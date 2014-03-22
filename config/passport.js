@@ -57,7 +57,7 @@ module.exports = function(passport) {
                     } else {
                         var newUser = new User();
                         newUser.local.email = email;
-                        //console.log("http://www.gravatar.com/avatar/"+md5.update(email.toLowerCase()).digest('hex')+"?f=y");
+                        //console.log("http://www.gravatar.com/avatar/"+md5.update(email.toLowerCase()).digest('hex')+"?s=48");
                         newUser.local.password = newUser.generateHash(password);
                         newUser.save(function(err) {
                             if (err)
