@@ -56,8 +56,10 @@ module.exports = function(passport) {
                         return done(null, false, req.flash('signupMessage', 'This email has been registered.'));
                     } else {
                         var newUser = new User();
+                        newUser.register = 'local';
                         newUser.local.email = email;
-                        //console.log("http://www.gravatar.com/avatar/"+md5.update(email.toLowerCase()).digest('hex')+"?s=48");
+                        newUser.local.name = email;
+                        newUser.local.avatar = "http://www.gravatar.com/avatar/"+md5.update(email.toLowerCase()).digest('hex')+"?d=retro&s=48";
                         newUser.local.password = newUser.generateHash(password);
                         newUser.save(function(err) {
                             if (err)
