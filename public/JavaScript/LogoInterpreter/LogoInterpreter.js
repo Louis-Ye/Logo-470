@@ -1,19 +1,34 @@
 
 var interpret = function(userTyping, delay, debugMode, callback) {
+	var tokens = null;
+	if (userTyping) {
+		tokens = lexical(userTyping, callback);
+	}
+	var tree = null;
+	if (tokens) {
+		 tree = parser(tokens, callback);
+	}
+	var runTree = null;
+	if (tree) {
+		runTree = semantic(tree, callback);
+	}
 
-	
-
-
+	if (runTree) {
+		runProgram(delay, debugMode);
+	}
 };
 
 
 
 
-var g_ExeNode = new ExeNode(null, PROGRAM_NODE_TYPE);
-var g_curExeNode;
+
+
+
+
+
 
 /////////////////////////////////////////////////////////////////////////
-// ExeNode Type
+// ExeNode
 final PROGRAM_TYPE = "program";
 final BODY_TYPE = "[]";
 final WHILE_TYPE = "while";
@@ -26,6 +41,9 @@ final EXPRESSION_TYPE = "expression";
 final IDENTIFIER_TYPE = "identifier";
 final MAKE_TYPE = "make";
 
+var g_programExeNode = new ExeNode(null, PROGRAM_NODE_TYPE);
+var g_curExeNode = g_programExeNode;
+
 function ExeNode(token, parent, nodeType) {
 	this.token = token;
 	this.nodeType = nodeType;
@@ -33,7 +51,7 @@ function ExeNode(token, parent, nodeType) {
 	this.parent = parent;
 	if (parent != null) parent.setChild(this);
 	this.children = [];
-	this.curChildPosition = -1;
+	this.curExeChildPos = -1;
 
 	if ( (nodeType === BODY_EXENODE_TYPE) || (nodeType === PROGRAM_EXENODE_TYPE) ) {
 		this.symbolTable = {};
