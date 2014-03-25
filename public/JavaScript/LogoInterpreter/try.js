@@ -6,12 +6,22 @@ var f1 = function() {
 	}
 
 	var v1 = true? f2(callback) : null;
-	alert("#" + asd + v1);
+	//alert("#" + asd + v1);
+
+	if (true) {
+		var ff1 = function() {
+			return "~~~";
+		};
+		console.log(ff1());
+	}
 }
 
-var f2 = function(callback) {
+f1();
+
+function f2(callback) {
 	// do something
 	callback("!!!");
 }
+
 
 
