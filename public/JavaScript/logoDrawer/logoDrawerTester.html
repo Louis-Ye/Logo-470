@@ -1,0 +1,41 @@
+<!DOCTYPE HTML5>
+<html>
+<head>
+</head>
+
+<body>
+	<canvas id="bg" width="400" height="300" style="position: absolute; z-index: 0">
+		Your browser does not support the canvas element.
+	</canvas>
+	<canvas id="lines" width="400" height="300" style="position: absolute; z-index: 1">
+	</canvas>
+	<canvas id="totoise" width="400" height="300" style="position: absolute; z-index: 2">
+	</canvas>
+	<script src="logoDrawer.js" charset="utf-8"></script>
+	<script>
+		initCanvas();
+		/*newInputData(3,"#00ffff");
+		for (I=0;I<360;I++)
+		{
+			newInputData(0,1);
+			newInputData(1,10);
+			newInputData(2,1-I%2);
+		}
+		newInputData(3,"#ff0000");
+		for (I=0;I<360;I++)
+		{
+			newInputData(0,1);
+			newInputData(1,10);
+			newInputData(2,I%2);
+		}*/
+		I=0;
+		newInputData(4,"#000000");
+		var timer = setInterval(function () {
+			newInputData(3,(I%2==0)?"#00ffff":"#ff0000");
+			newInputData(0,1);
+			newInputData(1,10);
+			I++;
+        }, 100);
+	</script>
+</body>
+</html>
