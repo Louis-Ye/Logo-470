@@ -21,19 +21,21 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	}
 
 	var callback = function (result) {
-		$scope.result += result + '\n';
-		$("#result-pad").scrollTop(99999);
+		if (result) {
+			$scope.result += result + '\n';
+			$("#result-pad").scrollTop(99999);
+		}
 	};
 
 	$scope.on_submit_clicked = function () {
-		// interpret({
-		// 	'userTyping': $scope.code,
-		// 	'delay': 0.1,
-		// 	'debugMode': false,
-		// 	'callback': callback
-		// });
-
 		callback($scope.code);
+
+		interpret({
+			'userTyping': $scope.code,
+			'delay': 0.1,
+			'debugMode': false,
+			'callback': callback
+		});
 
 		$scope.code = "";
 		document.getElementById("code-pad").focus();
