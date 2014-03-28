@@ -17,7 +17,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 
 	function init() {
 		$scope.result = "";
-		document.getElementById("code-pad").focus();
+		// document.getElementById("code-pad").focus();
 		initCanvas();
 	};
 

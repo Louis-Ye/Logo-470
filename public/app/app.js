@@ -6,17 +6,17 @@ ExpressLOGOApp.config(function ($routeProvider) {
 			controller: 'indexViewController',
 			templateUrl: 'app/partials/homepage.html'
 		})
-		.when('/learn', {
+		.when('/tutorial', {
 			controller: 'learnViewController',
-			templateUrl: 'app/partials/learn.html'
-		})
-		.when('/play', {
-			controller: 'playViewController',
-			templateUrl: 'app/partials/play.html'
+			templateUrl: 'app/partials/tutorial.html'
 		})
 		.when('/library', {
 			controller: 'libraryViewController',
 			templateUrl: 'app/partials/library.html'
+		})
+		.when('/play', {
+			controller: 'playViewController',
+			templateUrl: 'app/partials/play.html'
 		})
 		.when('/gallery', {
 			controller: 'galleryViewController',
