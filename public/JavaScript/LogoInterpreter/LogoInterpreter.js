@@ -17,13 +17,13 @@ var g_runProgram = function() {
 /////////////////////////////////////////////////////////////////////////
 // interpret
 
-function interpret(userTyping, delay, debugMode, callback) {
-	g_callback = callback;
+function interpret(arg) { //userTyping, delay, debugMode, callback
+	g_callback = arg.callback;
 	g_hasError = false;
 
 	var tokens = null;
-	if (userTyping) {
-		tokens = lexical(userTyping);
+	if (arg.userTyping) {
+		tokens = lexical(arg.userTyping);
 		//console.log(tokens);
 	}
 	var tree = null;
@@ -37,8 +37,8 @@ function interpret(userTyping, delay, debugMode, callback) {
 	}
 
 	if (runTree) {
-		g_delay = delay;
-		g_debugMode = debugMode;
+		g_delay = arg.delay;
+		g_debugMode = arg.debugMode;
 		g_runProgram();
 	}
 };
@@ -302,8 +302,9 @@ function lexical(userTyping) {
 
 	function preprocessSymbol(ch) {
 		if ( ch == "-" ) return " -";
-		if ( isSpaceOrNewline(ch) || isLetter(ch) || isDigit(ch) ) return ch;
-		return " " + ch + " ";
+		else if ( ch == "." ) return ch;
+		else if ( isSpaceOrNewline(ch) || isLetter(ch) || isDigit(ch) ) return ch;
+		else return " " + ch + " ";
 	};
 
 
@@ -388,8 +389,8 @@ function getNodeTypeByToken(token) {
 	if ( (Keyword.BACKWARD == token) || (Keyword.BK == token) ) return BACKWARD_TYPE;
 	if ( (Keyword.LEFT == token) || (Keyword.LT == token) ) return LEFT_TYPE;
 	if ( (Keyword.RIGHT == token) || (Keyword.RT == token) ) return RIGHT_TYPE;
-	if ( Keyword.IF == token) return IF_TYPE;
-	if ( Keyword.REPEAT == token) return REPEAT_TYPE;
+	if ( Keyword.IF == token ) return IF_TYPE;
+	if ( Keyword.REPEAT == token ) return REPEAT_TYPE;
 	if ( Keyword.WHILE == token ) return WHILE_TYPE;
 	if ( Keyword.MAKE == token ) return MAKE_TYPE;
 	return NO_TYPE;
@@ -506,6 +507,13 @@ function parser(tokens) {
 			thisNode.setChild(expr);
 			thisNode.setChild(body);
 			return thisNode;
+		}
+
+		if ( nowReading == Keyword.MAKE ) {
+			var token = nowReading;
+			readToken();
+			expect("\"");
+			
 		}
 
 		// ........................
@@ -690,15 +698,24 @@ function errorLog(message) {
 
 
 
-
-interpret("repeat 2 [bk -10 lt 32 repeat 3 [sdfright 99 fd 23] ] lt 11123", 100, false, function(error, doc) { 
-	console.log("error:" + error);
-	console.log("doc: " + doc);
+//userTyping, delay, debugMode, callback
+interpret({
+	'userTyping': "repeat 2 [bk -10 lt 32 repeat 3 [right 99 fd 23] ] lt 11123", 
+	'delay': 100, 
+	'debugMode': false, 
+	'callback': function(error, doc) { 
+		console.log("error:" + error);
+		console.log("doc: " + doc);
 });
 
-
-
-
+interpret({
+	'userTyping': "repeat 2 [ forward 1 ] bk 1", 
+	'delay': 100, 
+	'debugMode': false, 
+	'callback': function(error, doc) { 
+		console.log("error:" + error);
+		console.log("doc: " + doc);
+});
 
 
 
