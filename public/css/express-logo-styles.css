@@ -4,7 +4,8 @@ body {
 }
 
 #canvas-pad {
-	text-align: center;
+	/*text-align: center;*/
+	position: relative;
 }
 
 #canvas-pad canvas {
