@@ -14,24 +14,30 @@ ExpressLOGOApp.controller('learnViewController', function ($scope) {
 
 ExpressLOGOApp.controller('playViewController', function ($scope) {
 	init();
-	function init() {
 
-	};
+	function init() {
+		$scope.result = "";
+		document.getElementById("code-pad").focus();
+	}
 
 	var callback = function (result) {
-		// show result in upper box
+		$scope.result += result + '\n';
+		$("#result-pad").scrollTop(99999);
 	};
 
-	var userTyping;
-	var on_submit_clicked = function () {
-		interpret({
-			'userTyping': userTyping,
-			'delay': 0.1,
-			'debugMode': true,
-			'callback': callback
-		});
-	};
+	$scope.on_submit_clicked = function () {
+		// interpret({
+		// 	'userTyping': $scope.code,
+		// 	'delay': 0.1,
+		// 	'debugMode': false,
+		// 	'callback': callback
+		// });
 
+		callback($scope.code);
+
+		$scope.code = "";
+		document.getElementById("code-pad").focus();
+	};
 });
 
 ExpressLOGOApp.controller('libraryViewController', function ($scope) {

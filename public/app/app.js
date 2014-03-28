@@ -1,4 +1,4 @@
-var ExpressLOGOApp = angular.module('ExpressLOGOApp', ['ngRoute', 'ngAnimate']);
+var ExpressLOGOApp = angular.module('ExpressLOGOApp', ['ngRoute', 'ngAnimate', 'ngTouch']);
 
 ExpressLOGOApp.config(function ($routeProvider) {
 	$routeProvider
