@@ -699,6 +699,7 @@ function errorLog(message) {
 
 
 //userTyping, delay, debugMode, callback
+/*
 interpret({
 	'userTyping': "repeat 2 [bk -10 lt 32 repeat 3 [right 99 fd 23] ] lt 11123", 
 	'delay': 100, 
@@ -716,6 +717,6 @@ interpret({
 		console.log("error:" + error);
 		console.log("doc: " + doc);
 });
-
+*/
 
 
