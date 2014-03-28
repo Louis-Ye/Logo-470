@@ -22,14 +22,16 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 		// show result in upper box
 	};
 
-	var userTyping = text in lower box;
+	var userTyping;
+	var on_submit_clicked = function () {
+		interpret({
+			'userTyping': userTyping,
+			'delay': 0.1,
+			'debugMode': true,
+			'callback': callback
+		});
+	};
 
-	interpret({
-		'userTyping': userTyping,
-		'delay': 0.1,
-		'debugMode': true,
-		'callback': callback
-	});
 });
 
 ExpressLOGOApp.controller('libraryViewController', function ($scope) {
