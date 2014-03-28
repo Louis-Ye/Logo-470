@@ -19,7 +19,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 		$scope.result = "";
 		document.getElementById("code-pad").focus();
 		initCanvas();
-	}
+	};
 
 	var callback = function (result) {
 		if (result) {

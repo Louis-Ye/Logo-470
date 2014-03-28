@@ -3,6 +3,15 @@ body {
 	padding-bottom: 70px;
 }
 
+/* homepage.html */
+#hello {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+/* play.html */
 #canvas-pad {
 	/*text-align: center;*/
 	position: relative;
@@ -20,6 +29,7 @@ body {
 
 #console-pad {
 	padding-left: 50px;
+	/*position: relative;*/
 }
 
 #result-pad {
