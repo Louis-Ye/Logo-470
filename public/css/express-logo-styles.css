@@ -3,21 +3,31 @@ body {
 	padding-bottom: 70px;
 }
 
-/* homepage.html */
-#hello {
+#homepage #hello {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
 }
 
-/* play.html */
-#canvas-pad {
+#homepage .caption {
+	text-align: center;
+}
+
+#homepage a:hover {
+	text-decoration: none;
+}
+
+#homepage a:hover h3 {
+	color: #ffb515;
+}
+
+#play #canvas-pad {
 	/*text-align: center;*/
 	position: relative;
 }
 
-#canvas-pad canvas {
+#play #canvas-pad canvas {
 	width: 500px;
 	height: 400px;
 	border: 1px solid rgb(221, 221, 221);
@@ -27,12 +37,12 @@ body {
 	border-bottom-left-radius: 4px;
 }
 
-#console-pad {
+#play #console-pad {
 	padding-left: 50px;
 	/*position: relative;*/
 }
 
-#result-pad {
+#play #result-pad {
 	width: 100%;
 	height: 200px;
 	border: 1px solid rgb(221, 221, 221);
@@ -41,7 +51,7 @@ body {
 	border-top-right-radius: 4px;
 }
 
-#code-pad {
+#play #code-pad {
 	width: 90%;
 	height: 200px;
 	float: left;
@@ -52,7 +62,7 @@ body {
 	border-bottom-left-radius: 4px;
 }
 
-#submit {
+#play #submit {
 	width: 10%;
 	height: 200px;
 	float: right;

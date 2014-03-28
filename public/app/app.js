@@ -26,6 +26,14 @@ ExpressLOGOApp.config(function ($routeProvider) {
 			controller: 'aboutViewController',
 			templateUrl: 'app/partials/about.html'
 		})
+		.when('/sign-in', {
+			controller: 'signInViewController',
+			templateUrl: 'app/partials/sign-in.html'
+		})
+		.when('/sign-up', {
+			controller: 'signUpViewController',
+			templateUrl: 'app/partials/sign-up.html'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
