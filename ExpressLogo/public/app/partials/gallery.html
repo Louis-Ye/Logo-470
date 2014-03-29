@@ -8,7 +8,7 @@
     <!-- extra navigation controls -->
     <ul class="nav">
         <li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
-            <img src="{{ photo.src }}" alt="{{ photo.desc }}" title="{{ photo.desc }}" ng-click="showPhoto($index);" />
+            <img ng-src="{{ photo.src }}" alt="{{ photo.desc }}" title="{{ photo.desc }}" ng-click="showPhoto($index);" />
         </li>
     </ul>
 </div>
