@@ -1,11 +1,6 @@
-// load all the things we need
-var LocalStrategy   = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-// load up the user model
 var User = require('../models/user');
-
-// load the auth variables
 var configAuth = require('./auth');
 
 // expose this function to our app using module.exports
@@ -59,7 +54,7 @@ module.exports = function(passport) {
                     newUser.facebook.token = token; // we will save the token that facebook provides to the user                    
                     newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
                     newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-                    newUser.facebook.avatar = 'http://graph.facebook.com/' + profile.username + '/' + 'picture';
+                    newUser.facebook.avatar = 'http://graph.facebook.com/' + profile.username + '/picture';
                     newUser.register = 'facebook';
                     // save our user to the database
                     newUser.save(function(err) {

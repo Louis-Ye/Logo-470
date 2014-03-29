@@ -11,6 +11,7 @@ mongoose.connect('mongodb://localhost/logo');
 
 require('./config/passport')(passport);
 require('./config/passport-facebook')(passport);
+require('./config/passport-twitter')(passport);
 
 app.configure(function() {
 	app.use(express.static(__dirname + '/public'));
@@ -33,6 +34,7 @@ app.configure(function() {
 
 require('./routes/routes.js')(app, passport);
 require('./routes/routes-facebook.js')(app, passport);
+require('./routes/routes-twitter.js')(app, passport);
 require('./routes/routes-gallery.js')(app);
 
 http.createServer(app).listen(app.get('port'), function(){
