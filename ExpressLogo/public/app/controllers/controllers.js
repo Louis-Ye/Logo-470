@@ -116,8 +116,6 @@ ExpressLOGOApp.controller('signInViewController', function ($scope, $http, globa
     })
     .success(function (data) {
     	$scope.message = data.message;
-        console.log($scope.message);
-        global_data.logged_in = true;
     })
     .error(function (data) {
     	$scope.message = "Unknown error";
