@@ -1,5 +1,12 @@
 module.exports = function(app, passport) {
 
+	app.get('/profile', isLoggedIn, function(req, res) {
+		var register = req.user.register;
+		res.send({
+			user : req.user[register]
+		});
+	});
+
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/#/');

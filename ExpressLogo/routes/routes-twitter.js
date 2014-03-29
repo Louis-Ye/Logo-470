@@ -4,8 +4,8 @@ module.exports = function(app, passport) {
 
 	app.get('/auth/twitter/callback', 
 		passport.authenticate('twitter', {
-			successRedirect: '/',
-			failureRedirect: '/'
+			successRedirect: '/#/',
+			failureRedirect: '/#/'
 		}));
 };
 
