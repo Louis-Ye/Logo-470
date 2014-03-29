@@ -88,8 +88,6 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope) {
     };
 });
 
-});
-
 ExpressLOGOApp.controller('aboutViewController', function ($scope) {
 	init();
 	function init() {
