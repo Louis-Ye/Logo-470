@@ -23,7 +23,6 @@ app.configure(function() {
 	app.use(express.json());
 	app.use(express.urlencoded());
 	app.use(express.methodOverride());
-	app.set('view engine', 'ejs');
 
 	app.use(express.session({ secret: 'iloveexpresslogo' }));
 	app.use(passport.initialize());
