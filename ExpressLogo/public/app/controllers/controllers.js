@@ -27,7 +27,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 			$("#result-pad").scrollTop(99999);
 		}
 		else {
-			newInputData(command[0], command[1]);
+			newInputData(command.instruction, command.value);
 		}
 	};
 

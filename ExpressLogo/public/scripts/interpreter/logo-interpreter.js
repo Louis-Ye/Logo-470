@@ -198,19 +198,19 @@ ExeNode.prototype.execute = function() {
 
 	if ( this.nodeType == FORWARD_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, [1, childrenValue]);
+		g_callback(null, callbackSecondArg(1, childrenValue));
 	}
 	if ( this.nodeType == BACKWARD_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, [1, (-1) * childrenValue]);
+		g_callback(null, callbackSecondArg(1, (-1) * childrenValue));
 	}
 	if ( this.nodeType == LEFT_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, [0, childrenValue]);
+		g_callback(null, callbackSecondArg(0, childrenValue));
 	}
 	if ( this.nodeType == RIGHT_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, [0, (-1) * childrenValue]);
+		g_callback(null, callbackSecondArg(0, (-1) * childrenValue));
 	}
 
 
@@ -236,6 +236,12 @@ function isSimpleStatementType(nodeType) {
 		RIGHT_TYPE == nodeType;
 }
 */
+function callbackSecondArg(instruction, value) {
+	return {
+		'instruction': instruction,
+		'value': value
+	};
+}
 function setTimeOutAndNextExeNode(nodeRef) {
 	if (g_noProcessWaitingTimeout) {
 		g_noProcessWaitingTimeout = false;
