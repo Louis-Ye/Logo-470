@@ -96,3 +96,28 @@ ExpressLOGOApp.controller('aboutViewController', function ($scope) {
 
 	};
 });
+
+ExpressLOGOApp.controller('signUpViewController', function ($scope, $http) {
+	
+		$http({
+      	method: 'POST',
+      	url: 'http://localhost:3000/signup'
+    	})
+    	.success(function (data) {
+      		$scope.message = data.message;
+    	})
+    	.error(function (data) {
+      		$scope.message = "Some error occurred";
+    	});
+
+    	$http({
+      	method: 'GET',
+      	url: 'http://localhost:3000/signup'
+    	})
+    	.success(function (data) {
+      		$scope.message = data.message;
+    	})
+    	.error(function (data) {
+      	
+    	});
+});
