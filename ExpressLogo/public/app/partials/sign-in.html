@@ -2,7 +2,7 @@
 	<div class="col-sm-6 col-sm-offset-3">
 		<h1><span class="fa fa-sign-in"></span>Sign In</h1>
 
-		<div class="alert alert-danger">{{ message }}</div>
+		<div class="alert alert-danger" ng-if="message.length">{{ message[0] }}</div>
 
 		<form action="/login" method="post">
 			<div class="form-group">

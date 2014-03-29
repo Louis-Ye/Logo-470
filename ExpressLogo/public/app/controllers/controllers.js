@@ -95,7 +95,7 @@ ExpressLOGOApp.controller('aboutViewController', function ($scope) {
 	};
 });
 
-ExpressLOGOApp.controller('signUpViewController', function ($scope, $http) {
+ExpressLOGOApp.controller('signUpViewController', function ($scope, $http, global_data) {
 
     $http({
       	method: 'GET',
@@ -103,20 +103,23 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http) {
     })
     .success(function (data) {
     	$scope.message = data.message;
+        global_data.logged_in = true;
+        // console.log(global_data.logged_in);
     })
     .error(function (data) {
     	$scope.message = "Unknown error";
     });
 });
 
-ExpressLOGOApp.controller('signInViewController', function ($scope, $http) {
-
+ExpressLOGOApp.controller('signInViewController', function ($scope, $http, global_data) {
     $http({
       	method: 'GET',
       	url: '/login'
     })
     .success(function (data) {
     	$scope.message = data.message;
+        global_data.logged_in = true;
+        // console.log(global_data.logged_in);
     })
     .error(function (data) {
     	$scope.message = "Unknown error";

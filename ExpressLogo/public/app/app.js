@@ -1,5 +1,11 @@
 var ExpressLOGOApp = angular.module('ExpressLOGOApp', ['ngRoute', 'ngAnimate', 'ngTouch']);
 
+ExpressLOGOApp.factory('global_data', function() {
+  return {
+  	logged_in: false
+  };
+});
+
 ExpressLOGOApp.config(function ($routeProvider) {
 	$routeProvider
 		.when('/', {

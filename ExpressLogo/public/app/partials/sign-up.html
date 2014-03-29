@@ -1,11 +1,10 @@
 <div id="sign-up" class="container">
 	<div class="col-sm-6 col-sm-offset-3">
 
-	<h1><span class="fa fa-sign-in"></span> Signup by Email</h1>
+	<h1><span class="fa fa-sign-in"></span> Sign up by Email</h1>
 
-	<div class="alert alert-danger">{{ message }}</div>
+	<div class="alert alert-danger" ng-if="message.length">{{ message[0] }}</div>
 
-	<!-- LOGIN FORM -->
 	<form action="/signup" method="post">
 		<div class="form-group">
 			<label>Email</label>
@@ -16,7 +15,7 @@
 			<input type="password" class="form-control" name="password">
 		</div>
 
-		<button type="submit" class="btn btn-warning btn-lg">Signup</button>
+		<button type="submit" class="btn btn-warning btn-lg">Sign up</button>
 	</form>
 	<hr>
 	<p>Already have an account? <a href="#/sign-in">Login</a></p>
