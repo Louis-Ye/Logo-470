@@ -24,7 +24,7 @@ app.configure(function() {
 	app.use(express.methodOverride());
 	app.set('view engine', 'ejs');
 
-	app.use(express.session({ secret: 'ilovelogologo' }));
+	app.use(express.session({ secret: 'iloveexpresslogo' }));
 	app.use(passport.initialize());
 	app.use(passport.session());
 	app.use(flash());
@@ -33,6 +33,7 @@ app.configure(function() {
 
 require('./routes/routes.js')(app, passport);
 require('./routes/routes-facebook.js')(app, passport);
+require('./routes/routes-gallery.js')(app);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
