@@ -1,9 +1,9 @@
 var DTR = Math.PI/180;
-var padding = 1.5;
-var width = 400;
-var height = 300;
-var maxMoveX = 400;
-var maxMoveY = 300;
+var padding = 2;
+var width = 500;
+var height = 400;
+var maxMoveX = 500;
+var maxMoveY = 400;
 var xScale;
 var yScale;
 var rotDeg;
@@ -48,7 +48,7 @@ function yScale(d)
 function drawTotoise()
 {
 	if (!showTot) return;
-	
+
 	function rotTotX(d)
 	{
 		return xScale(startP[0]+
@@ -56,7 +56,7 @@ function drawTotoise()
 			-d[1]*Math.sin(rotDeg*DTR))
 			*padding);
 	}
-	
+
 	function rotTotY(d)
 	{
 		return yScale(startP[1]+
@@ -64,7 +64,7 @@ function drawTotoise()
 			+d[1]*Math.cos(rotDeg*DTR))
 			*padding);
 	}
-	
+
 	var i,x1,y1,r;
 	canvas[2].clearRect(0,0,width,height);
 	canvas[2].fillStyle = color;
@@ -112,7 +112,7 @@ function newInputData(inState,inValue)
 		canvas[1].lineTo(xScale(x2),yScale(y2));
 		canvas[1].stroke();
 	}
-	
+
 	function newPosition(newX,newY)
 	{
 		if (holdOn)
@@ -135,16 +135,14 @@ function newInputData(inState,inValue)
 					flagX = true;
 					tempR = tempX;
 					tempX = (tempX>=maxMoveX)?maxMoveX-1:0;
-					tempY = (tempY-startP[1])*(tempX-startP[0])
-						/(tempR-startP[0])+startP[1];
+					tempY = (tempY-startP[1])*(tempX-startP[0]) / (tempR-startP[0])+startP[1];
 				}
 				if (tempY>=maxMoveY || tempY<0)
 				{
 					flagY = true;
 					tempR = tempY;
 					tempY = (tempY>=maxMoveY)?maxMoveY-1:0;
-					tempX = (tempX-startP[0])*(tempY-startP[1])
-						/(tempR-startP[1])+startP[0];
+					tempX = (tempX-startP[0])*(tempY-startP[1]) / (tempR-startP[1])+startP[0];
 				}
 				reDraw(startP[0],startP[1],tempX,tempY);
 				if (flagX && !flagY)
@@ -165,7 +163,7 @@ function newInputData(inState,inValue)
 		startP[0] = newX;
 		startP[1] = newY;
 	}
-	
+
 	switch (inState)
 	{
 	case 0:
@@ -183,7 +181,7 @@ function newInputData(inState,inValue)
 		case 0:
 			holdOn = false;
 			break;
-		case 1: 
+		case 1:
 			holdOn = true;
 			break;
 		case 2:
