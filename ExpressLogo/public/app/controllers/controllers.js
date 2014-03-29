@@ -54,10 +54,40 @@ ExpressLOGOApp.controller('libraryViewController', function ($scope) {
 });
 
 ExpressLOGOApp.controller('galleryViewController', function ($scope) {
-	init();
-	function init() {
+    // Set of Photos
+    $scope.photos = [
+        {src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm21.jpg', desc: 'Image 01'},
+        {src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm22.jpg', desc: 'Image 02'},
+        {src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm25.jpg', desc: 'Image 03'},
+        {src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm26.jpg', desc: 'Image 04'},
+        {src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm27.jpg', desc: 'Image 05'},
+        {src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm28.jpg', desc: 'Image 06'}
+    ];
 
-	};
+    // initial image index
+    $scope._Index = 0;
+
+    // if a current image is the same as requested image
+    $scope.isActive = function (index) {
+        return $scope._Index === index;
+    };
+
+    // show prev image
+    $scope.showPrev = function () {
+        $scope._Index = ($scope._Index > 0) ? --$scope._Index : $scope.photos.length - 1;
+    };
+
+    // show next image
+    $scope.showNext = function () {
+        $scope._Index = ($scope._Index < $scope.photos.length - 1) ? ++$scope._Index : 0;
+    };
+
+    // show a certain image
+    $scope.showPhoto = function (index) {
+        $scope._Index = index;
+    };
+});
+
 });
 
 ExpressLOGOApp.controller('aboutViewController', function ($scope) {
