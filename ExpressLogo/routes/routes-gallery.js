@@ -1,13 +1,17 @@
+var fs = require('fs');
+
 module.exports = function(app) {
 	var Post = require('../models/post');
 
 	app.get('/addpost', function(req, res){
 		if(!req.user){
 			res.redirect("/");
-		} else {
+		}
+		else {
 			var user = req.user;
 			var register = user.register;
-			//for example
+
+			//for test
 			var newpost = new Post({
 				author : {
 					id: user._id,
@@ -15,16 +19,19 @@ module.exports = function(app) {
 					avatar: user[register].avatar,
 				},
 				date : Date.now(),
-				image :0000,
-				code : "fd 10",
+				code : "some codes",
 			});
+			newpost.image = fs.readFileSync('./turtle.png').toString('base64');
+			//use the followting code to show the pic
+			//<img src="data:image/png;base64, <%= data %>"/>
+			//console.log(newpost.image);
 			newpost.save(function(err) {
-        	if (err)
-          		throw err;
+        		if (err)
+          			throw err;
     		});
-    		res.json(newpost);
+    		res.render("img", {data: newpost.image});
 		}	
-	});
+	});	
 
 	//simply list all the posts
 	app.get('/gallery', function(req, res){

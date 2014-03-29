@@ -6,7 +6,7 @@ module.exports = function(app, passport) {
 		res.send({
 			email : user[register].email,
 			name : user[register].name,
-			name : user[register].avatar
+			avatar : user[register].avatar
 		});
 	});
 
