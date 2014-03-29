@@ -99,12 +99,26 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http) {
 
     $http({
       	method: 'GET',
-      	url: 'http://localhost:3000/signup'
+      	url: '/signup'
     })
     .success(function (data) {
     	$scope.message = data.message;
     })
     .error(function (data) {
-    
+    	$scope.message = "Unknown error";
+    });
+});
+
+ExpressLOGOApp.controller('signInViewController', function ($scope, $http) {
+
+    $http({
+      	method: 'GET',
+      	url: '/login'
+    })
+    .success(function (data) {
+    	$scope.message = data.message;
+    })
+    .error(function (data) {
+    	$scope.message = "Unknown error";
     });
 });

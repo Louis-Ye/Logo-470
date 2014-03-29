@@ -15,9 +15,9 @@ module.exports = function(app, passport) {
 		failureFlash : true // allow flash messages
 	}));
 
-	app.get('/signup', function(req, res) {
-		console.log(req.flash('signupMessage'));
-		res.send({ message: req.flash('signupMessage') });
+	app.get('/signup', function(req, res) {	
+		var message = { message: req.flash('signupMessage') };
+		res.send(message);
 	});
 
 	app.post('/signup', passport.authenticate('local-signup', {
