@@ -21,15 +21,18 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 		initCanvas();
 	};
 
-	var callback = function (result) {
-		if (result) {
-			$scope.result += result + '\n';
+	var callback = function (message, command) {
+		if (message) {
+			$scope.result += message + '\n';
 			$("#result-pad").scrollTop(99999);
+		}
+		else {
+			newInputData(command[0], command[1]);
 		}
 	};
 
 	$scope.on_submit_clicked = function () {
-		callback($scope.code);
+		callback($scope.code, null);
 
 		interpret({
 			'userTyping': $scope.code,
