@@ -103,8 +103,6 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http, globa
     })
     .success(function (data) {
     	$scope.message = data.message;
-        global_data.logged_in = true;
-        // console.log(global_data.logged_in);
     })
     .error(function (data) {
     	$scope.message = "Unknown error";
@@ -118,8 +116,8 @@ ExpressLOGOApp.controller('signInViewController', function ($scope, $http, globa
     })
     .success(function (data) {
     	$scope.message = data.message;
+        console.log($scope.message);
         global_data.logged_in = true;
-        // console.log(global_data.logged_in);
     })
     .error(function (data) {
     	$scope.message = "Unknown error";
