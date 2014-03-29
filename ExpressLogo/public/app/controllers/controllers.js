@@ -95,6 +95,13 @@ ExpressLOGOApp.controller('aboutViewController', function ($scope) {
 	};
 });
 
+ExpressLOGOApp.controller('aboutViewController', function ($scope) {
+    init();
+    function init() {
+
+    };
+});
+
 ExpressLOGOApp.controller('signUpViewController', function ($scope, $http, global_data) {
 
     $http({

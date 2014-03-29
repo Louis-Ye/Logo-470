@@ -32,6 +32,10 @@ ExpressLOGOApp.config(function ($routeProvider) {
 			controller: 'aboutViewController',
 			templateUrl: 'app/partials/about.html'
 		})
+		.when('/profile', {
+			controller: 'aboutViewController',
+			templateUrl: 'app/partials/profile.html'
+		})
 		.when('/sign-in', {
 			controller: 'signInViewController',
 			templateUrl: 'app/partials/sign-in.html'
