@@ -4,8 +4,7 @@ module.exports = function(app) {
 	app.get('/addpost', function(req, res){
 		if(!req.user){
 			res.redirect("/");
-		}
-		else {
+		} else {
 			var user = req.user;
 			var register = user.register;
 			//for example
@@ -21,9 +20,9 @@ module.exports = function(app) {
 			});
 			newpost.save(function(err) {
         	if (err)
-          	throw err;
+          		throw err;
     		});
-    	res.json(newpost);
+    		res.json(newpost);
 		}	
 	});
 
