@@ -1,9 +1,12 @@
 module.exports = function(app, passport) {
 
-	app.get('/profile', isLoggedIn, function(req, res) {
-		var register = req.user.register;
+	app.get('/user', isLoggedIn, function(req, res) {
+		var user = req.user;
+		var register = user.register;
 		res.send({
-			user : req.user[register]
+			email : user[register].email,
+			name : user[register].name,
+			name : user[register].avatar
 		});
 	});
 
