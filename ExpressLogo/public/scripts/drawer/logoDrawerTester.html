@@ -15,28 +15,27 @@
 	</canvas>
 	<script src="logo-drawer.js" charset="utf-8"></script>
 	<script>
-		initCanvas();
-		/*I=0;
-		newInputData(3,"#00ffff");
+		var mycanvas = LogoDrawer.createNew();
+		mycanvas.initCanvas();
+		/*for (I =0; I<30;I++)
+		{
+			mycanvas.turnLeftDegrees(10);
+			mycanvas.walkForwardLength(5);
+			mycanvas.turnRightDegrees(20);
+			mycanvas.walkForwardLength(5);
+		}
+		mycanvas.setBackgroundColor("66ccff");
+		mycanvas.setTurtlePosition(100,100);*/
+		I=0;
+		mycanvas.setBackgroundColor("000000");
+		//mycanvas.noBorder();
 		var timer = setInterval(function () {
-			newInputData(3,(I%2==0)?"#00ffff":"#ff0000");
-			newInputData(0,1);
+			mycanvas.setPenColor((I%2==0)?"#00ffff":"#ff0000");
+			mycanvas.setLineWidth((I%2==0)?5:1);
+			mycanvas.turnLeftDegrees(1);
+			mycanvas.walkForwardLength(20);
 			I++;
-        }, 100);*/
-		for (I =0; I<30;I++)
-			newInputData(0,3),newInputData(1,10);
-		newInputData(4,"#666666");
-		newInputData(7,{"x":300,"y":300});
-		newInputData(2,6);
-		/*I=0;
-		newInputData(4,"#000000");
-		var timer = setInterval(function () {
-			newInputData(3,(I%2==0)?"#00ffff":"#ff0000");
-			newInputData(6,(I%2==0)?5:1);
-			newInputData(0,1);
-			newInputData(1,10);
-			I++;
-        }, 100);*/
+        }, 100);
 	</script>
 </body>
 </html>
