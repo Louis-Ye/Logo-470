@@ -33,7 +33,7 @@ module.exports = function(passport) {
                 if (!user.validPassword(password))
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
                 else
-                    return done(null, user);
+                    return done(null, user, req.flash('loginMessage', 'success'));
             });
         });
 

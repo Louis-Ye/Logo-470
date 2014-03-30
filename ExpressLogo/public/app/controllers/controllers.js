@@ -169,4 +169,5 @@ ExpressLOGOApp.controller('signInViewController', function ($scope, $http, globa
     .error(function (data) {
     	$scope.message = "Unknown error";
     });
+
 });

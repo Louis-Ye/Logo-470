@@ -12,16 +12,18 @@ module.exports = function(app, passport) {
 
 	app.get('/logout', function(req, res) {
 		req.logout();
-		res.redirect('/#/');
+		res.redirect('#');
 	});
 
 	app.get('/login', function(req, res) {
-		res.send({ message: req.flash('loginMessage') });
+		res.send({ 
+			message: req.flash('loginMessage')
+		});
 	});
 
 	app.post('/login', passport.authenticate('local-login', {
-		successRedirect : '/#/', // redirect to the secure profile section
-		failureRedirect : '/#/sign-in', // redirect back to the signup page if there is an error
+		successRedirect : '#/sign-in', // redirect to the secure profile section
+		failureRedirect : '#/sign-in', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));
 
@@ -31,8 +33,8 @@ module.exports = function(app, passport) {
 	});
 
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect : '/#', // redirect to the secure profile section
-		failureRedirect : '/#/sign-up', // redirect back to the signup page if there is an error
+		successRedirect : '#', // redirect to the secure profile section
+		failureRedirect : '#/sign-up', // redirect back to the signup page if there is an error
 		failureFlash : true  // allow flash messages
 	}));
 };
@@ -41,6 +43,5 @@ module.exports = function(app, passport) {
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
-
-	res.redirect('/');
+	res.redirect('#');
 }
