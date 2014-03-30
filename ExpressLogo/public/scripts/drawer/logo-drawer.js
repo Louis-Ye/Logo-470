@@ -96,7 +96,7 @@ var LogoDrawer =
 					canvas[1].strokeStyle = penColor;
 					canvas[1].moveTo(xScale(x1),yScale(y1));
 					canvas[1].lineTo(xScale(x2),yScale(y2));
-					canvas[1].linewidth = lineWidth;
+					canvas[1].lineWidth = lineWidth;
 					canvas[1].stroke();
 				}
 				
