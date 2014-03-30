@@ -1,8 +1,10 @@
-function indentCode(elementId,key,fontSize)
+function indentCode(elementId,evt)
 {
+	var fontSize = 14;
 	var elementObject = document.getElementById(elementId);
-	
+	var key = getKeyCode(evt);
 	if (key!=9 &&
+		key!=10 &&
 		key!=13 &&
 		key!=40 &&
 		key!=91 &&
@@ -108,6 +110,9 @@ function indentCode(elementId,key,fontSize)
 			forwardCaret += 3;
 		}
 		break;
+	case 10:
+		shortcut_submit();
+		return false;
 	case 13:
 		var i,j;
 		var contentBackUp = content;
