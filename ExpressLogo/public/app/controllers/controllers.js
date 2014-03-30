@@ -19,15 +19,16 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	function callback (message) {
 		if (message) {
 			$scope.result += message + '\n';
-			$("#result-pad").scrollTop(99999);
+			// $("#result-pad").scrollTop(99999);
+			var result_pad = $('#result-pad');
+			result_pad.scrollTop(result_pad[0].scrollHeight - result_pad.height());
 		};
 	};
 
-	function init() {
+	function init () {
 		myCanvas.initCanvas();
 		$scope.result = "";
 		$scope.pen_status = myCanvas.getDrawStatus();
-		console.log()
 		$scope.return_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
 		interpret_json = {
@@ -36,6 +37,10 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 			'debugMode': false,
 			'callback': callback
 		};
+	};
+
+	function shortcut_submit () {
+		$scope.on_submit_clicked();
 	};
 
 	$scope.on_submit_clicked = function () {
@@ -78,7 +83,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	$scope.reset = function () {
 		$scope.result = "";
 		$scope.code = "";
-		// interpreter
+		interpreterReset();
+		myCanvas.initCanvas();
 	};
 
 	function shareCallback (url) {
