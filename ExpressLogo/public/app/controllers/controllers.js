@@ -19,16 +19,16 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	function callback (message) {
 		if (message) {
 			$scope.result += message + '\n';
-			$("#result-pad").scrollTop(999);
+			$("#result-pad").scrollTop(99999);
 		};
 	};
 
 	function init() {
+		myCanvas.initCanvas();
 		$scope.result = "";
 		$scope.pen_status = myCanvas.getDrawStatus();
 		$scope.return_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
-		myCanvas.initCanvas();
 		interpret_json = {
 			'userTyping': $scope.code,
 			'delay': 1,

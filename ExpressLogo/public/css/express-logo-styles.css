@@ -55,6 +55,7 @@ body {
 	border-top-right-radius: 4px;
 	padding: 6px 10px;
 	resize: none;
+	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
 }
 
 #play #code-pad {
@@ -69,6 +70,7 @@ body {
 	outline: none;
 	padding: 6px 10px;
 	resize: none;
+	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
 }
 
 #play #submit {
@@ -82,4 +84,5 @@ body {
 
 #play #control-buttons {
 	text-align: center;
+	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
 }
