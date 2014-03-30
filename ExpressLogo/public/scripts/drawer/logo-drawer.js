@@ -1,5 +1,5 @@
 var DTR = Math.PI/180;
-var padding = 2;
+var padding = 1.5;
 var width = 500;
 var height = 400;
 var maxMoveX = 500;
@@ -12,6 +12,7 @@ var canvas;
 var color;
 var holdOn;
 var showTot;
+var ldlineWidth;
 
 var totData = [	[0,8],[1,7],[-1,7],[1,6],[-1,6],
 				[2,6],[-2,6],[1,5],[-1,5],
@@ -48,7 +49,7 @@ function yScale(d)
 function drawTotoise()
 {
 	if (!showTot) return;
-
+	
 	function rotTotX(d)
 	{
 		return xScale(startP[0]+
@@ -56,7 +57,7 @@ function drawTotoise()
 			-d[1]*Math.sin(rotDeg*DTR))
 			*padding);
 	}
-
+	
 	function rotTotY(d)
 	{
 		return yScale(startP[1]+
@@ -64,7 +65,7 @@ function drawTotoise()
 			+d[1]*Math.cos(rotDeg*DTR))
 			*padding);
 	}
-
+	
 	var i,x1,y1,r;
 	canvas[2].clearRect(0,0,width,height);
 	canvas[2].fillStyle = color;
@@ -89,6 +90,7 @@ function initCanvas()
 	holdOn = false;
 	showTot = true;
 	color = "#000000";
+	ldlineWidth = 1;
 	canvas[0] = document.getElementById("bg");
 	canvas[1] = document.getElementById("lines");
 	canvas[2] = document.getElementById("totoise");
@@ -110,9 +112,10 @@ function newInputData(inState,inValue)
 		canvas[1].strokeStyle = color;
 		canvas[1].moveTo(xScale(x1),yScale(y1));
 		canvas[1].lineTo(xScale(x2),yScale(y2));
+		canvas[1].lineWidth = ldlineWidth;
 		canvas[1].stroke();
 	}
-
+	
 	function newPosition(newX,newY)
 	{
 		if (holdOn)
@@ -135,14 +138,16 @@ function newInputData(inState,inValue)
 					flagX = true;
 					tempR = tempX;
 					tempX = (tempX>=maxMoveX)?maxMoveX-1:0;
-					tempY = (tempY-startP[1])*(tempX-startP[0]) / (tempR-startP[0])+startP[1];
+					tempY = (tempY-startP[1])*(tempX-startP[0])
+						/(tempR-startP[0])+startP[1];
 				}
 				if (tempY>=maxMoveY || tempY<0)
 				{
 					flagY = true;
 					tempR = tempY;
 					tempY = (tempY>=maxMoveY)?maxMoveY-1:0;
-					tempX = (tempX-startP[0])*(tempY-startP[1]) / (tempR-startP[1])+startP[0];
+					tempX = (tempX-startP[0])*(tempY-startP[1])
+						/(tempR-startP[1])+startP[0];
 				}
 				reDraw(startP[0],startP[1],tempX,tempY);
 				if (flagX && !flagY)
@@ -163,7 +168,7 @@ function newInputData(inState,inValue)
 		startP[0] = newX;
 		startP[1] = newY;
 	}
-
+	
 	switch (inState)
 	{
 	case 0:
@@ -181,7 +186,7 @@ function newInputData(inState,inValue)
 		case 0:
 			holdOn = false;
 			break;
-		case 1:
+		case 1: 
 			holdOn = true;
 			break;
 		case 2:
@@ -216,6 +221,9 @@ function newInputData(inState,inValue)
 		{
 			canvas[0].drawImage(img,0,0,width,height);
 		}
+		break;
+	case 6:
+		ldlineWidth = inValue;
 		break;
 	default:
 	}

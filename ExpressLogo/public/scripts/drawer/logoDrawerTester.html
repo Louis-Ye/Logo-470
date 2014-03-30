@@ -14,24 +14,18 @@
 	<script src="logoDrawer.js" charset="utf-8"></script>
 	<script>
 		initCanvas();
-		/*newInputData(3,"#00ffff");
-		for (I=0;I<360;I++)
-		{
+		/*I=0;
+		newInputData(3,"#00ffff");
+		var timer = setInterval(function () {
+			newInputData(3,(I%2==0)?"#00ffff":"#ff0000");
 			newInputData(0,1);
-			newInputData(1,10);
-			newInputData(2,1-I%2);
-		}
-		newInputData(3,"#ff0000");
-		for (I=0;I<360;I++)
-		{
-			newInputData(0,1);
-			newInputData(1,10);
-			newInputData(2,I%2);
-		}*/
+			I++;
+        }, 100);*/
 		I=0;
 		newInputData(4,"#000000");
 		var timer = setInterval(function () {
 			newInputData(3,(I%2==0)?"#00ffff":"#ff0000");
+			newInputData(6,(I%2==0)?5:1);
 			newInputData(0,1);
 			newInputData(1,10);
 			I++;
