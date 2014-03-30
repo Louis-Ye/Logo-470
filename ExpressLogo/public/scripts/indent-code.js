@@ -8,7 +8,7 @@ function indentCode(elementId,key,fontSize)
 		key!=91 &&
 		key!=123) return true;
 	
-	function getCaret()
+	function getCaretStart()
 	{
 		//For Firefox, Chrome, new versions of IE, etc
 		if(typeof(elementObject.selectionStart) == "number")
@@ -34,6 +34,14 @@ function indentCode(elementId,key,fontSize)
 		return pos;
 	}
 	
+	function getCaretEnd()
+	{
+		//Cound only support new browsers. Sorry IE 6.0
+		if(typeof(elementObject.selectionEnd) == "number")
+			return elementObject.selectionEnd;
+		return getCaretStart();
+	}
+	
 	function setCaret(pos)
 	{
 		//For Firefox, Chrome, new versions of IE, etc
@@ -52,13 +60,14 @@ function indentCode(elementId,key,fontSize)
 		r.select();
 	}
 	
-	var caretPosition = getCaret();
+	var caretStart = getCaretStart();
+	var caretEnd = getCaretEnd();
 	var content = elementObject.value;
 	var contentSecondHalf = "";
-	if (caretPosition<content.length)
-		contentSecondHalf = content.slice(caretPosition);
-	if (caretPosition>0)
-		content = content.slice(0,caretPosition);
+	if (caretEnd<content.length)
+		contentSecondHalf = content.slice(caretEnd);
+	if (caretStart>0)
+		content = content.slice(0,caretStart);
 	else
 		content = "";
 	var forwardCaret = 1;
@@ -99,12 +108,12 @@ function indentCode(elementId,key,fontSize)
 	}
 	content += contentSecondHalf;
 	document.getElementById(elementId).value = content;
-	setCaret(caretPosition+forwardCaret);
+	setCaret(caretStart+forwardCaret);
 	if (forwardScroll) elementObject.scrollTop += fontSize;
 	return false;
 }
 
-//To support the browsers without window.event
+//To support the browsers without window.event (firefox, for example)
 function getKeyCode(evt)
 {
 	var key = window.event?evt.keyCode:evt.which;
