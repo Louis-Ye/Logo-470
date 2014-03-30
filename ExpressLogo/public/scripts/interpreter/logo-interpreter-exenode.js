@@ -41,9 +41,6 @@ const NO_TYPE = "no type";
 /////////////////////////////////////////////////////////////////////////
 // ExeNode
 
-var g_programExeNode = new ExeNode(null, PROGRAM_TYPE);
-var g_curExeNode = g_programExeNode;
-
 function ExeNode(token, nodeType) {
 	this.token = token;
 	this.nodeType = nodeType;
