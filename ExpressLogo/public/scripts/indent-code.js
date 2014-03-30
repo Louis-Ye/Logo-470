@@ -95,4 +95,12 @@ function indentCode(elementId,key,fontSize)
 	document.getElementById(elementId).value = content;
 	setCaret(caretPosition+forwardCaret);
 	if (forwardScroll) elementObject.scrollTop += fontSize;
+	return false;
+}
+
+//To support the browsers without window.event
+function getKeyCode(evt)
+{
+	var key = window.event?evt.keyCode:evt.which;
+	return key;
 }
