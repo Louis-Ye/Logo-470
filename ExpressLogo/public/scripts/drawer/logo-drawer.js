@@ -120,16 +120,16 @@ var LogoDrawer =
 							flagX = true;
 							tempR = tempX;
 							tempX = (tempX>=maxMoveX)?maxMoveX-1:0;
-							tempY = (tempY-startPoint.y)*(tempX-startPoint.x)
-								/(tempR-startPoint.x)+startPoint.y;
+							tempY = (tempY-startPoint.y)
+								*(tempX-startPoint.x)/(tempR-startPoint.x)+startPoint.y;
 						}
 						if (tempY>=maxMoveY || tempY<0)
 						{
 							flagY = true;
 							tempR = tempY;
 							tempY = (tempY>=maxMoveY)?maxMoveY-1:0;
-							tempX = (tempX-startPoint.x)*(tempY-startPoint.y)
-								/(tempR-startPoint.y)+startPoint.x;
+							tempX = (tempX-startPoint.x)
+								*(tempY-startPoint.y)/(tempR-startPoint.y)+startPoint.x;
 						}
 						newDraw(startPoint.x,startPoint.y,tempX,tempY);
 						if (flagX && !flagY)
@@ -335,3 +335,5 @@ var LogoDrawer =
 		return logoDrawer;
 	}
 }
+
+var myCanvas = LogoDrawer.createNew();
