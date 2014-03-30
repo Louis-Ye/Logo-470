@@ -22,9 +22,9 @@ const SHOWTURTLE_TYPE = "stmt showturtle type";
 const HOME_TYPE = "stmt home type";
 
 const COLOR_TYPE = "stmt color type";
+const PENWIDTH_TYPE = "stmt penwidth type";
 const MAKE_TYPE = "stmt make type";
 const SETXY_TYPE = "stmt setxy type";
-const COLOR_TYPE = "stmt colr type";
 
 const PLUS_TYPE = "expr plus type";
 const MINUS_TYPE = "expr minus type";
@@ -161,41 +161,47 @@ ExeNode.prototype.execute = function() {
 
 	if ( this.nodeType == FORWARD_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, myCanvas.walkForwardLength(childrenValue));
+		myCanvas.walkForwardLength(childrenValue);
 	}
 	if ( this.nodeType == BACKWARD_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, myCanvas.walkForwardLength((-1) * childrenValue));
+		myCanvas.walkForwardLength((-1) * childrenValue);
 	}
 	if ( this.nodeType == LEFT_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, myCanvas.turnLeftDegrees(childrenValue));
+		myCanvas.turnLeftDegrees(childrenValue);
 	}
 	if ( this.nodeType == RIGHT_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, myCanvas.turnRightDegrees(childrenValue));
+		myCanvas.turnRightDegrees(childrenValue);
 	}
 
 
 
 	if ( this.nodeType == PENDOWN_TYPE ) {
-		g_callback(null, myCanvas.turtlePutDown());
+		myCanvas.turtlePutDown();
 	}
 	if ( this.nodeType == PENUP_TYPE ) {
-		g_callback(null, myCanvas.turtleHoldOn());
+		myCanvas.turtleHoldOn();
 	}
 	if ( this.nodeType == HOME_TYPE ) {
-		g_callback(null, myCanvas.resetTurtleToHome());
+		myCanvas.resetTurtleToHome();
 	}
 	if ( this.nodeType == CLEARSCREEN_TYPE ) {
-		g_callback(null, myCanvas.clearCanvas());
+		myCanvas.clearCanvas();
 	}
 	if ( this.nodeType == HIDETURTLE_TYPE ) {
-		g_callback(null, myCanvas.turtleHide());
+		myCanvas.turtleHide();
 	}
 	if ( this.nodeType == SHOWTURTLE_TYPE ) {
-		g_callback(null, myCanvas.turtleShow());
+		myCanvas.turtleShow();
 	}
+	if ( this.nodeType == SETXY_TYPE ) {
+		var x = this.children[0].execute();
+		var y = this.children[1].execute();
+		myCanvas.setTurtlePosition(x, y);
+	}
+	
 
 
 
@@ -203,7 +209,13 @@ ExeNode.prototype.execute = function() {
 		var r = this.children[0].execute();
 		var g = this.children[1].execute();
 		var b = this.children[2].execute();
-		g_callback(null, myCanvas.setPenColor(makeRGB(r,g,b)));
+		myCanvas.setPenColor(makeRGB(r,g,b));
+	}
+	if (this.nodeType == PENWIDTH_TYPE) {
+		var childrenValue = this.children[0].execute();
+		console.log(childrenValue);
+		myCanvas.setLineWidth(childrenValue);
+		console.log(myCanvas.getLineWidth());
 	}
 
 

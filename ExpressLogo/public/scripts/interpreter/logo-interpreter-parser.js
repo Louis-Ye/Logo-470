@@ -18,7 +18,7 @@ const Keyword = {
 	"WHILE" : "while",
 	"MAKE" : "make",
 	
-	"CLEARSCREEN": "clearscree",
+	"CLEARSCREEN": "clearscreen",
 	"CS": "cs",
 	"PENUP": "penup",
 	"PU": "pu",
@@ -30,7 +30,8 @@ const Keyword = {
 	"ST": "st",
 	"HOME": "home",
 	"SETXY": "setxy",
-	"COLOR": "color"
+	"COLOR": "color",
+	"PENWIDTH": "penwidth"
 };
 
 function getNodeTypeByToken(token) {
@@ -50,6 +51,7 @@ function getNodeTypeByToken(token) {
 	if ( Keyword.HOME == token ) return HOME_TYPE;
 	if ( Keyword.SETXY == token ) return SETXY_TYPE;
 	if ( Keyword.COLOR == token ) return COLOR_TYPE;
+	if ( Keyword.PENWIDTH == token ) return PENWIDTH_TYPE;
 	return NO_TYPE;
 }
 
@@ -137,7 +139,8 @@ function parser(tokens) {
 			token == Keyword.MAKE ||
 			token == Keyword.WHILE ||
 			token == Keyword.SETXY ||
-			token == Keyword.COLOR;
+			token == Keyword.COLOR ||
+			token == Keyword.PENWIDTH;
 	};
 	function parseStatement() {
 		if (!startsStatement(nowReading)) {
@@ -208,6 +211,16 @@ function parser(tokens) {
 			var expr = parseExpression();
 			var thisNode = new ExeNode(token, MAKE_TYPE);
 			thisNode.setChild(iden);
+			thisNode.setChild(expr);
+			return thisNode;
+		}
+
+
+		if (nowReading == Keyword.PENWIDTH) {
+			var token = nowReading;
+			readToken();
+			var expr = parseExpression();
+			var thisNode = new ExeNode(token, PENWIDTH_TYPE);
 			thisNode.setChild(expr);
 			return thisNode;
 		}

@@ -11,7 +11,7 @@ var g_curExeNode = g_programExeNode;
 var given_callback;
 const g_callback = function(error, result) {
 	//console.log(result);
-	given_callback(error, result);
+	given_callback(error);
 };
 
 /////////////////////////////////////////////////////////////////////////
