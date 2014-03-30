@@ -52,14 +52,18 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 
     $scope.background_image = function () {
 
-    }
+    };
 
     $scope.reset = function () {
 
-    }
+    };
+
+    var shareCallback = function (url) {
+        var image = url;
+    };
 
     $scope.share = function () {
-        var image = newInputData(inputDataDictionary["specialFunctions"], inputDataDictionary["saveCanvas"]);
+        newInputData(inputDataDictionary["specialFunctions"], inputDataDictionary["saveCanvas"], shareCallback);
     }
 });
 
@@ -134,13 +138,16 @@ ExpressLOGOApp.controller('accountViewController', function ($scope, $http, glob
 });
 
 ExpressLOGOApp.controller('signUpViewController', function ($scope, $http, global_data) {
-
+    $scope.message = [];
     $http({
       	method: 'GET',
       	url: '/signup'
     })
     .success(function (data) {
     	$scope.message = data.message;
+        if ($scope.message[0] == "success") {
+            global_data.logged_in = true;
+        };
     })
     .error(function (data) {
     	$scope.message = "Unknown error";
@@ -148,12 +155,16 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http, globa
 });
 
 ExpressLOGOApp.controller('signInViewController', function ($scope, $http, global_data) {
+    $scope.message = [];
     $http({
       	method: 'GET',
       	url: '/login'
     })
     .success(function (data) {
     	$scope.message = data.message;
+        if ($scope.message[0] == "success") {
+            global_data.logged_in = true;
+        };
     })
     .error(function (data) {
     	$scope.message = "Unknown error";

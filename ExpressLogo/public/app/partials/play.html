@@ -41,7 +41,21 @@
 
 			<div class="btn-group">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					Color
+					Pen color
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a>color1</a></li>
+					<li><a>color2</a></li>
+					<li><a>color3</a></li>
+					<li><a>color4</a></li>
+					<li><a>color5</a></li>
+				</ul>
+			</div>
+
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					Background color
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
@@ -54,6 +68,9 @@
 			</div>
 
 			<button type="button" class="btn btn-default" ng-click="toggle_pen()">Pen {{ !pen.up && 'up' || 'down' }}</button>
+			<button type="button" class="btn btn-default" ng-click="background_image()">Enable return</button>
+			<button type="button" class="btn btn-default" ng-click="background_image()">Show Turtle</button>
+			<button type="button" class="btn btn-default" ng-click="background_image()">Clear</button>
 			<button type="button" class="btn btn-default" ng-click="background_image()">Image</button>
 			<button type="button" class="btn btn-default" ng-click="reset()">Reset</button>
 			<button type="button" class="btn btn-default" ng-click="share()">Share</button>
