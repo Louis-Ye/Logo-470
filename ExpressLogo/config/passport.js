@@ -64,22 +64,12 @@ module.exports = function(passport) {
                         newUser.save(function(err) {
                             if (err)
                                 throw err;
-                            return done(null, newUser);
+                            return done(null, newUser, req.flash('signupMessage', 'success'));
                         });
                     }
 
                 });
             } 
-            else {
-                var user = req.user;
-                user.local.email = email;
-                user.local.password = user.generateHash(password);
-                user.save(function(err) {
-                    if (err)
-                        throw err;
-                    return done(null, user);
-                });
-            }
         });
     }));
 };
