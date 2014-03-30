@@ -27,6 +27,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 		myCanvas.initCanvas();
 		$scope.result = "";
 		$scope.pen_status = myCanvas.getDrawStatus();
+		console.log()
 		$scope.return_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
 		interpret_json = {
@@ -46,27 +47,29 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	};
 
 	$scope.toggle_pen = function () {
-		$scope.pen_status = myCanvas.getDrawStatus();
 		interpret_json.userTyping = $scope.pen_status ? "penup" : "pendown";
 		callback(interpret_json.userTyping);
 		interpret(interpret_json);
+		$scope.pen_status = myCanvas.getDrawStatus();
 	};
 
-	$scope.toggle_return = function () {
-		$scope.return_status = myCanvas.getBorderStatus();
-		$scope.return_status ? myCanvas.noBorder() : myCanvas.setBorder();
-	}
+	$scope.toggle_border = function () {
+		$scope.border_status = myCanvas.getBorderStatus();
+		$scope.border_status ? myCanvas.noBorder() : myCanvas.setBorder();
+	};
 
 	$scope.toggle_turtle = function () {
-		$scope.turtle_status = myCanvas.getTurtleStatus();
 		interpret_json.userTyping = $scope.turtle_status ? "hideturtle" : "showturtle";
 		callback(interpret_json.userTyping);
 		interpret(interpret_json);
-	}
+		$scope.turtle_status = myCanvas.getTurtleStatus();
+	};
 
 	$scope.clear_canvas = function () {
-		myCanvas.clearCanvas();
-	}
+		interpret_json.userTyping = "clearscreen";
+		callback(interpret_json.userTyping);
+		interpret(interpret_json);
+	};
 
 	$scope.background_image = function () {
 		// interpreter API?
@@ -85,7 +88,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 
 	$scope.share = function () {
 		myCanvas.saveCanvas(shareCallback);
-	}
+	};
 });
 
 ExpressLOGOApp.controller('libraryViewController', function ($scope) {
