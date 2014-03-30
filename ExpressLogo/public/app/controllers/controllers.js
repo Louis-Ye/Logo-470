@@ -26,11 +26,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	function init() {
 		$scope.result = "";
 		$scope.pen_status = myCanvas.getDrawStatus();
-		if ($scope.pen_status) {
-			$scope.pen_string = "up";
-		} else {
-			$scope.pen_string = "down";
-		}
+		$scope.return_status = myCanvas.getBorderStatus();
+		$scope.turtle_status = myCanvas.getTurtleStatus();
 		document.getElementById("code-pad").focus();
 		myCanvas.initCanvas();
 		interpret_json = {
@@ -51,24 +48,35 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 
 	$scope.toggle_pen = function () {
 		$scope.pen_status = myCanvas.getDrawStatus();
-		if ($scope.pen_status) {
-			interpret_json.userTyping = "penup";
-			$scope.pen_string = "down";
-		}
-		else {
-			interpret_json.userTyping = "pendown";
-			$scope.pen_string = "up";
-		};
+		interpret_json.userTyping = $scope.pen_status ? "penup" : "pendown";
 		callback(interpret_json.userTyping);
 		interpret(interpret_json);
 	};
 
-	$scope.background_image = function () {
+	$scope.toggle_return = function () {
+		$scope.return_status = myCanvas.getBorderStatus();
+		$scope.return_status ? myCanvas.noBorder() : myCanvas.setBorder();
+	}
 
+	$scope.toggle_turtle = function () {
+		$scope.turtle_status = myCanvas.getTurtleStatus();
+		interpret_json.userTyping = $scope.turtle_status ? "hideturtle" : "showturtle";
+		callback(interpret_json.userTyping);
+		interpret(interpret_json);
+	}
+
+	$scope.clear_canvas = function () {
+		myCanvas.clearCanvas();
+	}
+
+	$scope.background_image = function () {
+		// interpreter API?
 	};
 
 	$scope.reset = function () {
-
+		$scope.result = "";
+		$scope.code = "";
+		// interpreter
 	};
 
 	function shareCallback (url) {
@@ -164,7 +172,7 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http, globa
 		};
 	})
 	.error(function (data) {
-		$scope.message = "Unknown error";
+		$scope.message = "Network error";
 	});
 });
 
@@ -182,7 +190,7 @@ ExpressLOGOApp.controller('signInViewController', function ($scope, $http, globa
 		};
 	})
 	.error(function (data) {
-		$scope.message[0] = "Unknown error";
+		$scope.message[0] = "Network error";
 	});
 
 });

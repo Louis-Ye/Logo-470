@@ -29,51 +29,36 @@
 		<div class="btn-group">
 			<div class="btn-group">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					Line
-					<span class="caret"></span>
+					Line <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a>line1</a></li>
-					<li><a>line2</a></li>
-					<li><a>line3</a></li>
-					<li><a>line4</a></li>
-					<li><a>line5</a></li>
+					<li ng-repeat="line in lines"><button>{{ line.thumbnail }}</button></li>
 				</ul>
 			</div>
 
 			<div class="btn-group">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					Pen color
-					<span class="caret"></span>
+					Pen color <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a>color1</a></li>
-					<li><a>color2</a></li>
-					<li><a>color3</a></li>
-					<li><a>color4</a></li>
-					<li><a>color5</a></li>
+					<li ng-repeat="color in colors"><button>{{ color.thumbnail }}</button></li>
 				</ul>
 			</div>
 
 			<div class="btn-group">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					Background color
-					<span class="caret"></span>
+					Background color <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a>color1</a></li>
-					<li><a>color2</a></li>
-					<li><a>color3</a></li>
-					<li><a>color4</a></li>
-					<li><a>color5</a></li>
+					<li ng-repeat="color in colors"><button>{{ color.thumbnail }}</button></li>
 				</ul>
 			</div>
 
-			<button type="button" class="btn btn-default" ng-click="toggle_pen()">Pen {{ pen_string }}</button>
-			<button type="button" class="btn btn-default" ng-click="background_image()">Enable return</button>
-			<button type="button" class="btn btn-default" ng-click="background_image()">Show Turtle</button>
-			<button type="button" class="btn btn-default" ng-click="background_image()">Clear</button>
-			<button type="button" class="btn btn-default" ng-click="background_image()">Image</button>
+			<button type="button" class="btn btn-default" ng-click="toggle_pen()">Pen {{ pen_status ? 'up' : 'down' }}</button>
+			<button type="button" class="btn btn-default" ng-click="toggle_return()">{{ return_status ? 'Disable' : 'Enable' }} return</button>
+			<button type="button" class="btn btn-default" ng-click="toggle_turtle()">{{ turtle_status ? 'Hide': 'Show' }} Turtle</button>
+			<button type="button" class="btn btn-default" ng-click="clear_canvas()">Clear</button>
+			<button type="button" class="btn btn-default" ng-click="">Image</button>
 			<button type="button" class="btn btn-default" ng-click="reset()">Reset</button>
 			<button type="button" class="btn btn-default" ng-click="share()">Share</button>
 		</div>
