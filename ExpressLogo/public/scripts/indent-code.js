@@ -66,6 +66,9 @@ function indentCode(elementId,key,fontSize)
 	var contentSecondHalf = "";
 	if (caretEnd<content.length)
 		contentSecondHalf = content.slice(caretEnd);
+	var selectContent = "";
+	if (caretEnd>caretStart && key==9)
+		selectContent = content.slice(caretStart,caretEnd);
 	if (caretStart>0)
 		content = content.slice(0,caretStart);
 	else
@@ -75,8 +78,35 @@ function indentCode(elementId,key,fontSize)
 	switch (key)
 	{
 	case 9:
-		content += '    ';
-		forwardCaret += 3;
+		var i;
+		var firstHalf;
+		var secondHalf;
+		var returnFlag = false;
+		for (i=0;i<selectContent.length;i++)
+			if (selectContent[i]=='\n')
+			{
+				firstHalf = selectContent.slice(0,i+1);
+				secondHalf = (i==selectContent.length-1)?"":selectContent.slice(i+1);
+				selectContent = firstHalf + '    ' + secondHalf;
+				returnFlag = true;
+			}
+		if (returnFlag)
+		{
+			for (i = content.length-1;i>=0;i--)
+				if (content[i] == '\n')
+				{
+					secondHalf = (i==content.length-1)?"":content.slice(i+1);
+					selectContent = '    ' + secondHalf + selectContent;
+					firstHalf = content.slice(0,i+1);
+					content = firstHalf;
+					caretStart = i;
+					break;
+				}
+		} else
+		{
+			selectContent = '    ';
+			forwardCaret += 3;
+		}
 		break;
 	case 13:
 		var i,j;
@@ -106,7 +136,7 @@ function indentCode(elementId,key,fontSize)
 	default:
 		content += String.fromCharCode(key);
 	}
-	content += contentSecondHalf;
+	content += selectContent + contentSecondHalf;
 	document.getElementById(elementId).value = content;
 	setCaret(caretStart+forwardCaret);
 	if (forwardScroll) elementObject.scrollTop += fontSize;
