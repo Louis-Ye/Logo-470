@@ -18,8 +18,46 @@
 					<textarea id="code-pad" ng-model="code" placeholder="Try something here!"></textarea>
 					<button id="submit" class="btn btn-default" ng-click="on_submit_clicked()"><span class="glyphicon glyphicon-play"></span></button>
 				</div>
-				<p>Hint: repeat 36 [repeat 3 [fd 110 rt 60] rt 10]</p>
 			</div>
+		</div>
+	</div>
+	<br />
+	<div class="row">
+		<div id="control-buttons" class="col-md-12 col-lg-10 col-lg-offset-1">
+		<div class="btn-group">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					Line
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a>line1</a></li>
+					<li><a>line2</a></li>
+					<li><a>line3</a></li>
+					<li><a>line4</a></li>
+					<li><a>line5</a></li>
+				</ul>
+			</div>
+
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					Color
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a>color1</a></li>
+					<li><a>color2</a></li>
+					<li><a>color3</a></li>
+					<li><a>color4</a></li>
+					<li><a>color5</a></li>
+				</ul>
+			</div>
+
+			<button type="button" class="btn btn-default" ng-click="toggle_pen()">Pen {{ !pen.up && 'up' || 'down' }}</button>
+			<button type="button" class="btn btn-default" ng-click="background_image()">Image</button>
+			<button type="button" class="btn btn-default" ng-click="reset()">Reset</button>
+			<button type="button" class="btn btn-default" ng-click="share()">Share</button>
+		</div>
 		</div>
 	</div>
 </div>

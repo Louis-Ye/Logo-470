@@ -24,7 +24,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	var callback = function (message, command) {
 		if (message) {
 			$scope.result += message + '\n';
-			$("#result-pad").scrollTop(99999);
+			$("#result-pad").scrollTop(999);
 		}
 		else {
 			newInputData(command.instruction, command.value);
@@ -44,6 +44,22 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 		$scope.code = "";
 		document.getElementById("code-pad").focus();
 	};
+
+    $scope.toggle_pen = function () {
+        // pen.up = !pen.up;
+    };
+
+    $scope.background_image = function () {
+
+    }
+
+    $scope.reset = function () {
+
+    }
+
+    $scope.share = function () {
+
+    }
 });
 
 ExpressLOGOApp.controller('libraryViewController', function ($scope) {
