@@ -17,7 +17,7 @@
 					<textarea id="result-pad" disabled>{{ result }}</textarea>
 				</div>
 				<div class="col-sm-6 col-md-12">
-					<textarea id="code-pad" ng-model="code" placeholder="Try something here!" autofocus spellcheck="false" onkeypress = "indentCode(id,event.keyCode,14);return false;"></textarea>
+					<textarea id="code-pad" ng-model="code" placeholder="Try something here!" autofocus spellcheck="false" onkeypress = "indentCode(id,event.keyCode,14);return false;" onkeydown = "if(event.keyCode == 9) {indentCode(id,9,14);return false;}"></textarea>
 					<button id="submit" class="btn btn-default" ng-click="on_submit_clicked()"><span class="glyphicon glyphicon-play"></span></button>
 				</div>
 			</div>

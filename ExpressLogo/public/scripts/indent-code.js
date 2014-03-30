@@ -59,6 +59,10 @@ function indentCode(elementId,key,fontSize)
 	var forwardScroll = false;
 	switch (key)
 	{
+	case 9:
+		content += '    ';
+		forwardCaret += 3;
+		break;
 	case 13:
 		var i,j;
 		var contentBackUp = content;
