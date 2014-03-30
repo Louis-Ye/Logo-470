@@ -102,8 +102,11 @@ var LogoDrawer =
 				
 				if (holdOnTurtle)
 				{
-					newX %= maxMoveX;
-					newY %= maxMoveY;
+					if (returnToCanvas)
+					{
+						newX %= maxMoveX;
+						newY %= maxMoveY;
+					}
 				} else
 				{
 					while ((newX>=maxMoveX || newX<0 || newY>=maxMoveY || newY<0) 
