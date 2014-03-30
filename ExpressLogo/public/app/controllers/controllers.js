@@ -17,7 +17,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 
 	function init() {
 		$scope.result = "";
-		// document.getElementById("code-pad").focus();
+		document.getElementById("code-pad").focus();
 		initCanvas();
 	};
 
@@ -47,6 +47,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 
     $scope.toggle_pen = function () {
         // pen.up = !pen.up;
+        if (pen.up) {};
     };
 
     $scope.background_image = function () {
@@ -58,7 +59,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
     }
 
     $scope.share = function () {
-
+        var image = newInputData(inputDataDictionary["specialFunctions"], inputDataDictionary["saveCanvas"]);
     }
 });
 
