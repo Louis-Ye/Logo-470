@@ -164,40 +164,40 @@ ExeNode.prototype.execute = function() {
 
 	if ( this.nodeType == FORWARD_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, callbackSecondArg(1, childrenValue));
+		g_callback(null, myCanvas.walkForwardLength(childrenValue));
 	}
 	if ( this.nodeType == BACKWARD_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, callbackSecondArg(1, (-1) * childrenValue));
+		g_callback(null, myCanvas.walkForwardLength((-1) * childrenValue));
 	}
 	if ( this.nodeType == LEFT_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, callbackSecondArg(0, childrenValue));
+		g_callback(null, myCanvas.turnLeftDegrees(childrenValue));
 	}
 	if ( this.nodeType == RIGHT_TYPE ) {
 		var childrenValue = this.children[0].execute();
-		g_callback(null, callbackSecondArg(0, (-1) * childrenValue));
+		g_callback(null, myCanvas.turnRightDegrees(childrenValue));
 	}
 
 
 
 	if ( this.nodeType == PENDOWN_TYPE ) {
-		g_callback(null, callbackSecondArg(2, 0));
+		g_callback(null, myCanvas.turtlePutDown());
 	}
 	if ( this.nodeType == PENUP_TYPE ) {
-		g_callback(null, callbackSecondArg(2, 1));
+		g_callback(null, myCanvas.turtleHoldOn());
 	}
 	if ( this.nodeType == HOME_TYPE ) {
-		g_callback(null, callbackSecondArg(2, 2));
+		g_callback(null, myCanvas.resetTurtleToHome());
 	}
 	if ( this.nodeType == CLEARSCREEN_TYPE ) {
-		g_callback(null, callbackSecondArg(2, 3));
+		g_callback(null, myCanvas.clearCanvas());
 	}
 	if ( this.nodeType == HIDETURTLE_TYPE ) {
-		g_callback(null, callbackSecondArg(2, 4));
+		g_callback(null, myCanvas.turtleHide());
 	}
 	if ( this.nodeType == SHOWTURTLE_TYPE ) {
-		g_callback(null, callbackSecondArg(2, 5));
+		g_callback(null, myCanvas.turtleShow());
 	}
 
 
@@ -206,7 +206,7 @@ ExeNode.prototype.execute = function() {
 		var r = this.children[0].execute();
 		var g = this.children[1].execute();
 		var b = this.children[2].execute();
-		g_callback(null, callbackSecondArg(3, makeRGB(r,g,b)));
+		g_callback(null, myCanvas.setPenColor(makeRGB(r,g,b)));
 	}
 
 
@@ -257,12 +257,6 @@ function isSimpleStatementType(nodeType) {
 		RIGHT_TYPE == nodeType;
 }
 */
-function callbackSecondArg(instruction, value) {
-	return {
-		'instruction': instruction,
-		'value': value
-	};
-}
 function setTimeOutAndNextExeNode(nodeRef) {
 	if (g_noProcessWaitingTimeout) {
 		g_noProcessWaitingTimeout = false;
