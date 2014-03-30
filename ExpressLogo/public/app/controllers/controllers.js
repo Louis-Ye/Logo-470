@@ -36,7 +36,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 
 		interpret({
 			'userTyping': $scope.code,
-			'delay': 0.1,
+			'delay': 1,
 			'debugMode': false,
 			'callback': callback
 		});
