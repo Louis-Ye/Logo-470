@@ -28,7 +28,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 		$scope.pen_status = myCanvas.getDrawStatus();
 		$scope.return_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
-		document.getElementById("code-pad").focus();
 		myCanvas.initCanvas();
 		interpret_json = {
 			'userTyping': $scope.code,
