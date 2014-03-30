@@ -18,19 +18,19 @@ module.exports = function(app){
 		}
 	});
 
-	app.get('/profile_edit', function(req, res){
+	app.get('/account', function(req, res){
 		if(!req.user)
 			res.redirect('#');
 		else{
 			var user = req.user;
-			var reg = user.register;
-			var name = user[reg].name;
 
-			Post.findById(user._id, function(err, post){
-				if (err)
-					throw err;
-				res.send(post);
-			});
+			if (user.register == 'local'){
+				User.findById(user._id, function(err, info){
+					if (err)
+						throw err;
+					res.send(info);
+				});
+			}
 		}
 	});
 };
