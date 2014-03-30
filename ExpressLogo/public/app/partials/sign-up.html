@@ -3,7 +3,7 @@
 
 	<h1><span class="fa fa-sign-in"></span> Sign up by Email</h1>
 
-	<div class="alert alert-danger" ng-if="message.length">{{ message[0] }}</div>
+	<div class="alert alert-danger" ng-if="message[0] != 'success'">{{ message[0] }}</div>
 
 	<form action="/signup" method="post">
 		<div class="form-group">
