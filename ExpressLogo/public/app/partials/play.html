@@ -6,7 +6,9 @@
 			</canvas>
 			<canvas id="lines" style="position: absolute; z-index: 1">
 			</canvas>
-			<canvas id="totoise" style="position: absolute; z-index: 2">
+			<canvas id="turtle" style="position: absolute; z-index: 2">
+			</canvas>
+			<canvas id="saving" style="position: absolute; z-index: 2">
 			</canvas>
 		</div>
 		<div id="console-pad" class="col-sm-12 col-md-6 col-lg-5">
@@ -67,7 +69,7 @@
 				</ul>
 			</div>
 
-			<button type="button" class="btn btn-default" ng-click="toggle_pen()">Pen {{ !pen.up && 'up' || 'down' }}</button>
+			<button type="button" class="btn btn-default" ng-click="toggle_pen()">Pen {{ pen_string }}</button>
 			<button type="button" class="btn btn-default" ng-click="background_image()">Enable return</button>
 			<button type="button" class="btn btn-default" ng-click="background_image()">Show Turtle</button>
 			<button type="button" class="btn btn-default" ng-click="background_image()">Clear</button>
