@@ -213,9 +213,7 @@ ExeNode.prototype.execute = function() {
 	}
 	if (this.nodeType == PENWIDTH_TYPE) {
 		var childrenValue = this.children[0].execute();
-		console.log(childrenValue);
 		myCanvas.setLineWidth(childrenValue);
-		console.log(myCanvas.getLineWidth());
 	}
 
 
