@@ -2,6 +2,12 @@ function indentCode(elementId,key,fontSize)
 {
 	var elementObject = document.getElementById(elementId);
 	
+	if (key!=9 &&
+		key!=13 &&
+		key!=40 &&
+		key!=91 &&
+		key!=123) return true;
+	
 	function getCaret()
 	{
 		//For Firefox, Chrome, new versions of IE, etc
