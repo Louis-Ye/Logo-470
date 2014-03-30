@@ -19,9 +19,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	function callback (message) {
 		if (message) {
 			$scope.result += message + '\n';
-			// $("#result-pad").scrollTop(99999);
-			var result_pad = $('#result-pad');
-			result_pad.scrollTop(result_pad[0].scrollHeight - result_pad.height());
+			var result_pad = document.getElementById('result-pad');
+			result_pad.scrollTop = result_pad.scrollHeight;
 		};
 	};
 
@@ -51,6 +50,10 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 		document.getElementById("code-pad").focus();
 	};
 
+	function change_pen_status () {
+		$scope.pen_status = myCanvas.getDrawStatus();
+	}
+
 	$scope.toggle_pen = function () {
 		interpret_json.userTyping = $scope.pen_status ? "penup" : "pendown";
 		callback(interpret_json.userTyping);
@@ -62,6 +65,10 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 		$scope.border_status = myCanvas.getBorderStatus();
 		$scope.border_status ? myCanvas.noBorder() : myCanvas.setBorder();
 	};
+
+	function change_turtle_status () {
+		$scope.turtle_status = myCanvas.getTurtleStatus();
+	}
 
 	$scope.toggle_turtle = function () {
 		interpret_json.userTyping = $scope.turtle_status ? "hideturtle" : "showturtle";
@@ -81,7 +88,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	};
 
 	$scope.reset = function () {
-		$scope.result = "";
+		// $scope.result = "";
 		$scope.code = "";
 		interpreterReset();
 		myCanvas.initCanvas();
