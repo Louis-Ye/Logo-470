@@ -43,6 +43,62 @@ var ld_turtleData = [	[0,8],[1,7],[-1,7],[1,6],[-1,6],
 						[3,-3],[-3,-3],[5,-3],[-5,-3],
 						[0,-4],[1,-5],[4,-4],[-4,-4]];
 
+function turnLeftDegrees (value) {
+	return newInputData(inputDataDictionary.turnLeftDegrees, value);
+}
+
+function walkForwardLength (value) {
+	return newInputData(inputDataDictionary.walkForwardLength, value);
+}
+
+function putDownTurtle () {
+	return newInputData(inputDataDictionary.specialFunctions, inputDataDictionary.putDownTurtle);
+}
+
+function holdOnTurtle () {
+	return newInputData(inputDataDictionary.specialFunctions, inputDataDictionary.holdOnTurtle);
+}
+
+function resetTurtleToHome () {
+	return newInputData(inputDataDictionary.specialFunctions, inputDataDictionary.resetTurtleToHome);
+}
+
+function clearCanvas () {
+	return newInputData(inputDataDictionary.specialFunctions, inputDataDictionary.clearCanvas);
+}
+
+function hideTurtle () {
+	return newInputData(inputDataDictionary.specialFunctions, inputDataDictionary.hideTurtle);
+}
+
+function showTurtle () {
+	return newInputData(inputDataDictionary.specialFunctions, inputDataDictionary.showTurtle);
+}
+
+function saveCanvas () {
+	return newInputData(inputDataDictionary.specialFunctions, inputDataDictionary.saveCanvas);
+}
+
+function setPenColor (value) {
+	return newInputData(inputDataDictionary.setPenColor, value);
+}
+
+function setBackgroundColor (value) {
+	return newInputData(inputDataDictionary.setBackgroundColor, value);
+}
+
+function setBackgroundPicture (value) {
+	return newInputData(inputDataDictionary.setBackgroundPicture, value);
+}
+
+function setLineWidth (value) {
+	return newInputData(inputDataDictionary.setLineWidth, value);
+}
+
+function setTurtlePosition (value) {
+	return newInputData(inputDataDictionary.setTurtlePosition, value);
+}
+
 function rotateX()
 {
 	return -Math.sin(ld_rotateDegrees*ld_DTR);
@@ -66,7 +122,7 @@ function yScale(d)
 function drawTurtle()
 {
 	if (!ld_showTurtle) return;
-	
+
 	function rotTotX(d)
 	{
 		return xScale(ld_startPoint[0]+
@@ -74,7 +130,7 @@ function drawTurtle()
 			-d[1]*Math.sin(ld_rotateDegrees*ld_DTR))
 			*ld_turtleSize);
 	}
-	
+
 	function rotTotY(d)
 	{
 		return yScale(ld_startPoint[1]+
@@ -82,7 +138,7 @@ function drawTurtle()
 			+d[1]*Math.cos(ld_rotateDegrees*ld_DTR))
 			*ld_turtleSize);
 	}
-	
+
 	var i,x1,y1,r;
 	ld_canvas[2].clearRect(0,0,ld_width,ld_height);
 	ld_canvas[2].fillStyle = ld_penColor;
@@ -134,7 +190,7 @@ function newInputData(inState,inValue)
 		ld_canvas[1].lineld_width = ld_lineWidth;
 		ld_canvas[1].stroke();
 	}
-	
+
 	function newPosition(newX,newY)
 	{
 		if (ld_holdOnTurtle)
@@ -157,16 +213,14 @@ function newInputData(inState,inValue)
 					flagX = true;
 					tempR = tempX;
 					tempX = (tempX>=ld_maxMoveX)?ld_maxMoveX-1:0;
-					tempY = (tempY-ld_startPoint[1])*(tempX-ld_startPoint[0])
-						/(tempR-ld_startPoint[0])+ld_startPoint[1];
+					tempY = (tempY-ld_startPoint[1])*(tempX-ld_startPoint[0])/(tempR-ld_startPoint[0])+ld_startPoint[1];
 				}
 				if (tempY>=ld_maxMoveY || tempY<0)
 				{
 					flagY = true;
 					tempR = tempY;
 					tempY = (tempY>=ld_maxMoveY)?ld_maxMoveY-1:0;
-					tempX = (tempX-ld_startPoint[0])*(tempY-ld_startPoint[1])
-						/(tempR-ld_startPoint[1])+ld_startPoint[0];
+					tempX = (tempX-ld_startPoint[0])*(tempY-ld_startPoint[1])/(tempR-ld_startPoint[1])+ld_startPoint[0];
 				}
 				newDraw(ld_startPoint[0],ld_startPoint[1],tempX,tempY);
 				if (flagX && !flagY)
@@ -187,7 +241,7 @@ function newInputData(inState,inValue)
 		ld_startPoint[0] = newX;
 		ld_startPoint[1] = newY;
 	}
-	
+
 	switch (inState)
 	{
 	case inputDataDictionary["turnLeftDegrees"]:
@@ -205,7 +259,7 @@ function newInputData(inState,inValue)
 		case inputDataDictionary["putDownTurtle"]:
 			ld_holdOnTurtle = false;
 			break;
-		case inputDataDictionary["holdOnTurtle"]: 
+		case inputDataDictionary["holdOnTurtle"]:
 			ld_holdOnTurtle = true;
 			break;
 		case inputDataDictionary["resetTurtleToHome"]:
