@@ -4,14 +4,16 @@
 </head>
 
 <body>
-	<canvas id="bg" width="400" height="300" style="position: absolute; z-index: 0">
+	<canvas id="saving" width="500" height="400" style="position: absolute; z-index: 0">
 		Your browser does not support the canvas element.
 	</canvas>
-	<canvas id="lines" width="400" height="300" style="position: absolute; z-index: 1">
+	<canvas id="bg" width="500" height="400" style="position: absolute; z-index: 1">
 	</canvas>
-	<canvas id="totoise" width="400" height="300" style="position: absolute; z-index: 2">
+	<canvas id="lines" width="500" height="400" style="position: absolute; z-index: 2">
 	</canvas>
-	<script src="logoDrawer.js" charset="utf-8"></script>
+	<canvas id="turtle" width="500" height="400" style="position: absolute; z-index: 3">
+	</canvas>
+	<script src="logo-drawer.js" charset="utf-8"></script>
 	<script>
 		initCanvas();
 		/*I=0;
@@ -21,7 +23,12 @@
 			newInputData(0,1);
 			I++;
         }, 100);*/
-		I=0;
+		for (I =0; I<30;I++)
+			newInputData(0,3),newInputData(1,10);
+		newInputData(4,"#666666");
+		newInputData(7,{"x":300,"y":300});
+		newInputData(2,6);
+		/*I=0;
 		newInputData(4,"#000000");
 		var timer = setInterval(function () {
 			newInputData(3,(I%2==0)?"#00ffff":"#ff0000");
@@ -29,7 +36,7 @@
 			newInputData(0,1);
 			newInputData(1,10);
 			I++;
-        }, 100);
+        }, 100);*/
 	</script>
 </body>
 </html>

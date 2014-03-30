@@ -1,18 +1,35 @@
 var DTR = Math.PI/180;
+var inputDataDictionary =
+{
+	"TurnLeftDegrees":0,
+	"walkForwardLength":1,
+	"specialFunctions":2,
+		"putDownTurtle":0,
+		"holdOnTurtle":1,
+		"resetTurtleToHome":2,
+		"clearCanvas":3,
+		"hideTurtle":4,
+		"showTurtle":5,
+		"saveCanvas":6,
+	"setPenColor":3,
+	"setBackgroundColor":4,
+	"setBackgroundPicture":5,
+	"setLineWidth":6,
+	"setTurtlePosition":7
+}
 var padding = 1.5;
 var width = 500;
 var height = 400;
 var maxMoveX = 500;
 var maxMoveY = 400;
-var xScale;
-var yScale;
-var rotDeg;
-var startP;
+var rotateDegrees;
+var startPoint;
+var canvasId;
 var canvas;
-var color;
-var holdOn;
-var showTot;
-var ldlineWidth;
+var penColor;
+var holdOnTurtle;
+var showTurtle;
+var idLineWidth;
 
 var totData = [	[0,8],[1,7],[-1,7],[1,6],[-1,6],
 				[2,6],[-2,6],[1,5],[-1,5],
@@ -28,12 +45,12 @@ var totData = [	[0,8],[1,7],[-1,7],[1,6],[-1,6],
 
 function rotateX()
 {
-	return -Math.sin(rotDeg*DTR);
+	return -Math.sin(rotateDegrees*DTR);
 }
 
 function rotateY()
 {
-	return Math.cos(rotDeg*DTR);
+	return Math.cos(rotateDegrees*DTR);
 }
 
 function xScale(d)
@@ -46,29 +63,29 @@ function yScale(d)
 	return height - d/maxMoveY*height;
 }
 
-function drawTotoise()
+function drawTurtle()
 {
-	if (!showTot) return;
+	if (!showTurtle) return;
 	
 	function rotTotX(d)
 	{
-		return xScale(startP[0]+
-			(d[0]*Math.cos(rotDeg*DTR)
-			-d[1]*Math.sin(rotDeg*DTR))
+		return xScale(startPoint[0]+
+			(d[0]*Math.cos(rotateDegrees*DTR)
+			-d[1]*Math.sin(rotateDegrees*DTR))
 			*padding);
 	}
 	
 	function rotTotY(d)
 	{
-		return yScale(startP[1]+
-			(d[0]*Math.sin(rotDeg*DTR)
-			+d[1]*Math.cos(rotDeg*DTR))
+		return yScale(startPoint[1]+
+			(d[0]*Math.sin(rotateDegrees*DTR)
+			+d[1]*Math.cos(rotateDegrees*DTR))
 			*padding);
 	}
 	
 	var i,x1,y1,r;
 	canvas[2].clearRect(0,0,width,height);
-	canvas[2].fillStyle = color;
+	canvas[2].fillStyle = penColor;
 	r = padding/maxMoveX*width/2
 	for (i=0;i<totData.length;i++)
 	{
@@ -84,24 +101,26 @@ function drawTotoise()
 function initCanvas()
 {
 	var i;
+	canvasId = new Array();
 	canvas = new Array();
-	startP = [maxMoveX/2,maxMoveY/2];
-	rotDeg = 0;
-	holdOn = false;
-	showTot = true;
-	color = "#000000";
-	ldlineWidth = 1;
-	canvas[0] = document.getElementById("bg");
-	canvas[1] = document.getElementById("lines");
-	canvas[2] = document.getElementById("totoise");
-	for (i=0;i<3;i++)
+	startPoint = [maxMoveX/2,maxMoveY/2];
+	rotateDegrees = 0;
+	holdOnTurtle = false;
+	showTurtle = true;
+	penColor = "#000000";
+	idLineWidth = 1;
+	canvasId[0] = document.getElementById("bg");
+	canvasId[1] = document.getElementById("lines");
+	canvasId[2] = document.getElementById("turtle");
+	canvasId[3] = document.getElementById("saving");
+	for (i=0;i<4;i++)
 	{
-		canvas[i].width=width;
-		canvas[i].height=height;
-		canvas[i]=canvas[i].getContext("2d");
+		canvasId[i].width=width;
+		canvasId[i].height=height;
+		canvas[i]=canvasId[i].getContext("2d");
 		canvas[i].clearRect(0,0,width,height);
 	}
-	drawTotoise();
+	drawTurtle();
 }
 
 function newInputData(inState,inValue)
@@ -109,16 +128,16 @@ function newInputData(inState,inValue)
 	function reDraw(x1,y1,x2,y2)
 	{
 		canvas[1].beginPath();
-		canvas[1].strokeStyle = color;
+		canvas[1].strokeStyle = penColor;
 		canvas[1].moveTo(xScale(x1),yScale(y1));
 		canvas[1].lineTo(xScale(x2),yScale(y2));
-		canvas[1].lineWidth = ldlineWidth;
+		canvas[1].lineWidth = idLineWidth;
 		canvas[1].stroke();
 	}
 	
 	function newPosition(newX,newY)
 	{
-		if (holdOn)
+		if (holdOnTurtle)
 		{
 			newX %= maxMoveX;
 			newY %= maxMoveY;
@@ -138,82 +157,104 @@ function newInputData(inState,inValue)
 					flagX = true;
 					tempR = tempX;
 					tempX = (tempX>=maxMoveX)?maxMoveX-1:0;
-					tempY = (tempY-startP[1])*(tempX-startP[0])
-						/(tempR-startP[0])+startP[1];
+					tempY = (tempY-startPoint[1])*(tempX-startPoint[0])
+						/(tempR-startPoint[0])+startPoint[1];
 				}
 				if (tempY>=maxMoveY || tempY<0)
 				{
 					flagY = true;
 					tempR = tempY;
 					tempY = (tempY>=maxMoveY)?maxMoveY-1:0;
-					tempX = (tempX-startP[0])*(tempY-startP[1])
-						/(tempR-startP[1])+startP[0];
+					tempX = (tempX-startPoint[0])*(tempY-startPoint[1])
+						/(tempR-startPoint[1])+startPoint[0];
 				}
-				reDraw(startP[0],startP[1],tempX,tempY);
+				reDraw(startPoint[0],startPoint[1],tempX,tempY);
 				if (flagX && !flagY)
 				{
-					startP[0] = (tempX==0)?maxMoveX-1:0;
-					startP[1] = tempY;
+					startPoint[0] = (tempX==0)?maxMoveX-1:0;
+					startPoint[1] = tempY;
 					newX = (tempX==0)?newX+maxMoveX:newX-maxMoveX;
 				}
 				if (flagY)
 				{
-					startP[1] = (tempY==0)?maxMoveY-1:0;
-					startP[0] = tempX;
+					startPoint[1] = (tempY==0)?maxMoveY-1:0;
+					startPoint[0] = tempX;
 					newY = (tempY==0)?newY+maxMoveY:newY-maxMoveY;
 				}
 			}
-			reDraw(startP[0],startP[1],newX, newY);
+			reDraw(startPoint[0],startPoint[1],newX, newY);
 		}
-		startP[0] = newX;
-		startP[1] = newY;
+		startPoint[0] = newX;
+		startPoint[1] = newY;
 	}
 	
 	switch (inState)
 	{
-	case 0:
-		rotDeg += inValue;
-		if (rotDeg>=360) rotDeg -= 360;
-		if (rotDeg<0) rotDeg += 360;
+	case inputDataDictionary["TurnLeftDegrees"]:
+		rotateDegrees += inValue;
+		if (rotateDegrees>=360) rotateDegrees -= 360;
+		if (rotateDegrees<0) rotateDegrees += 360;
 		break;
-	case 1:
-		newPosition(startP[0] + rotateX()*inValue,
-			startP[1] + rotateY()*inValue);
+	case inputDataDictionary["walkForwardLength"]:
+		newPosition(startPoint[0] + rotateX()*inValue,
+			startPoint[1] + rotateY()*inValue);
 		break;
-	case 2:
+	case inputDataDictionary["specialFunctions"]:
 		switch (inValue)
 		{
-		case 0:
-			holdOn = false;
+		case inputDataDictionary["putDownTurtle"]:
+			holdOnTurtle = false;
 			break;
-		case 1: 
-			holdOn = true;
+		case inputDataDictionary["holdOnTurtle"]: 
+			holdOnTurtle = true;
 			break;
-		case 2:
+		case inputDataDictionary["resetTurtleToHome"]:
 			newPosition(maxMoveX/2,maxMoveY/2);
-			rotDeg = 0;
+			rotateDegrees = 0;
 			break;
-		case 3:
+		case inputDataDictionary["clearCanvas"]:
 			canvas[1].clearRect(0,0,width,height);
 			break;
-		case 4:
+		case inputDataDictionary["hideTurtle"]:
 			canvas[2].clearRect(0,0,width,height);
-			showTot = false;
+			showTurtle = false;
 			break;
-		case 5:
-			showTot = true;
+		case inputDataDictionary["showTurtle"]:
+			showTurtle = true;
+			break;
+		case inputDataDictionary["saveCanvas"]:
+			var img = new Image();
+			var pictureURL;
+			img.src = canvasId[0].toDataURL("image/png");
+			img.onload=function()
+			{
+				canvas[3].drawImage(img,0,0,width,height);
+				img.src = canvasId[1].toDataURL("image/png");
+				img.onload=function()
+				{
+					canvas[3].drawImage(img,0,0,width,height);
+					img.src = canvasId[2].toDataURL("image/png");
+					img.onload=function()
+					{
+						canvas[3].drawImage(img,0,0,width,height);
+						pictureURL = canvasId[3].toDataURL("image/png");
+						canvas[3].clearRect(0,0,width,height);
+					}
+				}
+			}
+			return pictureURL;
 			break;
 		default:
 		}
 		break;
-	case 3:
-		color = inValue;
+	case inputDataDictionary["setPenColor"]:
+		penColor = inValue;
 		break;
-	case 4:
+	case inputDataDictionary["setBackgroundColor"]:
 		canvas[0].fillStyle = inValue;
 		canvas[0].fillRect(0,0,width,height);
 		break;
-	case 5:
+	case inputDataDictionary["setBackgroundPicture"]:
 		canvas[0].clearRect(0,0,width,height);
 		var img = new Image();
 		img.src = inValue;
@@ -222,10 +263,13 @@ function newInputData(inState,inValue)
 			canvas[0].drawImage(img,0,0,width,height);
 		}
 		break;
-	case 6:
-		ldlineWidth = inValue;
+	case inputDataDictionary["setLineWidth"]:
+		idLineWidth = inValue;
+		break;
+	case inputDataDictionary["setTurtlePosition"]:
+		newPosition(inValue["x"],inValue["y"]);
 		break;
 	default:
 	}
-	drawTotoise();
+	drawTurtle();
 }
