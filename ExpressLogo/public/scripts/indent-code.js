@@ -62,13 +62,15 @@ function indentCode(elementId,evt)
 		r.select();
 	}
 
-	function shortcut_submit () {
-		$('#submit').trigger("click");
-	}
-
-	function getShiftAndCtrl()
+	function getSuperKey()
 	{
-		return (evt.ctrlKey || evt.shiftKey);
+		return (evt.ctrlKey || evt.metaKey);
+	}
+	
+	function shortcut_submit ()
+	{
+		$('#submit').trigger("click");
+		return false;
 	}
 	
 	var caretStart = getCaretStart();
@@ -120,14 +122,12 @@ function indentCode(elementId,evt)
 		}
 		break;
 	case 10:
-		shortcut_submit();
-		return false;
+		return shortcut_submit();
 	case 13:
-		switch (getShiftAndCtrl())
+		switch (getSuperKey())
 		{
 		case true:
-			shortcut_submit();
-			return false;
+			return shortcut_submit();
 		case false:
 			var i,j;
 			var contentBackUp = content;
