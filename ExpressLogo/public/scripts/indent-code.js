@@ -64,7 +64,7 @@ function indentCode(elementId,evt)
 
 	function getSuperKey()
 	{
-		return (evt.ctrlKey || evt.metaKey);
+		return (evt.ctrlKey || evt.metaKey || evt.shiftKey);
 	}
 	
 	function shortcut_submit ()
