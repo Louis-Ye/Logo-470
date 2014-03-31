@@ -1,11 +1,8 @@
-var id_shift = false;
-
 function indentCode(elementId,evt)
 {
 	var fontSize = 14;
 	var elementObject = document.getElementById(elementId);
 	var key = getKeyCode(evt);
-	console.log(key);
 	if (key!=9 &&
 		key!=10 &&
 		key!=13 &&
@@ -65,6 +62,11 @@ function indentCode(elementId,evt)
 		r.select();
 	}
 	
+	function getShiftAndCtrl()
+	{
+		return (evt.ctrlKey || evt.shiftKey);
+	}
+	
 	var caretStart = getCaretStart();
 	var caretEnd = getCaretEnd();
 	var content = elementObject.value;
@@ -117,7 +119,7 @@ function indentCode(elementId,evt)
 		shortcut_submit();
 		return false;
 	case 13:
-		switch (id_shift)
+		switch (getShiftAndCtrl())
 		{
 		case true:
 			shortcut_submit();
