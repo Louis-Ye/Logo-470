@@ -18,8 +18,13 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 
 	function callback (message) {
 		if (message) {
-			$scope.result += message + '\n';
-			var result_pad = document.getElementById('result-pad');
+			var result_pad = $('#result-pad');
+			if (result_pad.val() == "") {
+				result_pad.append(message);
+			} else {
+				result_pad.append('\n' + message);
+			}
+			result_pad = document.getElementById('result-pad');
 			result_pad.scrollTop = result_pad.scrollHeight;
 		};
 	};
