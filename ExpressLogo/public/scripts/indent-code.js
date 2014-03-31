@@ -9,13 +9,13 @@ function indentCode(elementId,evt)
 		key!=40 &&
 		key!=91 &&
 		key!=123) return true;
-	
+
 	function getCaretStart()
 	{
 		//For Firefox, Chrome, new versions of IE, etc
 		if(typeof(elementObject.selectionStart) == "number")
 			return elementObject.selectionStart;
-		
+
 		//For old verson of IE (I am not sure whether it would work)
 		var pos = 0;
 		elementObject.focus();
@@ -35,7 +35,7 @@ function indentCode(elementId,evt)
 		elementObject.scrollTop = s;
 		return pos;
 	}
-	
+
 	function getCaretEnd()
 	{
 		//Cound only support new browsers. Sorry IE 6.0
@@ -43,7 +43,7 @@ function indentCode(elementId,evt)
 			return elementObject.selectionEnd;
 		return getCaretStart();
 	}
-	
+
 	function setCaret(pos)
 	{
 		//For Firefox, Chrome, new versions of IE, etc
@@ -61,7 +61,11 @@ function indentCode(elementId,evt)
 		r.moveStart('character',pos);
 		r.select();
 	}
-	
+
+	function shortcut_submit () {
+		$('#submit').trigger("click");
+	}
+
 	function getShiftAndCtrl()
 	{
 		return (evt.ctrlKey || evt.shiftKey);
