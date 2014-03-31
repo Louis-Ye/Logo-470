@@ -39,12 +39,10 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 			'userTyping': $scope.code,
 			'delay': 1,
 			'debugMode': false,
-			'callback': callback
+			'callback': callback,
+			'penStatusCallback': change_pen_status,
+			'turtleStatusCallback': change_turtle_status
 		};
-	};
-
-	function shortcut_submit () {
-		$scope.on_submit_clicked();
 	};
 
 	$scope.on_submit_clicked = function () {
