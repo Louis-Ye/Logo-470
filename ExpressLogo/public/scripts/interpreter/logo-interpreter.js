@@ -8,6 +8,8 @@ var g_resetting = false;
 var g_programExeNode = new ExeNode(null, PROGRAM_TYPE);
 var g_curExeNode = g_programExeNode;
 
+var given_penStatusCallback;
+var given_turtleStatusCallback;
 var given_callback;
 const g_callback = function(error, result) {
 	//console.log(result);
@@ -31,8 +33,11 @@ var g_runProgram = function() {
 
 function interpret(arg) { //userTyping, delay, debugMode, callback
 	given_callback = arg.callback;
+	given_penStatusCallback = arg.penStatusCallback;
+	given_turtleStatusCallback = arg.turtleStatusCallback;
+
 	g_hasError = false;
-	g_delay = arg.delay;
+	g_delay = 0;//arg.delay;
 	g_debugMode = arg.debugMode;
 
 	var tokens = null;
