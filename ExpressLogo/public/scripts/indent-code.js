@@ -1,8 +1,11 @@
+var id_shift = false;
+
 function indentCode(elementId,evt)
 {
 	var fontSize = 14;
 	var elementObject = document.getElementById(elementId);
 	var key = getKeyCode(evt);
+	console.log(key);
 	if (key!=9 &&
 		key!=10 &&
 		key!=13 &&
@@ -114,20 +117,29 @@ function indentCode(elementId,evt)
 		shortcut_submit();
 		return false;
 	case 13:
-		var i,j;
-		var contentBackUp = content;
-		content += '\n'
-		forwardScroll = true;
-		for (i=contentBackUp.length-1;i>=0;i--)
-			if (contentBackUp[i]=='\n') break;
-		for (j=i+1;j<contentBackUp.length;j++)
-			if (contentBackUp[j]==' ' || contentBackUp[j]=='\t')
-			{
-				content += contentBackUp[j];
-				forwardCaret++;
-			}
-			else
-				break;
+		switch (id_shift)
+		{
+		case true:
+			shortcut_submit();
+			return false;
+		case false:
+			var i,j;
+			var contentBackUp = content;
+			content += '\n'
+			forwardScroll = true;
+			for (i=contentBackUp.length-1;i>=0;i--)
+				if (contentBackUp[i]=='\n') break;
+			for (j=i+1;j<contentBackUp.length;j++)
+				if (contentBackUp[j]==' ' || contentBackUp[j]=='\t')
+				{
+					content += contentBackUp[j];
+					forwardCaret++;
+				}
+				else
+					break;
+			break;
+		default:
+		}
 		break;
 	case 40:
 		content += "()";
