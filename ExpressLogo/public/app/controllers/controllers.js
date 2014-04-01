@@ -54,8 +54,12 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	};
 
 	function change_pen_status () {
-		$scope.pen_status = myCanvas.getDrawStatus();
-	}
+		setTimeout(function () {
+			$scope.$apply(
+				$scope.pen_status = myCanvas.getDrawStatus()
+			);
+		}, 1);
+	};
 
 	$scope.toggle_pen = function () {
 		interpret_json.userTyping = $scope.pen_status ? "penup" : "pendown";
@@ -70,7 +74,11 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	};
 
 	function change_turtle_status () {
-		$scope.turtle_status = myCanvas.getTurtleStatus();
+		setTimeout(function () {
+			$scope.$apply(
+				$scope.turtle_status = myCanvas.getTurtleStatus()
+			);
+		}, 1);
 	}
 
 	$scope.toggle_turtle = function () {
