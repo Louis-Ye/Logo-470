@@ -53,12 +53,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 		document.getElementById("code-pad").focus();
 	};
 
-	function change_pen_status () {
-		setTimeout(function () {
-			$scope.$apply(
-				$scope.pen_status = myCanvas.getDrawStatus()
-			);
-		}, 1);
+	function change_pen_status (status) {
+		$scope.pen_status = status;
 	};
 
 	$scope.toggle_pen = function () {
@@ -73,12 +69,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 		$scope.border_status ? myCanvas.noBorder() : myCanvas.setBorder();
 	};
 
-	function change_turtle_status () {
-		setTimeout(function () {
-			$scope.$apply(
-				$scope.turtle_status = myCanvas.getTurtleStatus()
-			);
-		}, 1);
+	function change_turtle_status (status) {
+		$scope.turtle_status = status;
 	}
 
 	$scope.toggle_turtle = function () {
