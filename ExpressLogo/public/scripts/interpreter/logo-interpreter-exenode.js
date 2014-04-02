@@ -179,11 +179,11 @@ ExeNode.prototype.execute = function() {
 
 
 	if ( this.nodeType == PENDOWN_TYPE ) {
-		given_penStatusCallback();
+		given_penStatusCallback(true);
 		myCanvas.turtlePutDown();
 	}
 	if ( this.nodeType == PENUP_TYPE ) {
-		given_penStatusCallback();
+		given_penStatusCallback(false);
 		myCanvas.turtleHoldOn();
 	}
 	if ( this.nodeType == HOME_TYPE ) {
@@ -193,11 +193,11 @@ ExeNode.prototype.execute = function() {
 		myCanvas.clearCanvas();
 	}
 	if ( this.nodeType == HIDETURTLE_TYPE ) {
-		given_turtleStatusCallback();
+		given_turtleStatusCallback(false);
 		myCanvas.turtleHide();
 	}
 	if ( this.nodeType == SHOWTURTLE_TYPE ) {
-		given_turtleStatusCallback();
+		given_turtleStatusCallback(true);
 		myCanvas.turtleShow();
 	}
 	if ( this.nodeType == SETXY_TYPE ) {
