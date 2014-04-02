@@ -91,7 +91,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	};
 
 	$scope.reset = function () {
-		// $scope.result = "";
+		$('#result-pad').val('');
 		$scope.code = "";
 		interpreterReset();
 		myCanvas.initCanvas();
