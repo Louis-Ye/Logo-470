@@ -19,11 +19,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	function callback (message) {
 		if (message) {
 			var result_pad = $('#result-pad');
-			if (result_pad.val() == "") {
-				result_pad.append(message);
-			} else {
-				result_pad.append('\n' + message);
-			}
+			result_pad.append(message + '<br />');
 			result_pad = document.getElementById('result-pad');
 			result_pad.scrollTop = result_pad.scrollHeight;
 		};
@@ -189,9 +185,9 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http, globa
 			global_data.logged_in = true;
 		};
 	})
-	.error(function (data) {
-		$scope.message = "Network error";
-	});
+	// .error(function (data) {
+	// 	$scope.message = "Network error";
+	// });
 });
 
 ExpressLOGOApp.controller('signInViewController', function ($scope, $http, global_data) {
@@ -207,8 +203,8 @@ ExpressLOGOApp.controller('signInViewController', function ($scope, $http, globa
 			global_data.logged_in = true;
 		};
 	})
-	.error(function (data) {
-		$scope.message[0] = "Network error";
-	});
+	// .error(function (data) {
+	// 	$scope.message[0] = "Network error";
+	// });
 
 });

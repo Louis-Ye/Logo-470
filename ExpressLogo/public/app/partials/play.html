@@ -14,7 +14,7 @@
 		<div id="console-pad" class="col-sm-12 col-md-6 col-lg-5">
 			<div class="row">
 				<div class="col-sm-6 col-md-12">
-					<textarea id="result-pad" disabled>{{ result }}</textarea>
+					<p id="result-pad">{{ result }}</p>
 				</div>
 				<div class="col-sm-6 col-md-12">
 					<textarea id="code-pad" ng-model="code" placeholder="Try something here!" autofocus spellcheck="false" onkeypress="return indentCode(id,event);" onkeydown="if (getKeyCode(event)==9) return indentCode(id,event);"></textarea>
