@@ -1,4 +1,3 @@
-var fs = require('fs');
 
 module.exports = function(app) {
 	var Post = require('../models/post');
@@ -20,7 +19,7 @@ module.exports = function(app) {
 				},
 				date : Date.now(),
 				code : req.body.code,
-				image : req.body.img
+				image_url : req.body.img
 			});
 			//newpost.image = fs.readFileSync('./turtle.png').toString('base64');
 			//use the followting code to show the pic

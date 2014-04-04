@@ -1,19 +1,24 @@
+// require packages
 var mongoose = require('mongoose');
+//to generate url-friendly _id
+var shortId = require('shortid');
 
 var postSchema = mongoose.Schema({
-	author : {
-		id: String,
-		name: String,
-		avatar: String,
+	_id: {
+    	type: String,
+    	unique: true,
+    	default: function(){ return shortId.generate(); }
 	},
-	date : Date,
+	title : String,
+	author : {
+		id: String
+	},
+	create_at : Date,
 	image : Buffer,
 	code : String,
 	comment : [{
 		author: {
-			id: String,
-			name: String,
-			avatar: String,
+			id: String
 		},
 		content: String,
 		date: Date,

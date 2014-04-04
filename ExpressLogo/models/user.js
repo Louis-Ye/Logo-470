@@ -1,9 +1,16 @@
-// load the things we need
+// require packages
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
+//to generate url-friendly _id
+var shortId = require('shortid');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
+    _id: {
+        type: String,
+        unique: true,
+        default: function(){ return shortId.generate(); }
+    },
     register : String,
     local            : {
         email        : String,
