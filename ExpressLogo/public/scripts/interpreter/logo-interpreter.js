@@ -8,6 +8,8 @@ var g_resetting = false;
 var g_programExeNode = new ExeNode(null, PROGRAM_TYPE);
 var g_curExeNode = g_programExeNode;
 
+var g_stack = [];
+
 var given_penStatusCallback;
 var given_turtleStatusCallback;
 var given_callback;
@@ -47,12 +49,13 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 	}
 	var tree = null;
 	if (tokens) {
-		 tree = parser(tokens);
-		 //console.log(tree);
+		tree = parser(tokens);
+		//console.log(tree);
 	}
 	var runTree = null;
 	if (tree) {
 		runTree = semantic(tree);
+		console.log(runTree);
 	}
 
 	if (runTree) {

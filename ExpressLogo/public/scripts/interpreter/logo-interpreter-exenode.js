@@ -4,6 +4,9 @@
 const PROGRAM_TYPE = "program type";
 const BODY_TYPE = "body type";
 
+const FUNC_DEF_TYPE = "function definition type";
+const FUNC_INVO_TYPE = "function invocation type";
+
 const FORWARD_TYPE = "stmt forward type";
 const BACKWARD_TYPE = "stmt backword type";
 const LEFT_TYPE = "stmt left turn type";
@@ -12,7 +15,6 @@ const RIGHT_TYPE = "stmt right turn type";
 const WHILE_TYPE = "stmt while type";
 const REPEAT_TYPE = "stmt repeat type";
 const IF_TYPE = "stmt if type";
-
 
 const CLEARSCREEN_TYPE = "stmt clearscree type"
 const PENUP_TYPE = "stmt penup type";
@@ -30,13 +32,30 @@ const PLUS_TYPE = "expr plus type";
 const MINUS_TYPE = "expr minus type";
 const MULTIPLY_TYPE = "expr multiply type";
 const DIVIDE_TYPE = "expr divide type";
-const IDENTIFIER_DEC_TYPE = "identifier declaration type";
-const IDENTIFIER_INVO_TYPE = "identifier invocation type";
-const CONSTANT_TYPE = "constant type";
+const MOD_TYPE = "mod divide type";
+
+const EUQAL_TYPE = "logical equal type";
+const NOT_EUQAL_TYPE = "logical not equal type";
+const GREATER_TYPE = "logical greater type";
+const GREATER_EQUAL_TYPE = "logical greater equal type";
+const LESS_TYPE = "logical less type";
+const LESS_EQUAL_TYPE = "logical less equal type";
+const AND_TYPE = "logical and type";
+const OR_TYPE = "logical or type";
+const NOT_TYPE = "logical not type";
+
+const IDENTIFIER_DEC_TYPE = "identifier declaration type (terminal)";
+const IDENTIFIER_INVO_TYPE = "identifier invocation type (terminal)";
+const CONSTANT_TYPE = "constant type (terminal)";
 
 const NO_TYPE = "no type";
 
+/////////////////////////////////////////////////////////////////////////
+// numeric type
 
+const BOOL_TYPE_NUMERIC = "bool type numeric"
+const NUMBER_TYPE_NUMERIC = "number type numeric"
+const NA_TYPE_NUMERIC = "N/A"
 
 /////////////////////////////////////////////////////////////////////////
 // ExeNode
@@ -50,12 +69,19 @@ function ExeNode(token, nodeType) {
 
 	if ( (nodeType === BODY_TYPE) || (nodeType === PROGRAM_TYPE) ) {
 		this.symbolTable = {};
+		if (nodeType === BODY_TYPE) this.funcSymbolTable = {};
 		this.curExeChildPos = 0;
 	}
 	else if (nodeType === REPEAT_TYPE) {
 		this.curRemainingTimes = 0;
 	}
+	else if (nodeType === FUNC_DEF_TYPE) {
+		this.realExecute = function() {
+			this.children[ this.children.length - 1 ].execute();
+		};
+	}
 
+	this.numericType = NA_TYPE_NUMERIC;
 };
 
 ExeNode.prototype.setChild = function(child) {
@@ -63,22 +89,13 @@ ExeNode.prototype.setChild = function(child) {
 	child.parent = this;
 };
 
-ExeNode.prototype.getSymbolTableParent = function() {
-	var par = this.parent;
-	while (par != null && !par.hasSymbolTable()) {
-		par = par.parent;
-	}
-	return par;
-};
-
 ExeNode.prototype.cutErrorNodeFromProgramNode = function() {
 	var node = this;
 	while (node.parent != g_programExeNode) {
 		node = node.parent;
 	}
-
-	for (var i=g_programExeNode.curExeChildPos; i<g_programExeNode.length; i++) {
-		if (node == children[i]) {
+	for (var i=0; i<g_programExeNode.children.length; i++) {
+		if (node == g_programExeNode.children[i]) {
 			g_programExeNode.children = g_programExeNode.children.slice(0, i);
 			break;
 		}
@@ -88,7 +105,9 @@ ExeNode.prototype.cutErrorNodeFromProgramNode = function() {
 ExeNode.prototype.hasSymbolTable = function() {
 	return this.symbolTable;
 }
-
+ExeNode.prototype.hasFuncSymbolTable = function() {
+	return this.funcSymbolTable;
+}
 
 
 
@@ -121,6 +140,23 @@ ExeNode.prototype.execute = function() {
 	}
 
 	/////////////////////////////////////////////////////////////
+	// Func	
+
+	if ( this.nodeType == FUNC_INVO_TYPE) {
+		g_stack.push( findSymbolTableParent(this) );
+
+		var funcDefNode = g_programExeNode.funcSymbolTable[ this.token ];
+		for (var i=0; i<this.children.length; i++) {
+			var arguValue = this.children[i].execute();
+			var idenName = funcDefNode.children[i].token;
+			funcDefNode.symbolTable[idenName].val = arguValue;
+			funcDefNode.symbolTable[idenName].numericType = this.children[i].numericType;
+			funcDefNode.realExecute();
+		}
+		funcDefNode.realExecute();
+	}
+
+	/////////////////////////////////////////////////////////////
 	// BODY_TYPE
 	if ( this.nodeType == BODY_TYPE ) {
 		if (this.curExeChildPos < this.children.length) {
@@ -145,6 +181,9 @@ ExeNode.prototype.execute = function() {
 			else if (this.parent.nodeType == IF_TYPE) {
 				goToLastSymbolTableParentExe(this);
 			}
+			else if (this.parent.nodeType == FUNC_DEF_TYPE) {
+				setTimeOutAndNextExeNode( g_stack.pop() );
+			}
 			else {
 				goToLastSymbolTableParentExe(this);
 			}
@@ -155,6 +194,15 @@ ExeNode.prototype.execute = function() {
 	if (this.nodeType == REPEAT_TYPE) {
 		this.curRemainingTimes = this.children[0].execute();
 		if (this.curRemainingTimes > 0) this.children[1].execute();
+	}
+	if (this.nodeType == IF_TYPE) {
+		var expr = this.children[0];
+		if ( expr.execute() ) {
+			this.children[1].execute();
+		}
+		else {
+			if ( this.children.length >= 3 ) this.children[2].execute();
+		}
 	}
 
 
@@ -205,7 +253,6 @@ ExeNode.prototype.execute = function() {
 		var y = this.children[1].execute();
 		myCanvas.setTurtlePosition(x, y);
 	}
-	
 
 
 
@@ -221,12 +268,61 @@ ExeNode.prototype.execute = function() {
 	}
 
 
-
 	if (this.nodeType == MAKE_TYPE) {
 		var symbolTable = findSymbolTableIncludingThisNode(this.children[0]);
-		if (!symbolTable) symbolTable = this.getSymbolTableParent().symbolTable;
-		symbolTable[this.children[0].token] = this.children[1].execute();
+		symbolTable[this.children[0].token].val = this.children[1].execute();
 	}
+
+	/////////////////////////////////////////////////////////////
+	// logical operation
+
+	if (this.nodeType == EUQAL_TYPE) {
+		var left = this.children[0].execute();
+		var right = this.children[1].execute();
+		return left == right;
+	}
+	if (this.nodeType == NOT_EUQAL_TYPE) {
+		var left = this.children[0].execute();
+		var right = this.children[1].execute();
+		return left != right;
+	}
+	if (this.nodeType == GREATER_TYPE) {
+		var left = this.children[0].execute();
+		var right = this.children[1].execute();
+		return left > right;
+	}
+	if (this.nodeType == GREATER_EQUAL_TYPE) {
+		var left = this.children[0].execute();
+		var right = this.children[1].execute();
+		return left >= right;
+	}
+	if (this.nodeType == LESS_TYPE) {
+		var left = this.children[0].execute();
+		var right = this.children[1].execute();
+		return left < right;
+	}
+	if (this.nodeType == LESS_EQUAL_TYPE) {
+		var left = this.children[0].execute();
+		var right = this.children[1].execute();
+		return left <= right;
+	}
+	if (this.nodeType == AND_TYPE) {
+		var left = this.children[0].execute();
+		var right = this.children[1].execute();
+		return left && right;
+	}
+	if (this.nodeType == OR_TYPE) {
+		var left = this.children[0].execute();
+		var right = this.children[1].execute();
+		return left || right;
+	}
+	if (this.nodeType == NOT_TYPE) {
+		var child = this.children[0].execute();
+		return !child;
+	}
+
+	/////////////////////////////////////////////////////////////
+	// arithmetic operation
 
 	if (this.nodeType == PLUS_TYPE) {
 		var left = this.children[0].execute();
@@ -248,10 +344,17 @@ ExeNode.prototype.execute = function() {
 		var right = this.children[1].execute();
 		return left / right;
 	}
+	if (this.nodeType == MOD_TYPE) {
+		var left = this.children[0].execute();
+		var right = this.children[1].execute();
+		return left % right;
+	}
+
+	/////////////////////////////////////////////////////////////
 
 	if (this.nodeType == IDENTIFIER_INVO_TYPE) {
 		var symbolTable = findSymbolTableIncludingThisNode(this);
-		return symbolTable[this.token];
+		return symbolTable[this.token].val;
 	}
 
 	if (this.nodeType == CONSTANT_TYPE) {
@@ -260,14 +363,15 @@ ExeNode.prototype.execute = function() {
 
 };
 
-/*
-function isSimpleStatementType(nodeType) {
-	return FORWARD_TYPE == nodeType ||
-		BACKWARD_TYPE == nodeType ||
-		LEFT_TYPE == nodeType ||
-		RIGHT_TYPE == nodeType;
-}
-*/
+
+
+
+
+
+
+
+
+
 function setTimeOutAndNextExeNode(nodeRef) {
 	if (g_noProcessWaitingTimeout) {
 		g_noProcessWaitingTimeout = false;
@@ -276,7 +380,7 @@ function setTimeOutAndNextExeNode(nodeRef) {
 	}
 }
 function goToLastSymbolTableParentExe(nodeRef) {
-	NextExeNode = nodeRef.getSymbolTableParent();
+	NextExeNode = findSymbolTableParent(nodeRef);
 	setTimeOutAndNextExeNode(NextExeNode);
 }
 function makeRGB(r, g, b) {
@@ -293,6 +397,18 @@ function makeRGB(r, g, b) {
 
 	return "#" + rs + gs + bs;
 }
+
+/////////////////////////////////////////////////////////////////////////
+// variable symboltable
+
+function findSymbolTableParent(curNode) {
+	var par = curNode.parent;
+	while (par != null && !par.hasSymbolTable()) {
+		par = par.parent;
+	}
+	return par;
+}
+
 function findSymbolTableIncludingThisNode(curNode) {
 	var par = curNode.parent;
 	while ( par != null ) {
@@ -302,5 +418,18 @@ function findSymbolTableIncludingThisNode(curNode) {
 		par = par.parent;
 	}
 	return false;
+}
+
+function variableNotDecBefore(varNode) {
+	var par = varNode.parent;
+	var notDecBefore = true;
+	while (par != null) {
+		if (par.hasSymbolTable() && (varNode.token in par.symbolTable)) {
+			notDecBefore = false;
+			break;
+		}
+		par = par.parent;
+	}
+	return notDecBefore;
 }
 

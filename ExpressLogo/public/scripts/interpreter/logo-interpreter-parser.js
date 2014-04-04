@@ -31,7 +31,10 @@ const Keyword = {
 	"HOME": "home",
 	"SETXY": "setxy",
 	"COLOR": "color",
-	"PENWIDTH": "penwidth"
+	"PENWIDTH": "penwidth",
+
+	"TO": "to",
+	"END": "end"
 };
 
 function getNodeTypeByToken(token) {
@@ -64,10 +67,21 @@ const Punctuator = {
 	"MINUS": "-",
 	"MULTIPLY": "*",
 	"DIVIDE": "/",
+	"MOD": "%",
 	"BRACKET_OPEN": "(",
 	"BRACKET_CLOSE": ")",
 	"IDENTIFIER_INVO": ":",
-	"IDENTIFIER_DEC": "\""
+	"IDENTIFIER_DEC": "\"",
+
+	"EQUAL": "==",
+	"NOT_EQUAL": "!=",
+	"GREATER": ">",
+	"GREATER_EQUAL": ">=",
+	"LESS": "<",
+	"LESS_EQUAL": "<=",
+	"AND": "&&",
+	"OR": "||",
+	"NOT": "!"
 };
 
 
@@ -131,8 +145,17 @@ function parser(tokens) {
 			token == Keyword.CS ||
 			token == Keyword.HOME;
 	}
+	function startsFuncInvo(token) {
+		if (token == null || token == undefined) return false;
+		var mch = token.match(/[a-zA-Z][a-zA-Z0-9]*/);
+		if (mch) {
+			return mch.index == 0;
+		}
+		else return false;
+	}
 	function startsStatement(token) {
-		return startsSimpleStatement(token) ||
+		if (token == Keyword.END) return false;
+		if (startsSimpleStatement(token) ||
 			startsNoArguStatement(token) ||
 			token == Keyword.IF ||
 			token == Keyword.REPEAT ||
@@ -140,7 +163,10 @@ function parser(tokens) {
 			token == Keyword.WHILE ||
 			token == Keyword.SETXY ||
 			token == Keyword.COLOR ||
-			token == Keyword.PENWIDTH;
+			token == Keyword.PENWIDTH ||
+			token == Keyword.TO ||
+			startsFuncInvo(token) )
+			return true;
 	};
 	function parseStatement() {
 		if (!startsStatement(nowReading)) {
@@ -224,7 +250,49 @@ function parser(tokens) {
 			thisNode.setChild(expr);
 			return thisNode;
 		}
+
+
+		if (nowReading == Keyword.IF) {
+			var token = nowReading;
+			readToken();
+			var expr = parseExpression();
+			expect(Punctuator.BODY_OPEN);
+			var body = parseBody();
+			expect(Punctuator.BODY_CLOSE);
+			var thisNode = new ExeNode(token, IF_TYPE);
+			thisNode.setChild(expr);
+			thisNode.setChild(body);
+			return thisNode;
+		}
+
+
+		if (nowReading == Keyword.TO) {
+			var token = nowReading;
+			expect(Keyword.TO);
+			var thisNode = new ExeNode(token, FUNC_DEF_TYPE);
+			while (startsIdentifierInvo(nowReading)) {
+				var idenInvo = parseIdentifierInvo();
+				if (idenInvo) {
+					thisNode.setChild( idenInvo );
+				}
+			}
+			var body = parseBody();
+			if (body == null) body = new ExeNode("no body", NO_TYPE);
+			thisNode.setChild(body);
+			expect(Keyword.END);
+		}
 		
+		if ( startsFuncInvo(nowReading) ) {
+			var token = nowReading;
+			readToken();
+			var thisNode = new ExeNode(token, FUNC_INVO_TYPE);
+			while (startsExpression(nowReading)) {
+				var expr = parseExpression();
+				if (expr) {
+					thisNode.setChild( expr );
+				}
+			}
+		}
 
 		// ........................
 	};
@@ -238,7 +306,7 @@ function parser(tokens) {
 			return null;
 		}
 
-		var thisNode = new ExeNode(previousRead, BODY_TYPE);
+		var thisNode = new ExeNode("body start", BODY_TYPE);
 		while ( !g_hasError && startsStatement(nowReading) ) {
 			var stmt = parseStatement();
 			if ( !g_hasError ) thisNode.setChild(stmt);
@@ -250,30 +318,41 @@ function parser(tokens) {
 	// parse expression
 
 	// expr -> expr1
+	// expr1 -> expr2 ('||' expr2)*
+	// expr2 -> expr3 ('&&' expr3)*
+	// expr3 -> expr4 ( '!=' | '==' expr4 )*
+	// expr4 -> expr5 ( '>' | '>=' | '<' | '<=' expr5 )*
+	// expr5 -> expr6 ( '+' | '-' expr6 )*
+	// expr6 -> expr7 ( '*' | '/' | '%' expr7 )*
+	// expr7 -> '!' ? expr7 : expr8
+	// expr8 -> (expr) | constant | identifier
+
 	function startsExpression(token) {
 		return startsIdentifierInvo(token) || 
 			startsConstant(token) || 
-			(token == Punctuator.BRACKET_OPEN);
+			(token == Punctuator.BRACKET_OPEN) ||
+			(token == Punctuator.NOT);
 	}
 	function parseExpression() {
 		if ( !startsExpression(nowReading) ) {
 			errorLog(nowReading);
 		}
+
 		return parseExpression1();
 	}
 
-	// expr1 -> expr2 ((+|-) expr2)*
+	// expr1 -> expr2 ('||' expr2)*
 	function parseExpression1() {
 		if ( !startsExpression(nowReading) ) {
 			errorLog(nowReading);
 		}
 
 		var left = parseExpression2();
-		while ((nowReading == Punctuator.PLUS) || (nowReading == Punctuator.MINUS)) {
+		while (nowReading == Punctuator.OR) {
 			var token = nowReading;
 			readToken();
 			var right = parseExpression2();
-			var node = new ExeNode(token, (token == Punctuator.PLUS) ? PLUS_TYPE : MINUS_TYPE);
+			var node = new ExeNode(token, OR_TYPE);
 			node.setChild(left);
 			node.setChild(right);
 			left = node;
@@ -281,18 +360,18 @@ function parser(tokens) {
 		return left;
 	}
 
-	// expr2 -> expr3 ((*|/) expr3)*
+	// expr2 -> expr3 ('&&' expr3)*
 	function parseExpression2() {
 		if ( !startsExpression(nowReading) ) {
 			errorLog(nowReading);
 		}
 
 		var left = parseExpression3();
-		while ((nowReading == Punctuator.MULTIPLY) || (nowReading == Punctuator.DIVIDE)) {
+		while (nowReading == Punctuator.AND) {
 			var token = nowReading;
 			readToken();
 			var right = parseExpression3();
-			var node = new ExeNode(token, (token == Punctuator.MULTIPLY) ? MULTIPLY_TYPE : DIVIDE_TYPE);
+			var node = new ExeNode(token, AND_TYPE);
 			node.setChild(left);
 			node.setChild(right);
 			left = node;
@@ -300,8 +379,135 @@ function parser(tokens) {
 		return left;
 	}
 
-	// expr3 -> (epxr) | identifier | constant
+	// expr3 -> expr4 ( '!=' | '==' expr4 )*
 	function parseExpression3() {
+		if ( !startsExpression(nowReading) ) {
+			errorLog(nowReading);
+		}
+
+		function getNodeType(token) {
+			if (token == Punctuator.NOT_EQUAL) return NOT_EQUAL_TYPE;
+			if (token == Punctuator.EQUAL) return EQUAL_TYPE;
+			return NO_TYPE;
+		}
+
+		var left = parseExpression4();
+		while ((nowReading == Punctuator.NOT_EQUAL) || (nowReading == Punctuator.EQUAL)) {
+			var token = nowReading;
+			readToken();
+			var right = parseExpression4();
+			var node = new ExeNode(token, getNodeType(token));
+			node.setChild(left);
+			node.setChild(right);
+			left = node;
+		}
+		return left;
+	}
+
+	// expr4 -> expr5 ( '>' | '>=' | '<' | '<=' expr5 )*
+	function parseExpression4() {
+		if ( !startsExpression(nowReading) ) {
+			errorLog(nowReading);
+		}
+
+		function getNodeType(token) {
+			if (token == Punctuator.GREATER) return GREATER_TYPE;
+			if (token == Punctuator.GREATER_EQUAL) return GREATER_EQUAL_TYPE;
+			if (token == Punctuator.LESS) return LESS_TYPE;
+			if (token == Punctuator.LESS_EQUAL) return LESS_EQUAL_TYPE;
+			return NO_TYPE;
+		}
+
+		var left = parseExpression5();
+		while ((nowReading == Punctuator.GREATER) || 
+				(nowReading == Punctuator.GREATER_EQUAL) ||
+				(nowReading == Punctuator.LESS) ||
+				(nowReading == Punctuator.LESS_EQUAL)) {
+			var token = nowReading;
+			readToken();
+			var right = parseExpression5();
+			var node = new ExeNode(token, getNodeType(token));
+			node.setChild(left);
+			node.setChild(right);
+			left = node;
+		}
+		return left;
+	}
+
+	// expr5 -> expr6 ( '+' | '-' expr6 )*
+	function parseExpression5() {
+		if ( !startsExpression(nowReading) ) {
+			errorLog(nowReading);
+		}
+
+		function getNodeType(token) {
+			if (token == Punctuator.PLUS) return PLUS_TYPE;
+			if (token == Punctuator.MINUS) return MINUS_TYPE;
+			return NO_TYPE;
+		}
+
+		var left = parseExpression6();
+		while ((nowReading == Punctuator.PLUS) || (nowReading == Punctuator.MINUS)) {
+			var token = nowReading;
+			readToken();
+			var right = parseExpression6();
+			var node = new ExeNode(token, getNodeType(token));
+			node.setChild(left);
+			node.setChild(right);
+			left = node;
+		}
+		return left;
+	}
+
+	// expr6 -> expr7 ( '*' | '/' | '%' expr7 )*
+	function parseExpression6() {
+		if ( !startsExpression(nowReading) ) {
+			errorLog(nowReading);
+		}
+
+		function getNodeType(token) {
+			if (token == Punctuator.MULTIPLY) return MULTIPLY_TYPE;
+			if (token == Punctuator.DIVIDE) return DIVIDE_TYPE;
+			if (token == Punctuator.MOD) return MOD_TYPE;
+			return NO_TYPE;
+		}
+
+		var left = parseExpression7();
+		while ((nowReading == Punctuator.MULTIPLY) || 
+				(nowReading == Punctuator.DIVIDE) || 
+				(nowReading == Punctuator.MOD)) {
+			var token = nowReading;
+			readToken();
+			var right = parseExpression7();
+			var node = new ExeNode(token, getNodeType(token));
+			node.setChild(left);
+			node.setChild(right);
+			left = node;
+		}
+		return left;
+	}
+
+	// expr7 -> '!' ? expr7 : expr8
+	function parseExpression7() {
+		if ( !startsExpression(nowReading) ) {
+			errorLog(nowReading);
+		}
+
+		if (nowReading == Punctuator.NOT) {
+			var token = nowReading;
+			readToken();
+			var child = parseExpression7();
+			var node = new ExeNode(token, NOT_TYPE);
+			node.setChild(child);
+			return node;
+		}
+		else {
+			return parseExpression8();
+		}
+	}
+
+	// expr8 -> (expr) | constant | identifier
+	function parseExpression8() {
 		if ( !startsExpression(nowReading) ) {
 			errorLog(nowReading);
 		}

@@ -3,15 +3,35 @@
 
 function lexical(userTyping) {
 	var str = "";
-
+	var state = 0;
 
 	function preprocessSymbol(ch) {
-		if ( ch == "-" ) return " -";
-		else if ( ch == "." ) return ch;
-		else if ( isTagSpaceNewline(ch) || isLetter(ch) || isDigit(ch) ) return ch;
-		else return " " + ch + " ";
-	};
+		var result = "";
+		
+		if ( ch == "<" || ch == ">" || ch == "&" || ch == "|" || ch == "=" || ch == "!") {
+			if (state == 0) {
+				state = 1;
+				result = " " + ch;
+			}
+			else {
+				state = 0;
+				result = ch + " ";
+			}
+		}
+		else {
+			if (state == 1) {
+				state = 0;
+				result = " ";
+			}
 
+			if ( ch == "-" ) result += " -";
+			else if ( ch == "." ) result += ch;
+			else if ( isTagSpaceNewline(ch) || isLetter(ch) || isDigit(ch) ) result += ch;
+			else result += " " + ch + " ";
+		}
+
+		return result;
+	};
 
 	for (var i=0; i<userTyping.length; i++) {
 		var ch = userTyping.charAt(i);
