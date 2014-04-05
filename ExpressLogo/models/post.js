@@ -14,7 +14,7 @@ var postSchema = mongoose.Schema({
 		id: String
 	},
 	create_at : Date,
-	image : Buffer,
+	image_url : String,
 	code : String,
 	comment : [{
 		author: {

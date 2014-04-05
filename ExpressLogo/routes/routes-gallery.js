@@ -1,8 +1,8 @@
-
+//gallery oprations
 module.exports = function(app) {
 	var Post = require('../models/post');
 
-	app.post('/addpost', function(req, res){
+	app.post('/share', function(req, res){
 		if(!req.user){
 			res.redirect("#");
 		}
@@ -14,8 +14,6 @@ module.exports = function(app) {
 			var newpost = new Post({
 				author : {
 					id: user._id,
-					name: user[register].name,
-					avatar: user[register].avatar,
 				},
 				date : Date.now(),
 				code : req.body.code,
@@ -31,11 +29,18 @@ module.exports = function(app) {
 		}	
 	});	
 
-	//simply list all the posts
+	app.post('/gallery/:id/comments', function(req, res){
+		//leave a comment
+	});
+
+	//list all the posts
 	app.get('/gallery', function(req, res){
-		Post.find(function(err, post){
+		Post.find(function(err, data){
 			if(err)
 				throw err;
+			var post = new Object();
+			post = data;
+			
 			res.send(post);
 		});
 	});
