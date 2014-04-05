@@ -4,7 +4,7 @@ var LogoDrawer =
 	createNew: function()
 	{
 		var logoDrawer = {};
-
+		
 		//private:
 			var DTR = Math.PI/180;
 			var turtleSize = 1.5;
@@ -32,7 +32,7 @@ var LogoDrawer =
 								[4,-2],[-4,-2],[0,-3],[1,-3],[-1,-3],
 								[3,-3],[-3,-3],[5,-3],[-5,-3],
 								[0,-4],[1,-5],[4,-4],[-4,-4]];
-
+								
 			function rotateX()
 			{
 				return -Math.sin(rotateDegrees*DTR);
@@ -56,7 +56,7 @@ var LogoDrawer =
 			function drawTurtle()
 			{
 				if (!showTurtle) return;
-
+				
 				function rotTotX(d)
 				{
 					return xScale(startPoint.x+
@@ -64,7 +64,7 @@ var LogoDrawer =
 						-d[1]*Math.sin(rotateDegrees*DTR))
 						*turtleSize);
 				}
-
+				
 				function rotTotY(d)
 				{
 					return yScale(startPoint.y+
@@ -72,7 +72,7 @@ var LogoDrawer =
 						+d[1]*Math.cos(rotateDegrees*DTR))
 						*turtleSize);
 				}
-
+				
 				var i,x1,y1,r;
 				canvas[2].clearRect(0,0,width,height);
 				canvas[2].fillStyle = penColor;
@@ -99,7 +99,7 @@ var LogoDrawer =
 					canvas[1].lineWidth = lineWidth;
 					canvas[1].stroke();
 				}
-
+				
 				if (holdOnTurtle)
 				{
 					if (returnToCanvas)
@@ -109,7 +109,7 @@ var LogoDrawer =
 					}
 				} else
 				{
-					while ((newX>=maxMoveX || newX<0 || newY>=maxMoveY || newY<0)
+					while ((newX>=maxMoveX || newX<0 || newY>=maxMoveY || newY<0) 
 							&& returnToCanvas)
 					{
 						var tempX, tempY, tempR;
@@ -155,7 +155,7 @@ var LogoDrawer =
 			}
 
 		//public:
-
+		
 			//initialization
 			logoDrawer.initCanvas = function()
 			{
@@ -182,22 +182,22 @@ var LogoDrawer =
 				}
 				drawTurtle();
 			}
-
+			
 			//operation to canvas
 			logoDrawer.turnLeftDegrees = function(inValue)
 			{
 				rotateDegrees += inValue;
 				if (rotateDegrees>=360) rotateDegrees -= 360;
 				if (rotateDegrees<0) rotateDegrees += 360;
-				drawTurtle();
+				drawTurtle();	
 			}
-
+			
 			logoDrawer.turnRightDegrees = function(inValue)
 			{
 				rotateDegrees -= inValue;
 				if (rotateDegrees>=360) rotateDegrees -= 360;
 				if (rotateDegrees<0) rotateDegrees += 360;
-				drawTurtle();
+				drawTurtle();	
 			}
 
 			logoDrawer.walkForwardLength = function(inValue)
@@ -206,13 +206,13 @@ var LogoDrawer =
 					startPoint.y + rotateY()*inValue);
 				drawTurtle();
 			}
-
+			
 			logoDrawer.setTurtlePosition = function(inValueX,inValueY)
 			{
 				newPosition(inValueX,inValueY);
 				drawTurtle();
 			}
-
+			
 			logoDrawer.resetTurtleToHome = function()
 			{
 				newPosition(maxMoveX/2,maxMoveY/2);
@@ -241,12 +241,12 @@ var LogoDrawer =
 				showTurtle = true;
 				drawTurtle();
 			}
-
+			
 			logoDrawer.setBorder = function()
 			{
 				returnToCanvas = true;
 			}
-
+			
 			logoDrawer.noBorder = function()
 			{
 				returnToCanvas = false;
@@ -257,12 +257,12 @@ var LogoDrawer =
 				penColor = inValue;
 				drawTurtle();
 			}
-
+			
 			logoDrawer.setLineWidth = function(inValue)
 			{
 				lineWidth = inValue;
 			}
-
+			
 			logoDrawer.setBackgroundColor = function(inValue)
 			{
 				canvas[0].fillStyle = inValue;
@@ -279,7 +279,7 @@ var LogoDrawer =
 					canvas[0].drawImage(img,0,0,width,height);
 				}
 			}
-
+			
 			logoDrawer.clearCanvas = function()
 			{
 				canvas[1].clearRect(0,0,width,height);
@@ -310,33 +310,33 @@ var LogoDrawer =
 					}
 				}
 			}
-
+			
 			//GET methods
 			logoDrawer.getPenColor = function()
 			{
 				return penColor;
 			}
-
+			
 			logoDrawer.getDrawStatus = function()
 			{
 				return (!holdOnTurtle);
 			}
-
+			
 			logoDrawer.getTurtleStatus = function()
 			{
 				return showTurtle;
 			}
-
+			
 			logoDrawer.getBorderStatus = function()
 			{
 				return returnToCanvas
 			}
-
+			
 			logoDrawer.getLineWidth = function()
 			{
 				return lineWidth;
 			}
-
+			
 		return logoDrawer;
 	}
 }
