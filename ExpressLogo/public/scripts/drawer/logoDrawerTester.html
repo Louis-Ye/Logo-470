@@ -34,6 +34,11 @@
 			myCanvas.turnLeftDegrees(1);
 			myCanvas.walkForwardLength(20);
 			I++;
+			if (I==10) 
+			{
+				clearInterval(timer);
+				myCanvas.saveCanvas(I);
+			}
         }, 100);
 	</script>
 </body>

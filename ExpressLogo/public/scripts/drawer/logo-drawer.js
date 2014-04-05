@@ -293,10 +293,12 @@ var LogoDrawer =
 				img.onload=function()
 				{
 					canvas[3].drawImage(img,0,0,width,height);
+					img = new Image();
 					img.src = canvasId[1].toDataURL("image/png");
 					img.onload=function()
 					{
 						canvas[3].drawImage(img,0,0,width,height);
+						img = new Image();
 						img.src = canvasId[2].toDataURL("image/png");
 						img.onload=function()
 						{
