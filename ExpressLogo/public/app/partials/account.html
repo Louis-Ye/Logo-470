@@ -1,18 +1,46 @@
 <div id="account" class="container">
 	<h1>Account</h1>
 
-	<form accept-charset="UTF-8" action="/account" method="post">
+	<form accept-charset="UTF-8" action="/#/account/" method="post">
 		<div>
-			<img src="{{ user.avatar }}"/>
-			<fieldset>
-				<label for="name">Email</label>
-				<input id="name" type="text" value="{{ user.email }}"/>
-			</fieldset>
-			<fieldset>
-				<label for="name">Name</label>
-				<input id="name" type="text" value="{{ user.name }}"/>
-			</fieldset>
-			
+			<div class="form-field">
+				<img src="{{ user.avatar }}"/>
+			</div>
+			<div class="form-field">
+				<fieldset>
+					<label for="name">Email</label>
+					<input id="name" type="text" value="{{ user.email }}"/>
+				</fieldset>
+			</div>
+			<div class="form-field">
+				<fieldset>
+					<label for="name">Name</label>
+					<input id="name" type="text" value="{{ user.name }}"/>
+				</fieldset>
+			</div>
+			<div class="form-btns">
+				<input class="form-sub" type="submit" value="Update"/>
+			</div>
+			<form accept-charset="UTF-8" action="/account/password" class="gen-form" id="edit_user_494732" method="post">
+				<div>
+					<fieldset>
+						<label for="old_password">Old Password</label>
+						<input id="user_old_password" name="user[old_password]" size="30" type="password"/>
+					</fieldset>
+					<fieldset>
+						<label for="password">New Password</label>
+						<input id="user_password" name="user[password]" size="30" type="password"/>
+						<p class="message">Minimum 6 characters</p>
+					</fieldset>
+					<fieldset>
+						<label for="password">Confirm New Password</label>
+						<input id="user_password" name="user[password]" size="30" type="password"/>
+					</fieldset>
+					<div class="form-btns">
+						<input class="form-sub" name="commit" type="submit" value="Change"/>
+					</div>
+				</div>
+			</form>
 		</div>
 	</form>
 </div>
