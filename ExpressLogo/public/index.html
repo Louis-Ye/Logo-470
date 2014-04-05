@@ -5,6 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Express LOGO</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-colorpalette.css" />
 	<link rel="stylesheet" type="text/css" href="css/express-logo-styles.css" />
 	<link rel="stylesheet" type="text/css" href="css/gallery-style.css" />
 </head>
@@ -29,8 +30,8 @@
 						<li><a href="#/gallery">Gallery</a></li>
 						<li><a href="#/about">About</a></li>
 					</ul>
-					<a href="#/sign-in" type="button" class="btn btn-default navbar-btn navbar-right" ng-if="!Data.logged_in">Sign in</a>
-					<a href="#/sign-in" type="button" class="btn btn-default navbar-btn navbar-right" ng-if="Data.logged_in">Log out</a>
+					<a href="#/sign-in" type="button" class="btn btn-default navbar-btn navbar-right" ng-if="!global_data.logged_in">Sign in</a>
+					<a href="#/sign-in" type="button" class="btn btn-default navbar-btn navbar-right" ng-if="global_data.logged_in">Log out</a>
 				</div>
 			</div>
 		</nav>
@@ -61,6 +62,7 @@
 	<script type="text/javascript" src="scripts/jquery.js"></script>
 
 	<script type="text/javascript" src="scripts/bootstrap.js"></script>
+	<script type="text/javascript" src="scripts/bootstrap-colorpalette.js"></script>
 
 	<script type="text/javascript" src="app/app.js"></script>
 	<script type="text/javascript" src="app/controllers/controllers.js"></script>

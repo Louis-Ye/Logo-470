@@ -1,4 +1,4 @@
-ExpressLOGOApp.controller('indexViewController', function ($scope) {
+ExpressLOGOApp.controller('indexViewController', function ($scope, global_data) {
 	init();
 	function init() {
 
@@ -28,6 +28,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 
 	function init () {
 		myCanvas.initCanvas();
+		clearUndo();
 		$scope.result = "";
 		$scope.pen_status = myCanvas.getDrawStatus();
 		$scope.return_status = myCanvas.getBorderStatus();
@@ -41,6 +42,14 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 			'turtleStatusCallback': change_turtle_status
 		};
 	};
+
+	$('#colorpalette-pen').colorPalette().on('selectColor', function(selectedColor) {
+		myCanvas.setPenColor(selectedColor.color);
+	});
+
+	$('#colorpalette-background').colorPalette().on('selectColor', function(selectedColor) {
+		myCanvas.setBackgroundColor(selectedColor.color);
+	});
 
 	$scope.on_submit_clicked = function () {
 		callback($scope.code);
@@ -88,6 +97,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 	};
 
 	$scope.reset = function () {
+		clearUndo();
 		$('#result-pad').val('');
 		$scope.code = "";
 		interpreterReset();
@@ -182,13 +192,12 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http, globa
 	})
 	.success(function (data) {
 		$scope.message = data.message;
+
 		if ($scope.message[0] == "success") {
 			global_data.logged_in = true;
+			console.log(global_data.logged_in);
 		};
-	})
-	// .error(function (data) {
-	// 	$scope.message = "Network error";
-	// });
+	});
 });
 
 ExpressLOGOApp.controller('signInViewController', function ($scope, $http, global_data) {
@@ -199,13 +208,9 @@ ExpressLOGOApp.controller('signInViewController', function ($scope, $http, globa
 	})
 	.success(function (data) {
 		$scope.message = data.message;
-		console.log(global_data.logged_in);
 		if ($scope.message[0] == "success") {
 			global_data.logged_in = true;
+			console.log(global_data.logged_in);
 		};
-	})
-	// .error(function (data) {
-	// 	$scope.message[0] = "Network error";
-	// });
-
+	});
 });

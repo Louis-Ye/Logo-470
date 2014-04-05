@@ -27,7 +27,7 @@
 	<div class="row">
 		<div id="control-buttons" class="col-md-12 col-lg-10 col-lg-offset-1">
 		<div class="btn-group">
-			<div class="btn-group">
+			<div class="btn-group dropup">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 					Line <span class="caret"></span>
 				</button>
@@ -36,21 +36,21 @@
 				</ul>
 			</div>
 
-			<div class="btn-group">
+			<div class="btn-group dropup">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 					Color <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li ng-repeat="color in colors"><button>{{ color.thumbnail }}</button></li>
+					<li><div id="colorpalette-pen"></div></li>
 				</ul>
 			</div>
 
-			<div class="btn-group">
+			<div class="btn-group dropup">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 					Background <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li ng-repeat="color in colors"><button>{{ color.thumbnail }}</button></li>
+					<li><div id="colorpalette-background"></div></li>
 				</ul>
 			</div>
 
