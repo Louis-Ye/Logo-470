@@ -22,7 +22,6 @@ function indentCode(elementId,evt)
 		{
 			ic_TextUndo[ic_undoNow] = content;
 			ic_undoUpbound = ic_undoNow;
-			console.log(content);
 		}
 	}
 	
