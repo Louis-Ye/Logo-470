@@ -1,14 +1,44 @@
+var ic_undoUpbound;
+var ic_undoNow;
+var ic_TextUndo;
+
 function indentCode(elementId,evt)
 {
 	var fontSize = 14;
+	var  undoflag = false;
+	
 	var elementObject = document.getElementById(elementId);
+	var content = elementObject.value;
+	
+	//Append to undo array
+	if (ic_TextUndo[ic_undoNow].indexOf(content)!=0 
+		|| content.indexOf(ic_TextUndo[ic_undoNow])!=0)
+	{
+		ic_undoNow++;
+		if (ic_undoUpbound>=ic_undoNow
+			&& ic_TextUndo[ic_undoNow].indexOf(content)==0
+			&& content.indexOf(ic_TextUndo[ic_undoNow])==0)
+		{} else
+		{
+			ic_TextUndo[ic_undoNow] = content;
+			ic_undoUpbound = ic_undoNow;
+			console.log(content);
+		}
+	}
+	
 	var key = getKeyCode(evt);
-	if (key!=9 &&
-		key!=10 &&
-		key!=13 &&
-		key!=40 &&
-		key!=91 &&
-		key!=123) return true;
+	if (key!=9 &&/*tab*/
+		key!=10 &&/*ctrl+enter*/
+		key!=13 &&/*enter*/
+		key!=40 &&/* ( */
+		key!=91 &&/* [ */
+		key!=123 &&/* { */
+		key!=25 &&/*ctrl+y*/
+		key!=26 &&/*ctrl+z*/
+		key!=89 &&/*Y*/
+		key!=90 &&/*Z*/
+		key!=121 &&/*y*/
+		key!=122 /*z*/) return true;
 
 	function getCaretStart()
 	{
@@ -67,15 +97,33 @@ function indentCode(elementId,evt)
 		return (evt.ctrlKey || evt.metaKey || evt.shiftKey);
 	}
 	
+	function getUndoKey()
+	{
+		return (evt.ctrlKey || evt.metaKey)
+	}
+	
 	function shortcut_submit ()
 	{
 		$('#submit').trigger("click");
 		return false;
 	}
 	
+	function textUndo()
+	{
+		if (ic_undoNow>0)
+			content = ic_TextUndo[--ic_undoNow];
+		undoflag = true;
+	}
+	
+	function textRedo()
+	{
+		if (ic_undoNow<ic_undoUpbound)
+			content = ic_TextUndo[++ic_undoNow];
+		undoflag = true;
+	}
+	
 	var caretStart = getCaretStart();
 	var caretEnd = getCaretEnd();
-	var content = elementObject.value;
 	var contentSecondHalf = "";
 	if (caretEnd<content.length)
 		contentSecondHalf = content.slice(caretEnd);
@@ -90,7 +138,7 @@ function indentCode(elementId,evt)
 	var forwardScroll = false;
 	switch (key)
 	{
-	case 9:
+	case 9:/*tab*/
 		var i;
 		var firstHalf;
 		var secondHalf;
@@ -106,6 +154,7 @@ function indentCode(elementId,evt)
 		if (returnFlag)
 		{
 			for (i = content.length-1;i>=0;i--)
+			{
 				if (content[i] == '\n')
 				{
 					secondHalf = (i==content.length-1)?"":content.slice(i+1);
@@ -115,15 +164,24 @@ function indentCode(elementId,evt)
 					caretStart = i;
 					break;
 				}
+				if (i==0)
+				{
+					secondHalf = (0==content.length-1)?"":content.slice(0);
+					selectContent = '    ' + secondHalf + selectContent;
+					content = '';
+					caretStart = -1;
+					break;
+				}
+			}
 		} else
 		{
 			selectContent = '    ';
 			forwardCaret += 3;
 		}
 		break;
-	case 10:
+	case 10:/*ctrl+enter*/
 		return shortcut_submit();
-	case 13:
+	case 13:/*enter*/
 		switch (getSuperKey())
 		{
 		case true:
@@ -156,12 +214,28 @@ function indentCode(elementId,evt)
 	case 123:
 		content += "{}";
 		break;
+	case 89: /*ctrl+y (redo)*/
+	case 121:
+		if (!getUndoKey()) return true;
+	case 25:
+		textRedo();
+		break;
+	case 90: /*ctrl+z (undo)*/
+	case 122:
+		if (!getUndoKey()) return true;
+	case 26:
+		textUndo();
+		break;
 	default:
 		content += String.fromCharCode(key);
 	}
-	content += selectContent + contentSecondHalf;
+	if (!undoflag)
+		content += selectContent + contentSecondHalf;
 	document.getElementById(elementId).value = content;
-	setCaret(caretStart+forwardCaret);
+	if (undoflag)
+		setCaret(content.length);
+	else
+		setCaret(caretStart+forwardCaret);
 	if (forwardScroll) elementObject.scrollTop += fontSize;
 	return false;
 }
@@ -171,4 +245,25 @@ function getKeyCode(evt)
 {
 	var key = window.event?evt.keyCode:evt.which;
 	return key;
+}
+
+function clearUndo()
+{
+	ic_TextUndo = new Array();
+	ic_TextUndo[0] = "";
+	ic_undoNow = 0;
+	ic_undoUpbound = 0;
+}
+
+function ic_keydown(id,evt)
+{
+	function getUndoKey()
+	{
+		return (evt.ctrlKey || evt.metaKey)
+	}
+	key = getKeyCode(evt);
+	if (key==9) return indentCode(id,event);
+	if (getUndoKey() && (key==89 || key==90 || key==121 || key==122 || key==25 || key==26))
+		return indentCode(id,evt);
+	return true;
 }
