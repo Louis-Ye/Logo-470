@@ -43,6 +43,22 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 		};
 	};
 
+	$("#slider-delay").slider({
+		range: "min",
+		min: 1,
+		max: 1000,
+		value: 1,
+		animate: true,
+		slide: function (event, ui) {
+			$("#delay-tip").val(ui.value);
+			interpret_json.delay = ui.value;
+		}
+	});
+
+	$('#delay-tip').change(function () {
+		myCanvas.setLineWidth($(this).val());
+	});
+
 	$("#slider-line").slider({
 		range: "min",
 		min: 1,
@@ -50,17 +66,26 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 		value: 1,
 		animate: true,
 		slide: function (event, ui) {
-			$("#line-tip").val($(this).slider("value"));
-			myCanvas.setLineWidth($(this).slider("value"));
+			$("#line-tip").val(ui.value);
+			// myCanvas.setLineWidth(ui.value);
+			interpret_json.userTyping = "penwidth " + ui.value;
+			callback(interpret_json.userTyping);
+			interpret(interpret_json);
 		}
 	});
 
 	$('#line-tip').change(function () {
-		myCanvas.setLineWidth($(this).val());
+		// myCanvas.setLineWidth($(this).val());
+		interpret_json.userTyping = "penwidth " + $(this).val();
+		callback(interpret_json.userTyping);
+		interpret(interpret_json);
 	});
 
 	$('#colorpalette-pen').colorPalette().on('selectColor', function(selectedColor) {
-		myCanvas.setPenColor(selectedColor.color);
+		interpret_json.userTyping = "color [" + selectedColor.color + "]";
+		callback(interpret_json.userTyping);
+		interpret(interpret_json);
+		// myCanvas.setPenColor(selectedColor.color);
 	});
 
 	$('#colorpalette-background').colorPalette().on('selectColor', function(selectedColor) {

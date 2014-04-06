@@ -85,7 +85,7 @@ body {
 
 #play #control-buttons {
 	text-align: center;
-	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
+	/*font-family: Menlo, Consolas, "Ubuntu Mono", monospace;*/
 }
 
 #play #slider-line {
@@ -93,6 +93,15 @@ body {
 }
 
 #play #line-tip {
+	width: 50px;
+	border-radius: 4px;
+}
+
+#play #slider-delay {
+	margin: 5px 15px;
+}
+
+#play #delay-tip {
 	width: 50px;
 	border-radius: 4px;
 }
