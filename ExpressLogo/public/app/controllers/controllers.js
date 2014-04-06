@@ -1,9 +1,8 @@
-ExpressLOGOApp.controller('indexViewController', function ($scope, global_data) {
+ExpressLOGOApp.controller('indexViewController', function ($scope) {
 	init();
 	function init() {
 
 	};
-	console.log(global_data.logged_in);
 });
 
 ExpressLOGOApp.controller('learnViewController', function ($scope) {
@@ -241,7 +240,7 @@ ExpressLOGOApp.controller('profileViewController', function ($scope, $http) {
 	});
 });
 
-ExpressLOGOApp.controller('accountViewController', function ($scope, $http, global_data) {
+ExpressLOGOApp.controller('accountViewController', function ($scope, $http) {
 	$http({
 		method: 'GET',
 		url: '/account'
@@ -265,9 +264,7 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http) {
 		$scope.message = data.message;
 
 		if ($scope.message[0] == "success") {
-			console.log("!!!!!!!!!");
-			global_data.logged_in = true;
-			console.log(global_data.logged_in);
+
 		};
 	});
 });
@@ -282,9 +279,7 @@ ExpressLOGOApp.controller('signInViewController', function ($scope, $http) {
 		$scope.message = data.message;
 
 		if ($scope.message[0] == "success") {
-			console.log("@@@@@@@@");
-			global_data.logged_in = true;
-			console.log(global_data.logged_in);
+			
 		};
 	});
 });
