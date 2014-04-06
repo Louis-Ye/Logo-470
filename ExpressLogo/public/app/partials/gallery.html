@@ -1,16 +1,14 @@
 <div id="gallery" class="container">
 	<h1>gallery page</h1>
-	<div class="row">
-		<!-- enumerate all photos -->
-		<img ng-repeat="photo in photos" class="slide" ng-swipe-right="showPrev()" ng-swipe-left="showNext()" ng-show="isActive($index)" ng-src="{{ photo.src }}" />
-		<!-- prev / next controls -->
-		<a class="arrow prev" ng-click="showPrev()"></a>
-		<a class="arrow next" ng-click="showNext()"></a>
-		<!-- extra navigation controls -->
-		<ul class="nav">
-			<li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">
-				<img ng-src="{{ photo.src }}" alt="{{ photo.desc }}" title="{{ photo.desc }}" ng-click="showPhoto($index);" />
-			</li>
-		</ul>
+	<div class="bs-example">
+		<div class="row">
+			<!-- extra navigation controls -->
+			 <div class="photo">
+					<div ng-repeat="photo in photos" class="col-xs-6 col-md-5">
+						<a href="#" class="thumbnail"><img ng-src="{{photo.src}}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
+						<p><a href="#" class="btn btn-primary" role="button">Like</a> <a href="#" class="btn btn-default" role="button">Detail</a></p>
+					</div>
+			</div>
+		</div>
 	</div>
 </div>
