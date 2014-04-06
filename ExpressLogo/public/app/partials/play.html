@@ -14,7 +14,7 @@
 		<div id="console-pad" class="col-sm-12 col-md-6 col-lg-5">
 			<div class="row">
 				<div class="col-sm-6 col-md-12">
-					<p id="result-pad">{{ result }}</p>
+					<p id="result-pad"></p>
 				</div>
 				<div class="col-sm-6 col-md-12">
 					<textarea id="code-pad" ng-model="code" placeholder="Try something here!" autofocus spellcheck="false" onkeypress="return indentCode(id,event);" onkeydown="return ic_keydown(id,event);"></textarea>
@@ -32,7 +32,10 @@
 					Line <span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li ng-repeat="line in lines"><button>{{ line.thumbnail }}</button></li>
+					<li>Width: <input id="line-tip" value="1" type="text" /></li>
+					<li>
+						<div id="slider-line"></div>
+					</li>
 				</ul>
 			</div>
 

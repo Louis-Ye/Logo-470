@@ -43,6 +43,22 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 		};
 	};
 
+	$("#slider-line").slider({
+		range: "min",
+		min: 1,
+		max: 500,
+		value: 1,
+		animate: true,
+		slide: function (event, ui) {
+			$("#line-tip").val($(this).slider("value"));
+			myCanvas.setLineWidth($(this).slider("value"));
+		}
+	});
+
+	$('#line-tip').change(function () {
+		myCanvas.setLineWidth($(this).val());
+	});
+
 	$('#colorpalette-pen').colorPalette().on('selectColor', function(selectedColor) {
 		myCanvas.setPenColor(selectedColor.color);
 	});
@@ -77,7 +93,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 
 	function change_turtle_status (status) {
 		$scope.turtle_status = status;
-	}
+	};
 
 	$scope.toggle_turtle = function () {
 		interpret_json.userTyping = $scope.turtle_status ? "hideturtle" : "showturtle";
@@ -97,11 +113,9 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 	};
 
 	$scope.reset = function () {
-		clearUndo();
-		$('#result-pad').val('');
-		$scope.code = "";
-		interpreterReset();
-		myCanvas.initCanvas();
+		interpret_json.userTyping = "reset";
+		callback(interpret_json.userTyping);
+		interpret(interpret_json);
 	};
 
 	function shareCallback (url) {

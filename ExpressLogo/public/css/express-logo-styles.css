@@ -87,3 +87,12 @@ body {
 	text-align: center;
 	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
 }
+
+#play #slider-line {
+	margin: 5px 15px;
+}
+
+#play #line-tip {
+	width: 50px;
+	border-radius: 4px;
+}
