@@ -113,9 +113,11 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 	};
 
 	$scope.reset = function () {
-		interpret_json.userTyping = "reset";
-		callback(interpret_json.userTyping);
-		interpret(interpret_json);
+		clearUndo();
+		$('#result-pad').empty();
+		$scope.code = "";
+		interpreterReset();
+		myCanvas.initCanvas();
 	};
 
 	function shareCallback (url) {
