@@ -225,11 +225,19 @@ ExpressLOGOApp.controller('aboutViewController', function ($scope) {
 	};
 });
 
-ExpressLOGOApp.controller('profileViewController', function ($scope) {
-	init();
-	function init() {
-
-	};
+ExpressLOGOApp.controller('profileViewController', function ($scope, $http) {
+	$http({
+		method: 'GET',
+		url: '/profile'
+	})
+	.success(function (data) {
+		console.log(data);
+		var reg = data.register;
+		$scope.user = data[reg];
+	})
+	.error(function (data) {
+		$scope.message = "Error";
+	});
 });
 
 ExpressLOGOApp.controller('accountViewController', function ($scope, $http, global_data) {

@@ -7,14 +7,19 @@ module.exports = function(app){
 			res.redirect('#');
 		else{
 			var user = req.user;
-			var reg = user.register;
-			var name = user[reg].name;
+
+			User.findById(user._id, function(err, info){
+				if(err)
+					throw err;
+				res.send(info);
+			});
 
 			Post.findById(user._id, function(err, post){
 				if (err)
 					throw err;
-				res.send(post);
-			});
+				// res.send(post);
+ 			});
+
 		}
 	});
 
