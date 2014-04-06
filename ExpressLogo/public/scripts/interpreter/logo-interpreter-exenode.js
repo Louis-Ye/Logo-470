@@ -34,8 +34,8 @@ const MULTIPLY_TYPE = "expr multiply type";
 const DIVIDE_TYPE = "expr divide type";
 const MOD_TYPE = "mod divide type";
 
-const EUQAL_TYPE = "logical equal type";
-const NOT_EUQAL_TYPE = "logical not equal type";
+const EQUAL_TYPE = "logical equal type";
+const NOT_EQUAL_TYPE = "logical not equal type";
 const GREATER_TYPE = "logical greater type";
 const GREATER_EQUAL_TYPE = "logical greater equal type";
 const LESS_TYPE = "logical less type";
@@ -60,24 +60,34 @@ const NA_TYPE_NUMERIC = "N/A"
 /////////////////////////////////////////////////////////////////////////
 // ExeNode
 
+var private_g_node_id = 1;
 function ExeNode(token, nodeType) {
+	this.nodeID = private_g_node_id++;
 	this.token = token;
 	this.nodeType = nodeType;
 
 	this.parent = null;
 	this.children = [];
 
-	if ( (nodeType === BODY_TYPE) || (nodeType === PROGRAM_TYPE) ) {
+	if ( nodeType === PROGRAM_TYPE ) {
+		this.funcSymbolTable = {};
 		this.symbolTable = {};
-		if (nodeType === BODY_TYPE) this.funcSymbolTable = {};
-		this.curExeChildPos = 0;
+		this.curExePosVarName = "~~NODE_" + this.nodeID + "_curExeChildPos";
+		this.symbolTable[this.curExePosVarName] = 0;
+	}
+	else if ( nodeType === BODY_TYPE ) {
+		this.symbolTable = {};
+		this.curExePosVarName = "~~NODE_" + this.nodeID + "_curExeChildPos";
+		this.symbolTable[this.curExePosVarName] = 0;
 	}
 	else if (nodeType === REPEAT_TYPE) {
-		this.curRemainingTimes = 0;
+		this.repeatRemainVarName = "~~REPEAT_TYPE_NODE_" + this.nodeID + "_RemainingTimes";
 	}
 	else if (nodeType === FUNC_DEF_TYPE) {
 		this.realExecute = function() {
-			this.children[ this.children.length - 1 ].execute();
+			var body = this.children[ this.children.length - 1 ];
+			body.symbolTable[ body.curExePosVarName ] = 0;		
+			body.execute();
 		};
 	}
 
@@ -92,6 +102,10 @@ ExeNode.prototype.setChild = function(child) {
 ExeNode.prototype.cutErrorNodeFromProgramNode = function() {
 	var node = this;
 	while (node.parent != g_programExeNode) {
+		if (node.nodeType == FUNC_DEF_TYPE) {
+			var funcSt = g_programExeNode.funcSymbolTable;
+			delete funcSt[node.token];
+		}
 		node = node.parent;
 	}
 	for (var i=0; i<g_programExeNode.children.length; i++) {
@@ -132,26 +146,30 @@ ExeNode.prototype.hasFuncSymbolTable = function() {
 
 ExeNode.prototype.execute = function() {
 	if ( this.nodeType == PROGRAM_TYPE ) {
-		if (this.curExeChildPos < this.children.length) {
-			this.children[this.curExeChildPos].execute();
-			this.curExeChildPos++;
+		if (this.symbolTable[this.curExePosVarName] < this.children.length) {
+			this.symbolTable[this.curExePosVarName] += 1;
+			this.children[ this.symbolTable[this.curExePosVarName] - 1 ].execute();
 			setTimeOutAndNextExeNode(this);
 		}
 	}
 
 	/////////////////////////////////////////////////////////////
 	// Func	
+	if ( this.nodeType == FUNC_DEF_TYPE ) {
+		return;
+	}
 
 	if ( this.nodeType == FUNC_INVO_TYPE) {
-		g_stack.push( findSymbolTableParent(this) );
-
+		var stParent = findSymbolTableParent(this);
+		g_stack.push( stParent );
+		g_stack.push( copySymbolTable(stParent.symbolTable) );
 		var funcDefNode = g_programExeNode.funcSymbolTable[ this.token ];
+		var fDefBody = funcDefNode.children[ funcDefNode.children.length - 1 ];
 		for (var i=0; i<this.children.length; i++) {
 			var arguValue = this.children[i].execute();
 			var idenName = funcDefNode.children[i].token;
-			funcDefNode.symbolTable[idenName].val = arguValue;
-			funcDefNode.symbolTable[idenName].numericType = this.children[i].numericType;
-			funcDefNode.realExecute();
+			fDefBody.symbolTable[idenName].val = arguValue;
+			fDefBody.symbolTable[idenName].numericType = this.children[i].numericType;
 		}
 		funcDefNode.realExecute();
 	}
@@ -159,16 +177,20 @@ ExeNode.prototype.execute = function() {
 	/////////////////////////////////////////////////////////////
 	// BODY_TYPE
 	if ( this.nodeType == BODY_TYPE ) {
-		if (this.curExeChildPos < this.children.length) {
-			this.children[this.curExeChildPos].execute();
-			this.curExeChildPos++;
+		if (this.children.length <= 0) return;
+
+		if (this.symbolTable[this.curExePosVarName] < this.children.length) {
+			this.symbolTable[this.curExePosVarName] += 1;
+			this.children[ this.symbolTable[this.curExePosVarName] - 1 ].execute();
 			setTimeOutAndNextExeNode(this);
 		}
 		else {
-			this.curExeChildPos = 0;
+			this.symbolTable[this.curExePosVarName] = 0;
 			if (this.parent.nodeType == REPEAT_TYPE) {
-				if (this.parent.curRemainingTimes > 1) {
-					this.parent.curRemainingTimes--;
+				var stParent = findSymbolTableParent(this.parent);
+				var repeatRemainVarName = this.parent.repeatRemainVarName;
+				if (stParent.symbolTable[repeatRemainVarName] > 1) {
+					stParent.symbolTable[repeatRemainVarName] -= 1;
 					this.execute();
 				}
 				else {
@@ -182,7 +204,10 @@ ExeNode.prototype.execute = function() {
 				goToLastSymbolTableParentExe(this);
 			}
 			else if (this.parent.nodeType == FUNC_DEF_TYPE) {
-				setTimeOutAndNextExeNode( g_stack.pop() );
+				var lastSymbolTable = g_stack.pop();
+				var nextExeNode = g_stack.pop();
+				nextExeNode.symbolTable = lastSymbolTable;
+				setTimeOutAndNextExeNode( nextExeNode );
 			}
 			else {
 				goToLastSymbolTableParentExe(this);
@@ -192,16 +217,29 @@ ExeNode.prototype.execute = function() {
 	/////////////////////////////////////////////////////////////
 
 	if (this.nodeType == REPEAT_TYPE) {
-		this.curRemainingTimes = this.children[0].execute();
-		if (this.curRemainingTimes > 0) this.children[1].execute();
+		var stParent = findSymbolTableParent(this);
+		var childrenValue = this.children[0].execute();
+
+		var body = this.children[1];
+		body.symbolTable[ body.curExePosVarName ] = 0;
+
+		stParent.symbolTable[ this.repeatRemainVarName ] = childrenValue;
+		if (childrenValue > 0) body.execute();
 	}
+
 	if (this.nodeType == IF_TYPE) {
-		var expr = this.children[0];
-		if ( expr.execute() ) {
-			this.children[1].execute();
+		var expr = this.children[0].execute();
+		if ( expr ) {
+			var body = this.children[1];
+			body.symbolTable[ body.curExePosVarName ] = 0;
+			body.execute();
 		}
 		else {
-			if ( this.children.length >= 3 ) this.children[2].execute();
+			if ( this.children.length >= 3 ) {
+				var body = this.children[2];
+				body.symbolTable[ body.curExePosVarName ] = 0;
+				body.execute();
+			}
 		}
 	}
 
@@ -276,12 +314,12 @@ ExeNode.prototype.execute = function() {
 	/////////////////////////////////////////////////////////////
 	// logical operation
 
-	if (this.nodeType == EUQAL_TYPE) {
+	if (this.nodeType == EQUAL_TYPE) {
 		var left = this.children[0].execute();
 		var right = this.children[1].execute();
 		return left == right;
 	}
-	if (this.nodeType == NOT_EUQAL_TYPE) {
+	if (this.nodeType == NOT_EQUAL_TYPE) {
 		var left = this.children[0].execute();
 		var right = this.children[1].execute();
 		return left != right;
@@ -380,8 +418,8 @@ function setTimeOutAndNextExeNode(nodeRef) {
 	}
 }
 function goToLastSymbolTableParentExe(nodeRef) {
-	NextExeNode = findSymbolTableParent(nodeRef);
-	setTimeOutAndNextExeNode(NextExeNode);
+	var nextExeNode = findSymbolTableParent(nodeRef);
+	setTimeOutAndNextExeNode(nextExeNode);
 }
 function makeRGB(r, g, b) {
 	function makeHeximalTwoDigitNum(decimalNum) {
@@ -433,3 +471,18 @@ function variableNotDecBefore(varNode) {
 	return notDecBefore;
 }
 
+
+function copySymbolTable(st) {
+	var newSt = {};
+	for (var key in st) {
+		if ((typeof st[key]) == 'number') {
+			newSt[key] = st[key];
+		}
+		else {
+			newSt[key] = {};
+			newSt[key].val = st[key].val;
+			newSt[key].numericType = st[key].numericType;
+		}
+	}
+	return newSt;
+}

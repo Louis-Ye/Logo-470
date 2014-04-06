@@ -26,9 +26,12 @@ function semantic(tree) {
 			}
 		}
 
-		if ( (curNode.nodeType == EUQAL_TYPE) ||
-			(curNode.nodeType == NOT_EUQAL_TYPE) || 
-			(curNode.nodeType == AND_TYPE) || 
+		if ((curNode.nodeType == EQUAL_TYPE) ||
+			(curNode.nodeType == NOT_EQUAL_TYPE) ) {
+			curNode.numericType = BOOL_TYPE_NUMERIC;
+		}
+
+		if ((curNode.nodeType == AND_TYPE) || 
 			(curNode.nodeType == OR_TYPE) ) {
 			var left = curNode.children[0];
 			var right = curNode.children[1];
@@ -95,6 +98,11 @@ function semantic(tree) {
 				curNode.cutErrorNodeFromProgramNode();
 				errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ?");
 			}
+
+			if (curNode.nodeType == REPEAT_TYPE) {
+				var stParent = findSymbolTableParent(curNode);
+				stParent.symbolTable[ curNode.repeatRemainVarName ] = 0;
+			}
 		}
 
 		if (curNode.nodeType == SETXY_TYPE) {
@@ -135,13 +143,15 @@ function semantic(tree) {
 
 
 		if (curNode.nodeType == FUNC_DEF_TYPE) {
+			/* parser already did this
 			var funcName = curNode.token;
 			if (funcName in g_programExeNode.funcSymbolTable) {
 				errorMessage("Oops! You don't have to '" + funcName + "' again :)");
 			}
-			else {
+			else { parser already did this
 				g_programExeNode.funcSymbolTable[funcName] = curNode;
 			}
+			*/
 		}
 		if (curNode.nodeType == FUNC_INVO_TYPE) {
 			var funcName = curNode.token;
@@ -152,12 +162,21 @@ function semantic(tree) {
 				}
 			}
 			else {
-				errorMessage("Oops! You probably want to '" + funcName + "' at first ;)");
+				errorMessage("Oops! You probably want <b>TO</b> '" + funcName + "' at first ;)");
 			}
 		}
 
 
 		if (curNode.nodeType == IDENTIFIER_INVO_TYPE) {
+			if (curNode.parent.nodeType == FUNC_DEF_TYPE) {
+				var par = curNode.parent;
+				var symbolTable = par.children[par.children.length - 1].symbolTable;
+				symbolTable[curNode.token] = {};
+				symbolTable[curNode.token].val = UNINITIALIZED;
+				symbolTable[curNode.token].numericType = NUMBER_TYPE_NUMERIC;
+				return;
+			}
+
 			if ( variableNotDecBefore(curNode) ) {
 				curNode.cutErrorNodeFromProgramNode();
 				errorMessage("Oh! You might want to make <b>" + curNode.token + "</b> at first ;)");
@@ -165,7 +184,6 @@ function semantic(tree) {
 			else {
 				var symbolTable = findSymbolTableIncludingThisNode(curNode);
 				curNode.numericType = symbolTable[curNode.token].numericType;
-
 			}
 		}
 		if (curNode.nodeType == CONSTANT_TYPE) {

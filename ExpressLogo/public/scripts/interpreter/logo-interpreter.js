@@ -38,8 +38,9 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 	given_penStatusCallback = arg.penStatusCallback;
 	given_turtleStatusCallback = arg.turtleStatusCallback;
 
+	g_stack = [];
 	g_hasError = false;
-	g_delay = 0;//arg.delay;
+	g_delay = arg.delay;
 	g_debugMode = arg.debugMode;
 
 	var tokens = null;
@@ -55,7 +56,7 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 	var runTree = null;
 	if (tree) {
 		runTree = semantic(tree);
-		console.log(runTree);
+		//console.log(runTree);
 	}
 
 	if (runTree) {
@@ -77,13 +78,13 @@ function interpreterReset() {
 function errorMessage(message) {
 	if (!g_hasError) {
 		g_hasError = true;
-		g_callback(message, null);
+		g_callback("<logoError style='color:red;'>" + message +"</logoError>", null);
 	}
 }
 
 function errorLog(message) {
 	if (!g_hasError) {
 		g_hasError = true;
-		g_callback("Sorry, I don\'t know what is \'" + message + "\'", null);
+		g_callback("<logoError style='color:red;'>Sorry, I don\'t know what is \'" + message + "\' </logoError>", null);
 	}
 }

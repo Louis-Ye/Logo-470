@@ -14,6 +14,7 @@ const Keyword = {
 	"RIGHT" : "right",
 	"RT" : "rt",
 	"IF" : "if",
+	"ELSE": "else",
 	"REPEAT" : "repeat",
 	"WHILE" : "while",
 	"MAKE" : "make",
@@ -149,7 +150,9 @@ function parser(tokens) {
 		if (token == null || token == undefined) return false;
 		var mch = token.match(/[a-zA-Z][a-zA-Z0-9]*/);
 		if (mch) {
-			return mch.index == 0;
+			if ( mch.index == 0 ) {
+				return (token in g_programExeNode.funcSymbolTable);
+			}
 		}
 		else return false;
 	}
@@ -262,14 +265,33 @@ function parser(tokens) {
 			var thisNode = new ExeNode(token, IF_TYPE);
 			thisNode.setChild(expr);
 			thisNode.setChild(body);
+			if (nowReading == Keyword.ELSE) {
+				readToken();
+				expect(Punctuator.BODY_OPEN);
+				var body = parseBody();
+				expect(Punctuator.BODY_CLOSE);
+				thisNode.setChild(body);
+			}
 			return thisNode;
 		}
 
 
 		if (nowReading == Keyword.TO) {
-			var token = nowReading;
 			expect(Keyword.TO);
+			var token = nowReading;
+			readToken();
 			var thisNode = new ExeNode(token, FUNC_DEF_TYPE);
+
+			// take up space of funcSymbolTable
+			var funcName = token;
+			if (funcName in g_programExeNode.funcSymbolTable) {
+				errorMessage("Oops! You don't have to '" + funcName + "' again :)");
+			}
+			else {
+				g_programExeNode.funcSymbolTable[funcName] = thisNode;
+			}
+			/////////////////////////////////////////////////////
+
 			while (startsIdentifierInvo(nowReading)) {
 				var idenInvo = parseIdentifierInvo();
 				if (idenInvo) {
@@ -277,9 +299,11 @@ function parser(tokens) {
 				}
 			}
 			var body = parseBody();
-			if (body == null) body = new ExeNode("no body", NO_TYPE);
+			if (body == null) body = new ExeNode("no body", BODY_TYPE);
 			thisNode.setChild(body);
 			expect(Keyword.END);
+
+			return thisNode;
 		}
 		
 		if ( startsFuncInvo(nowReading) ) {
@@ -292,6 +316,7 @@ function parser(tokens) {
 					thisNode.setChild( expr );
 				}
 			}
+			return thisNode;
 		}
 
 		// ........................
@@ -562,6 +587,7 @@ function parser(tokens) {
 
 
 	function startsConstant(token) {
+		if (token == null || token == undefined) return false;
 		var mch = token.match(/-?[0-9]+/)
 		if (mch) {
 			return mch.index == 0;
@@ -586,8 +612,11 @@ function parser(tokens) {
 
 
 	while ( !g_hasError && startsStatement(nowReading) ) {
+		//console.log(nowReading);
 		var stmt = parseStatement();
-		if ( !g_hasError ) g_programExeNode.setChild(stmt);
+		//console.log(stmt);
+		//console.log(nowReading);
+		if ( !g_hasError && stmt ) g_programExeNode.setChild(stmt);
 	}
 
 	if ( nowReading ) errorLog(nowReading);
