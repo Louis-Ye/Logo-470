@@ -1,0 +1,95 @@
+#library
+{
+	margin-left:20%;
+	margin-right:20%;
+}
+
+#library h2
+{
+	font-size: 40px;
+	font-weight:bold;
+	text-align:center;
+	background-color: #66CCFF;
+}
+
+#library p
+{
+	background-color: #EEEEFF;
+}
+
+#library h3
+{
+	text-decoration: underline;
+}
+
+#library .type_style_number
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.1em;
+	font-weight:bold;
+	font-style: italic;
+	color: #229933;
+}
+
+#library .type_style_condition
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.1em;
+	font-weight:bold;
+	font-style: italic;
+	color: #223399;
+}
+
+#library .type_style_commands
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.1em;
+	font-weight:bold;
+	font-style: italic;
+	color: #993322;
+}
+
+#library .type_style_variable
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.1em;
+	font-weight:bold;
+	font-style: italic;
+	color: #555522;
+}
+
+#library .type_style_expression
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.1em;
+	font-weight:bold;
+	font-style: italic;
+	color: #339999;
+}
+
+#library .type_style_Standard
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.4em 0.02em 0.2em;
+	font-weight:bold;
+	font-style: italic;
+	color: #CC0000;
+}
+
+#library .type_style_Shortcut
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.4em 0.02em 0.2em;
+	font-weight:bold;
+	font-style: italic;
+	color: #00CC00;
+}
+
+#library .type_style_Related
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.4em 0.02em 0.2em;
+	font-weight:bold;
+	font-style: italic;
+	color: #0000CC;
+}
