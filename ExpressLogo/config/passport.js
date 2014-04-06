@@ -68,6 +68,9 @@ module.exports = function(passport) {
                         });
                     }
                 });
+            }
+            else{
+                return done(null, false, req.flash('signupMessage', 'You have already logged in.'));
             } 
         });
     }));

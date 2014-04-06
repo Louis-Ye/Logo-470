@@ -10,6 +10,7 @@ var postSchema = mongoose.Schema({
     	default: function(){ return shortId.generate(); }
 	},
 	title : String,
+	like : { type: Number, default: 0 },
 	author : {
 		id: String, 
 		name: String, 

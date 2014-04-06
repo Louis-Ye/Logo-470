@@ -3,7 +3,7 @@ module.exports = function(app) {
 	var Post = require('../models/post');
 
 	app.post('/share', function(req, res){
-		console.log(req.body);
+		//console.log(req.body);
 		if(!req.user){
 			res.send({ message: "not logged in"});
 		}
@@ -43,6 +43,13 @@ module.exports = function(app) {
 			post = data;
 			
 			res.send(post);
+		});
+	});
+
+	app.get('/gallery/:id', function(req, res){
+		var id = req.body,id;
+		Post.findById(id, function(err, data){
+			res.send(data);
 		});
 	});
 };

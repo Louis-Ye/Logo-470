@@ -3,6 +3,7 @@ ExpressLOGOApp.controller('indexViewController', function ($scope, global_data) 
 	function init() {
 
 	};
+	console.log(global_data.logged_in);
 });
 
 ExpressLOGOApp.controller('learnViewController', function ($scope) {
@@ -147,12 +148,12 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 
 	function shareCallback (url) {
 		var user_codes = $('#result-pad')[0].innerText;
-		console.log(user_codes);
+		//console.log(user_codes);
 		var share = $.param({
 			img_url: url,
 			code : user_codes
 		});
-		console.log(share);
+		//console.log(share);
 		//save image API
 		$http({
 			method: 'POST',
@@ -162,6 +163,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 		})
 		.success(function (data) {
 			//success
+			$scope.message = data.message;
 		})
 		.error(function (data) {
 			//failed
@@ -278,6 +280,7 @@ ExpressLOGOApp.controller('signInViewController', function ($scope, $http, globa
 	})
 	.success(function (data) {
 		$scope.message = data.message;
+
 		if ($scope.message[0] == "success") {
 			global_data.logged_in = true;
 			console.log(global_data.logged_in);

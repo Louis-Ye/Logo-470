@@ -1,4 +1,6 @@
 <div id="play" class="container">
+	<div class="alert alert-success", ng-if="message == 'success'">Successfully shared.</div>
+	<div class="alert alert-warning", ng-if="message == 'not logged in'">You need to <a href="#/sign-in" class="alert-link">log in</a> first.</div>
 	<div class="row">
 		<div id="canvas-pad" class="col-sm-12 col-md-6 col-lg-5 col-lg-offset-1">
 			<canvas id="bg" style="position: absolute; z-index: 1">
