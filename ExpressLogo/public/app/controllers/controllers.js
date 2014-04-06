@@ -262,10 +262,9 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http) {
 	})
 	.success(function (data) {
 		$scope.message = data.message;
-
 		if ($scope.message[0] == "success") {
-
-		};
+			
+		}
 	});
 });
 

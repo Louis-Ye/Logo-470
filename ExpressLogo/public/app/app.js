@@ -1,17 +1,25 @@
 var ExpressLOGOApp = angular.module('ExpressLOGOApp', ['ngRoute', 'ngAnimate', 'ngTouch', 'ngCookies']);
 
-// ExpressLOGOApp.factory('global_data', function() {
-//   return {
-//   	logged_in: false
-//   };
-// });
 
-ExpressLOGOApp.controller('mainController', function ($scope, $element, global_data) {
+ExpressLOGOApp.controller('mainController', function ($scope, $element, $http) {
 	init();
-	$scope.logged_in = global_data.logged_in;
 	function init() {
-		$scope.logged_in = global_data.logged_in;
-		console.log($scope.logged_in);
+		$http({
+			method: 'GET',
+			url: '/login'
+		})
+		.success(function (data) {
+			$scope.message = data.message;
+
+			if ($scope.message[0] == "success") {
+				$scope.top_right_button_href = "logout";
+				$scope.top_right_button_name = "Log out";
+			}
+			else {
+				$scope.top_right_button_href = "#/sign-in";
+				$scope.top_right_button_name = "Sign in";
+			}
+		});
 	};
 });
 
