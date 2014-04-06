@@ -11,14 +11,18 @@ var postSchema = mongoose.Schema({
 	},
 	title : String,
 	author : {
-		id: String
+		id: String, 
+		name: String, 
+		avatar: String
 	},
 	create_at : Date,
 	image_url : String,
 	code : String,
 	comment : [{
 		author: {
-			id: String
+			id: String, 
+			name: String,
+			avatar: String
 		},
 		content: String,
 		date: Date,

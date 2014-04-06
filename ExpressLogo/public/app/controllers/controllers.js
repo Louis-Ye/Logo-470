@@ -146,10 +146,13 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 	};
 
 	function shareCallback (url) {
-		var image = url;
+		var user_codes = $('#result-pad')[0].innerText;
+		console.log(user_codes);
 		var share = $.param({
 			img_url: url,
+			code : user_codes
 		});
+		console.log(share);
 		//save image API
 		$http({
 			method: 'POST',
@@ -167,6 +170,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 	};
 
 	$scope.share = function () {
+		// var codes = $('#result-pad');
+		// console.log(codes);
 		myCanvas.saveCanvas(shareCallback);
 	};
 });
