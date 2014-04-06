@@ -182,7 +182,7 @@ ExpressLOGOApp.controller('libraryViewController', function ($scope) {
 	};
 });
 
-ExpressLOGOApp.controller('galleryViewController', function ($scope, $http) {
+ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $filter) {
 	$http({
 		method: 'GET',
 		url: '/gallery?page=1'
@@ -190,10 +190,18 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http) {
 	.success(function (data) {
 		$scope.count = data.count;
 		$scope.photos = data.post;
+		$scope.query = '';
 	})
-	.error(function (data) {
-		$scope.message = "Error";
-	});
+
+
+		$scope.pages = [];//存页数
+		$scope.pagedUrls=[];
+		$scope.fliteredUrls = [];//利用一个数组存储过滤过的数据
+		$scope.currentPage = 0;//表示某一页,此数字等于页数-1
+		$scope.urlsPerPage = 5;//以5来分页
+                $scope.orderProp = 'id';
+
+
 	// Set of Photos
 	//$scope.photos = [
 	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm21.jpg', desc: 'Image 01'},
@@ -204,7 +212,35 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http) {
 	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm28.jpg', desc: 'Image 06'}
 	//];
 
-	$scope.addone = function(index) {}
+		$scope.search = function () {
+			var result = [];
+			$filter('filter')($scope.image_url, function (item) {
+				for (var attr in item) {
+					if (item[attr].toString().toLowerCase().indexOf($scope.query.toLowerCase()) !== -1) {
+						result.push(item);
+						break
+					}
+				}
+			});
+			//console.log(result)
+			$scope.fliteredUrls = result;
+			$scope.currentPage = 0;
+		}
+
+		$scope.paging = function () {
+			$scope.pages = [];
+			$scope.pagedUrls=[];//初始化
+			var l = $scope.fliteredUrls.length;//记录总数
+			var maxPage = (l % $scope.urlsPerPage == 0) ? l / $scope.urlsPerPage : (Math.floor(l / $scope.urlsPerPage) + 1)//计算要分的页数
+			console.log(maxPage)
+			for (var i = 0; i <= maxPage - 1; i++) {
+			$scope.pagedUrls[i] = $scope.fliteredUrls.splice(0, $scope.urlsPerPage)//开始分页。下标等于页数-1
+			$scope.pages.push(i+1)//重新造页数
+			}
+
+		}
+
+	$scope.addone = function(index) {index = index + 1;}
 
 	// initial image index
 	$scope._Index = 0;
