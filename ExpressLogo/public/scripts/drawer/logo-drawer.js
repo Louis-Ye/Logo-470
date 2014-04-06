@@ -305,10 +305,12 @@ var LogoDrawer =
 							canvas[3].drawImage(img,0,0,width,height);
 							pictureURL = canvasId[3].toDataURL("image/png");
 							canvas[3].clearRect(0,0,width,height);
+							//window.location = pictureURL;
 							callBackFunction(pictureURL);
 						}
 					}
 				}
+
 			}
 			
 			//GET methods

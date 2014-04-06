@@ -4,24 +4,21 @@ module.exports = function(app) {
 
 	app.post('/share', function(req, res){
 		if(!req.user){
-			res.redirect("#");
+			res.send("not logged in");
 		}
 		else {
 			var user = req.user;
-			var register = user.register;
-
-			//for test
+			
+			//console.log(user);
 			var newpost = new Post({
 				author : {
-					id: user._id,
+					id: user._id
 				},
-				date : Date.now(),
-				code : req.body.code,
-				image_url : req.body.img
+				create_at : Date.now(),
+				//code : req.body.code,
+				image_url : req.body.img_url
 			});
-			//newpost.image = fs.readFileSync('./turtle.png').toString('base64');
-			//use the followting code to show the pic
-			//<img src="data:image/png;base64, <%= data %>"/>
+			//console.log(newpost);
 			newpost.save(function(err) {
         		if (err)
           			throw err;

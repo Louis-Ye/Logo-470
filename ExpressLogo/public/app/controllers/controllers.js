@@ -12,7 +12,7 @@ ExpressLOGOApp.controller('learnViewController', function ($scope) {
 	};
 });
 
-ExpressLOGOApp.controller('playViewController', function ($scope) {
+ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 	var interpret_json;
 	init();
 
@@ -106,7 +106,23 @@ ExpressLOGOApp.controller('playViewController', function ($scope) {
 
 	function shareCallback (url) {
 		var image = url;
-		// save image API
+		var share = $.param({
+			img_url: url,
+		});
+		//save image API
+		$http({
+			method: 'POST',
+			url: '/share',
+			data: share,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		.success(function (data) {
+			//success
+		})
+		.error(function (data) {
+			//failed
+		});
+
 	};
 
 	$scope.share = function () {
