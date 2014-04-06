@@ -295,10 +295,15 @@ ExeNode.prototype.execute = function() {
 
 
 	if (this.nodeType == COLOR_TYPE) {
-		var r = this.children[0].execute();
-		var g = this.children[1].execute();
-		var b = this.children[2].execute();
-		myCanvas.setPenColor(makeRGB(r,g,b));
+		if (this.hasColorNum) {
+			myCanvas.setPenColor("#" + this.hasColorNum);
+		}
+		else {
+			var r = this.children[0].execute();
+			var g = this.children[1].execute();
+			var b = this.children[2].execute();
+			myCanvas.setPenColor(makeRGB(r,g,b));
+		}
 	}
 	if (this.nodeType == PENWIDTH_TYPE) {
 		var childrenValue = this.children[0].execute();

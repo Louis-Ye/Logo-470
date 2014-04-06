@@ -82,7 +82,8 @@ const Punctuator = {
 	"LESS_EQUAL": "<=",
 	"AND": "&&",
 	"OR": "||",
-	"NOT": "!"
+	"NOT": "!",
+	"NUM": "#"
 };
 
 
@@ -151,7 +152,8 @@ function parser(tokens) {
 		var mch = token.match(/[a-zA-Z][a-zA-Z0-9]*/);
 		if (mch) {
 			if ( mch.index == 0 ) {
-				return (token in g_programExeNode.funcSymbolTable);
+				//return (token in g_programExeNode.funcSymbolTable);
+				return true;
 			}
 		}
 		else return false;
@@ -219,16 +221,26 @@ function parser(tokens) {
 
 		if ( nowReading == Keyword.COLOR ) {
 			var token = nowReading;
+			var thisNode;
 			readToken();
 			expect(Punctuator.BODY_OPEN);
-			var r = parseExpression();
-			var g = parseExpression();
-			var b = parseExpression();
+			if (nowReading == Punctuator.NUM) {
+				readToken();
+				var thisNode = new ExeNode(token, COLOR_TYPE);
+				thisNode.hasColorNum = nowReading;
+				readToken();
+			}
+			else {
+				var r = parseExpression();
+				var g = parseExpression();
+				var b = parseExpression();
+				var thisNode = new ExeNode(token, COLOR_TYPE);
+				thisNode.setChild(r);
+				thisNode.setChild(g);
+				thisNode.setChild(b);
+			}
 			expect(Punctuator.BODY_CLOSE);
-			var thisNode = new ExeNode(token, COLOR_TYPE);
-			thisNode.setChild(r);
-			thisNode.setChild(g);
-			thisNode.setChild(b);
+			
 			return thisNode;
 		}
 

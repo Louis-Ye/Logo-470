@@ -115,15 +115,24 @@ function semantic(tree) {
 		}
 		
 		if (curNode.nodeType == COLOR_TYPE) {
-			var r = curNode.children[0];
-			var g = curNode.children[1];
-			var b = curNode.children[2];
-			if ( !(r.numericType == NUMBER_TYPE_NUMERIC) || 
-				!(g.numericType == NUMBER_TYPE_NUMERIC) ||
-				!(b.numericType == NUMBER_TYPE_NUMERIC) ) {
-				curNode.cutErrorNodeFromProgramNode();
-				errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ?");
+			if (curNode.hasColorNum) {
+				if ( curNode.hasColorNum.length != 6) {
+					curNode.cutErrorNodeFromProgramNode();
+					errorMessage("Oops! It's not a correct format argument at " + curNode.token + "'.");
+				}
 			}
+			else {
+				var r = curNode.children[0];
+				var g = curNode.children[1];
+				var b = curNode.children[2];
+				if ( !(r.numericType == NUMBER_TYPE_NUMERIC) || 
+					!(g.numericType == NUMBER_TYPE_NUMERIC) ||
+					!(b.numericType == NUMBER_TYPE_NUMERIC) ) {
+					curNode.cutErrorNodeFromProgramNode();
+					errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ?");
+				}
+			}
+
 		}
 
 		if (curNode.nodeType == MAKE_TYPE) {

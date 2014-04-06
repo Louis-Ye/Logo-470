@@ -46,7 +46,7 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 	var tokens = null;
 	if (arg.userTyping) {
 		tokens = lexical(arg.userTyping);
-		//console.log(tokens);
+		console.log(tokens);
 	}
 	var tree = null;
 	if (tokens) {
