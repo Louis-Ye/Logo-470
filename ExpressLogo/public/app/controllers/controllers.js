@@ -171,8 +171,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 	};
 
 	$scope.share = function () {
-		// var codes = $('#result-pad');
-		// console.log(codes);
 		myCanvas.saveCanvas(shareCallback);
 	};
 });

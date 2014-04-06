@@ -36,20 +36,17 @@ module.exports = function(app) {
 
 	//list all the posts
 	app.get('/gallery', function(req, res){
-		Post.find(function(err, data){
+		var page_num = req.query.page;
+		var item_per_page = 10;
+		Post.find({}, null, { skip: item_per_page*(page_num-1), limit: item_per_page }, function(err, data){
 			if(err)
 				throw err;
-			var post = new Object();
-			post = data;
-			
-			res.send(post);
-		});
-	});
-
-	app.get('/gallery/:id', function(req, res){
-		var id = req.body,id;
-		Post.findById(id, function(err, data){
-			res.send(data);
+			Post.count({}, function(err, count){
+				res.send({
+					count: count, 
+					post: data
+				});
+			});
 		});
 	});
 };
