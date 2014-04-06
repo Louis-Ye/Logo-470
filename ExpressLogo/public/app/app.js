@@ -1,4 +1,4 @@
-var ExpressLOGOApp = angular.module('ExpressLOGOApp', ['ngRoute', 'ngAnimate', 'ngTouch']);
+var ExpressLOGOApp = angular.module('ExpressLOGOApp', ['ngRoute', 'ngAnimate', 'ngTouch', 'ngCookies']);
 
 ExpressLOGOApp.factory('global_data', function() {
   return {
