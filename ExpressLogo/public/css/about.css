@@ -1,0 +1,26 @@
+#about
+{
+	margin-left:20%;
+	margin-right:20%;
+}
+
+#about h2
+{
+	font-size: 40px;
+	font-weight:bold;
+	text-align:center;
+	background-color: #66CCFF;
+}
+
+#about .ref
+{
+	margin-left:5%;
+	margin-right:5%;
+	background-color: #FFFFEE;
+}
+
+#about .ref a
+{
+	font-style: italic;
+	margin-left: 80%;
+}
