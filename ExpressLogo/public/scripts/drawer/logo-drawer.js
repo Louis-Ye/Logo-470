@@ -271,11 +271,11 @@ var LogoDrawer =
 
 			logoDrawer.setBackgroundPicture = function(inValue)
 			{
-				canvas[0].clearRect(0,0,width,height);
 				var img = new Image();
 				img.src = inValue;
 				img.onload=function()
 				{
+					canvas[0].clearRect(0,0,width,height);
 					canvas[0].drawImage(img,0,0,width,height);
 				}
 			}
@@ -305,12 +305,10 @@ var LogoDrawer =
 							canvas[3].drawImage(img,0,0,width,height);
 							pictureURL = canvasId[3].toDataURL("image/png");
 							canvas[3].clearRect(0,0,width,height);
-							//window.location = pictureURL;
 							callBackFunction(pictureURL);
 						}
 					}
 				}
-
 			}
 			
 			//GET methods
