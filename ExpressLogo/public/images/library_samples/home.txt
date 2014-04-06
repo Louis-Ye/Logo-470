@@ -1,0 +1,6 @@
+repeat 18
+[
+    lt 10
+    fd 10
+]
+home

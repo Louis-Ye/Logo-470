@@ -1,0 +1,8 @@
+make "A 0
+repeat 36
+[
+    lt 10
+    fd 10
+    if :A==0 [penwidth 1] else [penwidth 5]
+    make "A 1-:A
+]

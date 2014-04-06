@@ -1,0 +1,8 @@
+make "A 0
+repeat 36
+[
+    if :A==20 [clear]
+    lt 10
+    fd 10
+    make "A :A+1
+]
