@@ -96,3 +96,7 @@ body {
 	width: 50px;
 	border-radius: 4px;
 }
+
+#play #imgInput {
+	display: none;
+}

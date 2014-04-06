@@ -26,46 +26,46 @@
 	<br />
 	<div class="row">
 		<div id="control-buttons" class="col-md-12 col-lg-10 col-lg-offset-1">
-		<div class="btn-group">
-			<div class="btn-group dropup">
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					Line <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li>Width: <input id="line-tip" value="1" type="text" /></li>
-					<li>
-						<div id="slider-line"></div>
-					</li>
-				</ul>
-			</div>
+			<div class="btn-group">
+				<div class="btn-group dropup">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						Line <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li>Width: <input id="line-tip" value="1" type="text" /></li>
+						<li>
+							<div id="slider-line"></div>
+						</li>
+					</ul>
+				</div>
 
-			<div class="btn-group dropup">
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					Color <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><div id="colorpalette-pen"></div></li>
-				</ul>
-			</div>
+				<div class="btn-group dropup">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						Color <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><div id="colorpalette-pen"></div></li>
+					</ul>
+				</div>
 
-			<div class="btn-group dropup">
-				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					Background <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><div id="colorpalette-background"></div></li>
-				</ul>
-			</div>
+				<div class="btn-group dropup">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						Background <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><div id="colorpalette-background"></div></li>
+					</ul>
+				</div>
 
-			<button id="pen-status" type="button" class="btn btn-default" ng-click="toggle_pen()">Pen {{ pen_status ? 'up' : 'down' }}</button>
-			<button id="border-status" type="button" class="btn btn-default" ng-click="toggle_border()">{{ border_status ? 'Disable' : 'Enable' }} border</button>
-			<button id="turtle-status" type="button" class="btn btn-default" ng-click="toggle_turtle()">{{ turtle_status ? 'Hide': 'Show' }} Turtle</button>
-			<button id="clear-canvas" type="button" class="btn btn-default" ng-click="clear_canvas()">Clear</button>
+				<button id="pen-status" type="button" class="btn btn-default" ng-click="toggle_pen()">Pen {{ pen_status ? 'up' : 'down' }}</button>
+				<button id="border-status" type="button" class="btn btn-default" ng-click="toggle_border()">{{ border_status ? 'Disable' : 'Enable' }} border</button>
+				<button id="turtle-status" type="button" class="btn btn-default" ng-click="toggle_turtle()">{{ turtle_status ? 'Hide': 'Show' }} Turtle</button>
+				<button id="clear-canvas" type="button" class="btn btn-default" ng-click="clear_canvas()">Clear</button>
+				<button id="add-image" type="button" class="btn btn-default" onclick="document.getElementById('imgInput').click()">Image</button>
+				<button id="reset" type="button" class="btn btn-default" ng-click="reset()">Reset</button>
+				<button id="share" type="button" class="btn btn-default" ng-click="share()">Share</button>
+			</div>
 			<input type="file" id="imgInput" onchange="readPicture(event,id);" hidden/>
-			<button id="add-image" type="button" class="btn btn-default" ng-click="document.getElementById('imgInput').click()">Image</button>
-			<button id="reset" type="button" class="btn btn-default" ng-click="reset()">Reset</button>
-			<button id="share" type="button" class="btn btn-default" ng-click="share()">Share</button>
-		</div>
 		</div>
 	</div>
 </div>
