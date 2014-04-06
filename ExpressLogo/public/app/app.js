@@ -1,6 +1,5 @@
 var ExpressLOGOApp = angular.module('ExpressLOGOApp', ['ngRoute', 'ngAnimate', 'ngTouch', 'ngCookies']);
 
-
 ExpressLOGOApp.controller('mainController', function ($scope, $element, $http) {
 	init();
 	function init() {
