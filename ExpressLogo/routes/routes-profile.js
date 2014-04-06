@@ -11,15 +11,15 @@ module.exports = function(app){
 			User.findById(user._id, function(err, info){
 				if(err)
 					throw err;
-				res.send(info);
+				Post.findById(user._id, function(err, post){
+					if (err)
+						throw err;
+			 		res.send({
+			 			user: info,
+			 			post: post
+			 		});
+ 				});
 			});
-
-			Post.findById(user._id, function(err, post){
-				if (err)
-					throw err;
-				// res.send(post);
- 			});
-
 		}
 	});
 

@@ -233,9 +233,8 @@ ExpressLOGOApp.controller('profileViewController', function ($scope, $http) {
 		url: '/profile'
 	})
 	.success(function (data) {
-		console.log(data);
-		var reg = data.register;
-		$scope.user = data[reg];
+		var reg = data.user.register;
+		$scope.user = data.user[reg];
 	})
 	.error(function (data) {
 		$scope.message = "Error";
