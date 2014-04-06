@@ -256,7 +256,7 @@ ExpressLOGOApp.controller('accountViewController', function ($scope, $http, glob
 	});
 });
 
-ExpressLOGOApp.controller('signUpViewController', function ($scope, $http, global_data) {
+ExpressLOGOApp.controller('signUpViewController', function ($scope, $http) {
 	$scope.message = [];
 	$http({
 		method: 'GET',
@@ -266,13 +266,14 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http, globa
 		$scope.message = data.message;
 
 		if ($scope.message[0] == "success") {
+			console.log("!!!!!!!!!");
 			global_data.logged_in = true;
 			console.log(global_data.logged_in);
 		};
 	});
 });
 
-ExpressLOGOApp.controller('signInViewController', function ($scope, $http, global_data) {
+ExpressLOGOApp.controller('signInViewController', function ($scope, $http) {
 	$scope.message = [];
 	$http({
 		method: 'GET',
@@ -282,6 +283,7 @@ ExpressLOGOApp.controller('signInViewController', function ($scope, $http, globa
 		$scope.message = data.message;
 
 		if ($scope.message[0] == "success") {
+			console.log("@@@@@@@@");
 			global_data.logged_in = true;
 			console.log(global_data.logged_in);
 		};
