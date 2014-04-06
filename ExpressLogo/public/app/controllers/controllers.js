@@ -182,16 +182,28 @@ ExpressLOGOApp.controller('libraryViewController', function ($scope) {
 	};
 });
 
-ExpressLOGOApp.controller('galleryViewController', function ($scope) {
+ExpressLOGOApp.controller('galleryViewController', function ($scope, $http) {
+	$http({
+		method: 'GET',
+		url: '/gallery?page=1'
+	})
+	.success(function (data) {
+		$scope.photos = data;
+	})
+	.error(function (data) {
+		$scope.message = "Error";
+	});
 	// Set of Photos
-	$scope.photos = [
-		{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm21.jpg', desc: 'Image 01'},
-		{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm22.jpg', desc: 'Image 02'},
-		{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm25.jpg', desc: 'Image 03'},
-		{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm26.jpg', desc: 'Image 04'},
-		{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm27.jpg', desc: 'Image 05'},
-		{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm28.jpg', desc: 'Image 06'}
-	];
+	//$scope.photos = [
+	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm21.jpg', desc: 'Image 01'},
+	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm22.jpg', desc: 'Image 02'},
+	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm25.jpg', desc: 'Image 03'},
+	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm26.jpg', desc: 'Image 04'},
+	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm27.jpg', desc: 'Image 05'},
+	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm28.jpg', desc: 'Image 06'}
+	//];
+
+	$scope.addone = function(index) {}
 
 	// initial image index
 	$scope._Index = 0;
