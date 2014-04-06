@@ -34,7 +34,12 @@ module.exports = function(app) {
 		//leave a comment
 	});
 
+	app.get('/gallery/:id', function(req, res){
+
+	});
+	
 	//list all the posts
+	//with pagination
 	app.get('/gallery', function(req, res){
 		var page_num = req.query.page;
 		var item_per_page = 10;

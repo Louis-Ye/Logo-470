@@ -188,7 +188,8 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http) {
 		url: '/gallery?page=1'
 	})
 	.success(function (data) {
-		$scope.photos = data;
+		$scope.count = data.count;
+		$scope.photos = data.post;
 	})
 	.error(function (data) {
 		$scope.message = "Error";
