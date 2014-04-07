@@ -1,23 +1,54 @@
 <div id="gallery" class="container">
 	<h1>gallery page</h1>
- 	
-	<div class="navbar-search pull-left form-inline">
- 		<label for="searchIn">Search</label>
-		<input ng-model="query" type="text" class="search-query" placeholder="Search" name="searchIn" ng-change="search()">
-			<span>OrderProp</span><select ng-model="orderProp">
-  				<option value="name">name</option>
-  				<option value="like">like</option></select>
-	</div>
+
+<!-- 		<table class="table table-striped">
+			<thead> <tr>
+				<th>Title</th>
+				<th>Image</th>
+				<th>Description</th> </tr>
+			</thead> 
+			<tbody>
+				<tr ng-repeat="item in items | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"> <td>{{item.title}}</td> <td><img src="{{item.image_url}}" alt="500x400" style="height: 400px; width: 500px; display: block;"></img></td> <td>{{item.create_at}}</td>
+				</tr> 
+			</tbody>
+			<tfoot>
+				<td colspan="3">
+				<div class="pagination"> 
+				<ul>
+					<li ng-class="prevPageDisabled()">
+						<a href ng-click="prevPage()"> « Prev</a>
+					</li>
+					<li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"> <a href="#">{{n+1}}</a> </li>
+					<li ng-class="nextPageDisabled()">
+						<a href ng-click="nextPage()">Next »</a>
+					</li> 
+				</ul>
+				</div> 
+				</td>
+			</tfoot> 
+		</table>
+	</div> -->
 	<div class="bs-example">
 		<div class="row">
-			<!-- extra navigation controls -->
+			
 			 <ui class="photo">
-					<li ng-repeat="photo in photos" class="col-xs-6 col-md-5">
+					<li ng-repeat="photo in items | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" class="col-xs-6 col-md-5">
 						<a href="#" class="thumbnail"><img src="{{photo.image_url}}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
 						<p><a href="#" class="btn btn-primary" role="button" ng-click="addone({{photo.like}})">Like</a> <a href="#" class="btn btn-default" role="button" ng-click="showdetail">Detail</a></p>
 					</li>
 			</ui>
 		</div>
+		<div class="pagination"> 
+				<ul>
+					<li ng-class="prevPageDisabled()">
+						<a href ng-click="prevPage()"> « Prev</a>
+					</li>
+					<li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"> <a href="#">{{n+1}}</a> </li>
+					<li ng-class="nextPageDisabled()">
+						<a href ng-click="nextPage()">Next »</a>
+					</li> 
+				</ul>
+		</div> 
 	</div>
 </div>
 
