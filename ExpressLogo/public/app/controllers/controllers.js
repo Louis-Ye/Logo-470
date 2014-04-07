@@ -198,6 +198,7 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 //return input.slice(start);; };
 //});;
 
+
 		$scope.itemsPerPage = 5;
 		$scope.currentPage = 0;
 		
