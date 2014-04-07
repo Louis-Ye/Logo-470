@@ -185,14 +185,18 @@ ExpressLOGOApp.controller('libraryViewController', function ($scope) {
 ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $filter) {
 	$http({
 		method: 'GET',
-		url: '/gallery?page=1'
+		url: '/gallery'
 	})
 	.success(function (data) {
 		$scope.count = data.count;
 		$scope.items = data.post;
 
 	})
-
+//app.filter('offset', function() { 
+//return function(input, start) {
+//start = parseInt(start, 10);;
+//return input.slice(start);; };
+//});;
 
 		$scope.itemsPerPage = 5;
 		$scope.currentPage = 0;
@@ -221,6 +225,7 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 		$scope.nextPageDisabled = function() {
 		return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
 		}  
+
 
 	$scope.addone = function(index) {index = index + 1;}
 
