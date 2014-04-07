@@ -189,56 +189,38 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 	})
 	.success(function (data) {
 		$scope.count = data.count;
-		$scope.photos = data.post;
-		$scope.query = '';
+		$scope.items = data.post;
+
 	})
 
 
-		$scope.pages = [];//存页数
-		$scope.pagedUrls=[];
-		$scope.fliteredUrls = [];//利用一个数组存储过滤过的数据
-		$scope.currentPage = 0;//表示某一页,此数字等于页数-1
-		$scope.urlsPerPage = 5;//以5来分页
-                $scope.orderProp = 'id';
+		$scope.itemsPerPage = 5;
+		$scope.currentPage = 0;
+		
+		$scope.prevPage = function() { 
+		if ($scope.currentPage > 0) {
+		$scope.currentPage--;; }
+		};
 
 
-	// Set of Photos
-	//$scope.photos = [
-	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm21.jpg', desc: 'Image 01'},
-	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm22.jpg', desc: 'Image 02'},
-	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm25.jpg', desc: 'Image 03'},
-	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm26.jpg', desc: 'Image 04'},
-	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm27.jpg', desc: 'Image 05'},
-	//	{src: 'http://images.17173.com/2013/news/2013/12/31/cb1231pkm28.jpg', desc: 'Image 06'}
-	//];
+		$scope.prevPageDisabled = function() {
+		return $scope.currentPage === 0 ? "disabled" : "";;
+		};
 
-		$scope.search = function () {
-			var result = [];
-			$filter('filter')($scope.image_url, function (item) {
-				for (var attr in item) {
-					if (item[attr].toString().toLowerCase().indexOf($scope.query.toLowerCase()) !== -1) {
-						result.push(item);
-						break
-					}
-				}
-			});
-			//console.log(result)
-			$scope.fliteredUrls = result;
-			$scope.currentPage = 0;
-		}
 
-		$scope.paging = function () {
-			$scope.pages = [];
-			$scope.pagedUrls=[];//初始化
-			var l = $scope.fliteredUrls.length;//记录总数
-			var maxPage = (l % $scope.urlsPerPage == 0) ? l / $scope.urlsPerPage : (Math.floor(l / $scope.urlsPerPage) + 1)//计算要分的页数
-			console.log(maxPage)
-			for (var i = 0; i <= maxPage - 1; i++) {
-			$scope.pagedUrls[i] = $scope.fliteredUrls.splice(0, $scope.urlsPerPage)//开始分页。下标等于页数-1
-			$scope.pages.push(i+1)//重新造页数
-			}
+		$scope.pageCount = function() {
+		return Math.ceil($scope.items.length/$scope.itemsPerPage)-1;;
+		};
 
-		}
+
+		$scope.nextPage = function() {
+		if ($scope.currentPage < $scope.pageCount()) {
+		$scope.currentPage++;; }
+		};
+
+		$scope.nextPageDisabled = function() {
+		return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
+		}  
 
 	$scope.addone = function(index) {index = index + 1;}
 
