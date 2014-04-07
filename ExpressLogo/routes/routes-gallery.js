@@ -31,7 +31,7 @@ module.exports = function(app) {
 	});	
 
 	app.post('/gallery/:id/comments', function(req, res){
-		leave a comment
+		//leave a comment
 		if(!req.user){
 			res.send({ message: "not logged in"});
 		}
