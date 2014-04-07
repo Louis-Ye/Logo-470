@@ -3,7 +3,6 @@ var ExpressLOGOApp = angular.module('ExpressLOGOApp', ['ngRoute', 'ngAnimate', '
 ExpressLOGOApp.controller('mainController', function ($scope, $element, $http) {
 	init();
 	function init() {
-		$scope.top_right_button_name = "Sign in";
 		$http({
 			method: 'GET',
 			url: '/user'
@@ -18,6 +17,8 @@ ExpressLOGOApp.controller('mainController', function ($scope, $element, $http) {
 				$scope.top_right_button_name = "Sign in";
 			}
 		});
+		$scope.top_right_button_href = "#/sign-in";
+		$scope.top_right_button_name = "Sign in";
 	};
 });
 

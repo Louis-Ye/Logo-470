@@ -1,6 +1,6 @@
 <div id="play" class="container">
-	<div class="alert alert-success", ng-if="message == 'success'">Successfully shared.</div>
-	<div class="alert alert-warning", ng-if="message == 'not logged in'">You need to <a href="#/sign-in" class="alert-link">log in</a> first.</div>
+	<div class="alert alert-success", data-ng-if="message == 'success'">Successfully shared.</div>
+	<div class="alert alert-warning", data-ng-if="message == 'not logged in'">You need to <a href="#/sign-in" class="alert-link">log in</a> first.</div>
 	<div class="row">
 		<div id="canvas-pad" class="col-sm-12 col-md-6 col-lg-5 col-lg-offset-1">
 			<canvas id="bg" style="position: absolute; z-index: 1">
@@ -19,8 +19,8 @@
 					<p id="result-pad"></p>
 				</div>
 				<div class="col-sm-6 col-md-12">
-					<textarea id="code-pad" ng-model="code" placeholder="Try something here!" autofocus spellcheck="false" onkeypress="return indentCode(id,event);" onkeydown="return ic_keydown(id,event);"></textarea>
-					<button id="submit" class="btn btn-default" ng-click="on_submit_clicked()"><span class="glyphicon glyphicon-play"></span></button>
+					<textarea id="code-pad" data-ng-model="code" placeholder="Try something here!" autofocus spellcheck="false" onkeypress="return indentCode(id,event);" onkeydown="return ic_keydown(id,event);"></textarea>
+					<button id="submit" class="btn btn-default" data-ng-click="on_submit_clicked()"><span class="glyphicon glyphicon-play"></span></button>
 				</div>
 			</div>
 		</div>
@@ -71,16 +71,16 @@
 					</ul>
 				</div>
 
-				<button id="pen-status" type="button" class="btn btn-default" ng-click="toggle_pen()">Pen {{ pen_status ? 'up' : 'down' }}</button>
-				<button id="border-status" type="button" class="btn btn-default" ng-click="toggle_border()">{{ border_status ? 'Disable' : 'Enable' }} border</button>
-				<button id="turtle-status" type="button" class="btn btn-default" ng-click="toggle_turtle()">{{ turtle_status ? 'Hide': 'Show' }} Turtle</button>
-				<button id="clear-canvas" type="button" class="btn btn-default" ng-click="clear_canvas()">Clear</button>
+				<button id="pen-status" type="button" class="btn btn-default" data-ng-click="toggle_pen()">Pen {{ pen_status ? 'up' : 'down' }}</button>
+				<button id="border-status" type="button" class="btn btn-default" data-ng-click="toggle_border()">{{ border_status ? 'Disable' : 'Enable' }} border</button>
+				<button id="turtle-status" type="button" class="btn btn-default" data-ng-click="toggle_turtle()">{{ turtle_status ? 'Hide': 'Show' }} Turtle</button>
+				<button id="clear-canvas" type="button" class="btn btn-default" data-ng-click="clear_canvas()">Clear</button>
 				<button id="add-image" type="button" class="btn btn-default" onclick="document.getElementById('imgInput').click()">Image</button>
-				<button id="reset" type="button" class="btn btn-default" ng-click="reset()">Reset</button>
-				<button id="share" type="button" class="btn btn-default" ng-click="share()">Share</button>
+				<button id="reset" type="button" class="btn btn-default" data-ng-click="reset()">Reset</button>
+				<button id="share" type="button" class="btn btn-default" data-ng-click="share()">Share</button>
 			</div>
 			<input type="file" id="imgInput" onchange="readPicture(event,id);" hidden/>
-			
+
 		</div>
 	</div>
 </div>

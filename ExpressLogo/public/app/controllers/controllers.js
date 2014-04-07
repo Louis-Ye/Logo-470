@@ -33,6 +33,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 		$scope.pen_status = myCanvas.getDrawStatus();
 		$scope.return_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
+		$scope.message = "";
 		interpret_json = {
 			'userTyping': $scope.code,
 			'delay': 1,
@@ -143,6 +144,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 		$scope.code = "";
 		interpreterReset();
 		myCanvas.initCanvas();
+		$scope.message = "";
 	};
 
 	function shareCallback (url) {
@@ -183,7 +185,7 @@ ExpressLOGOApp.controller('libraryViewController', function ($scope) {
 });
 
 
-ExpressLOGOApp.filter('offset', function() { 
+ExpressLOGOApp.filter('offset', function() {
 		return function(input, start) {
 			start = parseInt(start, 10);
 			return input.slice(start);};
@@ -200,11 +202,16 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 		$scope.items = data.post;
 
 	});
+//app.filter('offset', function() {
+//return function(input, start) {
+//start = parseInt(start, 10);;
+//return input.slice(start);; };
+//});;
 
 		$scope.itemsPerPage = 6;
 		$scope.currentPage = 0;
-		
-		$scope.prevPage = function() { 
+
+		$scope.prevPage = function() {
 		if ($scope.currentPage > 0) {
 		$scope.currentPage--; }
 		};
@@ -227,7 +234,7 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 
 		$scope.nextPageDisabled = function() {
 		return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
-		}  
+		}
 
 
 	$scope.addone = function(index) {index = index + 1;}
@@ -259,7 +266,12 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 ExpressLOGOApp.controller('aboutViewController', function ($scope) {
 	init();
 	function init() {
-
+		$scope.samples = [
+			{name: "Big Bang", src: "images/about_samples/sample-1.png"},
+			{name: "Snow", src: "images/about_samples/sample-2.png"},
+			{name: "Colors", src: "images/about_samples/sample-3.png"},
+			{name: "Pansy", src: "images/about_samples/sample-4.png"},
+		];
 	};
 });
 
@@ -300,7 +312,7 @@ ExpressLOGOApp.controller('signUpViewController', function ($scope, $http) {
 	.success(function (data) {
 		$scope.message = data.message;
 		if ($scope.message[0] == "success") {
-			
+
 		}
 	});
 });
@@ -315,7 +327,7 @@ ExpressLOGOApp.controller('signInViewController', function ($scope, $http) {
 		$scope.message = data.message;
 
 		if ($scope.message[0] == "success") {
-			
+
 		};
 	});
 });
