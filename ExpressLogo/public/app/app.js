@@ -9,9 +9,8 @@ ExpressLOGOApp.controller('mainController', function ($scope, $element, $http) {
 			url: '/user'
 		})
 		.success(function (data) {
-
-			if (data.register) {
-				$scope.top_right_button_href = "/logout";
+			if (data.email) {
+				$scope.top_right_button_href = "logout";
 				$scope.top_right_button_name = "Log out";
 			}
 			else {
