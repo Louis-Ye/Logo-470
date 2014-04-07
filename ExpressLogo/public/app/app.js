@@ -6,13 +6,12 @@ ExpressLOGOApp.controller('mainController', function ($scope, $element, $http) {
 		$scope.top_right_button_name = "Sign in";
 		$http({
 			method: 'GET',
-			url: '/login'
+			url: '/user'
 		})
 		.success(function (data) {
-			$scope.message = data.message;
 
-			if ($scope.message[0] == "success") {
-				$scope.top_right_button_href = "logout";
+			if (data.register) {
+				$scope.top_right_button_href = "/logout";
 				$scope.top_right_button_name = "Log out";
 			}
 			else {
