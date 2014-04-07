@@ -22,7 +22,8 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>fd 50</code>
+		<h4><img src="/images/library_samples/fd.png"></h4><br/>
 	
 	<h2>back / bk</h2>
 		<h3>Name:</h3>
@@ -47,7 +48,8 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>bk 60</code>
+		<h4><img src="/images/library_samples/bk.png"></h4><br/>
 		
 	<h2>left / lt</h2>
 		<h3>Name:</h3>
@@ -72,7 +74,8 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>lt 70 fd 50</code>
+		<h4><img src="/images/library_samples/lt.png"></h4><br/>
 		
 	<h2>right / rt</h2>
 		<h3>Name:</h3>
@@ -97,7 +100,8 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>rt 90 fd -50</code>
+		<h4><img src="/images/library_samples/rt.png"></h4><br/>
 	
 	<h2>make</h2>
 		<h3>Name:</h3>
@@ -119,7 +123,8 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>make "A 30 fd :A</code>
+		<h4><img src="/images/library_samples/make.png"></h4><br/>
 		
 	<h2>if</h2>
 		<h3>Name:</h3>
@@ -143,7 +148,11 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>fd 30 <br>
+			make "A 1 <br>
+			if :A>0 [lt -90]<br>
+			bk -40</code>
+		<h4><img src="/images/library_samples/if.png"></h4><br/>
 		
 	<h2>else</h2>
 		<h3>Name:</h3>
@@ -167,7 +176,11 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>bk 50 <br>
+			make "A 1 <br>
+			if :A>2 [rt 60] else [lt 60] <br>
+			fd 50</code>
+		<h4><img src="/images/library_samples/else.png"></h4><br/>
 	
 	<h2>repeat</h2>
 		<h3>Name:</h3>
@@ -190,7 +203,12 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>repeat 36 <br>
+[ <br>
+    lt 10 <br>
+    fd 10 <br>
+]</code>
+		<h4><img src="/images/library_samples/repeat.png"></h4><br/>
 		
 	<h2>penup / pu</h2>
 		<h3>Name:</h3>
@@ -215,7 +233,15 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>make "A 0 <br>
+repeat 36 <br>
+[ <br>
+    lt 10 <br>
+    fd 10 <br>
+    if :A>20 pu <br>
+    make "A :A+1 <br>
+]</code>
+		<h4><img src="/images/library_samples/pu.png"></h4><br/>
 	
 	<h2>pendown / pd</h2>
 		<h3>Name:</h3>
@@ -239,7 +265,15 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>make "A 0 <br>
+repeat 36 <br>
+[ <br>
+    lt 10 <br>
+    fd 10 <br>
+    if :A==0 [pd] else [pu] <br>
+    make "A 1-:A <br>
+]</code>
+		<h4><img src="/images/library_samples/pd.png"></h4><br/>
 		
 	<h2>penwidth</h2>
 		<h3>Name:</h3>
@@ -260,7 +294,15 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>make "A 0 <br>
+repeat 36 <br>
+[ <br>
+    lt 10 <br>
+    fd 10 <br>
+    if :A==0 [penwidth 1] else [penwidth 5] <br>
+    make "A 1-:A <br>
+]</code>
+		<h4><img src="/images/library_samples/penwidth.png"></h4><br/>
 	
 	<h2>color</h2>
 		<h3>Name:</h3>
@@ -282,9 +324,17 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>make "A 0 <br>
+repeat 36 <br>
+[ <br>
+    if :A==0 [color 255 0 0] else [color 0 255 255] <br>
+    lt 10 <br>
+    fd 10 <br>
+    make "A 1-:A <br>
+]</code>
+		<h4><img src="/images/library_samples/color.png"></h4><br/>
 	
-	<h2>clear</h2>
+	<h2>clearscreen / cs</h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> clear<br/>
@@ -297,13 +347,21 @@
 		
 		<h3>What's this?</h3>
 		<p>
-			Command <b>clear</b> is for clear the canvas. All the lines that has been 
+			Command <b>clearscreen / cs</b> is for clear the canvas. All the lines that has been 
 			drawn will be cleaned. But neither the turtle would return "home", nor the 
 			background colour would be cleaned.<br/>
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>make "A 0 <br>
+repeat 36 <br>
+[ <br>
+    if :A==20 [clearscreen] <br>
+    lt 10 <br>
+    fd 10 <br>
+    make "A :A+1 <br>
+]</code>
+		<h4><img src="/images/library_samples/clearscreen.png"></h4><br/>
 		
 	<h2>home</h2>
 		<h3>Name:</h3>
@@ -326,7 +384,13 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>repeat 18 <br>
+[ <br>
+    lt 10 <br>
+    fd 10 <br>
+] <br>
+home</code>
+		<h4><img src="/images/library_samples/home.png"></h4><br/>
 	
 	<h2>setxy</h2>
 		<h3>Name:</h3>
@@ -352,5 +416,13 @@
 		</p>
 		
 		<h3>Example:</h3>
-		<h4>Sample picture here.</h4><br/>
+		<code>make "A 0 <br>
+repeat 36 <br>
+[ <br>
+    if :A==18 [setxy 150 150] <br>
+    lt 10 <br>
+    fd 10 <br>
+] <br>
+home</code>
+		<h4><img src="/images/library_samples/setxy.png"></h4><br/>
 </div>
