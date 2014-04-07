@@ -52,14 +52,14 @@
 }
 #gallery .arrow.prev {
     background-image: url("../images/prev.png");
-    left: 20px;
+    left: 50px;
     opacity: 0.2;
     transition: all 0.2s linear 0s;
 }
 #gallery .arrow.next {
     background-image: url("../images/next.png");
     opacity: 0.2;
-    right: 20px;
+    right: 50px;
     transition: all 0.2s linear 0s;
 }
 #gallery .arrow.prev:hover{

@@ -182,6 +182,14 @@ ExpressLOGOApp.controller('libraryViewController', function ($scope) {
 	};
 });
 
+
+ExpressLOGOApp.filter('offset', function() { 
+		return function(input, start) {
+			start = parseInt(start, 10);
+			return input.slice(start);};
+	});
+
+
 ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $filter) {
 	$http({
 		method: 'GET',
@@ -192,14 +200,8 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 		$scope.items = data.post;
 
 	});
-//app.filter('offset', function() { 
-//return function(input, start) {
-//start = parseInt(start, 10);;
-//return input.slice(start);; };
-//});;
 
-
-		$scope.itemsPerPage = 5;
+		$scope.itemsPerPage = 6;
 		$scope.currentPage = 0;
 		
 		$scope.prevPage = function() { 
@@ -240,12 +242,12 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 
 	// show prev image
 	$scope.showPrev = function () {
-		$scope._Index = ($scope._Index > 0) ? --$scope._Index : $scope.photos.length - 1;
+		$scope._Index = ($scope._Index > 0) ? --$scope._Index : $scope.items.length - 1;
 	};
 
 	// show next image
 	$scope.showNext = function () {
-		$scope._Index = ($scope._Index < $scope.photos.length - 1) ? ++$scope._Index : 0;
+		$scope._Index = ($scope._Index < $scope.items.length - 1) ? ++$scope._Index : 0;
 	};
 
 	// show a certain image
