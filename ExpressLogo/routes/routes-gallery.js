@@ -48,7 +48,7 @@ module.exports = function(app) {
 					avatar: user[register].avatar
 				}
 			};
-			Post.findByIdAndUpate(post_id, { $push: {
+			Post.findByIdAndUpdate(post_id, { $push: {
 				comment: new_comment
 			} }, function(err, data){
 				if(err) 
@@ -62,18 +62,19 @@ module.exports = function(app) {
 		}
 	});
 
-	app.post('/gallery/:id/like', isLoggedIn, function(req, res){
+	app.post('/gallery/:id/like', function(req, res){
 		//like this post
 		var post_id = req.params.id;
-			Post.findByIdAndUpate(post_id, { $inc: { like : 1 }}, function(err, data){
-			if(err) 
-					res.send({
-						message: err
-					});
-				else res.send({ 
-					message: "success"
-				});
+		console.log(post_id);
+		Post.findByIdAndUpdate(post_id, { $inc: { like : 1 }}, function(err, data){
+		if(err) 
+			res.send({
+				message: err
 			});
+			else res.send({ 
+				message: "success"
+			});
+		});
 	});
 
 	//get the details of one share
@@ -89,8 +90,18 @@ module.exports = function(app) {
 	app.get('/gallery', function(req, res){
 		var page_num = req.query.page;
 		var page_num = req.query.sort;
-		var item_per_page = 10;
-		Post.find({}, null, { skip: item_per_page*(page_num-1), limit: item_per_page }, function(err, data){
+		//var item_per_page = 10;
+		// Post.find({}, null, { skip: item_per_page*(page_num-1), limit: item_per_page }, function(err, data){
+		// 	if(err)
+		// 		throw err;
+		// 	Post.count({}, function(err, count){
+		// 		res.send({
+		// 			count: count, 
+		// 			post: data
+		// 		});
+		// 	});
+		// });
+		Post.find({}, null, null, function(err, data){
 			if(err)
 				throw err;
 			Post.count({}, function(err, count){

@@ -61,3 +61,10 @@ module.exports = function(app){
 		}
 	});
 };
+
+// route middleware to ensure user is logged in
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated())
+		return next();
+	res.send({ message : 'not logged in'});
+}
