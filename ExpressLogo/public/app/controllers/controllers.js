@@ -236,8 +236,28 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 		return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
 		}
 
+	function like(_id)
+	{
+		$scope.test = '/gallery/'+_id + '/like';
+		$http({
+			method: 'POST',
+			url: '/gallery/'+ _id + '/like',
+			data: _id,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		.success(function (data) {
+			//success
+		})
+		.error(function (data) {
+			//failed
+		});
+	}
 
-	$scope.addone = function(index) {index = index + 1;}
+	$scope.addone = function($photo) {
+		$scope.test = $photo._id;
+		like($scope.test);
+
+	}
 
 	// initial image index
 	$scope._Index = 0;
