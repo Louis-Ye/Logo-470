@@ -303,6 +303,7 @@ ExpressLOGOApp.controller('profileViewController', function ($scope, $http) {
 	.success(function (data) {
 		var reg = data.user.register;
 		$scope.user = data.user[reg];
+		$scope.posts = data.post;
 	})
 	.error(function (data) {
 		$scope.message = "Error";

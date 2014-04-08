@@ -20,6 +20,11 @@ var postSchema = mongoose.Schema({
 	image_url : String,
 	code : String,
 	comment : [{
+		comment_id: {
+    	type: String,
+    	unique: true,
+    	default: function(){ return shortId.generate(); }
+		},
 		author: {
 			id: String, 
 			name: String,

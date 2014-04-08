@@ -1,9 +1,12 @@
 <div id="profile" class="container">
 	<div class="col-sm-6 col-sm-offset-3">
-		<img src="{{ user.avatar }}" id="profile-image"/>
+		<img src="{{ user.avatar }}" id="profile-image" class="img-thumbnail"/>
 		<h1 id="profile-name">{{user.name}}</h1>
-
-
+		 <ul >
+			<li ng-repeat="post in posts" class="col-xs-6 col-md-5">
+				<a class="thumbnail"><img src="{{ post.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
+			</li>
+		</ul>
 		
 	</div>
 </div>

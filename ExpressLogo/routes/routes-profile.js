@@ -4,16 +4,19 @@ module.exports = function(app){
 
 	app.get('/profile', function(req, res){
 		if(!req.user)
-			res.redirect('#');
+			res.send({ message : 'not logged in'});
 		else{
 			var user = req.user;
 
 			User.findById(user._id, function(err, info){
 				if(err)
 					throw err;
-				Post.findById(user._id, function(err, post){
+				console.log(user._id);
+				var query = { 'author.id': user._id };
+				Post.find(query, function(err, post){
 					if (err)
 						throw err;
+					console.log(post);
 			 		res.send({
 			 			user: info,
 			 			post: post
@@ -47,8 +50,8 @@ module.exports = function(app){
 			var reg = user.register;
 			var name = user[reg].name;
 			var obj = req.body.name;
-			console.log(obj);
-			console.log(name);
+			//console.log(obj);
+			//console.log(name);
 
 			User.findByIdAndUpdate(user._id, {
 				$set : {'local.name' : obj}
