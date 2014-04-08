@@ -11,15 +11,16 @@ module.exports = function(app){
 			User.findById(user._id, function(err, info){
 				if(err)
 					throw err;
-				console.log(user._id);
+				//console.log(user._id);
 				var query = { 'author.id': user._id };
 				Post.find(query, function(err, post){
 					if (err)
 						throw err;
-					console.log(post);
+					//console.log(post);
 			 		res.send({
 			 			user: info,
-			 			post: post
+			 			post: post, 
+			 			message: "success"
 			 		});
  				});
 			});

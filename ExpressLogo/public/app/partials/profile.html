@@ -1,12 +1,31 @@
 <div id="profile" class="container">
-	<div class="col-sm-6 col-sm-offset-3">
-		<img src="{{ user.avatar }}" id="profile-image" class="img-thumbnail"/>
-		<h1 id="profile-name">{{user.name}}</h1>
-		 <ul >
-			<li ng-repeat="post in posts" class="col-xs-6 col-md-5">
-				<a class="thumbnail"><img src="{{ post.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
-			</li>
-		</ul>
-		
+<div class="col-sm-3 sidebar">
+	<br>
+	<fieldset id="profile-image-controls">
+		<img src="{{ user.avatar }}" class="img-thumbnail"/>
+	</fieldset>
+	<h3 class="text-info"> {{user.name}} </h3>
+
+</div>
+<div class="col-sm-9">
+	<h3>Posts</h3>
+	<div class = "row">
+		<div ng-repeat="post in posts" class="col-xs-6 col-md-4">
+    		<a class="thumbnail" href="#/gallery/{{post._id}}">
+        		<img src="{{ post.image_url }}" alt="">
+      		</a>
+      		<div class = "row">
+      		<div class="col-xs-12 col-md-6">
+      			<span class="glyphicon glyphicon-heart"></span>
+      			<span class="glyphicon-class">{{ post.like }}</span>
+      		</div>
+      		<div class="col-xs-12 col-md-6">
+      			<p><small>{{ post.create_time }}<small></p>
+      		</div>
+      		</div>
+      		<div class = "row" ng-if="{{post.title}}"><p>{{post.title}}</p></div>
+      		</br>
+    	</div>
 	</div>
+</div>
 </div>
