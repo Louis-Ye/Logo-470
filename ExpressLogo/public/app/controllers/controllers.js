@@ -207,6 +207,7 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 //start = parseInt(start, 10);;
 //return input.slice(start);; };
 //});;
+		$scope.order = false;
 
 		$scope.itemsPerPage = 6;
 		$scope.currentPage = 0;
@@ -235,6 +236,14 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 		$scope.nextPageDisabled = function() {
 		return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
 		}
+		
+		$scope.checkstate = function() {
+		return $scope.order === true ? true : false;
+		}
+
+		$scope.checkstate2 = function() {
+		return $scope.order === true ? false : true;
+		}
 
 	function like(_id)
 	{
@@ -256,9 +265,40 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 	$scope.addone = function($photo) {
 		$scope.test = $photo._id;
 		like($scope.test);
-
+		window.location.reload(true); 
 	}
 
+	$scope.showdetail = function($iterator){
+		$scope.order = true;
+		$scope.spe_photo = $iterator;
+	}
+
+	$scope.back = function(){	
+		$scope.order = false;
+	}
+
+	function submit_comment(_id, content)
+	{
+		$scope.test = '/gallery/'+_id + '/comments';
+		$http({
+			method: 'POST',
+			url: '/gallery/'+ _id + '/comments',
+			data: content,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		.success(function (data) {
+			//success
+		})
+		.error(function (data) {
+			//failed
+		});
+	}
+
+	$scope.submit = function($photo){
+		var text = document.getElementById('cm').value;
+		$scope.test = text;
+		submit_comment($photo._id,text);
+	}
 	// initial image index
 	$scope._Index = 0;
 

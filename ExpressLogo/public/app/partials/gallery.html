@@ -29,15 +29,18 @@
 		</table>
 	</div> -->
 	<!-- <p ng-repeat="photo in items"> {{photo.image_url}} </p> -->
+	<p>{{ order }}</p>
 	<p>{{ test }}</p>
-	<div class="bs-example">
+	<div ng-show="checkstate()"></p>test1</p></div>
+	<div ng-show="checkstate2()"></p>test2</p></div>
+	<div class="bs-example" ng-show="checkstate2()">
 		<div class="row">
 			
 			 <ui class="photo">
 					<li ng-repeat="photo in items | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" class="col-xs-6 col-md-5">
 						<a class="thumbnail"><img src="{{ photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
 						<p><button class="btn btn-primary"  ng-click="addone({{ photo }})">Like({{ photo.like }})</button>
-						   <button class="btn btn-default" ng-click="showdetail">Detail</button></p>
+						   <button class="btn btn-default" ng-click="showdetail({{ photo }})">Detail</button></p>
 					</li>
 			</ui>
 		</div>
@@ -52,6 +55,30 @@
 					</li> 
 				</ul>
 		</div> 
+	</div>
+	<div class = "order_photo" ng-show="checkstate()">
+		<a class="thumbnail"><img src="{{ spe_photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
+		<label>Author:</label><p>{{spe_photo.author.name}}</p>
+		<label>Create Date:</label><p>{{spe_photo.create_at}}</p>
+		<label>Code:</label>
+		<p>{{spe_photo.code}}</p>
+		<table class="table table-striped">
+			<thead> <tr>
+				<th>Date</th>
+				<th>ID</th>
+				<th>Description</th> </tr>
+			</thead> 
+			<tbody>
+				<tr ng-repeat="item in spe_photo.comments"> <td>{{item.date}}</td> <td>{{item.author.name}}</td> <td>{{item.content}}</td>
+				</tr> 
+			</tbody>
+		</table>
+		<label>Say something:</label>
+			<textarea id="cm" class="form-control" rows="3"></textarea>
+
+		<p><button class="btn btn-primary" ng-click="submit({{ spe_photo }})">Submit</button>
+		   <button class="btn btn-default" ng-click="back()">Back</button></p>
+		
 	</div>
 </div>
 
