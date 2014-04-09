@@ -26,7 +26,6 @@ function indentCode(elementId,evt)
 	}
 	
 	var key = getKeyCode(evt);
-	console.log(key);
 	if (key!=9 &&/*tab*/
 		key!=10 &&/*ctrl+enter*/
 		key!=13 &&/*enter*/
