@@ -46,4 +46,3 @@ ExpressLOGOApp.config(function ($routeProvider) {
 			redirectTo: '/'
 		});
 });
-ExpressLOGOApp.controller('playViewController', ['$scope', '$http', playViewController]);
