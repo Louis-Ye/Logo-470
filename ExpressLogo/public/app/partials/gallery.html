@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="css/gallery-style.css" />
+
 <div id="gallery" class="container">
 	<h1>gallery page</h1>
 
@@ -6,14 +8,14 @@
 				<th>Title</th>
 				<th>Image</th>
 				<th>Description</th> </tr>
-			</thead> 
+			</thead>
 			<tbody>
 				<tr ng-repeat="item in items | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"> <td>{{item.title}}</td> <td><img src="{{item.image_url}}" alt="500x400" style="height: 400px; width: 500px; display: block;"></img></td> <td>{{item.create_at}}</td>
-				</tr> 
+				</tr>
 			</tbody>
 			<tfoot>
 				<td colspan="3">
-				<div class="pagination"> 
+				<div class="pagination">
 				<ul>
 					<li ng-class="prevPageDisabled()">
 						<a href ng-click="prevPage()"> « Prev</a>
@@ -21,11 +23,11 @@
 					<li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"> <a href="#">{{n+1}}</a> </li>
 					<li ng-class="nextPageDisabled()">
 						<a href ng-click="nextPage()">Next »</a>
-					</li> 
+					</li>
 				</ul>
-				</div> 
+				</div>
 				</td>
-			</tfoot> 
+			</tfoot>
 		</table>
 	</div> -->
 	<!-- <p ng-repeat="photo in items"> {{photo.image_url}} </p> -->
@@ -35,7 +37,7 @@
 	<div ng-show="checkstate2()"></p>test2</p></div> -->
 	<div class="bs-example" ng-show="checkstate2()">
 		<div class="row">
-			
+
 			 <ui class="photo">
 					<li ng-repeat="photo in items | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" class="col-xs-6 col-md-5">
 						<a class="thumbnail"><img src="{{ photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
@@ -44,7 +46,7 @@
 					</li>
 			</ui>
 		</div>
-		<div class="pagination"> 
+		<div class="pagination">
 				<ul>
 					<li ng-class="prevPageDisabled()">
 						<a href ng-click="prevPage()"> « Prev</a>
@@ -52,9 +54,9 @@
 					<li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"> <a href="#">{{n+1}}</a> </li>
 					<li ng-class="nextPageDisabled()">
 						<a href ng-click="nextPage()">Next »</a>
-					</li> 
+					</li>
 				</ul>
-		</div> 
+		</div>
 	</div>
 	<div class = "order_photo" ng-show="checkstate()">
 		<a class="thumbnail"><img src="{{ spe_photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
@@ -67,10 +69,10 @@
 				<th>Date</th>
 				<th>ID</th>
 				<th>Description</th> </tr>
-			</thead> 
+			</thead>
 			<tbody>
 				<tr ng-repeat="item in spe_photo.comments"> <td>{{item.date}}</td> <td>{{item.author.name}}</td> <td>{{item.content}}</td>
-				</tr> 
+				</tr>
 			</tbody>
 		</table>
 		<label>Say something:</label>
@@ -78,8 +80,8 @@
 
 		<p><button class="btn btn-primary" ng-click="submit({{ spe_photo }})">Submit</button>
 		   <button class="btn btn-default" ng-click="back()">Back</button></p>
-		
+
 	</div>
 </div>
 
-
+<script type="text/javascript" src="app/controllers/galleryViewController.js"></script>

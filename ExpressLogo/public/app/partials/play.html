@@ -3,14 +3,14 @@
 	<div class="alert alert-warning", data-ng-if="message == 'not logged in'">You need to <a href="#/sign-in" class="alert-link">log in</a> first.</div>
 	<div class="row">
 		<div id="canvas-pad" class="col-sm-12 col-md-6 col-lg-5 col-lg-offset-1">
+			<canvas id="saving" style="position: absolute; z-index: 0">
+			</canvas>
 			<canvas id="bg" style="position: absolute; z-index: 1">
 			Your browser does not support the canvas element.
 			</canvas>
 			<canvas id="lines" style="position: absolute; z-index: 2">
 			</canvas>
 			<canvas id="turtle" style="position: absolute; z-index: 3">
-			</canvas>
-			<canvas id="saving" style="position: absolute; z-index: 0">
 			</canvas>
 		</div>
 		<div id="console-pad" class="col-sm-12 col-md-6 col-lg-5">
@@ -80,7 +80,6 @@
 				<button id="share" type="button" class="btn btn-default" data-ng-click="share()">Share</button>
 			</div>
 			<input type="file" id="imgInput" onchange="readPicture(event,id);" hidden/>
-
 		</div>
 	</div>
 </div>

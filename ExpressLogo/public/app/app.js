@@ -1,31 +1,9 @@
 var ExpressLOGOApp = angular.module('ExpressLOGOApp', ['ngRoute', 'ngAnimate', 'ngTouch', 'ngCookies']);
 
-ExpressLOGOApp.controller('mainController', function ($scope, $element, $http) {
-	init();
-	function init() {
-		$http({
-			method: 'GET',
-			url: '/user'
-		})
-		.success(function (data) {
-			if (data.email) {
-				$scope.top_right_button_href = "logout";
-				$scope.top_right_button_name = "Log out";
-			}
-			else {
-				$scope.top_right_button_href = "#/sign-in";
-				$scope.top_right_button_name = "Sign in";
-			}
-		});
-		$scope.top_right_button_href = "#/sign-in";
-		$scope.top_right_button_name = "Sign in";
-	};
-});
-
 ExpressLOGOApp.config(function ($routeProvider) {
 	$routeProvider
 		.when('/', {
-			controller: 'indexViewController',
+			controller: 'homepageViewController',
 			templateUrl: 'app/partials/homepage.html'
 		})
 		.when('/tutorial', {
@@ -68,3 +46,4 @@ ExpressLOGOApp.config(function ($routeProvider) {
 			redirectTo: '/'
 		});
 });
+ExpressLOGOApp.controller('playViewController', ['$scope', '$http', playViewController]);
