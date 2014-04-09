@@ -26,19 +26,40 @@ function indentCode(elementId,evt)
 	}
 	
 	var key = getKeyCode(evt);
+	console.log(key);
 	if (key!=9 &&/*tab*/
 		key!=10 &&/*ctrl+enter*/
 		key!=13 &&/*enter*/
 		key!=40 &&/* ( */
+		key!=41 &&/* ) */
 		key!=91 &&/* [ */
+		key!=93 &&/* ] */
 		key!=123 &&/* { */
+		key!=125 &&/* } */
 		key!=25 &&/*ctrl+y*/
 		key!=26 &&/*ctrl+z*/
 		key!=89 &&/*Y*/
 		key!=90 &&/*Z*/
 		key!=121 &&/*y*/
-		key!=122 /*z*/) return true;
+		key!=122 &&/*z*/
+		key!=8 &&/*backspace*/
+		key!=46/*delete*/) return true;
 
+	var caretStart = getCaretStart();
+	var caretEnd = getCaretEnd();
+	var contentSecondHalf = "";
+	if (caretEnd<content.length)
+		contentSecondHalf = content.slice(caretEnd);
+	var selectContent = "";
+	if (caretEnd>caretStart && key==9)
+		selectContent = content.slice(caretStart,caretEnd);
+	if (caretStart>0)
+		content = content.slice(0,caretStart);
+	else
+		content = "";
+	var forwardCaret = 1;
+	var forwardScroll = false;
+	
 	function getCaretStart()
 	{
 		//For Firefox, Chrome, new versions of IE, etc
@@ -121,20 +142,54 @@ function indentCode(elementId,evt)
 		undoflag = true;
 	}
 	
-	var caretStart = getCaretStart();
-	var caretEnd = getCaretEnd();
-	var contentSecondHalf = "";
-	if (caretEnd<content.length)
-		contentSecondHalf = content.slice(caretEnd);
-	var selectContent = "";
-	if (caretEnd>caretStart && key==9)
-		selectContent = content.slice(caretStart,caretEnd);
-	if (caretStart>0)
-		content = content.slice(0,caretStart);
-	else
-		content = "";
-	var forwardCaret = 1;
-	var forwardScroll = false;
+	function forwardSpace(d)
+	{
+		var c = 0;
+		for (var i=content.length-1;i>=0;i--)
+		{
+			if (c==d) break;
+			if (content[i]!=' ') break;
+			c++;
+		}
+		return c;
+	}
+	
+	function backwardSpace(d)
+	{
+		var c = 0;
+		for (var i=0;i<contentSecondHalf.length;i++)
+		{
+			if (c==d) break;
+			if (contentSecondHalf[i]!=' ') break;
+			c++;
+		}
+		return c;
+	}
+	
+	function backspaceIndent()
+	{
+		var fs = forwardSpace(4);
+		if (fs==0) return false;
+		var bs = backwardSpace(4-fs);
+		if (fs+bs<4) return false;
+		content = content.slice(0,content.length-fs);
+		contentSecondHalf = contentSecondHalf.slice(bs,contentSecondHalf.length);
+		forwardCaret -= 1+fs;
+		return true;
+	}
+	
+	function deleteIndent()
+	{
+		var bs = backwardSpace(4);
+		if (bs==0) return false;
+		var fs = forwardSpace(4-bs);
+		if (fs+bs<4) return false;
+		content = content.slice(0,content.length-fs);
+		contentSecondHalf = contentSecondHalf.slice(bs,contentSecondHalf.length);
+		forwardCaret -= 1+fs;
+		return true;
+	}
+	
 	switch (key)
 	{
 	case 9:/*tab*/
@@ -204,14 +259,29 @@ function indentCode(elementId,evt)
 		default:
 		}
 		break;
-	case 40:
+	case 40:/* () */
 		content += "()";
 		break;
-	case 91:
+	case 41:
+		if (selectContent.length!=0) return true;
+		if (contentSecondHalf.length==0) return true;
+		if (contentSecondHalf[0]!=')') return true;
+		break;
+	case 91:/* [] */
 		content += "[]";
 		break;
-	case 123:
+	case 93:
+		if (selectContent.length!=0) return true;
+		if (contentSecondHalf.length==0) return true;
+		if (contentSecondHalf[0]!=']') return true;
+		break;
+	case 123:/* {} */
 		content += "{}";
+		break;
+	case 125:
+		if (selectContent.length!=0) return true;
+		if (contentSecondHalf.length==0) return true;
+		if (contentSecondHalf[0]!='}') return true;
 		break;
 	case 89: /*ctrl+y (redo)*/
 	case 121:
@@ -224,6 +294,14 @@ function indentCode(elementId,evt)
 		if (!getUndoKey()) return true;
 	case 26:
 		textUndo();
+		break;
+	case 8:/*backspace*/
+		if (selectContent.length!=0) return true;
+		if (!backspaceIndent()) return true;
+		break;
+	case 46:/*delete*/
+		if (selectContent.length!=0) return true;
+		if (!deleteIndent()) return true;
 		break;
 	default:
 		content += String.fromCharCode(key);
@@ -261,7 +339,7 @@ function ic_keydown(id,evt)
 		return (evt.ctrlKey || evt.metaKey)
 	}
 	key = getKeyCode(evt);
-	if (key==9) return indentCode(id,event);
+	if (key==9 || key==8 || key==46) return indentCode(id,event);
 	if (getUndoKey() && (key==89 || key==90 || key==121 || key==122 || key==25 || key==26))
 		return indentCode(id,evt);
 	return true;
