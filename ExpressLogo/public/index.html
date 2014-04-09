@@ -4,10 +4,13 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Express LOGO</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-colorpalette.css" />
-	<link rel="stylesheet" type="text/css" href="jquery-ui/css/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-colorpalette.css" />
+	<link rel="stylesheet" type="text/css" href="script/jqurey/jquery-ui/css/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" href="css/express-logo-styles.css" />
+	<link rel="stylesheet" type="text/css" href="css/about.css" />
+	<link rel="stylesheet" type="text/css" href="css/gallery-style.css" />
+	<link rel="stylesheet" type="text/css" href="css/library.css" />
 </head>
 <body data-ng-controller="indexViewController">
 	<header>
@@ -31,7 +34,6 @@
 						<li><a href="#/about">About</a></li>
 					</ul>
 					<a href='{{ top_right_button_href }}' type="button" class="btn btn-default navbar-btn navbar-right"> {{ top_right_button_name }} </a>
-					<!-- <a id="sign-out-button" href="#/sign-in" type="button" class="btn btn-default navbar-btn navbar-right">Log out</a> -->
 				</div>
 			</div>
 		</nav>
@@ -54,32 +56,42 @@
 		</div>
 	</footer>
 
-	<script type="text/javascript" src="scripts/angular.js"></script>
-	<script type="text/javascript" src="scripts/angular-route.js"></script>
-	<script type="text/javascript" src="scripts/angular-animate.js"></script>
-	<script type="text/javascript" src="scripts/angular-touch.js"></script>
-	<script type="text/javascript" src="scripts/angular-cookies.js"></script>
+	<script type="text/javascript" src="scripts/angular/angular.js"></script>
+	<script type="text/javascript" src="scripts/angular/angular-route.js"></script>
+	<script type="text/javascript" src="scripts/angular/angular-animate.js"></script>
+	<script type="text/javascript" src="scripts/angular/angular-touch.js"></script>
+	<script type="text/javascript" src="scripts/angular/angular-cookies.js"></script>
 
-	<script type="text/javascript" src="scripts/jquery.js"></script>
-	<script type="text/javascript" src="jquery-ui/js/jquery-ui.js"></script>
+	<script type="text/javascript" src="scripts/jquery/jquery.js"></script>
+	<script type="text/javascript" src="scripts/jquery/jquery-ui/js/jquery-ui.js"></script>
 
-	<script type="text/javascript" src="scripts/bootstrap.js"></script>
-	<script type="text/javascript" src="scripts/bootstrap-colorpalette.js"></script>
+	<script type="text/javascript" src="scripts/bootstrap/bootstrap.js"></script>
+	<script type="text/javascript" src="scripts/bootstrap/bootstrap-colorpalette.js"></script>
+
+	<!-- <script type="text/javascript" src="scripts/require/require.js" data-main="scripts/main.js"></script> -->
 
 	<script type="text/javascript" src="app/app.js"></script>
 	<script type="text/javascript" src="app/controllers/indexViewController.js"></script>
-
-
+	<script type="text/javascript" src="app/controllers/homepageViewController.js"></script>
+	<script type="text/javascript" src="app/controllers/libraryViewController.js"></script>
 	<script type="text/javascript" src="app/controllers/playViewController.js"></script>
+	<script type="text/javascript" src="app/controllers/galleryViewController.js"></script>
+	<script type="text/javascript" src="app/controllers/tutorialViewController.js"></script>
+	<script type="text/javascript" src="app/controllers/accountViewController.js"></script>
+	<script type="text/javascript" src="app/controllers/profileViewController.js"></script>
+	<script type="text/javascript" src="app/controllers/signInViewController.js"></script>
+	<script type="text/javascript" src="app/controllers/signUpViewController.js"></script>
+	<script type="text/javascript" src="app/controllers/aboutViewController.js"></script>
 
-	<script type="text/javascript" src="scripts/interpreter/logo-interpreter-exenode.js"></script>
-	<script type="text/javascript" src="scripts/interpreter/logo-interpreter-lexical.js"></script>
-	<script type="text/javascript" src="scripts/interpreter/logo-interpreter-parser.js"></script>
-	<script type="text/javascript" src="scripts/interpreter/logo-interpreter-semantic.js"></script>
-	<script type="text/javascript" src="scripts/interpreter/logo-interpreter.js"></script>
+	<script type="text/javascript" src="app/services/interpreter/logo-interpreter-exenode.js"></script>
+	<script type="text/javascript" src="app/services/interpreter/logo-interpreter-lexical.js"></script>
+	<script type="text/javascript" src="app/services/interpreter/logo-interpreter-parser.js"></script>
+	<script type="text/javascript" src="app/services/interpreter/logo-interpreter-semantic.js"></script>
+	<script type="text/javascript" src="app/services/interpreter/logo-interpreter.js"></script>
 
-	<script type="text/javascript" src="scripts/drawer/logo-drawer.js"></script>
-	<script type="text/javascript" src="scripts/indent-code.js"></script>
-	<script type="text/javascript" src="scripts/readPicture.js"></script>
+	<script type="text/javascript" src="app/services/drawer/logo-drawer.js"></script>
+	<script type="text/javascript" src="app/services/indent-code.js"></script>
+	<script type="text/javascript" src="app/services/readPicture.js"></script>
+
 </body>
 </html>

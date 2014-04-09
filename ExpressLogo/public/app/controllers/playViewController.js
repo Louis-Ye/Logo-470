@@ -62,7 +62,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 		animate: true,
 		slide: function (event, ui) {
 			$("#line-tip").val(ui.value);
-			// myCanvas.setLineWidth(ui.value);
 			interpret_json.userTyping = "penwidth " + ui.value;
 			callback(interpret_json.userTyping);
 			interpret(interpret_json);
@@ -86,7 +85,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 		interpret_json.userTyping = "color [" + selectedColor.color + "]";
 		callback(interpret_json.userTyping);
 		interpret(interpret_json);
-		// myCanvas.setPenColor(selectedColor.color);
 	});
 
 	$('#colorpalette-background').colorPalette().on('selectColor', function(selectedColor) {
@@ -134,10 +132,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 		interpret(interpret_json);
 	};
 
-	$scope.background_image = function () {
-		// interpreter API?
-	};
-
 	$scope.reset = function () {
 		clearUndo();
 		$('#result-pad').empty();
@@ -149,13 +143,10 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 
 	function shareCallback (url) {
 		var user_codes = $('#result-pad')[0].innerText;
-		//console.log(user_codes);
 		var share = $.param({
 			img_url: url,
 			code : user_codes
 		});
-		//console.log(share);
-		//save image API
 		$http({
 			method: 'POST',
 			url: '/share',
