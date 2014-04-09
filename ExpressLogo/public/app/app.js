@@ -6,7 +6,7 @@ ExpressLOGOApp.config(function ($routeProvider) {
 			controller: 'homepageViewController',
 			templateUrl: 'app/partials/homepage.html'
 		})
-		.when('/tutorial', {
+		.when('/tutorial/:param/', {
 			controller: 'learnViewController',
 			templateUrl: 'app/partials/tutorial.html'
 		})
