@@ -19,7 +19,8 @@ function semantic(tree) {
 			if ( !(left.numericType == NUMBER_TYPE_NUMERIC) || 
 				!(right.numericType == NUMBER_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
-				errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ?");
+				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+				errorMessage("Oops! Can you give me a number type at '" + curNode.token + "'? <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 			else {
 				curNode.numericType = NUMBER_TYPE_NUMERIC;
@@ -38,7 +39,8 @@ function semantic(tree) {
 			if ( !(left.numericType == BOOL_TYPE_NUMERIC) || 
 				!(right.numericType == BOOL_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
-				errorMessage("Oops! Can you give me a bool type near '" + curNode.token + "' ?");
+				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+				errorMessage("Oops! Can you give me a bool type near '" + curNode.token + "' ? <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 			else {
 				curNode.numericType = BOOL_TYPE_NUMERIC;
@@ -54,7 +56,8 @@ function semantic(tree) {
 			if ( !(left.numericType == NUMBER_TYPE_NUMERIC) || 
 				!(right.numericType == NUMBER_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
-				errorMessage("Oops! Can you give me a number type near '"+ curNode.token + "' ?");
+				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+				errorMessage("Oops! Can you give me a number type near '"+ curNode.token + "' ? <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 			else {
 				curNode.numericType = BOOL_TYPE_NUMERIC;
@@ -65,7 +68,8 @@ function semantic(tree) {
 			var child = curNode.children[0];
 			if ( !(child.numericType == BOOL_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
-				errorMessage("Oops! Can you give me a bool type near '" + curNode.token + "' ?");
+				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+				errorMessage("Oops! Can you give me a bool type near '" + curNode.token + "' ? <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 			else {
 				curNode.numericType = BOOL_TYPE_NUMERIC;
@@ -79,7 +83,8 @@ function semantic(tree) {
 			var child = curNode.children[0];
 			if ( !(child.numericType == NUMBER_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
-				errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ?");
+				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+				errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ? <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 		}
 
@@ -88,7 +93,8 @@ function semantic(tree) {
 			var child = curNode.children[0];
 			if ( !(child.numericType == BOOL_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
-				errorMessage("Oops! Can you give me a bool type near '" + curNode.token + "' ?");
+				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+				errorMessage("Oops! Can you give me a bool type near '" + curNode.token + "' ? <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 		}
 
@@ -96,7 +102,8 @@ function semantic(tree) {
 			var child = curNode.children[0];
 			if ( !(child.numericType == NUMBER_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
-				errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ?");
+				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+				errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ? <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 
 			if (curNode.nodeType == REPEAT_TYPE) {
@@ -110,7 +117,8 @@ function semantic(tree) {
 			var y = curNode.children[1];
 			if ( !(x.numericType == NUMBER_TYPE_NUMERIC) || !(y.numericType == NUMBER_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
-				errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ?");
+				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+				errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ? <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 		}
 		
@@ -118,7 +126,8 @@ function semantic(tree) {
 			if (curNode.hasColorNum) {
 				if ( curNode.hasColorNum.length != 6) {
 					curNode.cutErrorNodeFromProgramNode();
-					errorMessage("Oops! It's not a correct format argument at " + curNode.token + "'.");
+					var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+					errorMessage("Oops! Argument '" + curNode.token + "' is not in correct format. <p style='color: blue'>near<code>" + codes + "</code></p>");
 				}
 			}
 			else {
@@ -129,7 +138,8 @@ function semantic(tree) {
 					!(g.numericType == NUMBER_TYPE_NUMERIC) ||
 					!(b.numericType == NUMBER_TYPE_NUMERIC) ) {
 					curNode.cutErrorNodeFromProgramNode();
-					errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ?");
+					var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+					errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ? <p style='color: blue'>near<code>" + codes + "</code></p>");
 				}
 			}
 
@@ -167,11 +177,15 @@ function semantic(tree) {
 			if (funcName in g_programExeNode.funcSymbolTable) {
 				var funcDefNode = g_programExeNode.funcSymbolTable[funcName];
 				if ( funcDefNode.children.length - 1 != curNode.children.length ) {
-					errorMessage("Oops! Be careful about the number of arguments at '" + funcName + "' :)");
+					curNode.cutErrorNodeFromProgramNode();
+					var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+					errorMessage("Oops! Be careful about the number of arguments at '" + funcName + "' :) <p style='color: blue'>near<code>" + codes + "</code></p>");
 				}
 			}
 			else {
-				errorMessage("Oops! You probably want <b>TO</b> '" + funcName + "' at first ;)");
+				curNode.cutErrorNodeFromProgramNode();
+				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+				errorMessage("Oops! You probably want <b>TO</b> '" + funcName + "' at first ;) <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 		}
 
@@ -188,7 +202,8 @@ function semantic(tree) {
 
 			if ( variableNotDecBefore(curNode) ) {
 				curNode.cutErrorNodeFromProgramNode();
-				errorMessage("Oh! You might want to make <b>" + curNode.token + "</b> at first ;)");
+				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
+				errorMessage("Oh! You might want to make '" + curNode.token + "' at first ;) <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 			else {
 				var symbolTable = findSymbolTableIncludingThisNode(curNode);

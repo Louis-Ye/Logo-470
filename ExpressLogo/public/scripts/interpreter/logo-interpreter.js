@@ -4,8 +4,10 @@ var g_isDebugMode;
 var g_hasError;
 var g_noProcessWaitingTimeout;
 
+var g_tokens;
+
 var g_resetting = false;
-var g_programExeNode = new ExeNode(null, PROGRAM_TYPE);
+var g_programExeNode = new ExeNode(-1, null, PROGRAM_TYPE);
 var g_curExeNode = g_programExeNode;
 
 var g_stack = [];
@@ -46,12 +48,13 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 	var tokens = null;
 	if (arg.userTyping) {
 		tokens = lexical(arg.userTyping);
+		g_tokens = tokens;
 		//console.log(tokens);
 	}
 	var tree = null;
 	if (tokens) {
 		tree = parser(tokens);
-		//console.log(tree);
+		console.log(tree);
 	}
 	var runTree = null;
 	if (tree) {
@@ -74,6 +77,18 @@ function interpreterReset() {
 
 
 
+function getCodeStringFromNearTokens(pos) {
+	var from = pos - 4;
+	if (from < 0) from = 0;
+	var to = pos + 4;
+	if (to > g_tokens.length - 1) to = g_tokens.length - 1;
+
+	var result = "";
+	for (var i=from; i<=to; i++) {
+		result += g_tokens[i] + " ";
+	}
+	return result;
+}
 
 function errorMessage(message) {
 	if (!g_hasError) {
@@ -82,9 +97,10 @@ function errorMessage(message) {
 	}
 }
 
-function errorLog(message) {
+function errorLog(pos, token) {
 	if (!g_hasError) {
 		g_hasError = true;
-		g_callback("<logoError style='color:red;'>Sorry, I don\'t know what is \'" + message + "\' </logoError>", null);
+		var codes = getCodeStringFromNearTokens(pos);
+		g_callback("<logoError style='color:red;'>Sorry, I don\'t know what is \'" + token + "\' <p style='color: blue'>near <code>" + codes +"</code></p></logoError>", null);
 	}
 }

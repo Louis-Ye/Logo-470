@@ -116,7 +116,7 @@ function parser(tokens) {
 			readToken();
 		}
 		else {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 			readToken();
 		}
 	}
@@ -175,28 +175,30 @@ function parser(tokens) {
 	};
 	function parseStatement() {
 		if (!startsStatement(nowReading)) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 			return null;
 		}
 
 		if ( startsSimpleStatement(nowReading) ) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var child = parseExpression();
-			var thisNode = new ExeNode(token, getNodeTypeByToken(token));
+			var thisNode = new ExeNode(tokenPos, token, getNodeTypeByToken(token));
 			thisNode.setChild(child);
 			return thisNode;
 		}
 
 		if ( nowReading == Keyword.REPEAT ) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var expr = parseExpression();
 			expect(Punctuator.BODY_OPEN);
 			var body = parseBody();
 			expect(Punctuator.BODY_CLOSE);
 
-			var thisNode = new ExeNode(token, REPEAT_TYPE);
+			var thisNode = new ExeNode(tokenPos, token, REPEAT_TYPE);
 			thisNode.setChild(expr);
 			thisNode.setChild(body);
 			return thisNode;
@@ -204,16 +206,18 @@ function parser(tokens) {
 
 		if ( startsNoArguStatement(nowReading) ) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
-			return new ExeNode(token, getNodeTypeByToken(token));
+			return new ExeNode(tokenPos, token, getNodeTypeByToken(token));
 		}
 
 		if ( nowReading == Keyword.SETXY ) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var childX = parseExpression();
 			var childY = parseExpression();
-			var thisNode = new ExeNode(token, SETXY_TYPE);
+			var thisNode = new ExeNode(tokenPos, token, SETXY_TYPE);
 			thisNode.setChild(childX);
 			thisNode.setChild(childY);
 			return thisNode;
@@ -221,12 +225,13 @@ function parser(tokens) {
 
 		if ( nowReading == Keyword.COLOR ) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			var thisNode;
 			readToken();
 			expect(Punctuator.BODY_OPEN);
 			if (nowReading == Punctuator.NUM) {
 				readToken();
-				var thisNode = new ExeNode(token, COLOR_TYPE);
+				var thisNode = new ExeNode(tokenPos, token, COLOR_TYPE);
 				thisNode.hasColorNum = nowReading;
 				readToken();
 			}
@@ -234,7 +239,7 @@ function parser(tokens) {
 				var r = parseExpression();
 				var g = parseExpression();
 				var b = parseExpression();
-				var thisNode = new ExeNode(token, COLOR_TYPE);
+				var thisNode = new ExeNode(tokenPos, token, COLOR_TYPE);
 				thisNode.setChild(r);
 				thisNode.setChild(g);
 				thisNode.setChild(b);
@@ -247,10 +252,11 @@ function parser(tokens) {
 
 		if (nowReading == Keyword.MAKE) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var iden = parseIdentifierDec();
 			var expr = parseExpression();
-			var thisNode = new ExeNode(token, MAKE_TYPE);
+			var thisNode = new ExeNode(tokenPos, token, MAKE_TYPE);
 			thisNode.setChild(iden);
 			thisNode.setChild(expr);
 			return thisNode;
@@ -259,9 +265,10 @@ function parser(tokens) {
 
 		if (nowReading == Keyword.PENWIDTH) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var expr = parseExpression();
-			var thisNode = new ExeNode(token, PENWIDTH_TYPE);
+			var thisNode = new ExeNode(tokenPos, token, PENWIDTH_TYPE);
 			thisNode.setChild(expr);
 			return thisNode;
 		}
@@ -269,12 +276,13 @@ function parser(tokens) {
 
 		if (nowReading == Keyword.IF) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var expr = parseExpression();
 			expect(Punctuator.BODY_OPEN);
 			var body = parseBody();
 			expect(Punctuator.BODY_CLOSE);
-			var thisNode = new ExeNode(token, IF_TYPE);
+			var thisNode = new ExeNode(tokenPos, token, IF_TYPE);
 			thisNode.setChild(expr);
 			thisNode.setChild(body);
 			if (nowReading == Keyword.ELSE) {
@@ -291,8 +299,9 @@ function parser(tokens) {
 		if (nowReading == Keyword.TO) {
 			expect(Keyword.TO);
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
-			var thisNode = new ExeNode(token, FUNC_DEF_TYPE);
+			var thisNode = new ExeNode(tokenPos, token, FUNC_DEF_TYPE);
 
 			// take up space of funcSymbolTable
 			var funcName = token;
@@ -311,7 +320,7 @@ function parser(tokens) {
 				}
 			}
 			var body = parseBody();
-			if (body == null) body = new ExeNode("no body", BODY_TYPE);
+			if (body == null) body = new ExeNode(curPos, "no body", BODY_TYPE);
 			thisNode.setChild(body);
 			expect(Keyword.END);
 
@@ -320,8 +329,9 @@ function parser(tokens) {
 		
 		if ( startsFuncInvo(nowReading) ) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
-			var thisNode = new ExeNode(token, FUNC_INVO_TYPE);
+			var thisNode = new ExeNode(tokenPos, token, FUNC_INVO_TYPE);
 			while (startsExpression(nowReading)) {
 				var expr = parseExpression();
 				if (expr) {
@@ -339,11 +349,11 @@ function parser(tokens) {
 	}
 	function parseBody() {
 		if (!startsBody(nowReading)) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 			return null;
 		}
 
-		var thisNode = new ExeNode("body start", BODY_TYPE);
+		var thisNode = new ExeNode(curPos, "body [", BODY_TYPE);
 		while ( !g_hasError && startsStatement(nowReading) ) {
 			var stmt = parseStatement();
 			if ( !g_hasError ) thisNode.setChild(stmt);
@@ -372,7 +382,7 @@ function parser(tokens) {
 	}
 	function parseExpression() {
 		if ( !startsExpression(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		return parseExpression1();
@@ -381,15 +391,16 @@ function parser(tokens) {
 	// expr1 -> expr2 ('||' expr2)*
 	function parseExpression1() {
 		if ( !startsExpression(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		var left = parseExpression2();
 		while (nowReading == Punctuator.OR) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var right = parseExpression2();
-			var node = new ExeNode(token, OR_TYPE);
+			var node = new ExeNode(tokenPos, token, OR_TYPE);
 			node.setChild(left);
 			node.setChild(right);
 			left = node;
@@ -400,15 +411,16 @@ function parser(tokens) {
 	// expr2 -> expr3 ('&&' expr3)*
 	function parseExpression2() {
 		if ( !startsExpression(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		var left = parseExpression3();
 		while (nowReading == Punctuator.AND) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var right = parseExpression3();
-			var node = new ExeNode(token, AND_TYPE);
+			var node = new ExeNode(tokenPos, token, AND_TYPE);
 			node.setChild(left);
 			node.setChild(right);
 			left = node;
@@ -419,7 +431,7 @@ function parser(tokens) {
 	// expr3 -> expr4 ( '!=' | '==' expr4 )*
 	function parseExpression3() {
 		if ( !startsExpression(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		function getNodeType(token) {
@@ -431,9 +443,10 @@ function parser(tokens) {
 		var left = parseExpression4();
 		while ((nowReading == Punctuator.NOT_EQUAL) || (nowReading == Punctuator.EQUAL)) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var right = parseExpression4();
-			var node = new ExeNode(token, getNodeType(token));
+			var node = new ExeNode(tokenPos, token, getNodeType(token));
 			node.setChild(left);
 			node.setChild(right);
 			left = node;
@@ -444,7 +457,7 @@ function parser(tokens) {
 	// expr4 -> expr5 ( '>' | '>=' | '<' | '<=' expr5 )*
 	function parseExpression4() {
 		if ( !startsExpression(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		function getNodeType(token) {
@@ -461,9 +474,10 @@ function parser(tokens) {
 				(nowReading == Punctuator.LESS) ||
 				(nowReading == Punctuator.LESS_EQUAL)) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var right = parseExpression5();
-			var node = new ExeNode(token, getNodeType(token));
+			var node = new ExeNode(tokenPos, token, getNodeType(token));
 			node.setChild(left);
 			node.setChild(right);
 			left = node;
@@ -474,7 +488,7 @@ function parser(tokens) {
 	// expr5 -> expr6 ( '+' | '-' expr6 )*
 	function parseExpression5() {
 		if ( !startsExpression(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		function getNodeType(token) {
@@ -486,9 +500,10 @@ function parser(tokens) {
 		var left = parseExpression6();
 		while ((nowReading == Punctuator.PLUS) || (nowReading == Punctuator.MINUS)) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var right = parseExpression6();
-			var node = new ExeNode(token, getNodeType(token));
+			var node = new ExeNode(tokenPos, token, getNodeType(token));
 			node.setChild(left);
 			node.setChild(right);
 			left = node;
@@ -499,7 +514,7 @@ function parser(tokens) {
 	// expr6 -> expr7 ( '*' | '/' | '%' expr7 )*
 	function parseExpression6() {
 		if ( !startsExpression(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		function getNodeType(token) {
@@ -514,9 +529,10 @@ function parser(tokens) {
 				(nowReading == Punctuator.DIVIDE) || 
 				(nowReading == Punctuator.MOD)) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var right = parseExpression7();
-			var node = new ExeNode(token, getNodeType(token));
+			var node = new ExeNode(tokenPos, token, getNodeType(token));
 			node.setChild(left);
 			node.setChild(right);
 			left = node;
@@ -527,14 +543,15 @@ function parser(tokens) {
 	// expr7 -> '!' ? expr7 : expr8
 	function parseExpression7() {
 		if ( !startsExpression(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		if (nowReading == Punctuator.NOT) {
 			var token = nowReading;
+			var tokenPos = curPos;
 			readToken();
 			var child = parseExpression7();
-			var node = new ExeNode(token, NOT_TYPE);
+			var node = new ExeNode(tokenPos, token, NOT_TYPE);
 			node.setChild(child);
 			return node;
 		}
@@ -546,7 +563,7 @@ function parser(tokens) {
 	// expr8 -> (expr) | constant | identifier
 	function parseExpression8() {
 		if ( !startsExpression(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		if (nowReading == Punctuator.BRACKET_OPEN) {
@@ -571,13 +588,14 @@ function parser(tokens) {
 	}
 	function parseIdentifierDec(token) {
 		if ( !startsIdentifierDec(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		expect(Punctuator.IDENTIFIER_DEC);
 		var token = nowReading;
+		var tokenPos = curPos;
 		readToken();
-		return new ExeNode(token, IDENTIFIER_DEC_TYPE);
+		return new ExeNode(tokenPos, token, IDENTIFIER_DEC_TYPE);
 	}
 
 
@@ -587,13 +605,14 @@ function parser(tokens) {
 	}
 	function parseIdentifierInvo(token) {
 		if ( !startsIdentifierInvo(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		expect(Punctuator.IDENTIFIER_INVO);
 		var token = nowReading;
+		var tokenPos = curPos;
 		readToken();
-		return new ExeNode(token, IDENTIFIER_INVO_TYPE);
+		return new ExeNode(tokenPos, token, IDENTIFIER_INVO_TYPE);
 	}
 
 
@@ -608,12 +627,13 @@ function parser(tokens) {
 	}
 	function parseConstant() {
 		if ( !startsConstant(nowReading) ) {
-			errorLog(nowReading);
+			errorLog(curPos, nowReading);
 		}
 
 		var token = nowReading;
+		var tokenPos = curPos;
 		readToken();
-		var thisNode = new ExeNode(token, CONSTANT_TYPE);
+		var thisNode = new ExeNode(tokenPos, token, CONSTANT_TYPE);
 		return thisNode;
 	}
 	//////////////////////////////////////////////
@@ -631,7 +651,7 @@ function parser(tokens) {
 		if ( !g_hasError && stmt ) g_programExeNode.setChild(stmt);
 	}
 
-	if ( nowReading ) errorLog(nowReading);
+	if ( nowReading ) errorLog(curPos, nowReading);
 
 	return g_programExeNode;
 };

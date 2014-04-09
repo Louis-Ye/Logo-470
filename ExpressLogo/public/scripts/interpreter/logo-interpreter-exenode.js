@@ -62,8 +62,9 @@ const NA_TYPE_NUMERIC = "N/A"
 
 var g_static_node_id = 1;
 
-function ExeNode(token, nodeType) {
+function ExeNode(tokenPos, token, nodeType) {
 	this.nodeID = g_static_node_id++;
+	this.tokenPos = tokenPos;
 	this.token = token;
 	this.nodeType = nodeType;
 
