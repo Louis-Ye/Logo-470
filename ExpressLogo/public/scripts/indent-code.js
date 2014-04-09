@@ -9,18 +9,22 @@ function indentCode(elementId,evt)
 	
 	var elementObject = document.getElementById(elementId);
 	var content = elementObject.value;
+	var caretStart = getCaretStart();
+	var caretEnd = getCaretEnd();
 	
 	//Append to undo array
-	if (ic_TextUndo[ic_undoNow].indexOf(content)!=0 
-		|| content.indexOf(ic_TextUndo[ic_undoNow])!=0)
+	if (ic_TextUndo[ic_undoNow].content.indexOf(content)!=0 
+		|| content.indexOf(ic_TextUndo[ic_undoNow].content)!=0)
 	{
 		ic_undoNow++;
 		if (ic_undoUpbound>=ic_undoNow
-			&& ic_TextUndo[ic_undoNow].indexOf(content)==0
-			&& content.indexOf(ic_TextUndo[ic_undoNow])==0)
+			&& ic_TextUndo[ic_undoNow].content.indexOf(content)==0
+			&& content.indexOf(ic_TextUndo[ic_undoNow].content)==0)
 		{} else
 		{
-			ic_TextUndo[ic_undoNow] = content;
+			ic_TextUndo[ic_undoNow] = {};
+			ic_TextUndo[ic_undoNow].content = content;
+			ic_TextUndo[ic_undoNow].caret = caretStart;
 			ic_undoUpbound = ic_undoNow;
 		}
 	}
@@ -44,8 +48,6 @@ function indentCode(elementId,evt)
 		key!=8 &&/*backspace*/
 		key!=46/*delete*/) return true;
 
-	var caretStart = getCaretStart();
-	var caretEnd = getCaretEnd();
 	var contentSecondHalf = "";
 	if (caretEnd<content.length)
 		contentSecondHalf = content.slice(caretEnd);
@@ -130,15 +132,21 @@ function indentCode(elementId,evt)
 	function textUndo()
 	{
 		if (ic_undoNow>0)
-			content = ic_TextUndo[--ic_undoNow];
-		undoflag = true;
+		{
+			content = ic_TextUndo[--ic_undoNow].content;
+			caretStart = ic_TextUndo[ic_undoNow].caret;
+			undoflag = true;
+		}
 	}
 	
 	function textRedo()
 	{
 		if (ic_undoNow<ic_undoUpbound)
-			content = ic_TextUndo[++ic_undoNow];
-		undoflag = true;
+		{
+			content = ic_TextUndo[++ic_undoNow].content;
+			caretStart = ic_TextUndo[ic_undoNow].caret;
+			undoflag = true;
+		}
 	}
 	
 	function forwardSpace(d)
@@ -287,12 +295,14 @@ function indentCode(elementId,evt)
 		if (!getUndoKey()) return true;
 	case 25:
 		textRedo();
+		forwardCaret = 0;
 		break;
 	case 90: /*ctrl+z (undo)*/
 	case 122:
 		if (!getUndoKey()) return true;
 	case 26:
 		textUndo();
+		forwardCaret = 0;
 		break;
 	case 8:/*backspace*/
 		if (selectContent.length!=0) return true;
@@ -309,7 +319,7 @@ function indentCode(elementId,evt)
 		content += selectContent + contentSecondHalf;
 	document.getElementById(elementId).value = content;
 	if (undoflag)
-		setCaret(content.length);
+		setCaret(caretStart);
 	else
 		setCaret(caretStart+forwardCaret);
 	if (forwardScroll) elementObject.scrollTop += fontSize;
@@ -326,7 +336,9 @@ function getKeyCode(evt)
 function clearUndo()
 {
 	ic_TextUndo = new Array();
-	ic_TextUndo[0] = "";
+	ic_TextUndo[0] = {};
+	ic_TextUndo[0].content = "";
+	ic_TextUndo[0].caret = -1;
 	ic_undoNow = 0;
 	ic_undoUpbound = 0;
 }
