@@ -63,6 +63,7 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 	}
 
 	if (runTree) {
+		g_reseting = false;
 		g_runProgram();
 	}
 };

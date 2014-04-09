@@ -28,6 +28,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 
 	function init () {
 		myCanvas.initCanvas();
+		interpreterReset();
 		clearUndo();
 		$scope.result = "";
 		$scope.pen_status = myCanvas.getDrawStatus();

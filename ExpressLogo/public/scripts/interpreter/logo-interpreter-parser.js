@@ -269,6 +269,8 @@ function parser(tokens) {
 			readToken();
 			var expr = parseExpression();
 			var thisNode = new ExeNode(tokenPos, token, PENWIDTH_TYPE);
+			if (g_hasError) return thisNode;
+			
 			thisNode.setChild(expr);
 			return thisNode;
 		}
@@ -283,6 +285,8 @@ function parser(tokens) {
 			var body = parseBody();
 			expect(Punctuator.BODY_CLOSE);
 			var thisNode = new ExeNode(tokenPos, token, IF_TYPE);
+			if (g_hasError) return thisNode;
+
 			thisNode.setChild(expr);
 			thisNode.setChild(body);
 			if (nowReading == Keyword.ELSE) {

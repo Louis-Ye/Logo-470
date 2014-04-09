@@ -185,7 +185,7 @@ function semantic(tree) {
 			else {
 				curNode.cutErrorNodeFromProgramNode();
 				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
-				errorMessage("Oops! You probably want <b>TO</b> '" + funcName + "' at first ;) <p style='color: blue'>near<code>" + codes + "</code></p>");
+				errorMessage("Sorry, I don't know what is '" + funcName + "' :( Can you tell me ? :D <p style='color: blue'>near<code>" + codes + "</code></p>");
 			}
 		}
 

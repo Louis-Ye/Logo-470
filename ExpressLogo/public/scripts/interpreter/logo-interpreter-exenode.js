@@ -98,7 +98,7 @@ function ExeNode(tokenPos, token, nodeType) {
 
 ExeNode.prototype.setChild = function(child) {
 	this.children.push(child);
-	child.parent = this;
+	if (child) child.parent = this;
 };
 
 ExeNode.prototype.cutErrorNodeFromProgramNode = function() {
