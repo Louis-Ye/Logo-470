@@ -47,7 +47,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 
 	$("#slider-delay").slider({
 		range: "min",
-		min: 1,
+		min: 0.002,
 		max: 1000,
 		value: 1,
 		animate: true,
@@ -58,7 +58,14 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 	});
 
 	$('#delay-tip').change(function () {
-		myCanvas.setLineWidth($(this).val());
+		if ($(this).val() < 0.002) {
+			$(this).val(0.002);
+		};
+		if ($(this).val() > 1000) {
+			$(this).val(1000);
+		};
+		$("#slider-delay").slider("value", $(this).val());
+		interpret_json.delay = $(this).val();
 	});
 
 	$("#slider-line").slider({
@@ -77,7 +84,13 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 	});
 
 	$('#line-tip').change(function () {
-		// myCanvas.setLineWidth($(this).val());
+		if ($(this).val() < 1) {
+			$(this).val(1);
+		};
+		if ($(this).val() > 500) {
+			$(this).val(500);
+		};
+		$("#slider-line").slider("value", $(this).val());
 		interpret_json.userTyping = "penwidth " + $(this).val();
 		callback(interpret_json.userTyping);
 		interpret(interpret_json);
@@ -237,7 +250,7 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 		$scope.nextPageDisabled = function() {
 		return $scope.currentPage === $scope.pageCount() ? "disabled" : "";
 		}
-		
+
 		$scope.checkstate = function() {
 		return $scope.order === true ? true : false;
 		}
@@ -266,7 +279,7 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 	$scope.addone = function($photo) {
 		$scope.test = $photo._id;
 		like($scope.test);
-		window.location.reload(true); 
+		window.location.reload(true);
 	}
 
 	$scope.showdetail = function($iterator){
@@ -274,7 +287,7 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 		$scope.spe_photo = $iterator;
 	}
 
-	$scope.back = function(){	
+	$scope.back = function(){
 		$scope.order = false;
 	}
 
