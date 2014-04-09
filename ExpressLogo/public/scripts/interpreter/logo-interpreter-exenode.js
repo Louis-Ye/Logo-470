@@ -12,7 +12,6 @@ const BACKWARD_TYPE = "stmt backword type";
 const LEFT_TYPE = "stmt left turn type";
 const RIGHT_TYPE = "stmt right turn type";
 
-const WHILE_TYPE = "stmt while type";
 const REPEAT_TYPE = "stmt repeat type";
 const IF_TYPE = "stmt if type";
 
@@ -142,17 +141,24 @@ ExeNode.prototype.hasFuncSymbolTable = function() {
 
 
 
-
 /////////////////////////////////////////////////////////////
 // execute
 
 ExeNode.prototype.execute = function() {
 	if ( this.nodeType == PROGRAM_TYPE ) {
+		//console.log(this.symbolTable[this.curExePosVarName]);
 		if (this.symbolTable[this.curExePosVarName] < this.children.length) {
 			this.symbolTable[this.curExePosVarName] += 1;
 			this.children[ this.symbolTable[this.curExePosVarName] - 1 ].execute();
-			setTimeOutAndNextExeNode(this);
+
+			if ( !lastExeChildContainsBody(this) ) {
+				setTimeOutAndNextExeNode(this);
+			}
 		}
+		else {
+			console.log();
+		}
+		return;
 	}
 
 	/////////////////////////////////////////////////////////////
@@ -179,18 +185,21 @@ ExeNode.prototype.execute = function() {
 			fDefBody.symbolTable[idenName].val = arguValue;
 			fDefBody.symbolTable[idenName].numericType = this.children[i].numericType;
 		}
+
 		funcDefNode.realExecute();
 	}
 
 	/////////////////////////////////////////////////////////////
 	// BODY_TYPE
 	if ( this.nodeType == BODY_TYPE ) {
-		if (this.children.length <= 0) return;
 
 		if (this.symbolTable[this.curExePosVarName] < this.children.length) {
 			this.symbolTable[this.curExePosVarName] += 1;
 			this.children[ this.symbolTable[this.curExePosVarName] - 1 ].execute();
-			setTimeOutAndNextExeNode(this);
+
+			if ( !lastExeChildContainsBody(this) ) {
+				setTimeOutAndNextExeNode(this);
+			}
 		}
 		else {
 			this.symbolTable[this.curExePosVarName] = 0;
@@ -199,14 +208,12 @@ ExeNode.prototype.execute = function() {
 				var repeatRemainVarName = this.parent.repeatRemainVarName;
 				if (stParent.symbolTable[repeatRemainVarName] > 1) {
 					stParent.symbolTable[repeatRemainVarName] -= 1;
+					
 					this.execute();
 				}
 				else {
 					goToLastSymbolTableParentExe(this);
 				}
-			}
-			else if (this.parent.nodeType == WHILE_TYPE) {
-				this.parent.execute();
 			}
 			else if (this.parent.nodeType == IF_TYPE) {
 				goToLastSymbolTableParentExe(this);
@@ -244,7 +251,7 @@ ExeNode.prototype.execute = function() {
 		body.symbolTable[ body.curExePosVarName ] = 0;
 
 		stParent.symbolTable[ this.repeatRemainVarName ] = childrenValue;
-		if (childrenValue > 0) body.execute();
+		if (childrenValue >= 1) body.execute();
 	}
 
 	if (this.nodeType == IF_TYPE) {
@@ -259,6 +266,9 @@ ExeNode.prototype.execute = function() {
 				var body = this.children[2];
 				body.symbolTable[ body.curExePosVarName ] = 0;
 				body.execute();
+			}
+			else {
+				goToLastSymbolTableParentExe(this);
 			}
 		}
 	}
@@ -432,14 +442,32 @@ ExeNode.prototype.execute = function() {
 
 
 
+function lastExeChildContainsBody(nodeRef) {
+	var lastExeChildPos = nodeRef.symbolTable[ nodeRef.curExePosVarName ] - 1;
+	var lastExeChild = nodeRef.children[lastExeChildPos];
+	if (lastExeChild) {
+		var nodeType = lastExeChild.nodeType;
+		return nodeType == IF_TYPE || nodeType == REPEAT_TYPE || nodeType == BODY_TYPE || nodeType == FUNC_INVO_TYPE;
+	}
+	else return false;
+}
 
 
-
+var g_command_count = 0;
+var g_max_command_count;
 function setTimeOutAndNextExeNode(nodeRef) {
 	if (g_noProcessWaitingTimeout) {
-		g_noProcessWaitingTimeout = false;
-		g_curExeNode = nodeRef;
-		setTimeout(g_runProgram, g_delay);
+		if (g_command_count < g_max_command_count) {
+			g_command_count += 1;
+			g_curExeNode = nodeRef;
+			g_runProgram();
+		}
+		else {
+			g_command_count = 0;
+			g_noProcessWaitingTimeout = false;
+			g_curExeNode = nodeRef;
+			setTimeout(g_runProgram, g_delay);
+		}
 	}
 }
 function goToLastSymbolTableParentExe(nodeRef) {

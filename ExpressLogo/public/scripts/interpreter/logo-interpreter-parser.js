@@ -16,7 +16,6 @@ const Keyword = {
 	"IF" : "if",
 	"ELSE": "else",
 	"REPEAT" : "repeat",
-	"WHILE" : "while",
 	"MAKE" : "make",
 	
 	"CLEARSCREEN": "clearscreen",
@@ -46,7 +45,6 @@ function getNodeTypeByToken(token) {
 	if ( (Keyword.CLEARSCREEN == token) || (Keyword.CS == token) ) return CLEARSCREEN_TYPE;
 	if ( Keyword.IF == token ) return IF_TYPE;
 	if ( Keyword.REPEAT == token ) return REPEAT_TYPE;
-	if ( Keyword.WHILE == token ) return WHILE_TYPE;
 	if ( Keyword.MAKE == token ) return MAKE_TYPE;
 	if ( (Keyword.PENUP == token) || (Keyword.PU == token) ) return PENUP_TYPE;
 	if ( (Keyword.PENDOWN == token) || (Keyword.PD == token) ) return PENDOWN_TYPE;
@@ -116,7 +114,8 @@ function parser(tokens) {
 			readToken();
 		}
 		else {
-			errorLog(curPos, nowReading);
+			if (nowReading) errorLog(curPos, nowReading);
+			else errorLog(curPos - 1, previousRead);
 			readToken();
 		}
 	}
@@ -165,7 +164,6 @@ function parser(tokens) {
 			token == Keyword.IF ||
 			token == Keyword.REPEAT ||
 			token == Keyword.MAKE ||
-			token == Keyword.WHILE ||
 			token == Keyword.SETXY ||
 			token == Keyword.COLOR ||
 			token == Keyword.PENWIDTH ||
@@ -270,7 +268,7 @@ function parser(tokens) {
 			var expr = parseExpression();
 			var thisNode = new ExeNode(tokenPos, token, PENWIDTH_TYPE);
 			if (g_hasError) return thisNode;
-			
+
 			thisNode.setChild(expr);
 			return thisNode;
 		}

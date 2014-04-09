@@ -26,10 +26,11 @@ const g_callback = function(error, result) {
 var g_runProgram = function() {
 	if (g_resetting) {
 		g_resetting = false;
-		return;
 	}
-	g_noProcessWaitingTimeout = true;
-	g_curExeNode.execute();
+	else {
+		g_noProcessWaitingTimeout = true;
+		g_curExeNode.execute();
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -42,8 +43,21 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 
 	g_stack = [];
 	g_hasError = false;
-	g_delay = arg.delay;
+	g_delay = 0.04;//arg.delay;
 	g_debugMode = arg.debugMode;
+
+	if (g_delay < 1) {
+		g_max_command_count = 1.0 / g_delay;
+		if (g_max_command_count > 25) g_max_command_count = 25;
+		g_delay = 1;
+	}
+	else {
+		g_max_command_count = 0;
+	}
+
+	console.log(g_delay);
+	console.log(g_max_command_count);
+	console.log("###");
 
 	var tokens = null;
 	if (arg.userTyping) {
@@ -54,12 +68,12 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 	var tree = null;
 	if (tokens) {
 		tree = parser(tokens);
-		console.log(tree);
+		//console.log(tree);
 	}
 	var runTree = null;
 	if (tree) {
 		runTree = semantic(tree);
-		//console.log(runTree);
+		console.log(runTree);
 	}
 
 	if (runTree) {
@@ -70,7 +84,7 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 
 function interpreterReset() {
 	g_reseting = true;
-	g_programExeNode = new ExeNode(null, PROGRAM_TYPE);
+	g_programExeNode = new ExeNode(-1, null, PROGRAM_TYPE);
 	g_curExeNode = g_programExeNode;
 }
 
