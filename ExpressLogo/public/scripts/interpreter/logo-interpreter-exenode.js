@@ -60,9 +60,10 @@ const NA_TYPE_NUMERIC = "N/A"
 /////////////////////////////////////////////////////////////////////////
 // ExeNode
 
-var private_g_node_id = 1;
+var g_static_node_id = 1;
+
 function ExeNode(token, nodeType) {
-	this.nodeID = private_g_node_id++;
+	this.nodeID = g_static_node_id++;
 	this.token = token;
 	this.nodeType = nodeType;
 
@@ -160,9 +161,15 @@ ExeNode.prototype.execute = function() {
 	}
 
 	if ( this.nodeType == FUNC_INVO_TYPE) {
-		var stParent = findSymbolTableParent(this);
-		g_stack.push( stParent );
-		g_stack.push( copySymbolTable(stParent.symbolTable) );
+		g_stack.push( findSymbolTableParent(this) );
+		var par = this;
+		while (par.nodeType != FUNC_DEF_TYPE && par.nodeType != PROGRAM_TYPE) {
+			if ( par.hasSymbolTable() ) {
+				g_stack.push( copySymbolTable(par.symbolTable) );
+			}
+			par = par.parent;
+		}
+		
 		var funcDefNode = g_programExeNode.funcSymbolTable[ this.token ];
 		var fDefBody = funcDefNode.children[ funcDefNode.children.length - 1 ];
 		for (var i=0; i<this.children.length; i++) {
@@ -204,9 +211,21 @@ ExeNode.prototype.execute = function() {
 				goToLastSymbolTableParentExe(this);
 			}
 			else if (this.parent.nodeType == FUNC_DEF_TYPE) {
-				var lastSymbolTable = g_stack.pop();
+				var symbolTableList = [];
+				while (true) {
+					if ( g_stack[ g_stack.length - 1 ].nodeID ) break;
+					symbolTableList.push( g_stack.pop() );
+				}
 				var nextExeNode = g_stack.pop();
-				nextExeNode.symbolTable = lastSymbolTable;
+
+				var par = nextExeNode;
+				while (par.nodeType != FUNC_DEF_TYPE && par.nodeType != PROGRAM_TYPE) {
+					if ( par.hasSymbolTable() ) {
+						par.symbolTable = symbolTableList.pop();
+					}
+					par = par.parent;
+				}
+
 				setTimeOutAndNextExeNode( nextExeNode );
 			}
 			else {
