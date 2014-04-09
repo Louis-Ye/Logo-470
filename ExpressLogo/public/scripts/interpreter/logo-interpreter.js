@@ -43,7 +43,7 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 
 	g_stack = [];
 	g_hasError = false;
-	g_delay = arg.delay;
+	g_delay = 0.01;//arg.delay;
 	g_debugMode = arg.debugMode;
 
 	if (g_delay < 1) {

@@ -102,12 +102,11 @@ ExeNode.prototype.setChild = function(child) {
 
 ExeNode.prototype.cutErrorNodeFromProgramNode = function() {
 	var node = this;
+	deleteFromFuncSymbolTable(node);
+
 	while (node.parent != g_programExeNode) {
-		if (node.nodeType == FUNC_DEF_TYPE) {
-			var funcSt = g_programExeNode.funcSymbolTable;
-			delete funcSt[node.token];
-		}
 		node = node.parent;
+		deleteFromFuncSymbolTable(node);
 	}
 	for (var i=0; i<g_programExeNode.children.length; i++) {
 		if (node == g_programExeNode.children[i]) {
@@ -486,6 +485,13 @@ function makeRGB(r, g, b) {
 	var bs = makeHeximalTwoDigitNum( parseInt(b) );
 
 	return "#" + rs + gs + bs;
+}
+
+function deleteFromFuncSymbolTable(node) {
+	if (node.nodeType == FUNC_DEF_TYPE) {
+		var funcSt = g_programExeNode.funcSymbolTable;
+		delete funcSt[node.token];
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////

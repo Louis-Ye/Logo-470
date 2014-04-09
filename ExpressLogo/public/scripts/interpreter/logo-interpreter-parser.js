@@ -326,6 +326,7 @@ function parser(tokens) {
 			thisNode.setChild(body);
 			expect(Keyword.END);
 
+			if (g_hasError) deleteFromFuncSymbolTable(thisNode);
 			return thisNode;
 		}
 		
