@@ -249,19 +249,31 @@ function indentCode(elementId,evt)
 			return shortcut_submit();
 		case false:
 			var i,j;
-			var contentBackUp = content;
+			var spaceHead = "";
 			content += '\n'
 			forwardScroll = true;
-			for (i=contentBackUp.length-1;i>=0;i--)
-				if (contentBackUp[i]=='\n') break;
-			for (j=i+1;j<contentBackUp.length;j++)
-				if (contentBackUp[j]==' ' || contentBackUp[j]=='\t')
+			for (i=content.length-2;i>=0;i--)
+				if (content[i]=='\n') break;
+			for (j=i+1;j<content.length;j++)
+				if (content[j]==' ' || content[j]=='\t')
 				{
-					content += contentBackUp[j];
+					spaceHead += content[j];
 					forwardCaret++;
 				}
 				else
 					break;
+			var newSection = false;
+			var pSpaceHead = "";
+			if (content[content.length-2]=='[')
+			{
+				newSection = true;
+				pSpaceHead = spaceHead.slice(0);
+				spaceHead += "    ";
+				forwardCaret+=4;
+			}
+			if (newSection && contentSecondHalf.length>0 && contentSecondHalf[0]==']')
+				contentSecondHalf='\n'+pSpaceHead+contentSecondHalf;
+			content += spaceHead;
 			break;
 		default:
 		}
