@@ -156,7 +156,7 @@ ExeNode.prototype.execute = function() {
 			}
 		}
 		else {
-			console.log();
+			console.log(this.symbolTable[this.curExePosVarName]);
 		}
 		return;
 	}
@@ -202,13 +202,12 @@ ExeNode.prototype.execute = function() {
 			}
 		}
 		else {
-			this.symbolTable[this.curExePosVarName] = 0;
 			if (this.parent.nodeType == REPEAT_TYPE) {
 				var stParent = findSymbolTableParent(this.parent);
 				var repeatRemainVarName = this.parent.repeatRemainVarName;
 				if (stParent.symbolTable[repeatRemainVarName] > 1) {
 					stParent.symbolTable[repeatRemainVarName] -= 1;
-					
+					this.symbolTable[this.curExePosVarName] = 0;
 					this.execute();
 				}
 				else {

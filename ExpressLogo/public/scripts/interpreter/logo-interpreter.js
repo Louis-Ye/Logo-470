@@ -43,21 +43,17 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 
 	g_stack = [];
 	g_hasError = false;
-	g_delay = 0.04;//arg.delay;
+	g_delay = arg.delay;
 	g_debugMode = arg.debugMode;
 
 	if (g_delay < 1) {
 		g_max_command_count = 1.0 / g_delay;
-		if (g_max_command_count > 25) g_max_command_count = 25;
+		if (g_max_command_count > 500) g_max_command_count = 500;
 		g_delay = 1;
 	}
 	else {
 		g_max_command_count = 0;
 	}
-
-	console.log(g_delay);
-	console.log(g_max_command_count);
-	console.log("###");
 
 	var tokens = null;
 	if (arg.userTyping) {
@@ -73,7 +69,7 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 	var runTree = null;
 	if (tree) {
 		runTree = semantic(tree);
-		console.log(runTree);
+		//console.log(runTree);
 	}
 
 	if (runTree) {
