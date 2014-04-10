@@ -13,7 +13,6 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 	.success(function (data) {
 		$scope.count = data.count;
 		$scope.items = data.post;
-
 	});
 //app.filter('offset', function() {
 //return function(input, start) {

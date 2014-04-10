@@ -10,7 +10,6 @@ var postSchema = mongoose.Schema({
     	default: function(){ return shortId.generate(); }
 	},
 	title : String,
-	like : { type: Number, default: 0 },
 	author : {
 		id: String, 
 		name: String, 
@@ -19,6 +18,12 @@ var postSchema = mongoose.Schema({
 	create_at : Date,
 	image_url : String,
 	code : String,
+	like : Number,
+	likers : [{
+		id: String, 
+		name: String,
+		avatar: String
+	}],
 	comment : [{
 		comment_id: {
     	type: String,
