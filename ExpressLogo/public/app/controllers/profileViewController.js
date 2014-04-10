@@ -5,8 +5,7 @@ ExpressLOGOApp.controller('profileViewController', function ($scope, $http) {
 		url: '/profile'
 	})
 	.success(function (data) {
-		var reg = data.user.register;
-		$scope.user = data.user[reg];
+		$scope.user = data.user;
 		$scope.posts = data.post;
 		$scope.message = data.message;
 		for (var post in $scope.posts){

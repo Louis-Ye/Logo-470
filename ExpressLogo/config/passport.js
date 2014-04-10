@@ -59,7 +59,7 @@ module.exports = function(passport) {
                         newUser.register = 'local';
                         newUser.local.email = email;
                         newUser.local.name = email;
-                        newUser.local.avatar = "http://www.gravatar.com/avatar/" + md5.update(email.toLowerCase()).digest('hex') + "?d=retro";
+                        newUser.local.avatar = "http://www.gravatar.com/avatar/" + md5.update(email.toLowerCase()).digest('hex') + "?d=retro&s=58";
                         newUser.local.password = newUser.generateHash(password);
                         newUser.save(function(err) {
                             if (err)

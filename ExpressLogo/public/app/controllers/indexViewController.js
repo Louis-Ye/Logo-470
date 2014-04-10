@@ -6,7 +6,7 @@ ExpressLOGOApp.controller('indexViewController', function ($scope, $element, $ht
 			url: '/user'
 		})
 		.success(function (data) {
-			if (data.email) {
+			if (data.name) {
 				$scope.isLoggedIn = true;
 				console.log($scope.isLoggedIn);
 				$scope.username = data.name;

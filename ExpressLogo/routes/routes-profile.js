@@ -9,22 +9,31 @@ module.exports = function(app){
 			res.send({ message : 'not logged in'});
 		else{
 			var user = req.user;
-
-			User.findById(user._id, function(err, info){
-				if(err)
+			var reg = req.user.register;
+			var user_info = {
+				name: user[reg].name,
+				avatar: user[reg].avatar,
+				email: user[reg].email
+			};
+			var query = { 'author.id': user._id };
+			Post.find(query, function(err, post){
+				if (err)
 					throw err;
-				
-				var query = { 'author.id': user._id };
-				Post.find(query, function(err, post){
-					if (err)
-						throw err;
-			 		res.send({
-			 			user: info,
-			 			post: post, 
-			 			message: "success"
+				if(isEmptyObject(post)){
+					res.send({
+			 		'user': user_info,
+			 		'post': post, 
+			 		'message': "null"
 			 		});
- 				});
-			});
+				}
+				else{
+					res.send({
+			 		'user': user_info,
+			 		'post': post, 
+			 		'message': "success"
+			 		});
+				}
+ 			});
 			
 		}
 	});
@@ -73,4 +82,12 @@ function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 	res.send({ message : 'not logged in'});
+}
+
+function isEmptyObject(obj) {
+	for (var name in obj) 
+    {
+        return false;
+    }
+    return true;
 }
