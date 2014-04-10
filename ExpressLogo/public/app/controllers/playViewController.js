@@ -5,8 +5,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 	function callback (message) {
 		if (message) {
 			var result_pad = $('#result-pad');
-			message = message.replace(/\n/g, '<br/>');
-			message = message.replace(/\s/g, '&nbsp;');
+			message = message.replace(/ /g, '&nbsp;');
+			message = message.replace(/\n/g, '<br />');
 			console.log(message);
 			result_pad.append(message + "<br />");
 			result_pad = document.getElementById('result-pad');
