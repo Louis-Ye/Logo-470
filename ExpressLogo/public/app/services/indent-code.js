@@ -197,6 +197,30 @@ function indentCode(elementId,evt)
 		return true;
 	}
 	
+	function betweenBrackets()
+	{
+		if (content.length==0 || contentSecondHalf.length==0) return false;
+		var biBrackets = false;
+		switch (contentSecondHalf[0])
+		{
+		case ')':
+			if (content[content.length-1]=='(') biBrackets=true;
+			break;
+		case ']':
+			if (content[content.length-1]=='[') biBrackets=true;
+			break;
+		case '}':
+			if (content[content.length-1]=='{') biBrackets=true;
+			break;
+		default:
+		}
+		if (!biBrackets) return false;
+		content = content.slice(0,content.length-1);
+		contentSecondHalf = contentSecondHalf.slice(1);
+		forwardCaret-=2;
+		return true;
+	}
+	
 	switch (key)
 	{
 	case 9:/*tab*/
@@ -318,10 +342,12 @@ function indentCode(elementId,evt)
 		break;
 	case 8:/*backspace*/
 		if (selectContent.length!=0) return true;
+		if (betweenBrackets()) break;
 		if (!backspaceIndent()) return true;
 		break;
 	case 46:/*delete*/
 		if (selectContent.length!=0) return true;
+		if (betweenBrackets()) break;
 		if (!deleteIndent()) return true;
 		break;
 	default:
