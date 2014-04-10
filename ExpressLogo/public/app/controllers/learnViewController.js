@@ -1,9 +1,14 @@
-ExpressLOGOApp.controller('learnViewController', function ($scope, $routeParams, $sce) {
+ExpressLOGOApp.controller('learnViewController', function ($scope, $routeParams, $sce, $location) {
 	init();
 	function init() {
 		var pageNumber = parseInt(7);
 		var page_show = [false];
 		var curPage = parseInt($routeParams.param);
+
+		if (curPage > pageNumber || curPage < 0 || !curPage) {
+			$location.path("/tutorial/1/");
+		}
+
 		for (var i = 1; i <= pageNumber; i++) {
 			page_show.push(false);
 		}
