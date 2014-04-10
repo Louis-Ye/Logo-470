@@ -4,8 +4,10 @@ ExpressLOGOApp.controller('accountViewController', function ($scope, $http) {
 		url: '/account'
 	})
 	.success(function (data) {
-		$scope.user = data.local;
-		$scope.name = data.local.name;
+		$scope.message = data.message;
+		console.log($scope.message);
+		$scope.user = data.user.local;
+		$scope.name = data.user.local.name;
 	})
 	.error(function (data) {
 		$scope.message = "Error";

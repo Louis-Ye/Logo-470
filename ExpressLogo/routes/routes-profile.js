@@ -8,6 +8,7 @@ module.exports = function(app){
 		if(!req.user)
 			res.send({ message : 'not logged in'});
 		else{
+
 			var user = req.user;
 			var reg = req.user.register;
 			var user_info = {
@@ -38,19 +39,18 @@ module.exports = function(app){
 		}
 	});
 
-	app.get('/account', function(req, res){
-		if(!req.user)
-			res.redirect('#');
-		else{
-			var user = req.user;
+	app.get('/account', isLoggedIn, function(req, res){
+		var user = req.user;
 
-			if (user.register == 'local'){
-				User.findById(user._id, function(err, info){
-					if (err)
-						throw err;
-					res.send(info);
-				});
-			}
+		if (user.register == 'local'){
+			User.findById(user._id, function(err, info){
+				if (err)
+					throw err;
+				res.send({ user: info, message: "local_success"});
+			});
+		}
+		else{
+			res.send({ message: "logged with social account"});
 		}
 	});
 

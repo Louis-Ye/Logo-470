@@ -1,4 +1,8 @@
 <div id="profile" class="container">
+<div ng-if = 'message == "not logged in"'>
+  <div class="alert alert-danger">You need to <a href="#/sign-in">log in</a> first</div>
+</div>
+<div ng-if = 'message !="not logged in"'>
 <div class="col-sm-3 sidebar">
 	<br>
 	<fieldset id="profile-image-controls">
@@ -30,5 +34,6 @@
         <p>You have not posted anything yet. Go <a href="#/play">Play</a> and Share your codes!</p>
       </div>
 	</div>
+</div>
 </div>
 </div>
