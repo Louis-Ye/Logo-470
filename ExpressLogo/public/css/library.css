@@ -17,10 +17,24 @@
 	background-color: #EEEEFF;
 }
 
+#library .for_export
+{
+	background-color: #EEEECC;
+	font-size: 80%;
+	margin-left:10%;
+	margin-right:10%;
+}
+
 #library h3
 {
 	text-decoration: underline;
 }
+
+#library .library_code
+{
+	margin-left:5%;
+}
+
 
 #library .type_style_number
 {
@@ -92,4 +106,22 @@
 	font-weight:bold;
 	font-style: italic;
 	color: #0000CC;
+}
+
+#library .type_style_function
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.4em 0.02em 0.2em;
+	font-weight:bold;
+	font-style: italic;
+	color: #6600CC;
+}
+
+#library .type_style_parameter
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.4em 0.02em 0.2em;
+	font-weight:bold;
+	font-style: italic;
+	color: #009999;
 }

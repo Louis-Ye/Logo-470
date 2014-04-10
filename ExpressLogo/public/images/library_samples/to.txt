@@ -1,0 +1,10 @@
+to MyFlower :DEG :LEN
+    lt :DEG
+    fd :LEN
+    if :DEG<360
+    [
+        home
+        MyFlower :DEG+10 :LEN
+    ]
+end
+MyFlower 0 70
