@@ -25,7 +25,7 @@ var postSchema = mongoose.Schema({
 		avatar: String
 	}],
 	comment : [{
-		comment_id: {
+		_id: {
     	type: String,
     	unique: true,
     	default: function(){ return shortId.generate(); }
