@@ -1,25 +1,245 @@
 <div id="tutorial" class="container">
-	<h1>Tutorial</h1>
-	<ul>
-		<li><b>Draw a straight line:</b><br>
+	<h1>Tutorial - Step {{step}}</h1>
+
+	<div ng-bind-html="progressButton"></div>
+
+	<hr>
+	<div>
+
+		<div ng-show='page_show[1]' ><h3>Draw a straight line:</h3>
 			<code>forward 50</code> || <code>fd 50</code>
 			<br>
 			<img src="/images/tutorial_samples/fd.png">
-		</li>
-		<li><b>Try more simple commands:</b><br>
+		</div>
+		<div ng-show='page_show[1]' >
+
+			<h3>Try more simple commands:</h3>
 
 			Backward move 50 pixels: <code>backword 50</code> || <code>bk 50</code><br>
 			Turtle left turns 90 degrees: <code>left 90</code> || <code>lt 90</code><br>
 			Turtle right turns 90 degrees: <code>right 90</code> || <code>rt 90</code><br>
 			
-		</li>
-		<li><b>Repeat commands</b><br>
-			With repeat commands, you dont have to type same commands again and again.<br>
-			Try these codes: <code>repeat 360 [lt 1 fd 1]</code><br>
-			<img src="/images/tutorial_samples/repeat.png">
+		</div>
 
+
+		<div ng-show='page_show[2]' ><h3>Repeat commands</h3>
+			With repeat commands, you dont have to type same commands again and again.<br>
+			Try these codes: <code>repeat 36 [lt 10 fd 10]</code><br>
+			<img src="/images/tutorial_samples/repeat.png">
+		</div>
+
+
+		<div ng-show='page_show[3]' ><h3>Make variables</h3>
+			Now you can draw a cute circle! :D<br>
+			With variable, you can draw more transformable shape in a simple way.<br>
+
+			Try these codes:<br>
+			<code>make "angle 5 <br>
+				repeat 36 [ <br>
+					&nbsp lt :angle <br>
+					&nbsp fd 10 <br>
+					&nbsp make "angle :angle - 1<br>
+				]<br></code><br>
+			<img src="/images/tutorial_samples/make_repeat.png">
+		</div>
+
+
+		<div ng-show='page_show[4]' ><h3>Control Flow with if/else</h3>
+			Programming is all about controlling the commands.<br>
+			Use if/else to control the behavior of this little turtle!<br>
+
+			Try these codes:<br>
+			<code>make "count 0 <br>
+				repeat 36 [ <br>
+					&nbsp if :count < 18 [<br>
+					&nbsp&nbsp 	lt 10 fd 5 <br>
+					&nbsp ] <br>
+					&nbsp else [<br>
+					&nbsp&nbsp rt 10 fd 5 <br>
+					&nbsp ]<br>
+					&nbsp make "count :count + 1<br>
+				]<br></code><br>
+			<img src="/images/tutorial_samples/if.png">
+		</div>
+
+
+		<div ng-show='page_show[5]' ><h3>Create your own command - using function</h3>
+			With function definition, you can create your own command<br>
+
+			For example, try defining a function and use it to draw a circle! <br>
+
+			Try these codes:<br>
+			<code>to drawCircle <br>
+				&nbsp repeat 36 [lt 10 fd 10] <br>
+				end <br><br>		
+				drawCircle</code><br>
+			<img src="/images/tutorial_samples/func_circle_1.png"><br>
+
+			<h3>Use function with parameters</h3>
+			Try these codes:<br>
+			<code>to drawCircle :r<br>
+				&nbsp repeat 36 [lt 10 fd 5 + :r] <br>
+				end <br><br>
+
+				make "i 5 <br>
+				repeat 5 [ <br> 
+				&nbsp drawCircle :i <br>
+				&nbsp make "i :i - 1 <br>
+				] <br>
+				</code><br>
+				<img src="/images/tutorial_samples/func_circle_2.png"><br>
+		</div>
+
+
+		<div ng-show='page_show[6]' >
+			<h3>Recursively call function</h3>
+			Recursive calling is a very important concept in programming.<br>
+			It means that you can call the function itself inside the body of its own definition! <br>
+
+			Try these codes:<br>
+			<code>to drawCircle <br>
+				&nbsp repeat 36 [lt 10 fd 10] <br>
+				&nbsp drawCircle<br>
+				end <br><br>
+				drawCircle</code><br>
+			<img src="/images/tutorial_samples/resursive_call.png"><br>
+		</div>
+
+
+		<div ng-show='page_show[7]' ><h3>Code Samples</h3>
+			<b>Congratulations!</b> If you have read through all the previous steps, you are now able to rock with the little turtle to get beautiful pattern!<br>
+
+			Here are some samples, enjoy! :D<br>
+			(Some Logo code samples, such as Snowflake, Spiral and Maze, are from <a href="http://logo.twentygototen.org/">papert</a>)
+
+			<hr>
+			<div>
+				<h4>Big Bang</h4>
+				<pre><code>
+home cs
+pu lt 90 fd 57 rt 90 pd
+make "i 1
+repeat 256 [
+	repeat 360 / :i [fd :i rt :i]
+	make "i :i + 1
+]
+				</code></pre>
+				<img src="/images/tutorial_samples/sample_1.png">
+			</div>
+
+			<hr>
+			<div>
+				<h4>Snowflake</h4>
+				<pre><code>
+to line :count :length
+if :count == 1 [fd :length]
+else [
+	make "count2 :count - 1 
+	line :count2 :length
+	lt 60 
+	line :count2 :length
+	rt 120 
+	line :count2 :length
+	lt 60 
+	line :count2 :length
+]
+end
+
+to koch :count :length
+	rt 30 line :count :length
+	rt 120 line :count :length
+	rt 120 line :count :length
+end
+
+home cs
+penup
+setxy 100 100
+pendown
+koch 5 2
+				</code></pre>
+				<img src="/images/tutorial_samples/sample_2.png">
+			</div>
+
+			<hr>
+			<div>
+				<h4>Colorful Spiral</h4>
+				<pre><code>
+to spiral :w :a :x :c :ww
+if :c == 0 [ pu pd ]
+else [
+	penwidth :ww
+	color [ 255 - :w * 2 0 :w * 2 ]
+	lt :x
+	fd :w
+	pu
+	bk :w
+	rt :x
+	fd :w
+	pd 
+	rt :a
+	spiral :w + 1 :a :x + 0.7 :c - 1 :ww + 0.1
+]
+end
+
+home cs
+spiral 1 30 10 90 1
+				</code></pre>
+				<img src="/images/tutorial_samples/sample_3.png">
+			</div>
+
+			<hr>
+			<div>
+				<h4>Maze</h4>
+				<pre><code>
+to l :l :w
+if :l == 0 [pd]
+else [
+	rt 90 
+	r :l - 1 :w
+	fd :w lt 90
+	l :l - 1 :w
+	fd :w
+	l :l - 1 :w
+	lt 90 fd :w
+	r :l - 1 :w
+	rt 90
+]
+end
+
+to r :l :w
+if :l == 0 [pd]
+else [
+	lt 90
+	l :l - 1 :w
+	fd :w rt 90
+	r :l - 1 :w
+	fd :w
+	r :l - 1 :w
+	right 90
+	fd :w
+	l :l - 1 :w
+	lt 90
+]
+end
+
+home cs
+pu setxy 60 10 pd
+penwidth 2
+l 6 6
+				</code></pre>
+				<img src="/images/tutorial_samples/sample_4.png">
+			</div>
+		</div>
+
+	</div>
+	<hr>
+	<div>
+		<li>
+			<a href="#/tutorial/{{previousPage}}/">« Prev</a>
 		</li>
-		<li></li>
-		<li></li>
-	</ul>
+		<li>
+			<a href="#/tutorial/{{nextPage}}/">Next »</a>
+		</li>
+	</div>
+
 </div>
