@@ -1,6 +1,6 @@
 <div id="sign-in" class="container">
 	<div class="col-sm-6 col-sm-offset-3">
-		<h1><span class="fa fa-sign-in"></span>Sign In</h1>
+		<h1><span class="fa fa-sign-in"></span> Sign In</h1>
 
 		<div class="alert alert-danger" ng-if="message.length > 0 && message[0] != 'success'">{{ message[0] }}</div>
 
@@ -14,10 +14,10 @@
 				<input type="password" class="form-control" name="password">
 			</div>
 
-			<button type="submit" class="btn btn-primary btn-lg">Sign In</button>
+			<button type="submit" class="btn btn-primary btn">Sign In</button>
 		</form>
 		<br>
-		<p>Sign in with <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span>Facebook</a>  <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span>Twitter</a></p>
+		<p><a href="/auth/twitter" class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>  <a href="/auth/facebook" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a></p>
 		<hr>
 		<p>Need an account? <a href="#/sign-up">Sign Up with Email</a></p>
 		<p>Back to <a href="#/">Home</a></p>
