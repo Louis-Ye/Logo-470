@@ -7,7 +7,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 			var result_pad = $('#result-pad');
 			message = message.replace(/ /g, '&nbsp;');
 			message = message.replace(/\n/g, '<br />');
-			console.log(message);
 			result_pad.append(message + "<br />");
 			result_pad = document.getElementById('result-pad');
 			result_pad.scrollTop = result_pad.scrollHeight;
