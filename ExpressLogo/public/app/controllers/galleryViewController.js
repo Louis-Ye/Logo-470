@@ -91,7 +91,7 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 
 	function submit_comment(_id, content)
 	{
-		$scope.test = '/gallery/'+_id + '/comments';
+		$scope.test = content;
 		$http({
 			method: 'POST',
 			url: '/gallery/'+ _id + '/comments',
@@ -106,10 +106,11 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 		});
 	}
 
-	$scope.submit = function($photo){
+	$scope.submit = function(){
 		var text = document.getElementById('cm').value;
-		$scope.test = text;
-		submit_comment($photo._id,text);
+		document.getElementById('cm').value = "";
+		submit_comment($scope.spe_photo._id,text);
+		window.location.reload(true);
 	}
 	// initial image index
 	$scope._Index = 0;
