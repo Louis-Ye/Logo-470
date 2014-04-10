@@ -41,11 +41,12 @@ module.exports = function(app) {
 		}
 		else {
 			console.log(req.body);
+			//TODO
 			var post_id = req.params.id;
 			var user = req.user;
 			var register = req.user.register;
 			var new_comment = {
-				content: req.body.content,
+				content: req.body.co,
 				data: Date.now,
 				author: {
 					id: user._id, 
