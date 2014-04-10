@@ -5,7 +5,6 @@ ExpressLOGOApp.controller('accountViewController', function ($scope, $http) {
 	})
 	.success(function (data) {
 		$scope.message = data.message;
-		console.log($scope.message);
 		$scope.user = data.user.local;
 		$scope.name = data.user.local.name;
 	})

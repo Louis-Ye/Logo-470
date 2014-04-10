@@ -169,7 +169,17 @@ module.exports = function(app) {
 			},
 			post: function(callback){
 				Post.find({}, function(err, post){
-					callback(null, post);
+					var send_post = new Array;
+					for(var i in post){
+						var one_post = {
+							image_url: post[i].image_url,
+							like: post[i].like,
+							_id: post[i]._id,
+							author: post[i].author
+						}
+						send_post.push(one_post);
+					}
+					callback(null, send_post);
 				});
 			}
 		},
