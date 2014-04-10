@@ -92,10 +92,13 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 	function submit_comment(_id, content)
 	{
 		$scope.test = content;
+		var content_data = {
+			co : content
+		}
 		$http({
 			method: 'POST',
 			url: '/gallery/'+ _id + '/comments',
-			data: content,
+			data: content_data,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 		.success(function (data) {
