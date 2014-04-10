@@ -33,7 +33,20 @@
 						<li><a href="#/gallery">Gallery</a></li>
 						<li><a href="#/about">About</a></li>
 					</ul>
-					<a href='{{ top_right_button_href }}' type="button" class="btn btn-default navbar-btn navbar-right"> {{ top_right_button_name }} </a>
+					<a ng-if="isLoggedIn == false" href='{{ top_right_button_href }}' type="button" class="btn btn-default navbar-btn navbar-right"> {{ top_right_button_name }} </a>
+					<ul ng-if="isLoggedIn" class="nav navbar-nav navbar-right">
+						<li><a href='#/profile'><img src="{{ avatar }}" height="24" width="24"></a></li>
+						<li><a href='#/profile'> {{ username }} </a></li>
+        				<li class="dropdown">
+        				<a class="dropdown-toggle" data-toggle="dropdown">Setting</a>
+       					<ul class="dropdown-menu">
+            				<li><a href="#/account">Account Setting</a></li>
+            				<li><a href="#/profile">Profile</a></li>
+            				<li class="divider"></li>
+            				<li><a href='{{ top_right_button_href }}'> {{ top_right_button_name }} </a></li>
+          				</ul>
+          				</li>
+      				</ul>
 				</div>
 			</div>
 		</nav>
