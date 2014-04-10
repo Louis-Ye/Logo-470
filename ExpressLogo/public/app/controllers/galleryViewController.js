@@ -4,6 +4,14 @@ ExpressLOGOApp.filter('offset', function() {
 			return input.slice(start);};
 	});
 
+ExpressLOGOApp.filter('range', function() {
+  return function(input, total) {
+    total = parseInt(total);
+    for (var i=0; i<total+1; i++)
+      input.push(i);
+    return input;
+  };
+});
 
 ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $filter) {
 	$http({
@@ -23,6 +31,7 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 
 		$scope.itemsPerPage = 6;
 		$scope.currentPage = 0;
+		$scope.all = 0;
 
 		$scope.prevPage = function() {
 		if ($scope.currentPage > 0) {
@@ -56,6 +65,12 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 		$scope.checkstate2 = function() {
 		return $scope.order === true ? false : true;
 		}
+		
+		$scope.setPage = function(i) {
+			$scope.currentPage = i;
+		}
+	
+	$scope.test = $scope.pageCount;
 
 	function like(_id)
 	{

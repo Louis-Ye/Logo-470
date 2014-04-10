@@ -30,9 +30,16 @@
 	</div> -->
 	<!-- <p ng-repeat="photo in items"> {{photo.image_url}} </p> -->
 
-	<p>{{ test }}</p>
-
 	<div class="bs-example" ng-show="checkstate2()">
+				<ul class="pagination">
+					<li ng-class="prevPageDisabled()">
+						<a href ng-click="prevPage()"> « Prev</a>
+					</li>
+					<li ng-repeat="n in [] | range:pageCount()"><a href ng-click="setPage({{n}})">{{n+1}} </a></li>
+					<li ng-class="nextPageDisabled()">
+						<a href ng-click="nextPage()">Next »</a>
+					</li>
+				</ul>
 		<div class="row">
 
 			 <ui class="photo">
@@ -43,17 +50,7 @@
 					</li>
 			</ui>
 		</div>
-		<div class="pagination">
-				<ul>
-					<li ng-class="prevPageDisabled()">
-						<a href ng-click="prevPage()"> « Prev</a>
-					</li>
-					<li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)"> <a href="#">{{n+1}}</a> </li>
-					<li ng-class="nextPageDisabled()">
-						<a href ng-click="nextPage()">Next »</a>
-					</li>
-				</ul>
-		</div>
+
 	</div>
 	<div class = "order_photo" ng-show="checkstate()">
 		<a class="thumbnail"><img src="{{ spe_photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
