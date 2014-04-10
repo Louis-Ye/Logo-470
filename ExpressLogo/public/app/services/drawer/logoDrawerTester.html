@@ -4,6 +4,12 @@
 </head>
 
 <body>
+	<script src="logo-drawer.js" charset="utf-8"></script>
+	<script src="readPicture.js" charset="utf-8"></script>
+	
+	<input type="file" id="imgInput" onchange="readPicture(event,id);" hidden/>
+	<button id="add-image" type="button" class="btn btn-default" onclick="document.getElementById('imgInput').click()">Image</button>
+	
 	<canvas id="saving" width="500" height="400" style="position: absolute; z-index: 0">
 		Your browser does not support the canvas element.
 	</canvas>
@@ -13,7 +19,6 @@
 	</canvas>
 	<canvas id="turtle" width="500" height="400" style="position: absolute; z-index: 3">
 	</canvas>
-	<script src="logo-drawer.js" charset="utf-8"></script>
 	<script>
 		myCanvas.initCanvas();
 		/*for (I =0; I<30;I++)
@@ -29,17 +34,12 @@
 		myCanvas.setBackgroundColor("000000");
 		//myCanvas.noBorder();
 		var timer = setInterval(function () {
-			myCanvas.setPenColor((I%2==0)?"#00ffff":"#ff0000");
-			myCanvas.setLineWidth((I%2==0)?5:1);
-			myCanvas.turnLeftDegrees(1);
+			myCanvas.setPenColor((I%2==0)?"#0000ff":"#ff0000");
+			//myCanvas.setLineWidth((I%2==0)?5:1);
+			myCanvas.turnLeftDegrees(3.6);
 			myCanvas.walkForwardLength(20);
 			I++;
-			if (I==10) 
-			{
-				clearInterval(timer);
-				myCanvas.saveCanvas(I);
-			}
-        }, 100);
+        }, 10);
 	</script>
 </body>
 </html>
