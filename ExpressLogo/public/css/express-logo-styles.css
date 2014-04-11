@@ -19,6 +19,7 @@ a:hover {
 	color: #ef5525;
 }
 
+::-moz-selection { background: #f9eb87; text-shadow: none; }
 ::selection { background: #f9eb87; text-shadow: none; }
 
 header .navbar {
