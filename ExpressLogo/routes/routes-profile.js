@@ -74,30 +74,46 @@ module.exports = function(app){
 		}
 	});
 
-	app.post('/account/change_password', function(req, res){
+	app.get('/account/change-password', function(req, res){
+
+		res.send({
+				wrongPwd: req.flash('wrongPwd'), 
+				notMatch: req.flash('notMatch'),
+				successPwd: req.flash('successPwd')
+			});
+		
+	});
+
+	app.post('/account/change-password', function(req, res){
 		if(!req.user)
 			req.redirect('#');
 		else{
 			var user = req.user;
 			var oldpwd = req.body.old_password;
 			var newpwd = req.body.new_password;
+			var confirm = req.body.confirm_password;
 
-			console.log(newpwd);
-
-			if (!user.validPassword(oldpwd))
-				res.send({"message" : "Wrong password."});
-			else
-			{
-				User.findByIdAndUpdate(user._id, {
-					$set : {'local.password' : user.generateHash(newpwd)}
-				}, function(err, User){
-					if(err)
-						throw err;
-				});
-
+			if (!user.validPassword(oldpwd)){
+				req.flash('wrongPwd' , 'Wrong password. Try again!');
 				res.redirect('/#/account');
+			} 
+			else {
+				if (confirm != newpwd){
+					req.flash('notMatch' , 'Confirm password and new password are not match!');
+					res.redirect('/#/account');
+				}
+				else {
+					User.findByIdAndUpdate(user._id, {
+						$set : {'local.password' : user.generateHash(newpwd)}
+					}, function(err, User){
+						if(err)
+							throw err;
+						console.log("lalala");
+						req.flash('successPwd' , 'success');
+					});
+					res.redirect('/#/account');
+				}
 			}
-
 		}
 	})
 };
