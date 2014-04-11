@@ -6,11 +6,11 @@ var shortId = require('shortid');
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-    _id: {
-        type: String,
-        unique: true,
-        default: function(){ return shortId.generate(); }
-    },
+    // _id: {
+    //     type: String,
+    //     unique: true,
+    //     default: function(){ return shortId.generate(); }
+    // },
     register : String,
     local            : {
         email        : String,

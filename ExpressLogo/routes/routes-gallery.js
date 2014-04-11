@@ -31,7 +31,6 @@ module.exports = function(app) {
 				// 	date: Date.now()
 				// } ]
 			});
-			console.log(newpost);
 			newpost.save(function(err) {
         		if (err)
           			throw err;
@@ -129,17 +128,19 @@ module.exports = function(app) {
 				Post.find({ _id: post_id }, function(err, doc){
 					callback(null, doc);
 				});
-			},
-			function(callback){
-				User.findByIdAndUpdate(user._id, { $push: { 'notification.like': like_notification }}, function(err, data){
-        		});
 			}
+			// function(callback){
+			// 	User.findByIdAndUpdate(user._id, { $push: { 'notification.like': like_notification }}, function(err, data){
+   //      		});
+			// }
 		],
 		function(err, result){
 			//doc stored as result[0]
 			var isLiked = false;
+			var post_author_id = result[0][0].author.id;
+			//console.log(post_author_id);
 			for (var i in result[0][0].likers){
-				console.log(result[0][0].likers[i]);
+				//console.log(result[0][0].likers[i]);
 				if(result[0][0].likers[i].id == new_liker.id){
 					isLiked = true;
 				}
@@ -148,23 +149,27 @@ module.exports = function(app) {
 				res.send({ message: "already liked this post"});
 			}
 			else {
-				Post.findById(post_id, function(err, data){
-					//console.log("updatedata:"+data);
-					if(err) {
-						message = "err";
-						res.send({ message: err });
-					}
-					else {
-						data.like = data.like +1;
-						data.likers.push(new_liker);
-						data.save(function(err, doc){
-							if(err) res.send({ message: err });
-							else{
-								res.send({ message: "success" });
-							}
-						})
-					}
+				Post.findByIdAndUpdate(post_id, { $inc: { like: 1}, $push: { likers: new_liker }}, function(err, data){
+
 				});
+				// Post.findById(post_id, function(err, data){
+				// 	if(err) {
+				// 		message = "err";
+				// 		res.send({ message: err });
+				// 	}
+				// 	else {
+				// 		data.like = data.like +1;
+				// 		data.likers.push(new_liker);
+				// 		data.save(function(err, doc){
+				// 			if(err) res.send({ message: err });
+				// 			else{
+				// 				res.send({ message: "success" });
+				// 			}
+				// 		})
+				// 	}
+				// });
+				User.findById(post_author_id, { $push: { 'notification.like': like_notification }}, function(err, data){
+   	    		});
 			}
 		});
 		/*not check repeat likes*/

@@ -26,19 +26,15 @@ var postSchema = mongoose.Schema({
 		avatar: String
 	}],
 	comment : [ {
-		_id: {
-    	type: String,
-    	unique: true,
-    	default: function(){ return shortId.generate(); }
-		},
 		author: {
 			id: String, 
 			name: String,
 			avatar: String
 		},
 		content: String,
-		date: Date,
+		date: Date
 	} ]
 });
+
 
 module.exports = mongoose.model('Post', postSchema);
