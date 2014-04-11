@@ -33,8 +33,33 @@ ExpressLOGOApp.service('sampleCodes', function () {
 		},
 		{
 			id: 6,
-			name: "Snake Turtle",
-
+			name: "Snake - Turtle",
+			src: "http://logo.twentygototen.org/",
+			code: "to l :l :w\n    if :l == 0 [pd]\n    else [\n        rt 90\n        r :l - 1 :w\n        fd :w\n        lt 90\n        l :l - 1 :w\n        fd :w\n        l :l - 1 :w\n        lt 90\n        fd :w\n        r :l - 1 :w\n        rt 90\n    ]\nend\n\nto r :l :w\n    if :l == 0 [pd]\n    else [\n        lt 90\n        l :l - 1 :w\n        fd :w\n        rt 90\n        r :l - 1 :w\n        fd :w\n        r :l - 1 :w\n        right 90\n        fd :w\n        l :l - 1 :w\n        lt 90\n]\nend\n\nhome cs\npu setxy 60 10 pd\npenwidth 2\nl 6 6\n"
+		},
+		{
+			id: 7,
+			name: "Complex Circle",
+			src: "http://logo.twentygototen.org/",
+			code: "home cs\nrepeat 72 [repeat 5 [fd 100 rt 144] rt 5]\n"
+		},
+		{
+			id: 8,
+			name: "Colorful Complex Circle",
+			src: "http://logo.twentygototen.org/",
+			code: "home cs\nto SK :H :A :X :Y\n    setxy :X :Y\n    repeat 2 [fd :H rt 90 fd :A rt 90]\nend\n\nto KUVA :H :A :H\n    repeat 60 [SK :A :H 250 250 rt 360/60]\nend\n\ncolor [255 0 0]\nKUVA 40 25 125\ncolor [0 200 0]\nKUVA 30 20 50\nKUVA 40 20 90\nKUVA 100 10 10\n"
+		},
+		{
+			id: 9,
+			name: "Complex Circle 2",
+			src: "http://logo.twentygototen.org/",
+			code: "home cs\n\nto SK :H :A\n    repeat 2 [fd :H rt 90 fd :A rt 90]\nend\n\nto MONI :PIT :SIVUT\n    repeat :SIVUT [fd :PIT rt 360/:SIVUT]\nend\n\ncolor [45 65 75]\npenwidth 0.5\nsetxy 150 275\n\nrepeat 75 [\n    color [15 105 25]\n    SK 150 300\n    fd 20\n    color [50 50 100] \n    MONI 75 6\n    rt 360/75\n]\n"
+		},
+		{
+			id: 10,
+			name: "Complex Circle",
+			src: "http://logo.twentygototen.org/",
+			code: "to t :x :y :s :c\n    if :c == 0 [pu pd]\n    else [\n        setxy :x :y\n        fd :s+0.4*:s\n        rt 90\n        fd :s\n        bk :s*2\n        lt 90\n        t :x :y +10 :s +5 :c -1\n]\nend \n\nhome cs\nt 100 100 5 10\n \nhome\nto SK :H :A\n    repeat 2 [fd :H rt 90 fd :A rt 90]\nend\nto MONI :PIT :SIVUT\n    repeat :SIVUT [fd :PIT rt 360/:SIVUT]\nend\n\ncolor [0 255 255]\npenwidth 4\nsetxy 150 250\nrepeat 30 [\ncolor [0 225 225] \n    SK 20 200 \n    fd 20 \n    color [0 0 235] \n    MONI 70 6 \n    rt 360/30\n]\n"
 		}
 	]
 });
