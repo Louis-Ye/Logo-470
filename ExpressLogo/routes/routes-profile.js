@@ -89,11 +89,13 @@ module.exports = function(app){
 			var confirm = req.body.confirm_password;
 
 			if (!user.validPassword(oldpwd)){
+				req.flash('pwdMessage', '');
 				req.flash('pwdMessage' , 'Wrong password. Try again!');
 				res.redirect('/#/account');
 			} 
 			else {
 				if (confirm != newpwd){
+					req.flash('pwdMessage', '');
 					req.flash('pwdMessage' , 'Confirm password and new password are not match!');
 					res.redirect('/#/account');
 				}
@@ -103,9 +105,9 @@ module.exports = function(app){
 					}, function(err, User){
 						if(err)
 							throw err;
-						console.log("lalala");
-						req.flash('pwdMessage' , 'success');
 					});
+					req.flash('pwdMessage', '');
+					req.flash('pwdMessage' , 'Success');
 					res.redirect('/#/account');
 				}
 			}

@@ -24,7 +24,6 @@ ExpressLOGOApp.controller('accountViewController', function ($scope, $http) {
 		url: '/account/change-password'
 	})
 	.success(function (data) {
-		console.log(data.pwdMessage);
-		$scope.pwdMessage = data.pwdMessage[ data.pwdMessage.length - 1 ];
+		$scope.pwdMessage = data.pwdMessage[0];
 	});
 });
