@@ -158,7 +158,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 
 	$scope.reset = function () {
 		clearUndo();
-		$('#result-pad').empty();
 		interpreterReset();
 		myCanvas.initCanvas();
 		$scope.message = "";
@@ -167,6 +166,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		$scope.border_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
 		initSlider();
+		$('#result-pad').empty();
 		interpret_json.delay = 1;
 	};
 
