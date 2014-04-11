@@ -1,0 +1,27 @@
+<div id="gallerylist" class="container">
+	<p> {{ test }} </p>
+	<div class = "order_photo" >
+		<a class="thumbnail"><img src="{{ photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
+		<label>Author:</label><p>{{photo.author.name}}</p>
+		<label>Create Date:</label><p>{{photo.create_at}}</p>
+		<label>Code:</label>
+		<textarea id="code" class="form-control" rows="3">{{photo.code}}</textarea>
+		<table class="table table-striped">
+			<thead> <tr>
+				<th>Date</th>
+				<th>ID</th>
+				<th>Description</th> </tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in photo.comment"> <td>{{item.date}}</td> <td>{{item.author.name}}</td> <td>{{item.content}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<label>Say something:</label>
+			<textarea id="cm" class="form-control" rows="3"></textarea>
+
+		<p><button class="btn btn-primary" ng-click="submit({{ photo }})">Submit</button>
+		   <button class="btn btn-default" ng-click="back()">Back</button></p>
+
+	</div>
+</div>
