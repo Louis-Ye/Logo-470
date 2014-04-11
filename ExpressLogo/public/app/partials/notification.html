@@ -15,14 +15,43 @@
 	</ul>
 </div>
 <div class="col-sm-9">
+
+
 <table class="table table-striped" ng-if="showUnreadComment || showAll">
-	<tr>
-		<td>A</td>
-	</tr>
+	<h2>Comments</h2>
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Author</th>
+			<th>Content</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr>
+			<td>A</td>
+			<td>B</td>
+			<td>C</td>
+		</tr>
+	</tbody>
+	
 </table>
+
+
 <table class="table table-striped" ng-if="showLike || showAll">
-	<tr>
-		<td>BB</td>
-	</tr>
+	<h2>Likes</h2>
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Author</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr ng-repeat="like in likes">
+			<td>{{like.date}}</td>
+			<td>{{like.liker.name}}</td>
+		</tr>
+	</tbody>
 </table>
 </div>

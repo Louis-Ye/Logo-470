@@ -38,6 +38,9 @@ ExpressLOGOApp.controller('notificationViewController', function ($scope, $http)
 		$scope.showUnreadComment = false;
 		$scope.showLike = true;
 		$scope.showAll = false;
+
+		var dic = {date: "!23", liker: {name: "BBB~~~"}};
+		$scope.likes = [dic, dic];
 	};
 
 	$scope.getAll = function () {
