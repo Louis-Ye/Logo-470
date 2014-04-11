@@ -92,6 +92,37 @@
 
 
 		<div ng-show='page_show[6]' >
+			<h3>Concept of local variables and global variables</h3>
+			<b>What is local variable and global variables?</b><br>
+			<li>Global variables are the variables you make at the top level of the program.</li>
+			<li>Local variables are the variables you make inside a <b>scope</b>.</li>
+			<b>What is scope?</b><br>
+			Scope is a range between certain codes. There are two situations that can be seen as scope:<br>
+			<li>Space between <code>[ ... ]</code></li>
+			<li>Space between <code>to ... end</code></li>
+			<b>Followed by these features:</b><br>
+			<li>Local variable which was firstly <code>make</code>d inside a scope can <b>not</b> be seen outside of this scope.<br></li>
+			<li>Parameters of a function are local variables belonging to the scope between <code>to ... end</code></li>
+			<li>Global variable can be seen any where after its <code>make</code>.</li>
+
+			<b>These codes will give errors:</b><br>
+			<pre>
+if 2 > 1 [
+	make "A 2
+]
+fd :A   ;  ':A' is not visible outside of the scope it was firstly made!
+			</pre>
+			<pre>
+to func :B
+	make "B 3
+end
+fd :B   ;  ':B' is not visible outside of the scope of the function body!
+			</pre>
+		</div>
+
+
+
+		<div ng-show='page_show[7]' >
 			<h3>Recursively call function</h3>
 			Recursive calling is a very important concept in programming.<br>
 			It means that you can call the function itself inside the body of its own definition! <br>
@@ -106,7 +137,7 @@
 		</div>
 
 
-		<div ng-show='page_show[7]' ><h3>Code Samples</h3>
+		<div ng-show='page_show[8]' ><h3>Code Samples</h3>
 			<b>Congratulations!</b> If you have read through all the previous steps, you are now able to rock with the little turtle to get beautiful pattern!<br>
 
 			Here are some samples, enjoy! :D<br>
