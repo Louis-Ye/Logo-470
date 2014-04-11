@@ -1,8 +1,8 @@
 <div id="gallerylist" class="container">
 	<div class = "order_photo" >
-		<a class="thumbnail"><img src="{{ photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
+		<a class="thumbnail" ><img src="{{ photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
 		<label>Author:</label><p>{{photo.author.name}}</p>
-		<label>Create Date:</label><p>{{photo.create_at}}</p>
+		<label>Create Date:</label><p>{{create_time}}</p>
 		<label>Code:</label>
 		<textarea id="code" class="form-control" rows="3">{{photo.code}}</textarea>
 		<table class="table table-striped">
@@ -12,7 +12,7 @@
 				<th>Description</th> </tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="item in photo.comment"> <td>{{item.date}}</td> <td>{{item.author.name}}</td> <td>{{item.content}}</td>
+				<tr ng-repeat="item in photo.comment"> <td>{{gettime(item.date)}}</td> <td>{{item.author.name}}</td> <td>{{item.content}}</td>
 				</tr>
 			</tbody>
 		</table>

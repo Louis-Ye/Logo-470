@@ -14,9 +14,8 @@
 
 			 <ui class="photo">
 					<li ng-repeat="photo in items | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" class="col-xs-6 col-md-5">
-						<a class="thumbnail"><img src="{{ photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
+						<a ng-href="#/gallerylist/{{photo._id}}" class="thumbnail"><img src="{{ photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
 						<p><button class="btn btn-primary"  ng-click="addone({{ photo }})">Like({{ photo.like }})</button>
-						   <button class="btn btn-default" ng-click="showdetail({{ photo }})">Detail</button></p>
 					</li>
 			</ui>
 		</div>

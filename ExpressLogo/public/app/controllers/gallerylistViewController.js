@@ -1,12 +1,23 @@
 ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, $routeParams) {
 	var str = $routeParams.param;
+
+	function gettime(date){
+		var str = new Date(date).toDateString();
+		return str;
+	}
+	
 	$http({
 		method: 'GET',
 		url: '/gallery/' + str
 	})
 	.success(function (data) {
 		$scope.photo = data;
+		$scope.create_time = new Date($scope.photo.create_at).toDateString();
+	})
+	.error(function (data) {
+		window.location.href='#/gallery';
 	});
+
 
 	function submit_comment(_id, content)
 	{
@@ -18,10 +29,12 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 		.success(function (data) {
-			//success
+			if (data.message === "not logged in") window.location.href="#/sign-in";
+			else {
+				window.location.reload(true);
+			}
 		})
 		.error(function (data) {
-			//failed
 		});
 	}
 
@@ -29,11 +42,11 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 		var text = document.getElementById('cm').value;
 		document.getElementById('cm').value = "";
 		submit_comment($scope.photo._id,text);
-		window.location.reload(true);
 	}
 
 	$scope.back = function(){
 		document.getElementById('cm').value = "";
 		window.location.href='#/gallery';
-	}
+	}	
+
 });
