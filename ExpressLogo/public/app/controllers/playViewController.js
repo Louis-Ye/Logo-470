@@ -24,13 +24,11 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		$scope.turtle_status = myCanvas.getTurtleStatus();
 		$scope.message = "";
 		$scope.sample_codes = sampleCodes.getSampleCodes();
+		$scope.code = "";
 		share_code = shareCode.getShareCode();
 		if (share_code.code != "") {
 			show_code(share_code);
 			shareCode.clearShareCode();
-		}
-		else {
-			$scope.code = "";
 		};
 		interpret_json = {
 			'userTyping': $scope.code,
@@ -187,5 +185,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 			};
 		};
 		$scope.code = sample.code;
+		var code_pad = document.getElementById('code-pad');
+		code_pad.scrollTop = code_pad.scrollHeight;
 	};
 });
