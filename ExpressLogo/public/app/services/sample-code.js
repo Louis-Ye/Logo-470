@@ -17,7 +17,7 @@ ExpressLOGOApp.service('sampleCodes', function () {
 		{
 			id: 3,
 			name: "Snow Flake",
-			src: "http://logo.twentygototen.org/"
+			src: "http://logo.twentygototen.org/",
 			code: "to line :count :length\nif :count == 1 [fd :length]\nelse\n[\nmake \"count :count - 1\nline :count :length\nlt 60\nline :count :length\nrt 120 \nline :count :length\nlt 60 \nline :count :length\n]\nend\n\nto koch :count :length\nrt 30 line :count :length\nrt 120 line :count :length\nrt 120 line :count :length\nend\n\nhome cs\npenup\nsetxy 100 100\npendown\nkoch 5 2"
 		},
 		{
