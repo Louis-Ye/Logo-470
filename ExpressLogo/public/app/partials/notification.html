@@ -9,7 +9,7 @@
 <div class ="row">
 <div class="col-sm-3 sidebar">
 	<ul class="nav nav-pills nav-stacked">
-  		<li ><a href="#/notification" data-ng-click="getUnreadComment()"><i class="fa fa-bell"></i>  Unread <span class="badge">14</span></a></li>
+  		<li ><a href="#/notification" data-ng-click="getUnreadComment()"><i class="fa fa-bell"></i>  Unread <span class="badge">{{unReadNum}}</span></a></li>
   		<li ><a href="#/notification" data-ng-click="getLike()"><i class="fa fa-heart"></i>  Like</a></li>
   		<li ><a href="#/notification" data-ng-click="getAll()"><i class="fa fa-check"></i>  All Notifications</a></li>
 	</ul>
@@ -18,7 +18,7 @@
 
 
 <table class="table table-striped" ng-if="showUnreadComment || showAll">
-	<h2>Comments</h2>
+	<h2 ng-if="showUnreadComment || showAll">Comments</h2>
 	<thead>
 		<tr>
 			<th>Date</th>
@@ -28,22 +28,23 @@
 	</thead>
 
 	<tbody>
-		<tr>
-			<td>A</td>
-			<td>B</td>
-			<td>C</td>
-		</tr>
+		<tr ng-repeat="comment in comments">
+			<td>{{comment.date}}</td>
+			<td>{{comment.author.name}}</td>
+			<td><a href="/#/gallerylist/{{comment.postId}}">{{comment.content}}</a></td>
+		</tr></b>
 	</tbody>
 	
 </table>
 
 
 <table class="table table-striped" ng-if="showLike || showAll">
-	<h2>Likes</h2>
+	<h2 ng-if="showLike || showAll">Likes</h2>
 	<thead>
 		<tr>
 			<th>Date</th>
 			<th>Author</th>
+			<th>URL</th>
 		</tr>
 	</thead>
 
@@ -51,6 +52,7 @@
 		<tr ng-repeat="like in likes">
 			<td>{{like.date}}</td>
 			<td>{{like.liker.name}}</td>
+			<td><a href="/#/gallerylist/{{comment.postId}}">goto</a></td>
 		</tr>
 	</tbody>
 </table>
