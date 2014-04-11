@@ -22,6 +22,10 @@ ExpressLOGOApp.config(function ($routeProvider) {
 			controller: 'galleryViewController',
 			templateUrl: 'app/partials/gallery.html'
 		})
+		.when('/gallerylist/:param',{
+			controller: 'gallerylistViewController',
+			templateUrl: 'app/partials/gallerylist.html'
+		})
 		.when('/about', {
 			controller: 'aboutViewController',
 			templateUrl: 'app/partials/about.html'
