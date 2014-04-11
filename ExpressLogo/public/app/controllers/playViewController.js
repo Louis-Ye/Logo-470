@@ -44,7 +44,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		max: 1000000,
 		value: 1000,
 		animate: true,
-		slide: function (event, ui) {
+		change: function (event, ui) {
 			$("#delay-tip").val(ui.value);
 			interpret_json.delay = ui.value / 1000.0;
 		}
@@ -67,7 +67,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		max: 500,
 		value: 1,
 		animate: true,
-		slide: function (event, ui) {
+		change: function (event, ui) {
 			$("#line-tip").val(ui.value);
 			interpret_json.userTyping = "penwidth " + ui.value;
 			callback(interpret_json.userTyping);
