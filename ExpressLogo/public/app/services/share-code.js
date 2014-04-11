@@ -3,10 +3,10 @@ ExpressLOGOApp.service('shareCode', function () {
 		return share_code;
 	};
 
-	this.setShareCode = function (name, src, code) {
-		share_code.name = name;
-		share_code.src = src;
-		share_code.code = code;
+	this.setShareCode = function (inlet_share_code) {
+		share_code.name = inlet_share_code.name;
+		share_code.src = inlet_share_code.src;
+		share_code.code = inlet_share_code.code;
 	};
 
 	this.cleanShareCode = function () {
