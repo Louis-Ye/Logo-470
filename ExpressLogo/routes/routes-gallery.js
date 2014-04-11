@@ -25,11 +25,6 @@ module.exports = function(app) {
 				code : req.body.code,
 				image_url : req.body.img_url,
 				like : 0
-				// comment: [ {
-				// 	author: {id: "123", name: "123", avatar:"123"},
-				// 	content: "asdfasdf",
-				// 	date: Date.now()
-				// } ]
 			});
 			newpost.save(function(err) {
         		if (err)
@@ -149,7 +144,7 @@ module.exports = function(app) {
 				res.send({ message: "already liked this post"});
 			}
 			else {
-				Post.findByIdAndUpdate(post_id, { $inc: { like: 1}, $push: { likers: new_liker }}, function(err, data){
+				Post.findByIdAndUpdate(post_id, { $inc: { like: 1 }, $push: { likers: new_liker }}, function(err, data){
 
 				});
 				// Post.findById(post_id, function(err, data){
@@ -168,7 +163,7 @@ module.exports = function(app) {
 				// 		})
 				// 	}
 				// });
-				User.findById(post_author_id, { $push: { 'notification.like': like_notification }}, function(err, data){
+				User.findByIdAndUpdate(post_author_id, { $push: { 'notification.like': like_notification }}, function(err, data){
    	    		});
 			}
 		});
