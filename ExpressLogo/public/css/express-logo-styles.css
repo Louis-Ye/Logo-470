@@ -13,7 +13,7 @@ body {
 }
 
 .navbar .open .dropdown-toggle {
-	background-color: #ffe9b5;
+	background-color: #ffe9b5 !important;
 }
 
 .navbar a {
