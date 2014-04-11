@@ -104,9 +104,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		interpret_json.userTyping = $('#code-pad').val();
 		interpret(interpret_json);
 		$('#code-pad').val("");
-		$('#code-pad').hide();
-		$('#code-pad').show();
-		// document.getElementById("code-pad").focus();
+		$('#code-pad-wrapper').html('<textarea id="code-pad" placeholder="Try something here!" autofocus spellcheck="false" onkeypress="return indentCode(id,event);" onkeydown="return ic_keydown(id,event);"></textarea>');
+		document.getElementById("code-pad").focus();
 	};
 
 	function change_pen_status (status) {
