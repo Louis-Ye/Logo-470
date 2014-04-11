@@ -1,4 +1,4 @@
-ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
+ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleCodes, shareCode) {
 	var interpret_json;
 	init();
 
@@ -22,6 +22,14 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 		$scope.return_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
 		$scope.message = "";
+		$scope.sample_codes = sampleCodes.getSampleCodes();
+		var share_code = shareCode.getShareCode();
+		if (share_code.code != "") {
+			$scope.code = shareCode;
+		}
+		else {
+			$scope.code = "";
+		};
 		interpret_json = {
 			'userTyping': $scope.code,
 			'delay': 1,
@@ -165,5 +173,12 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http) {
 
 	$scope.share = function () {
 		myCanvas.saveCanvas(shareCallback);
+	};
+
+	$scope.show_code = function (src, code) {
+		if (src) {
+			code = "; " + src + "\n\n" + code;
+		};
+		$scope.code = code;
 	};
 });

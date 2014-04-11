@@ -57,7 +57,7 @@ body {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 	padding: 6px 10px;
-	resize: none;
+	/*resize: none;*/
 	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
 	overflow: auto;
 }

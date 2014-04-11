@@ -89,8 +89,8 @@
 					<button id="sample-code" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-gift"></span>
 					</button>
-					<ul class="dropdown-menu">
-						<li data-ng-repeat=""></li>
+					<ul class="dropdown-menu pull-right">
+						<li data-ng-repeat="sample in sample_codes"><a href data-ng-click="show_code(sample.src, sample.code)">{{ sample.name }}</a></li>
 					</ul>
 				</div>
 
