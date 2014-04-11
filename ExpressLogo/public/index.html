@@ -37,7 +37,7 @@
 					</ul>
 					<a ng-if="isLoggedIn == false" href='{{ top_right_button_href }}' type="button" class="btn btn-default navbar-btn navbar-right"> {{ top_right_button_name }} </a>
 					<ul ng-if="isLoggedIn" class="nav navbar-nav navbar-right">
-						<li><a href='#/profile'><img src="{{ avatar }}" height="24" width="24"></a></li>
+						<li><a href='#/profile'><img ng-src="{{ avatar }}" height="24" width="24"></a></li>
 						<li><a href='#/profile'> {{ username }} </a></li>
         				<li class="dropdown">
         				<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
