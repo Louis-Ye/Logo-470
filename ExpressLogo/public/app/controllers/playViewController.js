@@ -42,8 +42,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 
 	$("#slider-delay").slider({
 		range: "min",
-		min: 0.002,
-		max: 1000,
+		min: 2,
+		max: 1000000,
 		value: 1,
 		animate: true,
 		slide: function (event, ui) {
@@ -53,14 +53,14 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 	});
 
 	$('#delay-tip').change(function () {
-		if ($(this).val() < 0.002) {
-			$(this).val(0.002);
+		if ($(this).val() < 2) {
+			$(this).val(2);
 		};
-		if ($(this).val() > 1000) {
-			$(this).val(1000);
+		if ($(this).val() > 1000000) {
+			$(this).val(1000000);
 		};
 		$("#slider-delay").slider("value", $(this).val());
-		interpret_json.delay = $(this).val();
+		interpret_json.delay = $(this).val() / 1000.0;
 	});
 
 	$("#slider-line").slider({
