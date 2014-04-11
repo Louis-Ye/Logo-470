@@ -8,7 +8,7 @@ ExpressLOGOApp.controller('indexViewController', function ($scope, $element, $ht
 		.success(function (data) {
 			if (data.name) {
 				$scope.isLoggedIn = true;
-				console.log($scope.isLoggedIn);
+				// console.log($scope.isLoggedIn);
 				$scope.username = data.name;
 				$scope.avatar = data.avatar;
 				$scope.top_right_button_href = "logout";

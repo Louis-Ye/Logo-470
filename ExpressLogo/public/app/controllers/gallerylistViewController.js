@@ -14,6 +14,7 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 		if (data.message === "failed") window.location.href='#/gallery';
 		else {
 			$scope.photo = data;
+			console.log($scope.photo.image_url);
 			$scope.create_time = new Date($scope.photo.create_at).toDateString();
 		}
 	})
@@ -56,6 +57,7 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 		var text = document.getElementById('cm').value;
 		document.getElementById('cm').value = "";
 		submit_comment($scope.photo._id,text);
+		console.log($scope.photo);
 	}
 
 	$scope.back = function(){
