@@ -9,7 +9,7 @@
 <div class ="row">
 <div class="col-sm-3 sidebar">
 	<ul class="nav nav-pills nav-stacked">
-  		<li ><a href="#/notification" data-ng-click="getUnreadComment()"><i class="fa fa-bell"></i>  Unread <span class="badge">{{unReadNum}}</span></a></li>
+  		<li ><a href="#/notification" data-ng-click="getUnreadComment()"><i class="fa fa-bell"></i>  Comments <span class="badge">{{unReadNum}}</span></a></li>
   		<li ><a href="#/notification" data-ng-click="getLike()"><i class="fa fa-heart"></i>  Like</a></li>
   		<li ><a href="#/notification" data-ng-click="getAll()"><i class="fa fa-check"></i>  All Notifications</a></li>
 	</ul>
@@ -30,7 +30,7 @@
 	<tbody>
 		<tr ng-repeat="comment in comments">
 			<td>{{comment.date}}</td>
-			<td>{{comment.author.name}}</td>
+			<td>{{comment.author.name}} <img ng-src="{{comment.author.avatar}}" /></td>
 			<td><a href="/#/gallerylist/{{comment.postId}}">{{comment.content}}</a></td>
 		</tr></b>
 	</tbody>
@@ -51,7 +51,7 @@
 	<tbody>
 		<tr ng-repeat="like in likes">
 			<td>{{like.date}}</td>
-			<td>{{like.liker.name}}</td>
+			<td>{{like.liker.name}} <img ng-src="{{like.liker.avatar}}" /></td>
 			<td><a href="/#/gallerylist/{{like.postId}}">goto</a></td>
 		</tr>
 	</tbody>
