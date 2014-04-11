@@ -7,7 +7,7 @@ ExpressLOGOApp.service('sampleCodes', function () {
 		{
 			id: 1,
 			name: "Pansy",
-			code: "home cs\nmake \"i 1\nrepeat 4\n[\nmake \"j 1\nrepeat 50\n[\nrepeat 360 / :j [ fd 1 rt :j ]\nmake \"j :j + 1\n]\nhome\nrt :i * 120\nmake \"i :i + 1\n]"
+			code: "home cs\nmake \"i 1\nrepeat 3\n[\nmake \"j 1\nrepeat 50\n[\nrepeat 360 / :j [ fd 1 rt :j ]\nmake \"j :j + 1\n]\nhome\nrt :i * 120\nmake \"i :i + 1\n]"
 		},
 		{
 			id: 2,

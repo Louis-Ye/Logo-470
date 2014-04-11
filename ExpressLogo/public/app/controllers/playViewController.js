@@ -43,7 +43,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		range: "min",
 		min: 2,
 		max: 1000000,
-		value: 1,
+		value: 1000,
 		animate: true,
 		slide: function (event, ui) {
 			$("#delay-tip").val(ui.value);
