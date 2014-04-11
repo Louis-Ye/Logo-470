@@ -13,7 +13,7 @@ ExpressLOGOApp.filter('range', function() {
   };
 });
 
-ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $filter) {
+ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $filter, $route) {
 	$http({
 		method: 'GET',
 		url: '/gallery'
@@ -77,7 +77,7 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 	$scope.addone = function($photo) {
 		$scope.test = $photo._id;
 		like($scope.test);
-		window.location.reload(true);
+		$route.reload();
 	}
 
 	$scope.showdetail = function($iterator){

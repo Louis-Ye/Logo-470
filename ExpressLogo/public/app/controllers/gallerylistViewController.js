@@ -1,4 +1,4 @@
-ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, $routeParams) {
+ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, $routeParams, $route) {
 	var str = $routeParams.param;
 
 	function gettime(date){
@@ -33,7 +33,7 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 		.success(function (data) {
 			if (data.message === "not logged in") window.location.href="#/sign-in";
 			else {
-				window.location.reload(true);
+				$route.reload();
 			}
 		})
 		.error(function (data) {
