@@ -37,4 +37,4 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 		document.getElementById('cm').value = "";
 		window.location.href='#/gallery';
 	}
-}
+});
