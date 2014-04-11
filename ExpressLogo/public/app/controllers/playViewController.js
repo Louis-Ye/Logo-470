@@ -47,7 +47,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		animate: true,
 		slide: function (event, ui) {
 			$("#delay-tip").val(ui.value);
-			interpret_json.delay = ui.value;
+			interpret_json.delay = ui.value / 1000.0;
 		}
 	});
 
