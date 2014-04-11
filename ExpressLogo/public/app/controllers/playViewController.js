@@ -18,7 +18,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		myCanvas.initCanvas();
 		interpreterReset();
 		clearUndo();
-		$scope.result = "";
 		$scope.pen_status = myCanvas.getDrawStatus();
 		$scope.return_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
