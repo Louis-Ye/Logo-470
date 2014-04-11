@@ -8,7 +8,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 			var result_pad = $('#result-pad');
 			message = message.replace(/ /g, '&nbsp;');
 			message = message.replace(/\n/g, '<br />');
-			console.log(message);
 			result_pad.append(message + "<br />");
 			result_pad = document.getElementById('result-pad');
 			result_pad.scrollTop = result_pad.scrollHeight;
@@ -27,15 +26,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		$scope.sample_codes = sampleCodes.getSampleCodes();
 		share_code = shareCode.getShareCode();
 		if (share_code.code != "") {
-			if (share_code.name) {
-				if (share_code.src) {
-					share_code.code = "; " + share_code.name + "\n; " + share_code.src + "\n\n" + share_code.code;
-				}
-				else {
-					share_code.code = "; " + share_code.name + "\n\n" + share_code.code;
-				};
-			};
-			$scope.code = share_code.code;
+			show_code(share_code);
 			shareCode.clearShareCode();
 		}
 		else {
@@ -155,10 +146,10 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 	$scope.reset = function () {
 		clearUndo();
 		$('#result-pad').empty();
-		$scope.code = "";
 		interpreterReset();
 		myCanvas.initCanvas();
 		$scope.message = "";
+		$scope.code = "";
 	};
 
 	function shareCallback (url) {
@@ -186,15 +177,15 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		myCanvas.saveCanvas(shareCallback);
 	};
 
-	$scope.show_code = function (name, src, code) {
-		if (name) {
-			if (src) {
-				code = "; " + name + "\n; " + src + "\n\n" + code;
+	$scope.show_code = function (sample) {
+		if (sample.name) {
+			if (sample.src) {
+				sample.code = "; " + sample.name + "\n; " + sample.src + "\n\n" + sample.code;
 			}
 			else {
-				code = "; " + name + "\n\n" + code;
+				sample.code = "; " + sample.name + "\n\n" + sample.code;
 			};
 		};
-		$scope.code = code;
+		$scope.code = sample.code;
 	};
 });
