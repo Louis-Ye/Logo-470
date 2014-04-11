@@ -59,6 +59,7 @@ const NA_TYPE_NUMERIC = "N/A"
 /////////////////////////////////////////////////////////////////////////
 // ExeNode
 
+const g_max_command_argu = 10000000;
 var g_static_node_id = 1;
 
 function ExeNode(tokenPos, token, nodeType) {
@@ -413,6 +414,10 @@ ExeNode.prototype.execute = function() {
 	if (this.nodeType == DIVIDE_TYPE) {
 		var left = this.children[0].execute();
 		var right = this.children[1].execute();
+		if (right == 0) {
+			errorMessage("Ouch! Runtime error: Divide by zero " + getCodeStringFromNearTokens(this.tokenPos));
+			return 0;
+		}
 		return left / right;
 	}
 	if (this.nodeType == MOD_TYPE) {

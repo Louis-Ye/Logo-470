@@ -8,7 +8,15 @@ function lexical(userTyping) {
 	function preprocessSymbol(ch) {
 		var result = "";
 		
-		if ( ch == "<" || ch == ">" || ch == "&" || ch == "|" || ch == "=" || ch == "!") {
+		if (state == 21) { // comments
+			if (ch == "\n") {
+				state = 0;
+			}
+		}
+		else if ( ch == ";" ) {
+			state = 21;
+		}
+		else if ( ch == "<" || ch == ">" || ch == "&" || ch == "|" || ch == "=" || ch == "!") {
 			if (state == 0) {
 				state = 1;
 				result = " " + ch;
@@ -24,8 +32,8 @@ function lexical(userTyping) {
 				result = " ";
 			}
 
-			if ( ch == "-" ) result += " -";
-			else if ( ch == "." ) result += ch;
+			//if ( ch == "-" ) result += " - ";
+			if ( ch == "." ) result += ch;
 			else if ( isTagSpaceNewline(ch) || isLetter(ch) || isDigit(ch) ) result += ch;
 			else result += " " + ch + " ";
 		}

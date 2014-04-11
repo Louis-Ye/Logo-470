@@ -32,6 +32,7 @@ const Keyword = {
 	"SETXY": "setxy",
 	"COLOR": "color",
 	"PENWIDTH": "penwidth",
+	"PW": "pw",
 
 	"TO": "to",
 	"END": "end"
@@ -53,7 +54,7 @@ function getNodeTypeByToken(token) {
 	if ( Keyword.HOME == token ) return HOME_TYPE;
 	if ( Keyword.SETXY == token ) return SETXY_TYPE;
 	if ( Keyword.COLOR == token ) return COLOR_TYPE;
-	if ( Keyword.PENWIDTH == token ) return PENWIDTH_TYPE;
+	if ( Keyword.PENWIDTH == token || Keyword.PW == token) return PENWIDTH_TYPE;
 	return NO_TYPE;
 }
 
@@ -114,8 +115,9 @@ function parser(tokens) {
 			readToken();
 		}
 		else {
-			if (nowReading) errorLog(curPos, nowReading);
-			else errorLog(curPos - 1, previousRead);
+			var message = " I'm Expecting '" + token + "' ";
+			if (nowReading) errorLog(curPos, nowReading, message);
+			else errorLog(curPos - 1, previousRead, message);
 			readToken();
 		}
 	}
@@ -166,7 +168,7 @@ function parser(tokens) {
 			token == Keyword.MAKE ||
 			token == Keyword.SETXY ||
 			token == Keyword.COLOR ||
-			token == Keyword.PENWIDTH ||
+			token == Keyword.PENWIDTH || token == Keyword.PW ||
 			token == Keyword.TO ||
 			startsFuncInvo(token) )
 			return true;
@@ -261,7 +263,7 @@ function parser(tokens) {
 		}
 
 
-		if (nowReading == Keyword.PENWIDTH) {
+		if (nowReading == Keyword.PENWIDTH || nowReading == Keyword.PW) {
 			var token = nowReading;
 			var tokenPos = curPos;
 			readToken();
@@ -622,7 +624,8 @@ function parser(tokens) {
 
 	function startsConstant(token) {
 		if (token == null || token == undefined) return false;
-		var mch = token.match(/-?[0-9]+/)
+		if (token == Punctuator.MINUS) return true;
+		var mch = token.match(/[0-9\.]+/)
 		if (mch) {
 			return mch.index == 0;
 		}
@@ -635,7 +638,17 @@ function parser(tokens) {
 
 		var token = nowReading;
 		var tokenPos = curPos;
+		if (nowReading == Punctuator.MINUS) {
+			readToken();
+			if ( nowReading == Punctuator.MINUS || ! startsConstant(nowReading) ) {
+				errorLog(curPos, nowReading);
+			}
+			else {
+				token += nowReading;
+			}
+		}
 		readToken();
+
 		var thisNode = new ExeNode(tokenPos, token, CONSTANT_TYPE);
 		return thisNode;
 	}

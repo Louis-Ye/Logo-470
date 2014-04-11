@@ -59,7 +59,7 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 	if (arg.userTyping) {
 		tokens = lexical(arg.userTyping);
 		g_tokens = tokens;
-		//console.log(tokens);
+		console.log(tokens);
 	}
 	var tree = null;
 	if (tokens) {
@@ -98,20 +98,20 @@ function getCodeStringFromNearTokens(pos) {
 	for (var i=from; i<=to; i++) {
 		result += g_tokens[i] + " ";
 	}
-	return result;
+	return "<p>near <code>" + result + "</code></p> ";
 }
 
 function errorMessage(message) {
 	if (!g_hasError) {
 		g_hasError = true;
-		g_callback("<logoError style='color:red;'>" + message +"</logoError>", null);
+		g_callback("<logoerror'>" + message + "</logoerror>", null);
 	}
 }
 
-function errorLog(pos, token) {
+function errorLog(pos, token, message) {
 	if (!g_hasError) {
 		g_hasError = true;
 		var codes = getCodeStringFromNearTokens(pos);
-		g_callback("<logoError style='color:red;'>Sorry, I don\'t know what is \'" + token + "\' <p style='color: blue'>near <code>" + codes +"</code></p></logoError>", null);
+		g_callback("<logoerror'>Sorry, I don\'t know what is \'" + token + "\' " + message + codes + "</logoerror>", null);
 	}
 }
