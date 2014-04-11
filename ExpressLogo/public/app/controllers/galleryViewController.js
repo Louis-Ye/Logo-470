@@ -14,6 +14,9 @@ ExpressLOGOApp.filter('range', function() {
 });
 
 ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $filter, $route) {
+
+	$scope.items = "";
+	
 	$http({
 		method: 'GET',
 		url: '/gallery'
