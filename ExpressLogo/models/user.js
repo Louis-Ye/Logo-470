@@ -31,6 +31,29 @@ var userSchema = mongoose.Schema({
         username     : String,
         name         : String,
         avatar       : String
+    },
+    notification     : {
+        like         : [{
+            isRead   : Boolean,
+            postId   : String,
+            liker    : {
+                id: String, 
+                name: String,
+                avatar: String
+            },
+            date     : Date
+        }],
+        comment      : [{
+            isRead   : Boolean,
+            postId   : String,
+            content  : String,
+            author   : {
+                id: String, 
+                name: String,
+                avatar: String
+            },
+            date     : Date
+        }]
     }
 });
 

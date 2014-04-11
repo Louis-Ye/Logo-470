@@ -36,6 +36,7 @@ require('./routes/routes-facebook.js')(app, passport);
 require('./routes/routes-twitter.js')(app, passport);
 require('./routes/routes-gallery.js')(app);
 require('./routes/routes-profile.js')(app);
+require('./routes/routes-notification.js')(app);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

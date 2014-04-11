@@ -46,6 +46,10 @@ ExpressLOGOApp.config(function ($routeProvider) {
 			controller: 'signUpViewController',
 			templateUrl: 'app/partials/sign-up.html'
 		})
+		.when('/notification', {
+			controller: 'notificationViewController',
+			templateUrl: 'app/partials/notification.html'
+		})
 		.otherwise({
 			redirectTo: '/'
 		});

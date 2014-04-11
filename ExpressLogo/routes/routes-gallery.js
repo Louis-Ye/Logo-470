@@ -45,26 +45,59 @@ module.exports = function(app) {
 			var post_id = req.params.id;
 			var user = req.user;
 			var register = req.user.register;
+			var message;
 			var new_comment = {
 				content: req.body.co,
-				data: Date.now,
+				date: Date.now(),
 				author: {
 					id: user._id, 
 					name: user[register].name,
 					avatar: user[register].avatar
 				}
 			};
-			Post.findByIdAndUpdate(post_id, { $push: {
-				comment: new_comment
-			} }, function(err, data){
-				if(err) 
-					res.send({
-						message: err
+			var notification = {
+				postId: post_id,
+				content: req.body.co,
+				date: Date.now(),
+				author: {
+					id: user._id, 
+					name: user[register].name,
+					avatar: user[register].avatar
+				}
+
+			};
+			async.parallel([
+    			function(callback){
+        			//add comment to notification box
+        			User.findByIdAndUpdate(user._id, { $push: { 'notification.comment': notification }}, function(err, data){
+        				callback(null, running);
+        			});
+    			},
+    			function(callback){
+        			Post.findByIdAndUpdate(post_id, { $push: {
+						comment: new_comment
+					} }, function(err, data){
+						if(err) 
+							callback(null, err);
+						else 
+							callback(null, "success");
 					});
-				else res.send({ 
-					message: "success"
-				});
+    			}
+			],
+			function(err, results){	//empty callback
+				console.log(results);
 			});
+			// Post.findByIdAndUpdate(post_id, { $push: {
+			// 	comment: new_comment
+			// } }, function(err, data){
+			// 	if(err) 
+			// 		res.send({
+			// 			message: err
+			// 		});
+			// 	else res.send({ 
+			// 		message: "success"
+			// 	});
+			// });
 		}
 	});
 
@@ -80,12 +113,20 @@ module.exports = function(app) {
 			avatar: user[register].avatar
 		};
 		var message;
-
+		var like_notification = {
+			postId: post_id,
+			liker: new_liker,
+			date : Date.now()
+		};
 		async.parallel([
 			function(callback){
 				Post.find({ _id: post_id }, function(err, doc){
 					callback(null, doc);
 				});
+			},
+			function(callback){
+				User.findByIdAndUpdate(user._id, { $push: { 'notification.like': like_notification }}, function(err, data){
+        		});
 			}
 		],
 		function(err, result){

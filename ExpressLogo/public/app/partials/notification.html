@@ -1,0 +1,19 @@
+<div id="profile" class="container">
+<div ng-if = 'message == "not logged in"'>
+  <div class="alert alert-danger">You need to <a href="#/sign-in">log in</a> first</div>
+</div>
+<div >
+<h2>Notification</h2>
+
+<br /> 
+<div class ="row">
+<div class="col-sm-3 sidebar">
+	<ul class="nav nav-pills nav-stacked">
+  		<li ><a href="#/notification" data-ng-click="getcomment()"><i class="fa fa-bell"></i>  Unread <span class="badge">14</span></a></li>
+  		<li ><a href="#/notification" data-ng-click="getlike()"><i class="fa fa-heart"></i>  Like</a></li>
+  		<li ><a href="#/notification" data-ng-click="getall()"><i class="fa fa-check"></i>  All Notifications</a></li>
+	</ul>
+</div>
+<div class="col-sm-9">
+
+</div>

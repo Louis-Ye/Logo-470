@@ -40,10 +40,11 @@
 						<li><a href='#/profile'><img src="{{ avatar }}" height="24" width="24"></a></li>
 						<li><a href='#/profile'> {{ username }} </a></li>
         				<li class="dropdown">
-        				<a class="dropdown-toggle" data-toggle="dropdown">Setting</a>
+        				<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></a>
        					<ul class="dropdown-menu">
             				<li><a href="#/account">Account Setting</a></li>
             				<li><a href="#/profile">Profile</a></li>
+            				<li><a href="#/notification">Comment</a></li>
             				<li class="divider"></li>
             				<li><a href='{{ top_right_button_href }}'> {{ top_right_button_name }} </a></li>
           				</ul>
@@ -96,6 +97,8 @@
 	<script type="text/javascript" src="app/controllers/signInViewController.js"></script>
 	<script type="text/javascript" src="app/controllers/signUpViewController.js"></script>
 	<script type="text/javascript" src="app/controllers/aboutViewController.js"></script>
+	<script type="text/javascript" src="app/controllers/notificationViewController.js"></script>
+	<script type="text/javascript" src="app/controllers/gallerylistViewController.js"></script>
 
 	<script type="text/javascript" src="app/services/sample-code.js"></script>
 	<script type="text/javascript" src="app/services/share-code.js"></script>
