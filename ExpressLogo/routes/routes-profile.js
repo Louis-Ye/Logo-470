@@ -62,8 +62,6 @@ module.exports = function(app){
 			var reg = user.register;
 			var name = user[reg].name;
 			var obj = req.body.name;
-			//console.log(obj);
-			//console.log(name);
 
 			User.findByIdAndUpdate(user._id, {
 				$set : {'local.name' : obj}
@@ -75,6 +73,33 @@ module.exports = function(app){
 			res.redirect('/#/account');
 		}
 	});
+
+	app.post('/account/change_password', function(req, res){
+		if(!req.user)
+			req.redirect('#');
+		else{
+			var user = req.user;
+			var oldpwd = req.body.old_password;
+			var newpwd = req.body.new_password;
+
+			console.log(newpwd);
+
+			if (!user.validPassword(oldpwd))
+				res.send({"message" : "Wrong password."});
+			else
+			{
+				User.findByIdAndUpdate(user._id, {
+					$set : {'local.password' : user.generateHash(newpwd)}
+				}, function(err, User){
+					if(err)
+						throw err;
+				});
+
+				res.redirect('/#/account');
+			}
+
+		}
+	})
 };
 
 // route middleware to ensure user is logged in
