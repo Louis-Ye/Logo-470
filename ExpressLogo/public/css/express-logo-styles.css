@@ -28,8 +28,6 @@ body {
 }
 
 #play #canvas-pad {
-	/*text-align: center;*/
-	position: relative;
 	border-color: rgb(91, 184, 92);
 }
 
@@ -72,7 +70,9 @@ body {
 	outline: none;
 	padding: 6px 10px;
 	resize: none;
+	float: left;
 	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
+	overflow: auto;
 }
 
 #play #submit {
