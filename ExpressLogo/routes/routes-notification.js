@@ -10,19 +10,20 @@ module.exports = function(app) {
 		var q = req.query.q;
 		console.log(q);
 		if(q == "like"){
-			User.findById(user._id, { sort: {'notification.like.data': -1} }, function(err, user){
-				console.log(user);
-				res.send(user);
+			User.findById(user._id, function(err, user){
+				console.log(user.notification);
+				res.send(user.notification.like);
 			});
 		}
 		if(q == "comment"){
 			User.findById(user._id, function(err, user){
+				console.log(user.notification);
 				res.send(user.notification.comment);
 			});
 		}
 		if(q == "all"){
 			User.findById(user._id, function(err, user){
-				res.send(user.notification.comment);
+				res.send(user.notification);
 			});
 		}
 	});
