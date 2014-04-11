@@ -11,11 +11,13 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 		url: '/gallery/' + str
 	})
 	.success(function (data) {
-		$scope.photo = data;
-		$scope.create_time = new Date($scope.photo.create_at).toDateString();
+		if (data.message === "failed") window.location.href='#/gallery';
+		else {
+			$scope.photo = data;
+			$scope.create_time = new Date($scope.photo.create_at).toDateString();
+		}
 	})
 	.error(function (data) {
-		window.location.href='#/gallery';
 	});
 
 
