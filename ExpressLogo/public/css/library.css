@@ -56,7 +56,8 @@
 
 #library #library_toc
 {
-	margin-left:5%;
+	position:fixed;
+	margin-left:2%;
 	width:13em;
 	padding: 0em 1em;
 	border-style: solid;
