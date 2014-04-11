@@ -24,14 +24,13 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		$scope.turtle_status = myCanvas.getTurtleStatus();
 		$scope.message = "";
 		$scope.sample_codes = sampleCodes.getSampleCodes();
-		$scope.code = "";
 		share_code = shareCode.getShareCode();
 		if (share_code.code != "") {
 			show_code(share_code);
 			shareCode.clearShareCode();
 		};
 		interpret_json = {
-			'userTyping': $scope.code,
+			'userTyping': $('#code-pad').val(),
 			'delay': 1,
 			'debugMode': false,
 			'callback': callback,
@@ -101,11 +100,13 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 	});
 
 	$scope.on_submit_clicked = function () {
-		callback($scope.code);
-		interpret_json.userTyping = $scope.code;
+		callback($('#code-pad').val());
+		interpret_json.userTyping = $('#code-pad').val();
 		interpret(interpret_json);
-		$scope.code = "";
-		document.getElementById("code-pad").focus();
+		$('#code-pad').val("");
+		$('#code-pad').hide();
+		$('#code-pad').show();
+		// document.getElementById("code-pad").focus();
 	};
 
 	function change_pen_status (status) {
@@ -147,7 +148,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		interpreterReset();
 		myCanvas.initCanvas();
 		$scope.message = "";
-		$scope.code = "";
+		$('#code-pad').val("");
 	};
 
 	function shareCallback (url) {
@@ -184,7 +185,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 				sample.code = "; " + sample.name + "\n\n" + sample.code;
 			};
 		};
-		$scope.code = sample.code;
+		$('#code-pad').val(sample.code);
 		var code_pad = document.getElementById('code-pad');
 		code_pad.scrollTop = code_pad.scrollHeight;
 	};
