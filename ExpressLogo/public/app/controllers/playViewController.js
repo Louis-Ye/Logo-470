@@ -18,16 +18,15 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		myCanvas.initCanvas();
 		interpreterReset();
 		clearUndo();
+		initSlider();
 		$scope.pen_status = myCanvas.getDrawStatus();
-		$scope.return_status = myCanvas.getBorderStatus();
+		$scope.border_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
 		$scope.message = "";
 		$scope.sample_codes = sampleCodes.getSampleCodes();
 		share_code = shareCode.getShareCode();
 		if (share_code.code != "") {
-			share_code.name = "";
-			share_code.src = "";
-			show_code(share_code);
+			show_code({name: "", src: "", code: share_code.code});
 			shareCode.clearShareCode();
 		};
 		interpret_json = {
@@ -53,17 +52,33 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		return false;
 	});
 
-	$("#slider-delay").slider({
-		range: "min",
-		min: 2,
-		max: 1000000,
-		value: 1000,
-		animate: true,
-		change: function (event, ui) {
-			$("#delay-tip").val(ui.value);
-			interpret_json.delay = ui.value / 1000.0;
-		}
-	});
+	function initSlider () {
+		$("#slider-delay").slider({
+			range: "min",
+			min: 2,
+			max: 1000000,
+			value: 1000,
+			animate: true,
+			change: function (event, ui) {
+				$("#delay-tip").val(ui.value);
+				interpret_json.delay = ui.value / 1000.0;
+			}
+		});
+
+		$("#slider-line").slider({
+			range: "min",
+			min: 1,
+			max: 500,
+			value: 1,
+			animate: true,
+			change: function (event, ui) {
+				$("#line-tip").val(ui.value);
+				interpret_json.userTyping = "penwidth " + ui.value;
+				callback('<pre>' + interpret_json.userTyping + '</pre>');
+				interpret(interpret_json);
+			}
+		});
+	}
 
 	$('#delay-tip').change(function () {
 		if ($(this).val() < 2) {
@@ -74,20 +89,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		};
 		$("#slider-delay").slider("value", $(this).val());
 		// interpret_json.delay = $(this).val() / 1000.0;
-	});
-
-	$("#slider-line").slider({
-		range: "min",
-		min: 1,
-		max: 500,
-		value: 1,
-		animate: true,
-		change: function (event, ui) {
-			$("#line-tip").val(ui.value);
-			interpret_json.userTyping = "penwidth " + ui.value;
-			callback('<pre>' + interpret_json.userTyping + '</pre>');
-			interpret(interpret_json);
-		}
 	});
 
 	$('#line-tip').change(function () {
@@ -134,8 +135,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 	};
 
 	$scope.toggle_border = function () {
-		$scope.border_status = myCanvas.getBorderStatus();
 		$scope.border_status ? myCanvas.noBorder() : myCanvas.setBorder();
+		$scope.border_status = myCanvas.getBorderStatus();
 	};
 
 	function change_turtle_status (status) {
@@ -162,6 +163,11 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		myCanvas.initCanvas();
 		$scope.message = "";
 		$('#code-pad').val("");
+		$scope.pen_status = myCanvas.getDrawStatus();
+		$scope.border_status = myCanvas.getBorderStatus();
+		$scope.turtle_status = myCanvas.getTurtleStatus();
+		initSlider();
+		interpret_json.delay = 1;
 	};
 
 	function shareCallback (url) {
@@ -190,13 +196,17 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 	};
 
 	$scope.show_code = function (sample) {
+		var code;
 		if (sample.name) {
 			if (sample.src) {
-				sample.code = "; " + sample.name + "\n; " + sample.src + "\n\n" + sample.code;
+				code = "; " + sample.name + "\n; " + sample.src + "\n\n" + sample.code;
 			}
 			else {
-				sample.code = "; " + sample.name + "\n\n" + sample.code;
+				code = "; " + sample.name + "\n\n" + sample.code;
 			};
+		}
+		else {
+			code = sample.code;
 		};
 		$('#code-pad').val(sample.code);
 		var code_pad = document.getElementById('code-pad');
