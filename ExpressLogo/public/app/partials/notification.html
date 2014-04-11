@@ -44,7 +44,7 @@
 		<tr>
 			<th>Date</th>
 			<th>Author</th>
-			<th>URL</th>
+			<th>Which Post</th>
 		</tr>
 	</thead>
 
@@ -52,7 +52,7 @@
 		<tr ng-repeat="like in likes">
 			<td>{{like.date}}</td>
 			<td>{{like.liker.name}}</td>
-			<td><a href="/#/gallerylist/{{comment.postId}}">goto</a></td>
+			<td><a href="/#/gallerylist/{{like.postId}}">goto</a></td>
 		</tr>
 	</tbody>
 </table>
