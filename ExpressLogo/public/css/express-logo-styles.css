@@ -212,6 +212,11 @@ header .navbar .btn:hover {
 	color: #428bca;
 }
 
+#gallery li {
+	list-style-type: none;
+	margin-bottom: 20px;
+}
+
 #profile-image {
 	float:left;
 	margin-left: -100px;
