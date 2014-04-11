@@ -11,6 +11,10 @@ footer {
 	margin-bottom: 0;
 }
 
+footer .navbar {
+	margin-bottom: 0;
+}
+
 a {
 	color: #df3505;
 }
