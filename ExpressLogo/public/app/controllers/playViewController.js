@@ -70,7 +70,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		change: function (event, ui) {
 			$("#line-tip").val(ui.value);
 			interpret_json.userTyping = "penwidth " + ui.value;
-			callback(interpret_json.userTyping);
+			callback('<pre>' + interpret_json.userTyping + '</pre>');
 			interpret(interpret_json);
 		}
 	});
@@ -84,13 +84,13 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		};
 		$("#slider-line").slider("value", $(this).val());
 		interpret_json.userTyping = "penwidth " + $(this).val();
-		callback(interpret_json.userTyping);
+		callback('<pre>' + interpret_json.userTyping + '</pre>');
 		interpret(interpret_json);
 	});
 
 	$('#colorpalette-pen').colorPalette().on('selectColor', function(selectedColor) {
 		interpret_json.userTyping = "color [" + selectedColor.color + "]";
-		callback(interpret_json.userTyping);
+		callback('<pre>' + interpret_json.userTyping + '</pre>');
 		interpret(interpret_json);
 	});
 
@@ -113,7 +113,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 
 	$scope.toggle_pen = function () {
 		interpret_json.userTyping = $scope.pen_status ? "penup" : "pendown";
-		callback(interpret_json.userTyping);
+		callback('<pre>' + interpret_json.userTyping + '</pre>');
 		interpret(interpret_json);
 		$scope.pen_status = myCanvas.getDrawStatus();
 	};
@@ -129,14 +129,14 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 
 	$scope.toggle_turtle = function () {
 		interpret_json.userTyping = $scope.turtle_status ? "hideturtle" : "showturtle";
-		callback(interpret_json.userTyping);
+		callback('<pre>' + interpret_json.userTyping + '</pre>');
 		interpret(interpret_json);
 		$scope.turtle_status = myCanvas.getTurtleStatus();
 	};
 
 	$scope.clear_canvas = function () {
 		interpret_json.userTyping = "clearscreen";
-		callback(interpret_json.userTyping);
+		callback('<pre>' + interpret_json.userTyping + '</pre>');
 		interpret(interpret_json);
 	};
 
