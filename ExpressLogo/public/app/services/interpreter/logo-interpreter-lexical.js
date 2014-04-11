@@ -8,7 +8,7 @@ function lexical(userTyping) {
 	function preprocessSymbol(ch) {
 		var result = "";
 		
-		if (state == 21) { // comments
+		if (state == 21) { // comments state
 			if (ch == "\n") {
 				state = 0;
 			}
