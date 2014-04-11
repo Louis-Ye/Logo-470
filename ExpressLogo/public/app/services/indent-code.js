@@ -31,6 +31,7 @@ function indentCode(elementId,evt)
 	
 	var key = getKeyCode(evt);
 	if (key!=9 &&/*tab*/
+		key!=59 &&/*;*/
 		key!=10 &&/*ctrl+enter*/
 		key!=13 &&/*enter*/
 		key!=40 &&/* ( */
@@ -52,7 +53,7 @@ function indentCode(elementId,evt)
 	if (caretEnd<content.length)
 		contentSecondHalf = content.slice(caretEnd);
 	var selectContent = "";
-	if (caretEnd>caretStart && key==9)
+	if (caretEnd>caretStart && (key==9 || key==59))
 		selectContent = content.slice(caretStart,caretEnd);
 	if (caretStart>0)
 		content = content.slice(0,caretStart);
@@ -221,48 +222,56 @@ function indentCode(elementId,evt)
 		return true;
 	}
 	
-	switch (key)
+	function multiLinesAdd(d)
 	{
-	case 9:/*tab*/
 		var i;
 		var firstHalf;
 		var secondHalf;
-		var returnFlag = false;
+		var enterFlag = false;
 		for (i=0;i<selectContent.length;i++)
 			if (selectContent[i]=='\n')
 			{
 				firstHalf = selectContent.slice(0,i+1);
 				secondHalf = (i==selectContent.length-1)?"":selectContent.slice(i+1);
-				selectContent = firstHalf + '    ' + secondHalf;
-				returnFlag = true;
+				selectContent = firstHalf + d + secondHalf;
+				enterFlag = true;
 			}
-		if (returnFlag)
+		if (!enterFlag) return false;
+		
+		for (i = content.length-1;i>=0;i--)
 		{
-			for (i = content.length-1;i>=0;i--)
+			if (content[i] == '\n')
 			{
-				if (content[i] == '\n')
-				{
-					secondHalf = (i==content.length-1)?"":content.slice(i+1);
-					selectContent = '    ' + secondHalf + selectContent;
-					firstHalf = content.slice(0,i+1);
-					content = firstHalf;
-					caretStart = i;
-					break;
-				}
-				if (i==0)
-				{
-					secondHalf = (0==content.length-1)?"":content.slice(0);
-					selectContent = '    ' + secondHalf + selectContent;
-					content = '';
-					caretStart = -1;
-					break;
-				}
+				secondHalf = (i==content.length-1)?"":content.slice(i+1);
+				selectContent = d + secondHalf + selectContent;
+				firstHalf = content.slice(0,i+1);
+				content = firstHalf;
+				caretStart = i;
+				break;
 			}
-		} else
+			if (i==0)
+			{
+				secondHalf = (0==content.length-1)?"":content.slice(0);
+				selectContent = d + secondHalf + selectContent;
+				content = '';
+				caretStart = -1;
+				break;
+			}
+		}
+		return true;
+	}
+	
+	switch (key)
+	{
+	case 9:/*tab*/
+		if (!multiLinesAdd('    '))
 		{
 			selectContent = '    ';
 			forwardCaret += 3;
 		}
+		break;
+	case 59:/*;*/
+		if (!multiLinesAdd(';')) return true;
 		break;
 	case 10:/*ctrl+enter*/
 		return shortcut_submit();
@@ -351,7 +360,7 @@ function indentCode(elementId,evt)
 		if (!deleteIndent()) return true;
 		break;
 	default:
-		content += String.fromCharCode(key);
+		selectContent = String.fromCharCode(key);
 	}
 	if (!undoflag)
 		content += selectContent + contentSecondHalf;
