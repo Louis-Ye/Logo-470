@@ -24,6 +24,8 @@ Features may be missed while marking:
 	(1) type ‘[‘
 	(2) type something, and press shift + enter
 	(3) select some lines, and press tab or ‘;’
+	(4) between a '[]' press enter or backspace of delete.
+	(5) press ctrl+z or ctrl+y. (use command under Mac)
 2. Progress bar in Tutorial Page can be clicked.
 
 
