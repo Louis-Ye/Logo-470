@@ -1,10 +1,31 @@
 <div id="library" class="container">
-	<h2>forward / fd</h2>
+	<div id='library_toc'>
+		<h4 class='tocheader'>Contents</h4>
+		<ul>
+			<li class='toctext'><a href="#lb_fd">forward / fd</a></li>
+			<li class='toctext'><a href="#lb_bk">back / bk</a></li>
+			<li class='toctext'><a href="#lb_lt">left / lt</a></li>
+			<li class='toctext'><a href="#lb_rt">right / rt</a></li>
+			<li class='toctext'><a href="#lb_make">make</a></li>
+			<li class='toctext'><a href="#lb_if">if</a></li>
+			<li class='toctext'><a href="#lb_else">else</a></li>
+			<li class='toctext'><a href="#lb_repeat">repeat</a></li>
+			<li class='toctext'><a href="#lb_pu">penup / pu</a></li>
+			<li class='toctext'><a href="#lb_pd">pendown / pd</a></li>
+			<li class='toctext'><a href="#lb_pw">penwidth / pw</a></li>
+			<li class='toctext'><a href="#lb_color">color</a></li>
+			<li class='toctext'><a href="#lb_cs">clearscreen / cs</a></li>
+			<li class='toctext'><a href="#lb_home">home</a></li>
+			<li class='toctext'><a href="#lb_setxy">setxy</a></li>
+			<li class='toctext'><a href="#lb_to">to & end</a></li>
+		</ul>
+	</div>
+	<h2><span id="lb_fd">forward / fd</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> forward<br/>
 			<span class="type_style_Shortcut">Shortcut</span> fd<br/>
-			<span class="type_style_Related">Related</span> back<br/>
+			<span class="type_style_Related">Related</span> <a href="#lb_bk">back</a><br/>
 		</p>
 
 		<h3>Syntax:</h3>
@@ -23,14 +44,14 @@
 
 		<h3>Example:</h3>
 		<div class="library_code"><code>fd 50</code></div>
-		<h4><img src="images/library_samples/fd.png"></h4><br/>
+		<img src="/images/library_samples/fd.png"><br/>
 
-	<h2>back / bk</h2>
+	<h2><span id="lb_bk">back / bk</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> back<br/>
 			<span class="type_style_Shortcut">Shortcut</span> bk<br/>
-			<span class="type_style_Related">Related</span> forward<br/>
+			<span class="type_style_Related">Related</span> <a href="#lb_fd">forward</a><br/>
 		</p>
 
 		<h3>Syntax:</h3>
@@ -49,14 +70,14 @@
 
 		<h3>Example:</h3>
 		<div class="library_code"><code>bk 60</code></div>
-		<h4><img src="images/library_samples/bk.png"></h4><br/>
+		<img src="/images/library_samples/bk.png"><br/>
 
-	<h2>left / lt</h2>
+	<h2><span id="lb_lt">left / lt</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> left<br/>
 			<span class="type_style_Shortcut">Shortcut</span> lt<br/>
-			<span class="type_style_Related">Related</span> right<br/>
+			<span class="type_style_Related">Related</span> <a href="#lb_rt">right</a><br/>
 		</p>
 
 		<h3>Syntax:</h3>
@@ -78,14 +99,14 @@
 			lt 70 <br/>
 			fd 50
 		</code></div>
-		<h4><img src="images/library_samples/lt.png"></h4><br/>
+		<img src="/images/library_samples/lt.png"><br/>
 
-	<h2>right / rt</h2>
+	<h2><span id="lb_rt">right / rt</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> right<br/>
 			<span class="type_style_Shortcut">Shortcut</span> rt<br/>
-			<span class="type_style_Related">Related</span> left<br/>
+			<span class="type_style_Related">Related</span> <a href="#lb_lt">left</a><br/>
 		</p>
 
 		<h3>Syntax:</h3>
@@ -107,9 +128,9 @@
 			rt 90<br/>
 			fd -50
 		</code></div>
-		<h4><img src="images/library_samples/rt.png"></h4><br/>
+		<img src="/images/library_samples/rt.png"><br/>
 
-	<h2>make</h2>
+	<h2><span id="lb_make">make</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> make<br/>
@@ -131,13 +152,13 @@
 
 		<h3>Example:</h3>
 		<div class="library_code"><code>make "A 30 fd :A</code></div>
-		<h4><img src="images/library_samples/make.png"></h4><br/>
+		<img src="/images/library_samples/make.png"><br/>
 
-	<h2>if</h2>
+	<h2><span id="lb_if">if</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> if<br/>
-			<span class="type_style_Related">Related</span> else<br/>
+			<span class="type_style_Related">Related</span> <a href="#lb_else">else</a><br/>
 		</p>
 
 		<h3>Syntax:</h3>
@@ -161,13 +182,13 @@
 			if :A>0 [lt -90]<br/>
 			bk -40
 		</code></div>
-		<h4><img src="images/library_samples/if.png"></h4><br/>
+		<img src="/images/library_samples/if.png"><br/>
 
-	<h2>else</h2>
+	<h2><span id="lb_else">else</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> else<br/>
-			<span class="type_style_Related">Related</span> if<br/>
+			<span class="type_style_Related">Related</span> <a href="#lb_if">if</a><br/>
 		</p>
 
 		<h3>Syntax:</h3>
@@ -191,9 +212,9 @@
 			if :A>2 [rt 60] else [lt 60] <br/>
 			fd 50
 		</code></div>
-		<h4><img src="images/library_samples/else.png"></h4><br/>
+		<img src="/images/library_samples/else.png"><br/>
 
-	<h2>repeat</h2>
+	<h2><span id="lb_repeat">repeat</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> repeat<br/>
@@ -221,14 +242,14 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
 			]
 		</code></div>
-		<h4><img src="images/library_samples/repeat.png"></h4><br/>
+		<img src="/images/library_samples/repeat.png"><br/>
 
-	<h2>penup / pu</h2>
+	<h2><span id="lb_pu">penup / pu</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> penup<br/>
 			<span class="type_style_Shortcut">Shortcut</span> pu<br/>
-			<span class="type_style_Related">Related</span> pendown<br/>
+			<span class="type_style_Related">Related</span> <a href="#lb_pd">pendown</a><br/>
 		</p>
 
 		<h3>Syntax:</h3>
@@ -256,14 +277,14 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;make "A :A+1 <br/>
 			]
 		</code></div>
-		<h4><img src="images/library_samples/pu.png"></h4><br/>
+		<img src="/images/library_samples/pu.png"><br/>
 
-	<h2>pendown / pd</h2>
+	<h2><span id="lb_pd">pendown / pd</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> pendown<br/>
 			<span class="type_style_Shortcut">Shortcut</span> pd<br/>
-			<span class="type_style_Related">Related</span> penup<br/>
+			<span class="type_style_Related">Related</span> <a href="#lb_pu">penup</a><br/>
 		</p>
 
 		<h3>Syntax:</h3>
@@ -290,9 +311,9 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;make "A 1-:A <br/>
 			]
 		</code></div>
-		<h4><img src="images/library_samples/pd.png"></h4><br/>
+		<img src="/images/library_samples/pd.png"><br/>
 
-	<h2>penwidth / pw</h2>
+	<h2><span id="lb_pw">penwidth / pw</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> penwidth<br/>
@@ -323,9 +344,9 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;make "A 1-:A <br/>
 			]
 		</code></div>
-		<h4><img src="images/library_samples/penwidth.png"></h4><br/>
+		<img src="/images/library_samples/penwidth.png"><br/>
 
-	<h2>color</h2>
+	<h2><span id="lb_color">color</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> color<br/>
@@ -357,9 +378,9 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;make "A 1-:A <br/>
 			]
 		</code></div>
-		<h4><img src="images/library_samples/color.png"></h4><br/>
+		<img src="/images/library_samples/color.png"><br/>
 
-	<h2>clearscreen / cs</h2>
+	<h2><span id="lb_cs">clearscreen / cs</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> clearscreen<br/>
@@ -390,13 +411,13 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;make "A :A+1 <br/>
 			]
 		</code></div>
-		<h4><img src="images/library_samples/clearscreen.png"></h4><br/>
+		<img src="/images/library_samples/clearscreen.png"><br/>
 
-	<h2>home</h2>
+	<h2><span id="lb_home">home</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> home<br/>
-			<span class="type_style_Related">Related</span> setxy<br/>
+			<span class="type_style_Related">Related</span> <a href="#lb_setxy">setxy</a><br/>
 		</p>
 
 		<h3>Syntax:</h3>
@@ -421,13 +442,13 @@
 			] <br/>
 			home
 		</code></div>
-		<h4><img src="images/library_samples/home.png"></h4><br/>
+		<img src="/images/library_samples/home.png"><br/>
 
-	<h2>setxy</h2>
+	<h2><span id="lb_setxy">setxy</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> setxy<br/>
-			<span class="type_style_Related">Related</span> home<br/>
+			<span class="type_style_Related">Related</span> <a href="#lb_home">home</a><br/>
 		</p>
 
 		<h3>Syntax:</h3>
@@ -457,9 +478,9 @@
 			] <br/>
 			home
 		</code></div>
-		<h4><img src="images/library_samples/setxy.png"></h4><br/>
-
-		<h2>to & end</h2>
+		<img src="/images/library_samples/setxy.png"><br/>
+		
+	<h2><span id="lb_to">to & end</span></h2>
 		<h3>Name:</h3>
 		<p>
 			<span class="type_style_Standard">Standard</span> to<br/>
@@ -494,7 +515,7 @@
 			Please remember that a <span class="type_style_function">function name</span> can only be used once. 
 			You may notice that there is some <span class="type_style_parameter">parameters</span> following after 
 			the <span class="type_style_function">function</span>. They are just the <span class="type_style_variable">variable</span> 
-			I introduced in the <b>make</b> section. You can assign different values to those <span class="type_style_parameter">parameters</span> 
+			I introduced in the <b><a href="#lb_make">make</a></b> section. You can assign different values to those <span class="type_style_parameter">parameters</span> 
 			to achieve different results. There is no limitation on the number of <span class="type_style_parameter">parameters</span>.
 			Which means you can define as much <span class="type_style_parameter">parameters</span> as you want. Of course, 
 			you may also leave it blank if you do not need any. To call that <span class="type_style_function">function</span>, 
@@ -510,7 +531,7 @@
 			they are just the copy of the origin. So make change of these <span class="type_style_parameter">parameters</span> 
 			would not change the original object.<br/><br/>
 			You can call <span class="type_style_function">functions</span> inside a <span class="type_style_function">function</span>. 
-			It can be other <span class="type_style_function">functions</span> or just the <span class="type_style_function">function itself</span>
+			It can be other <span class="type_style_function">functions</span>, or just the <span class="type_style_function">function itself</span>
 			if you want to solve a problem in a recursive way.<br/><br/>
 			You can define a new <span class="type_style_function">function</span> inside a <span class="type_style_function">function</span>. 
 			Since all the functions are global, it is not meaningful to do so.<br/><br/>
@@ -533,5 +554,5 @@
 				end<br/>
 				MyFlower 0 70<br/>
 		</code></div>
-		<h4><img src="images/library_samples/to.png"></h4><br/>
+		<img src="/images/library_samples/to.png"><br/>
 </div>

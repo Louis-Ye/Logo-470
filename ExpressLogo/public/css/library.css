@@ -30,6 +30,44 @@
 	text-decoration: underline;
 }
 
+#library a:link
+{
+	text-decoration: none;
+	color: blue
+}
+
+#library a:active
+{
+	text-decoration: blink;
+	color: blue
+}
+
+#library a:visited
+{
+	text-decoration: none;
+	color: blue
+}
+
+#library a:hover
+{
+	text-decoration: underline;
+	color: red
+}
+
+#library #library_toc
+{
+	margin-left:5%;
+	width:13em;
+	padding: 0em 1em;
+	border-style: solid;
+	background-color: #EEEEEE
+}
+
+#library .tocheader
+{
+	text-align:center;
+}
+
 #library .library_code
 {
 	margin-left:5%;
