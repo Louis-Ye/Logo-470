@@ -38,6 +38,11 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		};
 	};
 
+	$('.tip').click(function () {
+		// $(this).next('input').focus();
+		return false;
+	});
+
 	$("#slider-delay").slider({
 		range: "min",
 		min: 2,
@@ -58,7 +63,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 			$(this).val(1000000);
 		};
 		$("#slider-delay").slider("value", $(this).val());
-		interpret_json.delay = $(this).val() / 1000.0;
+		// interpret_json.delay = $(this).val() / 1000.0;
 	});
 
 	$("#slider-line").slider({
@@ -83,9 +88,9 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 			$(this).val(500);
 		};
 		$("#slider-line").slider("value", $(this).val());
-		interpret_json.userTyping = "penwidth " + $(this).val();
-		callback('<pre>' + interpret_json.userTyping + '</pre>');
-		interpret(interpret_json);
+		// interpret_json.userTyping = "penwidth " + $(this).val();
+		// callback('<pre>' + interpret_json.userTyping + '</pre>');
+		// interpret(interpret_json);
 	});
 
 	$('#colorpalette-pen').colorPalette().on('selectColor', function(selectedColor) {
