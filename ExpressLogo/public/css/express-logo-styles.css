@@ -115,11 +115,16 @@ body {
 	display: none;
 }
 
-#play logoError {
+#play #result-pad .error {
 	color: #d9534f;
+	font-family: sans-serif;
 }
 
-#play logoError p {
+#play #result-pad .error strong {
+	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
+}
+
+#play #result-pad .error p {
 	color: #428bca;
 }
 

@@ -24,13 +24,13 @@ function semantic(tree) {
 		// visitLeave
 
 		if ( (curNode.nodeType == PLUS_TYPE) ||
-			(curNode.nodeType == MINUS_TYPE) || 
-			(curNode.nodeType == MULTIPLY_TYPE) || 
-			(curNode.nodeType == DIVIDE_TYPE) || 
+			(curNode.nodeType == MINUS_TYPE) ||
+			(curNode.nodeType == MULTIPLY_TYPE) ||
+			(curNode.nodeType == DIVIDE_TYPE) ||
 			(curNode.nodeType == MOD_TYPE) ) {
 			var left = curNode.children[0];
 			var right = curNode.children[1];
-			if ( !(left.numericType == NUMBER_TYPE_NUMERIC) || 
+			if ( !(left.numericType == NUMBER_TYPE_NUMERIC) ||
 				!(right.numericType == NUMBER_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
 				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
@@ -46,11 +46,11 @@ function semantic(tree) {
 			curNode.numericType = BOOL_TYPE_NUMERIC;
 		}
 
-		if ((curNode.nodeType == AND_TYPE) || 
+		if ((curNode.nodeType == AND_TYPE) ||
 			(curNode.nodeType == OR_TYPE) ) {
 			var left = curNode.children[0];
 			var right = curNode.children[1];
-			if ( !(left.numericType == BOOL_TYPE_NUMERIC) || 
+			if ( !(left.numericType == BOOL_TYPE_NUMERIC) ||
 				!(right.numericType == BOOL_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
 				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
@@ -62,12 +62,12 @@ function semantic(tree) {
 		}
 
 		if ( (curNode.nodeType == GREATER_TYPE) ||
-			(curNode.nodeType == GREATER_EQUAL_TYPE) || 
-			(curNode.nodeType == LESS_TYPE) || 
+			(curNode.nodeType == GREATER_EQUAL_TYPE) ||
+			(curNode.nodeType == LESS_TYPE) ||
 			(curNode.nodeType == LESS_EQUAL_TYPE) ) {
 			var left = curNode.children[0];
 			var right = curNode.children[1];
-			if ( !(left.numericType == NUMBER_TYPE_NUMERIC) || 
+			if ( !(left.numericType == NUMBER_TYPE_NUMERIC) ||
 				!(right.numericType == NUMBER_TYPE_NUMERIC) ) {
 				curNode.cutErrorNodeFromProgramNode();
 				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
@@ -91,8 +91,8 @@ function semantic(tree) {
 		}
 
 		if ( (curNode.nodeType == FORWARD_TYPE) ||
-			(curNode.nodeType == BACKWARD_TYPE) || 
-			(curNode.nodeType == LEFT_TYPE) || 
+			(curNode.nodeType == BACKWARD_TYPE) ||
+			(curNode.nodeType == LEFT_TYPE) ||
 			(curNode.nodeType == RIGHT_TYPE) ) {
 			var child = curNode.children[0];
 			if ( !(child.numericType == NUMBER_TYPE_NUMERIC) ) {
@@ -135,7 +135,7 @@ function semantic(tree) {
 				errorMessage("Oops! Can you give me a number type near '" + curNode.token + "' ? " + codes);
 			}
 		}
-		
+
 		if (curNode.nodeType == COLOR_TYPE) {
 			if (curNode.hasColorNum) {
 				if ( curNode.hasColorNum.length != 6) {
@@ -148,7 +148,7 @@ function semantic(tree) {
 				var r = curNode.children[0];
 				var g = curNode.children[1];
 				var b = curNode.children[2];
-				if ( !(r.numericType == NUMBER_TYPE_NUMERIC) || 
+				if ( !(r.numericType == NUMBER_TYPE_NUMERIC) ||
 					!(g.numericType == NUMBER_TYPE_NUMERIC) ||
 					!(b.numericType == NUMBER_TYPE_NUMERIC) ) {
 					curNode.cutErrorNodeFromProgramNode();
@@ -199,7 +199,7 @@ function semantic(tree) {
 			else {
 				curNode.cutErrorNodeFromProgramNode();
 				var codes = getCodeStringFromNearTokens(curNode.tokenPos);
-				errorMessage("Sorry, I don't know what is '" + funcName + "' :( Can you tell me ? :D " + codes);
+				errorMessage("Sorry, I don’t know what is <strong>" + funcName + "</strong>. Can you tell me ? :D " + codes);
 			}
 		}
 

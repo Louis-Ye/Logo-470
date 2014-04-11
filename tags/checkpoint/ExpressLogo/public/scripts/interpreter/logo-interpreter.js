@@ -519,7 +519,7 @@ function parser(tokens) {
 			var token = nowReading;
 			readToken();
 			expect("\"");
-			
+
 		}
 
 		// ........................
@@ -682,7 +682,7 @@ function errorMessage(message) {
 function errorLog(message) {
 	if (!g_hasError) {
 		g_hasError = true;
-		g_callback("Sorry, I don\'t know what is \'" + message + "\'", null);
+		g_callback("Sorry, I don’t know what is <strong>" + message + "</strong>", null);
 	}
 }
 
@@ -707,19 +707,19 @@ function errorLog(message) {
 //userTyping, delay, debugMode, callback
 /*
 interpret({
-	'userTyping': "repeat 2 [bk -10 lt 32 repeat 3 [right 99 fd 23] ] lt 11123", 
-	'delay': 100, 
-	'debugMode': false, 
-	'callback': function(error, doc) { 
+	'userTyping': "repeat 2 [bk -10 lt 32 repeat 3 [right 99 fd 23] ] lt 11123",
+	'delay': 100,
+	'debugMode': false,
+	'callback': function(error, doc) {
 		console.log("error:" + error);
 		console.log("doc: " + doc);
 });
 
 interpret({
-	'userTyping': "repeat 2 [ forward 1 ] bk 1", 
-	'delay': 100, 
-	'debugMode': false, 
-	'callback': function(error, doc) { 
+	'userTyping': "repeat 2 [ forward 1 ] bk 1",
+	'delay': 100,
+	'debugMode': false,
+	'callback': function(error, doc) {
 		console.log("error:" + error);
 		console.log("doc: " + doc);
 });

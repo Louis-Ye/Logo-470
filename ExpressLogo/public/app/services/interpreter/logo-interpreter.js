@@ -104,7 +104,7 @@ function getCodeStringFromNearTokens(pos) {
 function errorMessage(message) {
 	if (!g_hasError) {
 		g_hasError = true;
-		g_callback("<logoerror>" + message + "</logoerror>", null);
+		g_callback('<p class="error">' + message + "</p>", null);
 	}
 }
 
@@ -112,6 +112,6 @@ function errorLog(pos, token, message) {
 	if (!g_hasError) {
 		g_hasError = true;
 		var codes = getCodeStringFromNearTokens(pos);
-		g_callback("<logoerror>Sorry, I don\'t know what is \'" + token + "\' " + message + codes + "</logoerror>", null);
+		g_callback("<p class=\"error\">Sorry, I don’t know what is <strong>" + token + "</strong> " + message + codes + "</p>", null);
 	}
 }

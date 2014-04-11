@@ -17,7 +17,7 @@ const Keyword = {
 	"ELSE": "else",
 	"REPEAT" : "repeat",
 	"MAKE" : "make",
-	
+
 	"CLEARSCREEN": "clearscreen",
 	"CS": "cs",
 	"PENUP": "penup",
@@ -115,7 +115,7 @@ function parser(tokens) {
 			readToken();
 		}
 		else {
-			var message = " I'm Expecting '" + token + "' ";
+			var message = " I’m expecting <strong>" + token + "</strong> ";
 			if (nowReading) errorLog(curPos, nowReading, message);
 			else errorLog(curPos - 1, previousRead, message);
 			readToken();
@@ -245,7 +245,7 @@ function parser(tokens) {
 				thisNode.setChild(b);
 			}
 			expect(Punctuator.BODY_CLOSE);
-			
+
 			return thisNode;
 		}
 
@@ -310,7 +310,7 @@ function parser(tokens) {
 			// take up space of funcSymbolTable
 			var funcName = token;
 			if (funcName in g_programExeNode.funcSymbolTable) {
-				errorMessage("Oops! You don't have to '" + funcName + "' again :)");
+				errorMessage("Oops! You don’t have to <strong>" + funcName + "</strong> again.");
 			}
 			else {
 				g_programExeNode.funcSymbolTable[funcName] = thisNode;
@@ -331,7 +331,7 @@ function parser(tokens) {
 			if (g_hasError) deleteFromFuncSymbolTable(thisNode);
 			return thisNode;
 		}
-		
+
 		if ( startsFuncInvo(nowReading) ) {
 			var token = nowReading;
 			var tokenPos = curPos;
@@ -380,8 +380,8 @@ function parser(tokens) {
 	// expr8 -> (expr) | constant | identifier
 
 	function startsExpression(token) {
-		return startsIdentifierInvo(token) || 
-			startsConstant(token) || 
+		return startsIdentifierInvo(token) ||
+			startsConstant(token) ||
 			(token == Punctuator.BRACKET_OPEN) ||
 			(token == Punctuator.NOT);
 	}
@@ -474,7 +474,7 @@ function parser(tokens) {
 		}
 
 		var left = parseExpression5();
-		while ((nowReading == Punctuator.GREATER) || 
+		while ((nowReading == Punctuator.GREATER) ||
 				(nowReading == Punctuator.GREATER_EQUAL) ||
 				(nowReading == Punctuator.LESS) ||
 				(nowReading == Punctuator.LESS_EQUAL)) {
@@ -530,8 +530,8 @@ function parser(tokens) {
 		}
 
 		var left = parseExpression7();
-		while ((nowReading == Punctuator.MULTIPLY) || 
-				(nowReading == Punctuator.DIVIDE) || 
+		while ((nowReading == Punctuator.MULTIPLY) ||
+				(nowReading == Punctuator.DIVIDE) ||
 				(nowReading == Punctuator.MOD)) {
 			var token = nowReading;
 			var tokenPos = curPos;
