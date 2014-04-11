@@ -81,6 +81,7 @@ header .navbar .btn:hover {
 
 #play {
 	margin-top: 20px;
+	padding-bottom: 70px;
 }
 
 #play #canvas-pad {
