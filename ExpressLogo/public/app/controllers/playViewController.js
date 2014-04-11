@@ -208,7 +208,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		else {
 			code = sample.code;
 		};
-		$('#code-pad').val(sample.code);
+		$('#code-pad').val(code);
 		var code_pad = document.getElementById('code-pad');
 		code_pad.scrollTop = code_pad.scrollHeight;
 	};
