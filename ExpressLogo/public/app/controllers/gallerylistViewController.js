@@ -24,6 +24,7 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 	function submit_comment(_id, content)
 	{
 		var xsrf = $.param({co: content});
+
 		$http({
 			method: 'POST',
 			url: '/gallery/'+ _id + '/comments',
@@ -31,12 +32,23 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 		.success(function (data) {
-			if (data.message === "not logged in") window.location.href="#/sign-in";
-			else {
-				$route.reload();
-			}
 		})
 		.error(function (data) {
+		});
+
+
+		$http({
+			method: 'GET',
+			url: '/user/'
+		}).success(function (data) {
+
+			if (data.email) {
+				$route.reload();
+			}
+			else {
+				window.location.href="/#/sign-in";
+			}
+		}).error(function (data) {
 		});
 	}
 

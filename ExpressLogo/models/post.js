@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var shortId = require('shortid');
 
 var postSchema = mongoose.Schema({
-	_id: {
+	_id: 
+	{
     	type: String,
     	unique: true,
     	default: function(){ return shortId.generate(); }
@@ -24,7 +25,7 @@ var postSchema = mongoose.Schema({
 		name: String,
 		avatar: String
 	}],
-	comment : [{
+	comment : [ {
 		_id: {
     	type: String,
     	unique: true,
@@ -37,7 +38,7 @@ var postSchema = mongoose.Schema({
 		},
 		content: String,
 		date: Date,
-	}]
+	} ]
 });
 
 module.exports = mongoose.model('Post', postSchema);

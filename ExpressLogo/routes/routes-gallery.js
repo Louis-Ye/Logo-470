@@ -16,17 +16,22 @@ module.exports = function(app) {
 			var register = req.user.register;
 			//console.log(user);
 			var newpost = new Post({
-				author : {
-					id: user._id,
-					name: user[register].name,
-					avatar: user[register].avatar
-				},
-				create_at : Date.now(),
-				code : req.body.code,
-				image_url : req.body.img_url,
-				like : 0
+				// author : {
+				// 	id: user._id,
+				// 	name: user[register].name,
+				// 	avatar: user[register].avatar
+				// },
+				// create_at : Date.now(),
+				// code : req.body.code,
+				// image_url : req.body.img_url,
+				// like : 0,
+				// comment: [ {
+				// 	author: {id: "123", name: "123", avatar:"123"},
+				// 	content: "asdfasdf",
+				// 	date: Date.now()
+				// } ]
 			});
-			//console.log(newpost);
+			console.log(newpost);
 			newpost.save(function(err) {
         		if (err)
           			throw err;
