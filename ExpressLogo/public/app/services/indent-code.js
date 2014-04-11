@@ -4,7 +4,7 @@ var ic_TextUndo;
 
 function indentCode(elementId,evt)
 {
-	var fontSize = 14;
+	var fontSize = 16;
 	var  undoflag = false;
 	
 	var elementObject = document.getElementById(elementId);
