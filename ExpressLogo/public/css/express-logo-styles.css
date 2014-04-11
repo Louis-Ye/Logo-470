@@ -1,7 +1,14 @@
 body {
 	padding-top: 70px;
-	padding-bottom: 70px;
+	padding-bottom: 0px;
+	margin-bottom: -70px;
 	font-family: "Avenir Next", "Segoe UI", sans-serif !important;
+}
+
+footer {
+	margin-top: 50px;
+	padding-bottom: 0;
+	margin-bottom: 0;
 }
 
 a {
@@ -12,32 +19,32 @@ a:hover {
 	color: #ef5525;
 }
 
-.navbar {
+header .navbar {
 	background-color: #ffe5a5;
 	border-color: #ffb515;
 }
 
-.navbar .dropdown {
+header .navbar .dropdown {
 	cursor: pointer;
 }
 
-.navbar .open .dropdown-toggle {
+header .navbar .open .dropdown-toggle {
 	background-color: #ffe9b5 !important;
 }
 
-.navbar a {
+header .navbar a {
 	color: #df3505 !important;
 }
 
-.navbar .navbar-brand {
+header .navbar .navbar-brand {
 	font-weight: bold;
 }
 
-.navbar .btn {
+header .navbar .btn {
 	border-color: #ffb515;
 }
 
-.navbar .btn:hover {
+header .navbar .btn:hover {
 	background-color: #fffff5;
 }
 
