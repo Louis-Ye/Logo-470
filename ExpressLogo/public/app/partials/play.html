@@ -65,7 +65,7 @@
 
 				<button id="clear-canvas" type="button" class="btn btn-info" data-ng-click="clear_canvas()">Clear Screen</button>
 
-				<button id="add-image" type="button" class="btn btn-warning" onclick="document.getElementById('imgInput').click()">Image</button>
+				<button id="add-image" type="button" class="btn btn-warning" onclick="document.getElementById('img-input').click()">Image</button>
 
 				<button id="border-status" type="button" class="btn btn-warning" data-ng-click="toggle_border()">{{ border_status ? 'Disable' : 'Enable' }} border</button>
 
@@ -80,8 +80,20 @@
 						</li>
 					</ul>
 				</div>
+
 				<button id="reset" type="button" class="btn btn-danger" data-ng-click="reset()">Reset</button>
+
 				<button id="share" type="button" class="btn btn-success" data-ng-click="share()">Share</button>
+
+				<div class="btn-group dropup">
+					<button id="examples" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-gift"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li data-ng-repeat=""></li>
+					</ul>
+				</div>
+
 			</div>
 			<input type="file" id="img-input" onchange="readPicture(event,id);" hidden/>
 		</div>

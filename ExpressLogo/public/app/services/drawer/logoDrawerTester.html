@@ -6,10 +6,10 @@
 <body>
 	<script src="logo-drawer.js" charset="utf-8"></script>
 	<script src="readPicture.js" charset="utf-8"></script>
-	
-	<input type="file" id="imgInput" onchange="readPicture(event,id);" hidden/>
-	<button id="add-image" type="button" class="btn btn-default" onclick="document.getElementById('imgInput').click()">Image</button>
-	
+
+	<input type="file" id="img-input" onchange="readPicture(event,id);" hidden/>
+	<button id="add-image" type="button" class="btn btn-default" onclick="document.getElementById('img-input').click()">Image</button>
+
 	<canvas id="saving" width="500" height="400" style="position: absolute; z-index: 0">
 		Your browser does not support the canvas element.
 	</canvas>
