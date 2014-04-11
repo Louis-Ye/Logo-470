@@ -1,10 +1,10 @@
 ExpressLOGOApp.controller('accountViewController', function ($scope, $http) {
-	// init();
-	// function init(){
-	// 	$scope.loginMessage = "";
-	// 	$scope.user = "";
-	// 	$scope.pwdMessage = "";
-	// }
+	init();
+	function init(){
+		$scope.loginMessage = "";
+		$scope.user = "";
+		$scope.pwdMessage = "";
+	}
 
 	$http({
 		method: 'GET',
@@ -24,8 +24,7 @@ ExpressLOGOApp.controller('accountViewController', function ($scope, $http) {
 		url: '/account/change-password'
 	})
 	.success(function (data) {
-		$scope.wrongPwd = data.wrongPwd[0];
-		$scope.notMatch = data.notMatch[0];
-		$scope.successPwd = data.successPwd[0];
+		console.log(data.pwdMessage);
+		$scope.pwdMessage = data.pwdMessage[ data.pwdMessage.length - 1 ];
 	});
 });

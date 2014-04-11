@@ -16,6 +16,6 @@
     "bcrypt-nodejs": "latest",
     "validator": "*",
     "shortid": "~2.0.0",
-    "async": "~0.7.0"
+    "async": "~0.7.0", 
   }
 }

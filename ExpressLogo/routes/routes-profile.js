@@ -75,13 +75,8 @@ module.exports = function(app){
 	});
 
 	app.get('/account/change-password', function(req, res){
-
-		res.send({
-				wrongPwd: req.flash('wrongPwd'), 
-				notMatch: req.flash('notMatch'),
-				successPwd: req.flash('successPwd')
-			});
-		
+		var pwdMessage = { pwdMessage: req.flash('pwdMessage')};
+		res.send(pwdMessage);
 	});
 
 	app.post('/account/change-password', function(req, res){
@@ -94,12 +89,12 @@ module.exports = function(app){
 			var confirm = req.body.confirm_password;
 
 			if (!user.validPassword(oldpwd)){
-				req.flash('wrongPwd' , 'Wrong password. Try again!');
+				req.flash('pwdMessage' , 'Wrong password. Try again!');
 				res.redirect('/#/account');
 			} 
 			else {
 				if (confirm != newpwd){
-					req.flash('notMatch' , 'Confirm password and new password are not match!');
+					req.flash('pwdMessage' , 'Confirm password and new password are not match!');
 					res.redirect('/#/account');
 				}
 				else {
@@ -109,7 +104,7 @@ module.exports = function(app){
 						if(err)
 							throw err;
 						console.log("lalala");
-						req.flash('successPwd' , 'success');
+						req.flash('pwdMessage' , 'success');
 					});
 					res.redirect('/#/account');
 				}
