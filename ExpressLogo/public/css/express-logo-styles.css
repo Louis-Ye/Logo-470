@@ -19,6 +19,8 @@ a:hover {
 	color: #ef5525;
 }
 
+::selection { background: #f9eb87; text-shadow: none; }
+
 header .navbar {
 	background-color: #ffe5a5;
 	border-color: #ffb515;
