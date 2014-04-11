@@ -25,6 +25,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		$scope.sample_codes = sampleCodes.getSampleCodes();
 		share_code = shareCode.getShareCode();
 		if (share_code.code != "") {
+			share_code.name = "";
+			share_code.src = "";
 			show_code(share_code);
 			shareCode.clearShareCode();
 		};
