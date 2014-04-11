@@ -9,11 +9,20 @@
 <div class ="row">
 <div class="col-sm-3 sidebar">
 	<ul class="nav nav-pills nav-stacked">
-  		<li ><a href="#/notification" data-ng-click="getcomment()"><i class="fa fa-bell"></i>  Unread <span class="badge">14</span></a></li>
-  		<li ><a href="#/notification" data-ng-click="getlike()"><i class="fa fa-heart"></i>  Like</a></li>
-  		<li ><a href="#/notification" data-ng-click="getall()"><i class="fa fa-check"></i>  All Notifications</a></li>
+  		<li ><a href="#/notification" data-ng-click="getUnreadComment()"><i class="fa fa-bell"></i>  Unread <span class="badge">14</span></a></li>
+  		<li ><a href="#/notification" data-ng-click="getLike()"><i class="fa fa-heart"></i>  Like</a></li>
+  		<li ><a href="#/notification" data-ng-click="getAll()"><i class="fa fa-check"></i>  All Notifications</a></li>
 	</ul>
 </div>
 <div class="col-sm-9">
-
+<table class="table table-striped" ng-if="showUnreadComment || showAll">
+	<tr>
+		<td>A</td>
+	</tr>
+</table>
+<table class="table table-striped" ng-if="showLike || showAll">
+	<tr>
+		<td>BB</td>
+	</tr>
+</table>
 </div>

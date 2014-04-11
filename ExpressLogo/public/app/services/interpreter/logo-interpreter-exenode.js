@@ -155,9 +155,6 @@ ExeNode.prototype.execute = function() {
 				setTimeOutAndNextExeNode(this);
 			}
 		}
-		else {
-			console.log(this.symbolTable[this.curExePosVarName]);
-		}
 		return;
 	}
 
