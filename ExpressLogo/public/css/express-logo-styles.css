@@ -115,6 +115,34 @@ body {
 	display: none;
 }
 
+#play #result-pad {
+	padding: 0;
+}
+
+#play #result-pad .item {
+	padding: 10px;
+}
+
+#play #result-pad .item p,
+#play #result-pad .item pre {
+	margin: 4px 0;
+}
+
+#play #result-pad .item:nth-child(odd) {
+}
+
+#play #result-pad .item:nth-child(odd):hover {
+	background-color: #fcfcfc;
+}
+
+#play #result-pad .item:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+#play #result-pad .item:nth-child(even):hover {
+	background-color: #f4f4f4;
+}
+
 #play #result-pad .error {
 	color: #d9534f;
 	font-family: sans-serif;

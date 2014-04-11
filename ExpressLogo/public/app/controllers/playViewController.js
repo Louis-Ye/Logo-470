@@ -7,8 +7,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		if (message) {
 			var result_pad = $('#result-pad');
 			// message = message.replace(/ /g, '&nbsp;');
-			message = message.replace(/\n/g, '<br />');
-			result_pad.append(message + "<br />");
+			// message = message.replace(/\n/g, '<br />');
+			result_pad.append('<div class="item">' + message + "</div>");
 			result_pad = document.getElementById('result-pad');
 			result_pad.scrollTop = result_pad.scrollHeight;
 		};
@@ -99,7 +99,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 	});
 
 	$scope.on_submit_clicked = function () {
-		callback($('#code-pad').val());
+		callback('<pre>' + $('#code-pad').val() + '</pre>');
 		interpret_json.userTyping = $('#code-pad').val();
 		interpret(interpret_json);
 		$('#code-pad').val("");
