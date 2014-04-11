@@ -57,6 +57,7 @@ module.exports = function(app) {
 				}
 			};
 			var notification = {
+				isRead: false,
 				postId: post_id,
 				content: req.body.co,
 				date: Date.now(),
@@ -177,7 +178,12 @@ module.exports = function(app) {
 	app.get('/gallery/:id', function(req, res){
 		var post_id = req.params.id;
 		Post.findById(post_id, function(err, data){
-			res.send(data);
+			if(isEmptyObject(data)){
+				res.send({ message: "failed"});
+			}
+			else {
+				res.send(data);
+			}
 		});
 	});
 	
@@ -235,4 +241,12 @@ function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 	res.send({ message: "not logged in" });
+}
+
+function isEmptyObject(obj) {
+	for (var name in obj) 
+    {
+        return false;
+    }
+    return true;
 }
