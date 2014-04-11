@@ -1,6 +1,5 @@
 ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, $routeParams) {
 	var str = $routeParams.param;
-	$scope.test = 1;
 	$http({
 		method: 'GET',
 		url: '/gallery/' + str
