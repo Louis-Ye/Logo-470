@@ -3,6 +3,7 @@ var async = require("async");
 //gallery oprations
 module.exports = function(app) {
 	var Post = require('../models/post');
+	var User = require('../models/user');
 
 	//share a post(login first)
 	app.post('/share', function(req, res){
@@ -70,7 +71,6 @@ module.exports = function(app) {
     			function(callback){
         			//add comment to notification box
         			User.findByIdAndUpdate(user._id, { $push: { 'notification.comment': notification }}, function(err, data){
-        				callback(null, running);
         			});
     			},
     			function(callback){

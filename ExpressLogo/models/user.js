@@ -34,7 +34,6 @@ var userSchema = mongoose.Schema({
     },
     notification     : {
         like         : [{
-            isRead   : Boolean,
             postId   : String,
             liker    : {
                 id: String, 
