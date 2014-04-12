@@ -1,4 +1,4 @@
-ExpressLOGOApp.controller('profileViewController', function ($scope, $http) {
+ExpressLOGOApp.controller('profileViewController', function ($scope, $http, $route) {
 
 	$http({
 		method: 'GET',
@@ -14,5 +14,18 @@ ExpressLOGOApp.controller('profileViewController', function ($scope, $http) {
 	})
 	.error(function (data) {
 		$scope.message = "Error";
-	})
+	});
+
+	$scope.post_delete = function(postId){
+		console.log(postId);
+		$http({
+			method: 'DELETE',
+			url: '/profile/' + postId
+		})
+		.success(function() {
+			//success
+		})
+		.error(function() {});
+		$route.reload();
+	};
 });

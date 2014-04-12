@@ -39,6 +39,32 @@ module.exports = function(app){
 		}
 	});
 
+	app.delete('/profile/:postId', isLoggedIn, function(req, res){
+		var user = req.user;
+		var postId = req.params.postId;
+
+		Post.findById(postId, function(err, info){
+			if (err) 
+				throw err;
+			if (!info) {
+				res.send("No such post.");
+			}
+			else{
+				if (info.author.id == user._id){
+					//delete
+					Post.findByIdAndRemove(postId, function(err, data){
+						if (err)
+							throw err;
+					});
+				}
+				else{
+					res.send("Cannot delete");
+				}
+			}
+			
+		});
+	});
+
 	app.get('/account', isLoggedIn, function(req, res){
 		var user = req.user;
 
@@ -51,6 +77,7 @@ module.exports = function(app){
 		}
 		else{
 			res.send({ message: "logged with social account"});
+			res.redirect('/#');
 		}
 	});
 
