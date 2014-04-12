@@ -1,6 +1,5 @@
 body {
 	padding-top: 70px;
-	padding-bottom: 0;
 	font-family: "Avenir Next", "Segoe UI", sans-serif !important;
 }
 
@@ -35,8 +34,14 @@ a:hover {
 	color: #ef5525;
 }
 
-::-moz-selection { background: #f9eb87; text-shadow: none; }
-::selection { background: #f9eb87; text-shadow: none; }
+::-moz-selection {
+	background: #f9eb87;
+	text-shadow: none;
+}
+::selection {
+	background: #f9eb87;
+	text-shadow: none;
+}
 
 header .navbar {
 	background-color: #ffe5a5;

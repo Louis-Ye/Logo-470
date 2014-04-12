@@ -10,589 +10,605 @@
 	</div>
 </div>
 <div class="col-sm-9">
-	<div id="lb_fd"> </div>
-	<br/>
-	<br/>
-	<h2>forward / fd</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> forward<br/>
-			<span class="type_style_Shortcut">Shortcut</span> fd<br/>
-			<span class="type_style_Related">Related</span> <a href="#/library/#lb_bk">back</a><br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			forward <span class="type_style_number">number</span><br/>
-			fd <span class="type_style_number">number</span><br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>forward</b> or <b>fd</b> means "move forward". The opposite command
-			is <b>back</b> or <b>bk</b>. By using this command, the turtle will
-			move forward for <span class="type_style_number">number</span>
-			pixels.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>fd 50</code></div>
-		<img src="images/library_samples/fd.png"/><br/>
-
-	<div id="lb_bk"> </div>
-	<br/>
-	<br/>
-	<h2>back / bk</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> back<br/>
-			<span class="type_style_Shortcut">Shortcut</span> bk<br/>
-			<span class="type_style_Related">Related</span> <a href="#/library/#lb_fd">forward</a><br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			back <span class="type_style_number">number</span><br/>
-			bk <span class="type_style_number">number</span><br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>back</b> or <b>bk</b> means "move backward". It is just the opposite
-			to <b>forward</b> or <b>fd</b>. By using this command, the turtle will
-			move backward for <span class="type_style_number">number</span>
-			pixels.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>bk 60</code></div>
-		<img src="images/library_samples/bk.png"/><br/>
-
-	<div id="lb_lt"> </div>
-	<br/>
-	<br/>
-	<h2>left / lt</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> left<br/>
-			<span class="type_style_Shortcut">Shortcut</span> lt<br/>
-			<span class="type_style_Related">Related</span> <a href="#/library/#lb_rt">right</a><br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			left <span class="type_style_number">number</span><br/>
-			lt <span class="type_style_number">number</span><br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>left</b> or <b>lt</b> means "turn left". The opposite command
-			would be <b>right</b> or <b>rt</b>. By using this command, the turtle will
-			turn left for <span class="type_style_number">number</span>
-			degrees.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			lt 70 <br/>
-			fd 50
-		</code></div>
-		<img src="images/library_samples/lt.png"/><br/>
-
-	<div id="lb_rt"> </div>
-	<br/>
-	<br/>
-	<h2>right / rt</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> right<br/>
-			<span class="type_style_Shortcut">Shortcut</span> rt<br/>
-			<span class="type_style_Related">Related</span> <a href="#/library/#lb_lt">left</a><br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			right <span class="type_style_number">number</span><br/>
-			rt <span class="type_style_number">number</span><br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>right</b> or <b>rt</b> means "turn right", which is the opposite to
-			<b>left</b> or <b>lt</b>. By using this command, the turtle will
-			turn right for <span class="type_style_number">number</span>
-			degrees.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			rt 90<br/>
-			fd -50
-		</code></div>
-		<img src="images/library_samples/rt.png"/><br/>
-
-	<div id="lb_make"> </div>
-	<br/>
-	<br/>
-	<h2>make</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> make<br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			make "<span class="type_style_variable">variable</span> <span class="type_style_expression">expression</span><br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>make</b> can be used to assign a value to a <span class="type_style_variable">variable</span>,
-			and you may used this <span class="type_style_variable">variable</span> in the following
-			program by writing a ":" mark followed by the <span class="type_style_variable">variable name</span>.
-			It may be hard to understand what is so called <span class="type_style_variable">variable</span>.
-			See the examples below and hopefully you will know the power of a <span class="type_style_variable">variable</span>.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>make "A 30 fd :A</code></div>
-		<img src="images/library_samples/make.png"/><br/>
-
-	<div id="lb_if"> </div>
-	<br/>
-	<br/>
-	<h2>if</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> if<br/>
-			<span class="type_style_Related">Related</span> <a href="#/library/#lb_else">else</a><br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			if <span class="type_style_condition">condition</span> [<span class="type_style_commands">commands</span>]<br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>if</b> is a very classical conditional statement. You can see this statement
-			in almost every programming language. The <span class="type_style_commands">commands</span>
-			would be executed only if the <span class="type_style_condition">condition</span> is true.
-			What if your want to execute other commands when the <span class="type_style_condition">condition</span>
-			is false? See <b>else</b> and you will get the answer.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			fd 30 <br/>
-			make "A 1 <br/>
-			if :A>0 [lt -90]<br/>
-			bk -40
-		</code></div>
-		<img src="images/library_samples/if.png"/><br/>
-
-	<div id="lb_else"> </div>
-	<br/>
-	<br/>
-	<h2>else</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> else<br/>
-			<span class="type_style_Related">Related</span> <a href="#/library/#lb_if">if</a><br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			if <span class="type_style_condition">condition</span> [<span class="type_style_commands">commands</span>]
-			else [<span class="type_style_commands">commands</span>]<br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>else</b> can not be used individually without <b>if</b> statement.
-			By using <b>else</b> statement, you can assign <span class="type_style_commands">commands</span>
-			to execute not only when the <span class="type_style_condition">condition</span> is true,
-			but also when it is false.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			bk 50 <br/>
-			make "A 1 <br/>
-			if :A>2 [rt 60] else [lt 60] <br/>
-			fd 50
-		</code></div>
-		<img src="images/library_samples/else.png"/><br/>
-
-	<div id="lb_repeat"> </div>
-	<br/>
-	<br/>
-	<h2>repeat</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> repeat<br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			repeat <span class="type_style_number">number</span> [<span class="type_style_commands">commands</span>]<br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>repeat</b> in Logo can be considered as a simple version of <b>for</b> statement
-			in other languages. The <span class="type_style_commands">commands</span>
-			would be executed for <span class="type_style_number">number</span> times.
-			Although any real number can be accepted as the <span class="type_style_number">number</span>
-			parameter by the compiler. You are still encouraged to use a none negative integer.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			repeat 36 <br/>
-			[ <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
-			]
-		</code></div>
-		<img src="images/library_samples/repeat.png"/><br/>
-
-	<div id="lb_pu"> </div>
-	<br/>
-	<br/>
-	<h2>penup / pu</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> penup<br/>
-			<span class="type_style_Shortcut">Shortcut</span> pu<br/>
-			<span class="type_style_Related">Related</span> <a href="#/library/#lb_pd">pendown</a><br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			penup<br/>
-			pu<br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>penup</b> or <b>pu</b> is used to "pick up" the turtle from the canvas.
-			After using this command, the following movement of the turtle will
-			not be drawn on canvas, although the turtle will still move follow the commands.
-			What if you want to "put down" the turtle? Use <b>pendown</b>!<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			make "A 0 <br/>
-			repeat 36 <br/>
-			[ <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;if :A>20 [pu] <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;make "A :A+1 <br/>
-			]
-		</code></div>
-		<img src="images/library_samples/pu.png"/><br/>
-
-	<div id="lb_pd"> </div>
-	<br/>
-	<br/>
-	<h2>pendown / pd</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> pendown<br/>
-			<span class="type_style_Shortcut">Shortcut</span> pd<br/>
-			<span class="type_style_Related">Related</span> <a href="#/library/#lb_pu">penup</a><br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			pendown<br/>
-			pd<br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>pendown</b> or <b>pd</b> is used to "put down" the turtle onto the canvas
-			after <b>penup</b> has been used. You do not need to initialize the canvas
-			because the turtle is "down" by default.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			make "A 0 <br/>
-			repeat 36 <br/>
-			[ <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;if :A==0 [pd] else [pu] <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;make "A 1-:A <br/>
-			]
-		</code></div>
-		<img src="images/library_samples/pd.png"/><br/>
-
-	<div id="lb_pw"> </div>
-	<br/>
-	<br/>
-	<h2>penwidth / pw</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> penwidth<br/>
-			<span class="type_style_Shortcut">Shortcut</span> pw<br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			penwidth <span class="type_style_number">number</span><br/>
-			pw <span class="type_style_number">number</span><br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			Find the lines too thin? Set the width for the lines by yourself using
-			<b>penwidth</b>. The following lines would be drew in the width of <span class="type_style_number">number</span>
-			pixels.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			make "A 0 <br/>
-			repeat 36 <br/>
-			[ <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;if :A==0 [penwidth 1] else [penwidth 5] <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;make "A 1-:A <br/>
-			]
-		</code></div>
-		<img src="images/library_samples/penwidth.png"/><br/>
-
-	<div id="lb_color"> </div>
-	<br/>
-	<br/>
-	<h2>color</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> color<br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			color [<span class="type_style_number">number</span> <span class="type_style_number">number</span> <span class="type_style_number">number</span>]<br/>
-			color [<span class="type_style_number">#3-byte RGB code</span>]
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			Do not like the boring black turtle and lines? You can set them to your own colours
-			using <b>color</b> command. The three <span class="type_style_number">number</span>s
-			represent the RGB value (from 0 to 255) of the following lines. The <span class="type_style_number">3-byte RGB code</span>
-			should be write in term of 3 hexadecimal number (66CCFF, for example).If you do not know what is
-			RGB and what is hexadecimal number, you can just pick one colour by clicking the "color" button under the canvas.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			make "A 0 <br/>
-			repeat 36 <br/>
-			[ <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;if :A==0 [color [0 255 255]] else [color [255 0 0]] <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;make "A 1-:A <br/>
-			]
-		</code></div>
-		<img src="images/library_samples/color.png"/><br/>
-
-	<div id="lb_cs"> </div>
-	<br/>
-	<br/>
-	<h2>clearscreen / cs</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> clearscreen<br/>
-			<span class="type_style_Shortcut">Shortcut</span> cs<br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			clearscreen<br/>
-			cs<br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			Command <b>clearscreen / cs</b> is for clear the canvas. All the lines that has been
-			drawn will be cleaned. But neither the turtle would return "home", nor the
-			background colour would be cleaned.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			make "A 0 <br/>
-			repeat 36 <br/>
-			[ <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;if :A==20 [clearscreen] <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;make "A :A+1 <br/>
-			]
-		</code></div>
-		<img src="images/library_samples/clearscreen.png"/><br/>
-
-	<div id="lb_home"> </div>
-	<br/>
-	<br/>
-	<h2>home</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> home<br/>
-			<span class="type_style_Related">Related</span> <a href="#/library/#lb_setxy">setxy</a><br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			home<br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			By using <b>home</b> command, you can move the turtle back to the centre of the
-			canvas and reset the direction it is pointing to to upward direction. Notice that if <b>penup</b>
-			is not used before <b>home</b>, a lined will be drew from the original position to
-			the "home".<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			repeat 18 <br/>
-			[ <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
-			] <br/>
-			home
-		</code></div>
-		<img src="images/library_samples/home.png"/><br/>
-
-	<div id="lb_setxy"> </div>
-	<br/>
-	<br/>
-	<h2>setxy</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> setxy<br/>
-			<span class="type_style_Related">Related</span> <a href="#/library/#lb_home">home</a><br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			setxy <span class="type_style_number">number</span> <span class="type_style_number">number</span><br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			<b>setxy</b> is not a standard Logo command, so we do not encourage you to
-			use it in your program. Abuse of <b>setxy</b> can destroy both your code and
-			your picture. But if you find it very important to you. Just feel free to use
-			it. <b>setxy</b> can be regarded as a special version of <b>home</b>. The two
-			<span class="type_style_number">number</span>s represent the coordinate position
-			of the destination on canvas (the (0,0) is at the left-bottom of the canvas).
-			Please notice that unlike <b>home</b>, the direction of the turtle will not be reset.<br/>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			make "A 0 <br/>
-			repeat 36 <br/>
-			[ <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;if :A==18 [setxy 250 250] <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;make "A :A+1<br/>
-			] <br/>
-			home
-		</code></div>
-		<img src="images/library_samples/setxy.png"/><br/>
-
-	<div id="lb_to"> </div>
-	<br/>
-	<br/>
-	<h2>to &amp; end</h2>
-		<h3>Name:</h3>
-		<p>
-			<span class="type_style_Standard">Standard</span> to<br/>
-			<span class="type_style_Standard">Standard</span> end<br/>
-		</p>
-
-		<h3>Syntax:</h3>
-		<p>
-			to <span class="type_style_function">function</span>
-				<span class="type_style_parameter">:parameter1</span>
-				<span class="type_style_parameter">:parameter2</span>
-				<span class="type_style_parameter">...</span><br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;<span class="type_style_commands">commands</span><br/>
-			end<br/><br/>
-
-			<span class="type_style_function">function</span>
-				<span class="type_style_number">number1</span>
-				<span class="type_style_number">number2</span>
-				<span class="type_style_parameter">...</span><br/>
-		</p>
-
-		<h3>What's this?</h3>
-		<p>
-			The <b>to</b> and <b>end</b> sentence can define a <span class="type_style_function">function</span> in the program.
-			You may wonder what is a <span class="type_style_function">function</span>? Well, it is quite hard to explain. As a beginner
-			to programming, you may only need to know that by using this tricky thing, you no more
-			need to write those duplicated code. You can just put them into a <span class="type_style_function">function</span> and "call"
-			that <span class="type_style_function">function</span> every time you need it.<br/><br/>
-			Oh, wait. I just forgot to tell you how to use the <span class="type_style_function">function</span>.
-			Before you can call a <span class="type_style_function">function</span>, you must define that
-			<span class="type_style_function">function</span> just using <b>to & end</b> sentence.
-			Please remember that a <span class="type_style_function">function name</span> can only be used once.
-			You may notice that there is some <span class="type_style_parameter">parameters</span> following after
-			the <span class="type_style_function">function</span>. They are just the <span class="type_style_variable">variable</span>
-			I introduced in the <b><a href="#/library/#lb_make">make</a></b> section. You can assign different values to those <span class="type_style_parameter">parameters</span>
-			to achieve different results. There is no limitation on the number of <span class="type_style_parameter">parameters</span>.
-			Which means you can define as much <span class="type_style_parameter">parameters</span> as you want. Of course,
-			you may also leave it blank if you do not need any. To call that <span class="type_style_function">function</span>,
-			just do like you use other sentences. write the <span class="type_style_function">function</span> followed by some
-			<span class="type_style_number">numbers</span> or <span class="type_style_variable">variables</span> to set those
-			<span class="type_style_parameter">parameters</span>. By the way, the number of the objects you give should be exactly equal
-			to the number of <span class="type_style_parameter">parameters</span> that you have defined, or there will be an error.<br/><br/>
-			If you are still confused, why not just look at the example?
-		</p>
-		<p class="for_export">
-			<i><b>If you are a beginner, you can just skip the following information:</b><br/><br/>
-			The <span class="type_style_parameter">parameters</span> are <span class="type_style_parameter">formal parameters</span>
-			they are just the copy of the origin. So make change of these <span class="type_style_parameter">parameters</span>
-			would not change the original object.<br/><br/>
-			You can call <span class="type_style_function">functions</span> inside a <span class="type_style_function">function</span>.
-			It can be other <span class="type_style_function">functions</span>, or just the <span class="type_style_function">function itself</span>
-			if you want to solve a problem in a recursive way.<br/><br/>
-			You can define a new <span class="type_style_function">function</span> inside a <span class="type_style_function">function</span>.
-			Since all the functions are global, it is not meaningful to do so.<br/><br/>
-			However, the <span class="type_style_variable">variables</span> declared in a <span class="type_style_function">function</span>
-			is local. It can not be used outside that <span class="type_style_function">function</span> and would be deleted when the
-			<span class="type_style_function">function</span> is end. Even if you call the same <span class="type_style_function">function</span>
-			again, the value would not be inherited.</i>
-		</p>
-
-		<h3>Example:</h3>
-		<div class="library_code"><code>
-			to MyFlower :DEG :LEN<br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;lt :DEG<br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;fd :LEN<br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;if :DEG<360<br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;[<br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;home<br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyFlower :DEG+10 :LEN<br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
-				end<br/>
-				MyFlower 0 70<br/>
-		</code></div>
-		<img src="images/library_samples/to.png"/><br/>
-		</div>
+	<div id="lb_fd">
+		<br/>
+		<br/>
+		<h2>forward / fd</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> forward<br/>
+				<span class="type_style_Shortcut">Shortcut</span> fd<br/>
+				<span class="type_style_Related">Related</span> <a href="#/library/#lb_bk">back</a><br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				forward <span class="type_style_number">number</span><br/>
+				fd <span class="type_style_number">number</span><br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>forward</b> or <b>fd</b> means "move forward". The opposite command
+				is <b>back</b> or <b>bk</b>. By using this command, the turtle will
+				move forward for <span class="type_style_number">number</span>
+				pixels.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>fd 50</code></div>
+			<img src="images/library_samples/fd.png"/><br/>
+	</div>
+
+	<div id="lb_bk">
+		<br/>
+		<br/>
+		<h2>back / bk</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> back<br/>
+				<span class="type_style_Shortcut">Shortcut</span> bk<br/>
+				<span class="type_style_Related">Related</span> <a href="#/library/#lb_fd">forward</a><br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				back <span class="type_style_number">number</span><br/>
+				bk <span class="type_style_number">number</span><br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>back</b> or <b>bk</b> means "move backward". It is just the opposite
+				to <b>forward</b> or <b>fd</b>. By using this command, the turtle will
+				move backward for <span class="type_style_number">number</span>
+				pixels.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>bk 60</code></div>
+			<img src="images/library_samples/bk.png"/><br/>
+	</div>
+
+	<div id="lb_lt">
+		<br/>
+		<br/>
+		<h2>left / lt</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> left<br/>
+				<span class="type_style_Shortcut">Shortcut</span> lt<br/>
+				<span class="type_style_Related">Related</span> <a href="#/library/#lb_rt">right</a><br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				left <span class="type_style_number">number</span><br/>
+				lt <span class="type_style_number">number</span><br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>left</b> or <b>lt</b> means "turn left". The opposite command
+				would be <b>right</b> or <b>rt</b>. By using this command, the turtle will
+				turn left for <span class="type_style_number">number</span>
+				degrees.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				lt 70 <br/>
+				fd 50
+			</code></div>
+			<img src="images/library_samples/lt.png"/><br/>
+	</div>
+
+	<div id="lb_rt">
+		<br/>
+		<br/>
+		<h2>right / rt</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> right<br/>
+				<span class="type_style_Shortcut">Shortcut</span> rt<br/>
+				<span class="type_style_Related">Related</span> <a href="#/library/#lb_lt">left</a><br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				right <span class="type_style_number">number</span><br/>
+				rt <span class="type_style_number">number</span><br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>right</b> or <b>rt</b> means "turn right", which is the opposite to
+				<b>left</b> or <b>lt</b>. By using this command, the turtle will
+				turn right for <span class="type_style_number">number</span>
+				degrees.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				rt 90<br/>
+				fd -50
+			</code></div>
+			<img src="images/library_samples/rt.png"/><br/>
+	</div>
+
+	<div id="lb_make">
+		<br/>
+		<br/>
+		<h2>make</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> make<br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				make "<span class="type_style_variable">variable</span> <span class="type_style_expression">expression</span><br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>make</b> can be used to assign a value to a <span class="type_style_variable">variable</span>,
+				and you may used this <span class="type_style_variable">variable</span> in the following
+				program by writing a ":" mark followed by the <span class="type_style_variable">variable name</span>.
+				It may be hard to understand what is so called <span class="type_style_variable">variable</span>.
+				See the examples below and hopefully you will know the power of a <span class="type_style_variable">variable</span>.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>make "A 30 fd :A</code></div>
+			<img src="images/library_samples/make.png"/><br/>
+	</div>
+
+	<div id="lb_if">
+		<br/>
+		<br/>
+		<h2>if</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> if<br/>
+				<span class="type_style_Related">Related</span> <a href="#/library/#lb_else">else</a><br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				if <span class="type_style_condition">condition</span> [<span class="type_style_commands">commands</span>]<br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>if</b> is a very classical conditional statement. You can see this statement
+				in almost every programming language. The <span class="type_style_commands">commands</span>
+				would be executed only if the <span class="type_style_condition">condition</span> is true.
+				What if your want to execute other commands when the <span class="type_style_condition">condition</span>
+				is false? See <b>else</b> and you will get the answer.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				fd 30 <br/>
+				make "A 1 <br/>
+				if :A>0 [lt -90]<br/>
+				bk -40
+			</code></div>
+			<img src="images/library_samples/if.png"/><br/>
+	</div>
+
+	<div id="lb_else">
+		<br/>
+		<br/>
+		<h2>else</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> else<br/>
+				<span class="type_style_Related">Related</span> <a href="#/library/#lb_if">if</a><br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				if <span class="type_style_condition">condition</span> [<span class="type_style_commands">commands</span>]
+				else [<span class="type_style_commands">commands</span>]<br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>else</b> can not be used individually without <b>if</b> statement.
+				By using <b>else</b> statement, you can assign <span class="type_style_commands">commands</span>
+				to execute not only when the <span class="type_style_condition">condition</span> is true,
+				but also when it is false.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				bk 50 <br/>
+				make "A 1 <br/>
+				if :A>2 [rt 60] else [lt 60] <br/>
+				fd 50
+			</code></div>
+			<img src="images/library_samples/else.png"/><br/>
+	</div>
+
+	<div id="lb_repeat">
+		<br/>
+		<br/>
+		<h2>repeat</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> repeat<br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				repeat <span class="type_style_number">number</span> [<span class="type_style_commands">commands</span>]<br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>repeat</b> in Logo can be considered as a simple version of <b>for</b> statement
+				in other languages. The <span class="type_style_commands">commands</span>
+				would be executed for <span class="type_style_number">number</span> times.
+				Although any real number can be accepted as the <span class="type_style_number">number</span>
+				parameter by the compiler. You are still encouraged to use a none negative integer.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				repeat 36 <br/>
+				[ <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
+				]
+			</code></div>
+			<img src="images/library_samples/repeat.png"/><br/>
+	</div>
+
+	<div id="lb_pu">
+		<br/>
+		<br/>
+		<h2>penup / pu</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> penup<br/>
+				<span class="type_style_Shortcut">Shortcut</span> pu<br/>
+				<span class="type_style_Related">Related</span> <a href="#/library/#lb_pd">pendown</a><br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				penup<br/>
+				pu<br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>penup</b> or <b>pu</b> is used to "pick up" the turtle from the canvas.
+				After using this command, the following movement of the turtle will
+				not be drawn on canvas, although the turtle will still move follow the commands.
+				What if you want to "put down" the turtle? Use <b>pendown</b>!<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				make "A 0 <br/>
+				repeat 36 <br/>
+				[ <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;if :A>20 [pu] <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;make "A :A+1 <br/>
+				]
+			</code></div>
+			<img src="images/library_samples/pu.png"/><br/>
+	</div>
+
+	<div id="lb_pd">
+		<br/>
+		<br/>
+		<h2>pendown / pd</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> pendown<br/>
+				<span class="type_style_Shortcut">Shortcut</span> pd<br/>
+				<span class="type_style_Related">Related</span> <a href="#/library/#lb_pu">penup</a><br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				pendown<br/>
+				pd<br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>pendown</b> or <b>pd</b> is used to "put down" the turtle onto the canvas
+				after <b>penup</b> has been used. You do not need to initialize the canvas
+				because the turtle is "down" by default.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				make "A 0 <br/>
+				repeat 36 <br/>
+				[ <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;if :A==0 [pd] else [pu] <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;make "A 1-:A <br/>
+				]
+			</code></div>
+			<img src="images/library_samples/pd.png"/><br/>
+	</div>
+
+	<div id="lb_pw">
+		<br/>
+		<br/>
+		<h2>penwidth / pw</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> penwidth<br/>
+				<span class="type_style_Shortcut">Shortcut</span> pw<br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				penwidth <span class="type_style_number">number</span><br/>
+				pw <span class="type_style_number">number</span><br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				Find the lines too thin? Set the width for the lines by yourself using
+				<b>penwidth</b>. The following lines would be drew in the width of <span class="type_style_number">number</span>
+				pixels.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				make "A 0 <br/>
+				repeat 36 <br/>
+				[ <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;if :A==0 [penwidth 1] else [penwidth 5] <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;make "A 1-:A <br/>
+				]
+			</code></div>
+			<img src="images/library_samples/penwidth.png"/><br/>
+	</div>
+
+	<div id="lb_color">
+		<br/>
+		<br/>
+		<h2>color</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> color<br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				color [<span class="type_style_number">number</span> <span class="type_style_number">number</span> <span class="type_style_number">number</span>]<br/>
+				color [<span class="type_style_number">#3-byte RGB code</span>]
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				Do not like the boring black turtle and lines? You can set them to your own colours
+				using <b>color</b> command. The three <span class="type_style_number">number</span>s
+				represent the RGB value (from 0 to 255) of the following lines. The <span class="type_style_number">3-byte RGB code</span>
+				should be write in term of 3 hexadecimal number (66CCFF, for example).If you do not know what is
+				RGB and what is hexadecimal number, you can just pick one colour by clicking the "color" button under the canvas.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				make "A 0 <br/>
+				repeat 36 <br/>
+				[ <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;if :A==0 [color [0 255 255]] else [color [255 0 0]] <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;make "A 1-:A <br/>
+				]
+			</code></div>
+			<img src="images/library_samples/color.png"/><br/>
+	</div>
+
+	<div id="lb_cs">
+		<br/>
+		<br/>
+		<h2>clearscreen / cs</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> clearscreen<br/>
+				<span class="type_style_Shortcut">Shortcut</span> cs<br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				clearscreen<br/>
+				cs<br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				Command <b>clearscreen / cs</b> is for clear the canvas. All the lines that has been
+				drawn will be cleaned. But neither the turtle would return "home", nor the
+				background colour would be cleaned.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				make "A 0 <br/>
+				repeat 36 <br/>
+				[ <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;if :A==20 [clearscreen] <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;make "A :A+1 <br/>
+				]
+			</code></div>
+			<img src="images/library_samples/clearscreen.png" /><br/>
+	</div>
+
+	<div id="lb_home">
+		<br/>
+		<br/>
+		<h2>home</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> home<br/>
+				<span class="type_style_Related">Related</span> <a href="#/library/#lb_setxy">setxy</a><br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				home<br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				By using <b>home</b> command, you can move the turtle back to the centre of the
+				canvas and reset the direction it is pointing to to upward direction. Notice that if <b>penup</b>
+				is not used before <b>home</b>, a lined will be drew from the original position to
+				the "home".<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				repeat 18 <br/>
+				[ <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
+				] <br/>
+				home
+			</code></div>
+			<img src="images/library_samples/home.png"/><br/>
+	</div>
+
+	<div id="lb_setxy">
+		<br/>
+		<br/>
+		<h2>setxy</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> setxy<br/>
+				<span class="type_style_Related">Related</span> <a href="#/library/#lb_home">home</a><br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				setxy <span class="type_style_number">number</span> <span class="type_style_number">number</span><br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				<b>setxy</b> is not a standard Logo command, so we do not encourage you to
+				use it in your program. Abuse of <b>setxy</b> can destroy both your code and
+				your picture. But if you find it very important to you. Just feel free to use
+				it. <b>setxy</b> can be regarded as a special version of <b>home</b>. The two
+				<span class="type_style_number">number</span>s represent the coordinate position
+				of the destination on canvas (the (0,0) is at the left-bottom of the canvas).
+				Please notice that unlike <b>home</b>, the direction of the turtle will not be reset.<br/>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				make "A 0 <br/>
+				repeat 36 <br/>
+				[ <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;if :A==18 [setxy 250 250] <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;make "A :A+1<br/>
+				] <br/>
+				home
+			</code></div>
+			<img src="images/library_samples/setxy.png"/><br/>
+	</div>
+
+	<div id="lb_to">
+		<br/>
+		<br/>
+		<h2>to &amp; end</h2>
+			<h3>Name:</h3>
+			<p>
+				<span class="type_style_Standard">Standard</span> to<br/>
+				<span class="type_style_Standard">Standard</span> end<br/>
+			</p>
+
+			<h3>Syntax:</h3>
+			<p>
+				to <span class="type_style_function">function</span>
+					<span class="type_style_parameter">:parameter1</span>
+					<span class="type_style_parameter">:parameter2</span>
+					<span class="type_style_parameter">...</span><br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;<span class="type_style_commands">commands</span><br/>
+				end<br/><br/>
+
+				<span class="type_style_function">function</span>
+					<span class="type_style_number">number1</span>
+					<span class="type_style_number">number2</span>
+					<span class="type_style_parameter">...</span><br/>
+			</p>
+
+			<h3>What's this?</h3>
+			<p>
+				The <b>to</b> and <b>end</b> sentence can define a <span class="type_style_function">function</span> in the program.
+				You may wonder what is a <span class="type_style_function">function</span>? Well, it is quite hard to explain. As a beginner
+				to programming, you may only need to know that by using this tricky thing, you no more
+				need to write those duplicated code. You can just put them into a <span class="type_style_function">function</span> and "call"
+				that <span class="type_style_function">function</span> every time you need it.<br/><br/>
+				Oh, wait. I just forgot to tell you how to use the <span class="type_style_function">function</span>.
+				Before you can call a <span class="type_style_function">function</span>, you must define that
+				<span class="type_style_function">function</span> just using <b>to & end</b> sentence.
+				Please remember that a <span class="type_style_function">function name</span> can only be used once.
+				You may notice that there is some <span class="type_style_parameter">parameters</span> following after
+				the <span class="type_style_function">function</span>. They are just the <span class="type_style_variable">variable</span>
+				I introduced in the <b><a href="#/library/#lb_make">make</a></b> section. You can assign different values to those <span class="type_style_parameter">parameters</span>
+				to achieve different results. There is no limitation on the number of <span class="type_style_parameter">parameters</span>.
+				Which means you can define as much <span class="type_style_parameter">parameters</span> as you want. Of course,
+				you may also leave it blank if you do not need any. To call that <span class="type_style_function">function</span>,
+				just do like you use other sentences. write the <span class="type_style_function">function</span> followed by some
+				<span class="type_style_number">numbers</span> or <span class="type_style_variable">variables</span> to set those
+				<span class="type_style_parameter">parameters</span>. By the way, the number of the objects you give should be exactly equal
+				to the number of <span class="type_style_parameter">parameters</span> that you have defined, or there will be an error.<br/><br/>
+				If you are still confused, why not just look at the example?
+			</p>
+			<p class="for_export">
+				<i><b>If you are a beginner, you can just skip the following information:</b><br/><br/>
+				The <span class="type_style_parameter">parameters</span> are <span class="type_style_parameter">formal parameters</span>
+				they are just the copy of the origin. So make change of these <span class="type_style_parameter">parameters</span>
+				would not change the original object.<br/><br/>
+				You can call <span class="type_style_function">functions</span> inside a <span class="type_style_function">function</span>.
+				It can be other <span class="type_style_function">functions</span>, or just the <span class="type_style_function">function itself</span>
+				if you want to solve a problem in a recursive way.<br/><br/>
+				You can define a new <span class="type_style_function">function</span> inside a <span class="type_style_function">function</span>.
+				Since all the functions are global, it is not meaningful to do so.<br/><br/>
+				However, the <span class="type_style_variable">variables</span> declared in a <span class="type_style_function">function</span>
+				is local. It can not be used outside that <span class="type_style_function">function</span> and would be deleted when the
+				<span class="type_style_function">function</span> is end. Even if you call the same <span class="type_style_function">function</span>
+				again, the value would not be inherited.</i>
+			</p>
+
+			<h3>Example:</h3>
+			<div class="library_code"><code>
+				to MyFlower :DEG :LEN<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;lt :DEG<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;fd :LEN<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;if :DEG<360<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;[<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;home<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyFlower :DEG+10 :LEN<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+					end<br/>
+					MyFlower 0 70<br/>
+			</code></div>
+			<img src="images/library_samples/to.png"/><br/>
+			</div>
+	</div>
 </div>
