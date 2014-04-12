@@ -8,7 +8,6 @@ module.exports = function(app) {
 		var user = req.user;
 
 		var q = req.query.q;
-		console.log(q);
 		if(q == "like"){
 			User.findById(user._id, function(err, user){
 				console.log(user.notification);

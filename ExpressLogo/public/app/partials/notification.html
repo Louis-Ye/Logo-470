@@ -30,7 +30,7 @@
 	<tbody>
 		<tr ng-repeat="comment in comments">
 			<td>{{comment.date}}</td>
-			<td>{{comment.author.name}} <img ng-src="{{comment.author.avatar}}" /></td>
+			<td><img ng-src="{{comment.author.avatar}}" height="20" width="20" /> &nbsp{{comment.author.name}} </td>
 			<td><a href="/#/gallerylist/{{comment.postId}}">{{comment.content}}</a></td>
 		</tr></b>
 	</tbody>
@@ -51,7 +51,7 @@
 	<tbody>
 		<tr ng-repeat="like in likes">
 			<td>{{like.date}}</td>
-			<td>{{like.liker.name}} <img ng-src="{{like.liker.avatar}}" /></td>
+			<td><img ng-src="{{like.liker.avatar}}" height="20" width="20" /> &nbsp{{like.liker.name}} </td>
 			<td><a href="/#/gallerylist/{{like.postId}}">goto</a></td>
 		</tr>
 	</tbody>

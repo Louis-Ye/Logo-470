@@ -7,14 +7,12 @@ module.exports = function(app) {
 
 	//share a post(login first)
 	app.post('/share', function(req, res){
-		//console.log(req.body);
 		if(!req.user){
 			res.send({ message: "not logged in"});
 		}
 		else {
 			var user = req.user;
 			var register = req.user.register;
-			//console.log(user);
 			var newpost = new Post({
 				author : {
 					id: user._id,
@@ -40,8 +38,6 @@ module.exports = function(app) {
 			res.send({ message: "not logged in"});
 		}
 		else {
-			console.log(req.body);
-			//TODO
 			var post_id = req.params.id;
 			var user = req.user;
 			var register = req.user.register;
@@ -67,25 +63,17 @@ module.exports = function(app) {
 				}
 
 			};
-			async.parallel([
-    			function(callback){
-        			//add comment to notification box
-        			User.findByIdAndUpdate(user._id, { $push: { 'notification.comment': notification }}, function(err, data){
+			Post.findByIdAndUpdate(post_id, { $push: {
+				comment: new_comment
+			} }, function(err, data){
+				if(err){
+					throw err;
+				}	
+				else {
+					var post_author_id = data.author.id;
+					User.findByIdAndUpdate(post_author_id, { $push: { 'notification.comment': notification }}, function(err, data){
         			});
-    			},
-    			function(callback){
-        			Post.findByIdAndUpdate(post_id, { $push: {
-						comment: new_comment
-					} }, function(err, data){
-						if(err) 
-							callback(null, err);
-						else 
-							callback(null, "success");
-					});
-    			}
-			],
-			function(err, results){	//empty callback
-				console.log(results);
+				}	
 			});
 			// Post.findByIdAndUpdate(post_id, { $push: {
 			// 	comment: new_comment
@@ -124,18 +112,12 @@ module.exports = function(app) {
 					callback(null, doc);
 				});
 			}
-			// function(callback){
-			// 	User.findByIdAndUpdate(user._id, { $push: { 'notification.like': like_notification }}, function(err, data){
-   //      		});
-			// }
 		],
 		function(err, result){
 			//doc stored as result[0]
 			var isLiked = false;
 			var post_author_id = result[0][0].author.id;
-			//console.log(post_author_id);
 			for (var i in result[0][0].likers){
-				//console.log(result[0][0].likers[i]);
 				if(result[0][0].likers[i].id == new_liker.id){
 					isLiked = true;
 				}
@@ -147,6 +129,9 @@ module.exports = function(app) {
 				Post.findByIdAndUpdate(post_id, { $inc: { like: 1 }, $push: { likers: new_liker }}, function(err, data){
 
 				});
+				User.findByIdAndUpdate(post_author_id, { $push: { 'notification.like': like_notification }}, function(err, data){
+   	    		});
+   	    		/*save method may lead to crash*/
 				// Post.findById(post_id, function(err, data){
 				// 	if(err) {
 				// 		message = "err";
@@ -163,8 +148,6 @@ module.exports = function(app) {
 				// 		})
 				// 	}
 				// });
-				User.findByIdAndUpdate(post_author_id, { $push: { 'notification.like': like_notification }}, function(err, data){
-   	    		});
 			}
 		});
 		/*not check repeat likes*/
@@ -210,6 +193,7 @@ module.exports = function(app) {
 		// 		});
 		// 	});
 		// });
+	
 		/*
 		* without pagination
 		*/
