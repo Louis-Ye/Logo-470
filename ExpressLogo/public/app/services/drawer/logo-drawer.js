@@ -34,14 +34,6 @@ var LogoDrawer =
 								[4,-2],[-4,-2],[0,-3],[1,-3],[-1,-3],
 								[3,-3],[-3,-3],[5,-3],[-5,-3],
 								[0,-4],[1,-5],[4,-4],[-4,-4]];
-								
-			function modTotateDegrees()
-			{
-				var floatDegree = rotateDegrees - (rotateDegrees>>0);
-				rotateDegrees = rotateDegrees>>0;
-				rotateDegrees %= 360;
-				rotateDegrees += floatDegree;
-			}
 			
 			function rotateX()
 			{
@@ -199,14 +191,14 @@ var LogoDrawer =
 			logoDrawer.turnLeftDegrees = function(inValue)
 			{
 				rotateDegrees += inValue;
-				modTotateDegrees();
+				rotateDegrees %= 360;
 				drawTurtle();	
 			}
 			
 			logoDrawer.turnRightDegrees = function(inValue)
 			{
 				rotateDegrees -= inValue;
-				modTotateDegrees();
+				rotateDegrees %= 360;
 				drawTurtle();	
 			}
 
