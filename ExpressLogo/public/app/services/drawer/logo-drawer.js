@@ -214,7 +214,7 @@ var LogoDrawer =
 			{
 				if (inValueX>maxMoveX) inValueX = maxMoveX;
 				if (inValueX<0) inValueX = 0;
-				if (inValueY>maxMovey) inValueY = maxMoveY;
+				if (inValueY>maxMoveY) inValueY = maxMoveY;
 				if (inValueY<0) inValueY = 0;
 				newPosition(inValueX,inValueY);
 				drawTurtle();
