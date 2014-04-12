@@ -3,22 +3,9 @@
 	<div id='library_toc'>
 		<h4 class='tocheader'>Contents</h4>
 		<ul>
-			<li class='toctext'><a href="#/library/#lb_fd">forward / fd</a></li>
-			<li class='toctext'><a href="#/library/#lb_bk">back / bk</a></li>
-			<li class='toctext'><a href="#/library/#lb_lt">left / lt</a></li>
-			<li class='toctext'><a href="#/library/#lb_rt">right / rt</a></li>
-			<li class='toctext'><a href="#/library/#lb_make">make</a></li>
-			<li class='toctext'><a href="#/library/#lb_if">if</a></li>
-			<li class='toctext'><a href="#/library/#lb_else">else</a></li>
-			<li class='toctext'><a href="#/library/#lb_repeat">repeat</a></li>
-			<li class='toctext'><a href="#/library/#lb_pu">penup / pu</a></li>
-			<li class='toctext'><a href="#/library/#lb_pd">pendown / pd</a></li>
-			<li class='toctext'><a href="#/library/#lb_pw">penwidth / pw</a></li>
-			<li class='toctext'><a href="#/library/#lb_color">color</a></li>
-			<li class='toctext'><a href="#/library/#lb_cs">clearscreen / cs</a></li>
-			<li class='toctext'><a href="#/library/#lb_home">home</a></li>
-			<li class='toctext'><a href="#/library/#lb_setxy">setxy</a></li>
-			<li class='toctext'><a href="#/library/#lb_to">to & end</a></li>
+			<li class="toctext" ng-repeat="command in commands">
+				<a href="" ng-click="jumpToCommand(command.id)">{{ command.name }}</a>
+			</li>
 		</ul>
 	</div>
 </div>
