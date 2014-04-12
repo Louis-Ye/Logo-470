@@ -65,28 +65,14 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 		window.location.href='#/gallery';
 	}	
 
-	function like(_id)
-	{
-		$scope.test = '/gallery/'+_id + '/like';
-		$http({
-			method: 'POST',
-			url: '/gallery/'+ _id + '/like',
-			data: _id,
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		})
-		.success(function (data) {
-			//success
-		})
-		.error(function (data) {
-			//failed
-		});
-	}
 
 	$scope.addone = function() {
+
+
 		$http({
 			method: 'POST',
 			url: '/gallery/'+ $scope.photo._id + '/like',
-			data: _id,
+			data: $scope.photo._id,
 			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		})
 		.success(function (data) {
@@ -94,8 +80,21 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 		})
 		.error(function (data) {
 			//failed
+		});		
+
+		$http({
+			method: 'GET',
+			url: '/user/'
+		}).success(function (data) {
+
+			if (data.email) {
+				$route.reload();
+			}
+			else {
+				window.location.href="/#/sign-in";
+			}
+		}).error(function (data) {
 		});
-		$route.reload();
 	}
 
 });

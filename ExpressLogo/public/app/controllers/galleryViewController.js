@@ -79,6 +79,20 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 		.error(function (data) {
 			//failed
 		});
+
+		$http({
+			method: 'GET',
+			url: '/user/'
+		}).success(function (data) {
+
+			if (data.email) {
+				$route.reload();
+			}
+			else {
+				window.location.href="/#/sign-in";
+			}
+		}).error(function (data) {
+		});
 	}
 
 	$scope.addone = function($photo) {
