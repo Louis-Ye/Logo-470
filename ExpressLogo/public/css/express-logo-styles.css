@@ -67,6 +67,21 @@ header .navbar .btn:hover {
 	background-color: #fffff5;
 }
 
+.view-animate.ng-enter{
+	-webkit-transition: 0.5s linear opacity;
+	-moz-transition: 0.5s linear opacity;
+	-o-transition: 0.5s linear opacity;
+	transition: 0.5s linear opacity;
+}
+
+.view-animate.ng-enter {
+	opacity:0;
+}
+
+.view-animate.ng-enter.ng-enter-active {
+	opacity: 1;
+}
+
 #homepage #hello {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
