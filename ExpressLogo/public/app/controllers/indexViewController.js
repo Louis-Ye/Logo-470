@@ -19,7 +19,5 @@ ExpressLOGOApp.controller('indexViewController', function ($scope, $element, $ht
 				$scope.top_right_button_name = "Sign in";
 			}
 		});
-		// $scope.top_right_button_href = "#/sign-in";
-		// $scope.top_right_button_name = "Sign in";
 	};
 });
