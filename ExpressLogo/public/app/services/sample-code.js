@@ -18,24 +18,24 @@ ExpressLOGOApp.service('sampleCodes', function () {
 			id: 3,
 			name: "Snow Flake",
 			src: "http://logo.twentygototen.org/",
-			code: "home cs\nto line :count :length\nif :count == 1 [fd :length]\nelse\n[\nmake \"count :count - 1\nline :count :length\nlt 60\nline :count :length\nrt 120 \nline :count :length\nlt 60 \nline :count :length\n]\nend\n\nto koch :count :length\nrt 30 line :count :length\nrt 120 line :count :length\nrt 120 line :count :length\nend\n\nhome cs\npenup\nsetxy 100 100\npendown\nkoch 5 2"
+			code: "to line :count :length\nif :count == 1 [fd :length]\nelse\n[\nmake \"count :count - 1\nline :count :length\nlt 60\nline :count :length\nrt 120 \nline :count :length\nlt 60 \nline :count :length\n]\nend\n\nto koch :count :length\nrt 30 line :count :length\nrt 120 line :count :length\nrt 120 line :count :length\nend\n\nhome cs\npenup\nsetxy 100 100\npendown\nkoch 5 2"
 		},
 		{
 			id: 4,
 			name: "Time Tunnel",
 			src: "http://logo.twentygototen.org/",
-			code: "home cs\nto spiral :w :a :x :c :ww\n    if :c == 0 [ pu pd ]\n    else [\n        penwidth :ww\n        color [ 255 - :w * 2 0 :w * 2 ]\n        lt :x\n        fd :w\n        pu\n        bk :w\n        rt :x\n        fd :w\n        pd\n        rt :a\n        spiral :w + 1 :a :x + 0.7 :c - 1 :ww + 0.1\n    ]\nend\n\nhome cs\nspiral 1 30 10 90 1"
+			code: "to spiral :w :a :x :c :ww\n    if :c == 0 [ pu pd ]\n    else [\n        penwidth :ww\n        color [ 255 - :w * 2 0 :w * 2 ]\n        lt :x\n        fd :w\n        pu\n        bk :w\n        rt :x\n        fd :w\n        pd\n        rt :a\n        spiral :w + 1 :a :x + 0.7 :c - 1 :ww + 0.1\n    ]\nend\n\nhome cs\nspiral 1 30 10 90 1"
 		},
 		{
 			id: 5,
 			name: "Colorful Snow Flake",
-			code: "home cs\nmake \"A 0\nmake \"B 0\nmake \"C 1\ncolor [:A :B :C]\nrepeat 12000\n[\n    to line :count :length\n    if :count == 1\n    [\n        fd :length\n        make \"C :C+10\n        if :C>255 [make \"C 1 make \"B :B+10]\n        if :B>255 [make \"B 1 make \"A :A+10]\n        if :A>255 [make \"A 1]\n        color [:A :B :C]\n    ]\n    else\n    [\n        make \"count :count - 1\n        line :count :length\n        lt 60\n        line :count :length\n        rt 120\n        line :count :length\n        lt 60\n        line :count :length\n    ]\n    end\n\n    to koch :count :length\n    rt 30 line :count :length\n    rt 120 line :count :length\n    rt 120 line :count :length\n    end\n\n    penup\n    setxy 100 100\n    pendown\n    koch 5 2\n\n    rt 90\n]"
+			code: "make \"A 0\nmake \"B 0\nmake \"C 1\ncolor [:A :B :C]\nrepeat 12000\n[\n    to line :count :length\n    if :count == 1\n    [\n        fd :length\n        make \"C :C+10\n        if :C>255 [make \"C 1 make \"B :B+10]\n        if :B>255 [make \"B 1 make \"A :A+10]\n        if :A>255 [make \"A 1]\n        color [:A :B :C]\n    ]\n    else\n    [\n        make \"count :count - 1\n        line :count :length\n        lt 60\n        line :count :length\n        rt 120\n        line :count :length\n        lt 60\n        line :count :length\n    ]\n    end\n\n    to koch :count :length\n    rt 30 line :count :length\n    rt 120 line :count :length\n    rt 120 line :count :length\n    end\n\n    penup\n    setxy 100 100\n    pendown\n    koch 5 2\n\n    rt 90\n]"
 		},
 		{
 			id: 6,
 			name: "Snake - Turtle",
 			src: "http://logo.twentygototen.org/",
-			code: "home cs\nto l :l :w\n    if :l == 0 [pd]\n    else [\n        rt 90\n        r :l - 1 :w\n        fd :w\n        lt 90\n        l :l - 1 :w\n        fd :w\n        l :l - 1 :w\n        lt 90\n        fd :w\n        r :l - 1 :w\n        rt 90\n    ]\nend\n\nto r :l :w\n    if :l == 0 [pd]\n    else [\n        lt 90\n        l :l - 1 :w\n        fd :w\n        rt 90\n        r :l - 1 :w\n        fd :w\n        r :l - 1 :w\n        right 90\n        fd :w\n        l :l - 1 :w\n        lt 90\n]\nend\n\nhome cs\npu setxy 60 10 pd\npenwidth 2\nl 6 6"
+			code: "to l :l :w\n    if :l == 0 [pd]\n    else [\n        rt 90\n        r :l - 1 :w\n        fd :w\n        lt 90\n        l :l - 1 :w\n        fd :w\n        l :l - 1 :w\n        lt 90\n        fd :w\n        r :l - 1 :w\n        rt 90\n    ]\nend\n\nto r :l :w\n    if :l == 0 [pd]\n    else [\n        lt 90\n        l :l - 1 :w\n        fd :w\n        rt 90\n        r :l - 1 :w\n        fd :w\n        r :l - 1 :w\n        right 90\n        fd :w\n        l :l - 1 :w\n        lt 90\n]\nend\n\nhome cs\npu setxy 60 10 pd\npenwidth 2\nl 6 6"
 		},
 		{
 			id: 7,
@@ -59,7 +59,7 @@ ExpressLOGOApp.service('sampleCodes', function () {
 			id: 10,
 			name: "Complex Circle",
 			src: "http://logo.twentygototen.org/",
-			code: "home cs\nto t :x :y :s :c\n    if :c == 0 [pu pd]\n    else [\n        setxy :x :y\n        fd :s+0.4*:s\n        rt 90\n        fd :s\n        bk :s*2\n        lt 90\n        t :x :y +10 :s +5 :c -1\n]\nend \n\nhome cs\nt 100 100 5 10\n \nhome\nto SK :H :A\n    repeat 2 [fd :H rt 90 fd :A rt 90]\nend\nto MONI :PIT :SIVUT\n    repeat :SIVUT [fd :PIT rt 360/:SIVUT]\nend\n\ncolor [0 255 255]\npenwidth 4\nsetxy 150 250\nrepeat 30 [\ncolor [0 225 225] \n    SK 20 200 \n    fd 20 \n    color [0 0 235] \n    MONI 70 6 \n    rt 360/30\n]"
+			code: "to t :x :y :s :c\n    if :c == 0 [pu pd]\n    else [\n        setxy :x :y\n        fd :s+0.4*:s\n        rt 90\n        fd :s\n        bk :s*2\n        lt 90\n        t :x :y +10 :s +5 :c -1\n]\nend \n\nhome cs\nt 100 100 5 10\n \nhome\nto SK :H :A\n    repeat 2 [fd :H rt 90 fd :A rt 90]\nend\nto MONI :PIT :SIVUT\n    repeat :SIVUT [fd :PIT rt 360/:SIVUT]\nend\n\ncolor [0 255 255]\npenwidth 4\nsetxy 150 250\nrepeat 30 [\ncolor [0 225 225] \n    SK 20 200 \n    fd 20 \n    color [0 0 235] \n    MONI 70 6 \n    rt 360/30\n]"
 		}
 	]
 });
