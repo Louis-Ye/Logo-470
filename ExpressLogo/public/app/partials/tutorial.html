@@ -9,7 +9,7 @@
 		<div ng-show='page_show[1]' ><h3>Draw a straight line:</h3>
 			<code>forward 50</code> || <code>fd 50</code>
 			<br>
-			<img src="/images/tutorial_samples/fd.png">
+			<img src="images/tutorial_samples/fd.png">
 		</div>
 		<div ng-show='page_show[1]' >
 
@@ -18,14 +18,14 @@
 			Backward move 50 pixels: <code>backword 50</code> || <code>bk 50</code><br>
 			Turtle left turns 90 degrees: <code>left 90</code> || <code>lt 90</code><br>
 			Turtle right turns 90 degrees: <code>right 90</code> || <code>rt 90</code><br>
-			
+
 		</div>
 
 
 		<div ng-show='page_show[2]' ><h3>Repeat commands</h3>
 			With repeat commands, you dont have to type same commands again and again.<br>
 			Try these codes: <code>repeat 36 [lt 10 fd 10]</code><br>
-			<img src="/images/tutorial_samples/repeat.png">
+			<img src="images/tutorial_samples/repeat.png">
 		</div>
 
 
@@ -40,7 +40,7 @@
 					&nbsp fd 10 <br>
 					&nbsp make "angle :angle - 1<br>
 				]<br></code><br>
-			<img src="/images/tutorial_samples/make_repeat.png">
+			<img src="images/tutorial_samples/make_repeat.png">
 		</div>
 
 
@@ -59,7 +59,7 @@
 					&nbsp ]<br>
 					&nbsp make "count :count + 1<br>
 				]<br></code><br>
-			<img src="/images/tutorial_samples/if.png">
+			<img src="images/tutorial_samples/if.png">
 		</div>
 
 
@@ -91,9 +91,9 @@
 			Try these codes:<br>
 			<code>to drawCircle <br>
 				&nbsp repeat 36 [lt 10 fd 10] <br>
-				end <br><br>		
+				end <br><br>
 				drawCircle</code><br>
-			<img src="/images/tutorial_samples/func_circle_1.png"><br>
+			<img src="images/tutorial_samples/func_circle_1.png"><br>
 
 			<h3>Use function with parameters</h3>
 			Try these codes:<br>
@@ -102,12 +102,12 @@
 				end <br><br>
 
 				make "i 5 <br>
-				repeat 5 [ <br> 
+				repeat 5 [ <br>
 				&nbsp drawCircle :i <br>
 				&nbsp make "i :i - 1 <br>
 				] <br>
 				</code><br>
-				<img src="/images/tutorial_samples/func_circle_2.png"><br>
+				<img src="images/tutorial_samples/func_circle_2.png"><br>
 		</div>
 
 
@@ -153,7 +153,7 @@ fd :B   ;  ':B' is not visible outside of the scope of the function body!
 				&nbsp drawCircle<br>
 				end <br><br>
 				drawCircle</code><br>
-			<img src="/images/tutorial_samples/resursive_call.png"><br>
+			<img src="images/tutorial_samples/resursive_call.png"><br>
 		</div>
 
 
@@ -175,7 +175,7 @@ repeat 256 [
 	make "i :i + 1
 ]
 				</code></pre>
-				<img src="/images/tutorial_samples/sample_1.png">
+				<img src="images/tutorial_samples/sample_1.png">
 			</div>
 
 			<hr>
@@ -185,13 +185,13 @@ repeat 256 [
 to line :count :length
 if :count == 1 [fd :length]
 else [
-	make "count2 :count - 1 
+	make "count2 :count - 1
 	line :count2 :length
-	lt 60 
+	lt 60
 	line :count2 :length
-	rt 120 
+	rt 120
 	line :count2 :length
-	lt 60 
+	lt 60
 	line :count2 :length
 ]
 end
@@ -208,7 +208,7 @@ setxy 100 100
 pendown
 koch 5 2
 				</code></pre>
-				<img src="/images/tutorial_samples/sample_2.png">
+				<img src="images/tutorial_samples/sample_2.png">
 			</div>
 
 			<hr>
@@ -226,7 +226,7 @@ else [
 	bk :w
 	rt :x
 	fd :w
-	pd 
+	pd
 	rt :a
 	spiral :w + 1 :a :x + 0.7 :c - 1 :ww + 0.1
 ]
@@ -235,7 +235,7 @@ end
 home cs
 spiral 1 30 10 90 1
 				</code></pre>
-				<img src="/images/tutorial_samples/sample_3.png">
+				<img src="images/tutorial_samples/sample_3.png">
 			</div>
 
 			<hr>
@@ -245,7 +245,7 @@ spiral 1 30 10 90 1
 to l :l :w
 if :l == 0 [pd]
 else [
-	rt 90 
+	rt 90
 	r :l - 1 :w
 	fd :w lt 90
 	l :l - 1 :w
@@ -278,7 +278,7 @@ pu setxy 60 10 pd
 penwidth 2
 l 6 6
 				</code></pre>
-				<img src="/images/tutorial_samples/sample_4.png">
+				<img src="images/tutorial_samples/sample_4.png">
 			</div>
 		</div>
 
