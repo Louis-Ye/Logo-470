@@ -6,12 +6,14 @@ var LogoDrawer =
 		var logoDrawer = {};
 		
 		//private:
+			var MAXLOOP = 20000;
 			var DTR = Math.PI/180;
 			var turtleSize = 1.5;
 			var width = 500;
 			var height = 400;
 			var maxMoveX = 500;
 			var maxMoveY = 400;
+			var maxfd = ((maxMoveX>maxMoveY)?maxMoveX:maxMoveY)*MAXLOOP;
 			var rotateDegrees;
 			var startPoint;
 			var canvasId;
@@ -33,6 +35,14 @@ var LogoDrawer =
 								[3,-3],[-3,-3],[5,-3],[-5,-3],
 								[0,-4],[1,-5],[4,-4],[-4,-4]];
 								
+			function modTotateDegrees()
+			{
+				var floatDegree = rotateDegrees - (rotateDegrees>>0);
+				rotateDegrees = rotateDegrees>>0;
+				rotateDegrees %= 360;
+				rotateDegrees += floatDegree;
+			}
+			
 			function rotateX()
 			{
 				return -Math.sin(rotateDegrees*DTR);
@@ -106,6 +116,8 @@ var LogoDrawer =
 					{
 						newX %= maxMoveX;
 						newY %= maxMoveY;
+						if (newX<0) newX+=maxMoveX;
+						if (newY<0) newY+=maxMoveY;
 					}
 				} else
 				{
@@ -153,7 +165,7 @@ var LogoDrawer =
 				startPoint.x = newX;
 				startPoint.y = newY;
 			}
-
+		
 		//public:
 		
 			//initialization
@@ -187,21 +199,20 @@ var LogoDrawer =
 			logoDrawer.turnLeftDegrees = function(inValue)
 			{
 				rotateDegrees += inValue;
-				if (rotateDegrees>=360) rotateDegrees -= 360;
-				if (rotateDegrees<0) rotateDegrees += 360;
+				modTotateDegrees();
 				drawTurtle();	
 			}
 			
 			logoDrawer.turnRightDegrees = function(inValue)
 			{
 				rotateDegrees -= inValue;
-				if (rotateDegrees>=360) rotateDegrees -= 360;
-				if (rotateDegrees<0) rotateDegrees += 360;
+				modTotateDegrees();
 				drawTurtle();	
 			}
 
 			logoDrawer.walkForwardLength = function(inValue)
 			{
+				if (inValue>maxfd) inValue = maxfd;
 				newPosition(startPoint.x + rotateX()*inValue,
 					startPoint.y + rotateY()*inValue);
 				drawTurtle();
@@ -209,6 +220,10 @@ var LogoDrawer =
 			
 			logoDrawer.setTurtlePosition = function(inValueX,inValueY)
 			{
+				if (inValueX>maxMoveX) inValueX = maxMoveX;
+				if (inValueX<0) inValueX = 0;
+				if (inValueY>maxMovey) inValueY = maxMoveY;
+				if (inValueY<0) inValueY = 0;
 				newPosition(inValueX,inValueY);
 				drawTurtle();
 			}
