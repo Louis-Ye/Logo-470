@@ -101,7 +101,6 @@ header .navbar .btn:hover {
 
 #play #console-pad {
 	padding-left: 50px;
-	/*position: relative;*/
 }
 
 #play #result-pad {
@@ -120,7 +119,6 @@ header .navbar .btn:hover {
 	width: 90%;
 	height: 200px;
 	border: 4px solid rgb(91, 184, 92);
-	/*border-right: 0;*/
 	border-top-left-radius: 0px;
 	border-top-right-radius: 0px;
 	border-bottom-left-radius: 4px;
@@ -151,20 +149,24 @@ header .navbar .btn:hover {
 }
 
 #play #slider-line {
+	width: 140px;
 	margin: 5px 15px;
 }
 
 #play #line-tip {
 	width: 50px;
+	border: 1px rgb(53, 126, 189) solid;
 	border-radius: 4px;
 }
 
 #play #slider-delay {
-	margin: 5px 15px;
+	width: 190px;
+	margin: 5px 20px;
 }
 
 #play #delay-tip {
-	width: 50px;
+	width: 80px;
+	border: 1px rgb(238, 162, 54) solid;
 	border-radius: 4px;
 }
 

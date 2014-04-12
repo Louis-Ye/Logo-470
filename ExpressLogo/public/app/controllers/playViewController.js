@@ -1,16 +1,34 @@
 ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleCodes, shareCode) {
 	var interpret_json;
 	var share_code;
+
 	init();
 
 	function callback (message) {
 		if (message) {
 			var result_pad = $('#result-pad');
-			// message = message.replace(/ /g, '&nbsp;');
-			// message = message.replace(/\n/g, '<br />');
 			result_pad.append('<div class="item">' + message + "</div>");
 			result_pad = document.getElementById('result-pad');
 			result_pad.scrollTop = result_pad.scrollHeight;
+		};
+	};
+
+	function setReady () {
+		$scope.ready = true;
+	};
+
+	function callInterpreter (src, message) {
+		if ($scope.ready) {
+			interpret_json.userTyping = message;
+			callback('<pre>' + interpret_json.userTyping + '</pre>');
+			$scope.ready = false;
+			interpret(interpret_json);
+		}
+		else {
+			callback('<p class="error">Turtle is running, please wait a moment! :)</p>');
+			if (src == "button") {
+				$('#code-pad').append(message + '\n');
+			};
 		};
 	};
 
@@ -19,6 +37,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		interpreterReset();
 		clearUndo();
 		initSlider();
+		$scope.ready = true;
 		$scope.pen_status = myCanvas.getDrawStatus();
 		$scope.border_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
@@ -26,7 +45,11 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 		$scope.sample_codes = sampleCodes.getSampleCodes();
 		share_code = shareCode.getShareCode();
 		if (share_code.code != "") {
-			show_code({name: "", src: "", code: share_code.code});
+			show_code({
+				name: "",
+				src: "",
+				code: share_code.code
+			});
 			shareCode.clearShareCode();
 		};
 		interpret_json = {
@@ -35,7 +58,8 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 			'debugMode': false,
 			'callback': callback,
 			'penStatusCallback': change_pen_status,
-			'turtleStatusCallback': change_turtle_status
+			'turtleStatusCallback': change_turtle_status,
+			'ready': setReady
 		};
 
 		$("footer .navbar").removeClass('navbar-static-bottom');
@@ -48,7 +72,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 	};
 
 	$('.tip').click(function () {
-		// $(this).next('input').focus();
 		return false;
 	});
 
@@ -73,9 +96,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 			animate: true,
 			change: function (event, ui) {
 				$("#line-tip").val(ui.value);
-				interpret_json.userTyping = "penwidth " + ui.value;
-				callback('<pre>' + interpret_json.userTyping + '</pre>');
-				interpret(interpret_json);
+				callInterpreter("button", "penwidth " + ui.value);
 			}
 		});
 	}
@@ -88,7 +109,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 			$(this).val(1000000);
 		};
 		$("#slider-delay").slider("value", $(this).val());
-		// interpret_json.delay = $(this).val() / 1000.0;
 	});
 
 	$('#line-tip').change(function () {
@@ -99,15 +119,10 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 			$(this).val(500);
 		};
 		$("#slider-line").slider("value", $(this).val());
-		// interpret_json.userTyping = "penwidth " + $(this).val();
-		// callback('<pre>' + interpret_json.userTyping + '</pre>');
-		// interpret(interpret_json);
 	});
 
 	$('#colorpalette-pen').colorPalette().on('selectColor', function(selectedColor) {
-		interpret_json.userTyping = "color [" + selectedColor.color + "]";
-		callback('<pre>' + interpret_json.userTyping + '</pre>');
-		interpret(interpret_json);
+		callInterpreter("button", "color [" + selectedColor.color + "]");
 	});
 
 	$('#colorpalette-background').colorPalette().on('selectColor', function(selectedColor) {
@@ -115,9 +130,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 	});
 
 	$scope.on_submit_clicked = function () {
-		callback('<pre>' + $('#code-pad').val() + '</pre>');
-		interpret_json.userTyping = $('#code-pad').val();
-		interpret(interpret_json);
+		callInterpreter("submit", $('#code-pad').val());
 		$('#code-pad').val("");
 		$('#code-pad-wrapper').html('<textarea id="code-pad" placeholder="Try something here!" autofocus spellcheck="false" onkeypress="return indentCode(id,event);" onkeydown="return ic_keydown(id,event);"></textarea>');
 		document.getElementById("code-pad").focus();
@@ -128,9 +141,7 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 	};
 
 	$scope.toggle_pen = function () {
-		interpret_json.userTyping = $scope.pen_status ? "penup" : "pendown";
-		callback('<pre>' + interpret_json.userTyping + '</pre>');
-		interpret(interpret_json);
+		callInterpreter("button", $scope.pen_status ? "penup" : "pendown");
 		$scope.pen_status = myCanvas.getDrawStatus();
 	};
 
@@ -144,28 +155,25 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 	};
 
 	$scope.toggle_turtle = function () {
-		interpret_json.userTyping = $scope.turtle_status ? "hideturtle" : "showturtle";
-		callback('<pre>' + interpret_json.userTyping + '</pre>');
-		interpret(interpret_json);
+		callInterpreter("button", $scope.turtle_status ? "hideturtle" : "showturtle");
 		$scope.turtle_status = myCanvas.getTurtleStatus();
 	};
 
 	$scope.clear_canvas = function () {
-		interpret_json.userTyping = "clearscreen";
-		callback('<pre>' + interpret_json.userTyping + '</pre>');
-		interpret(interpret_json);
+		callInterpreter("button", "clearscreen");
 	};
 
 	$scope.reset = function () {
 		clearUndo();
 		interpreterReset();
 		myCanvas.initCanvas();
+		initSlider();
+		$scope.ready = true;
 		$scope.message = "";
-		$('#code-pad').val("");
 		$scope.pen_status = myCanvas.getDrawStatus();
 		$scope.border_status = myCanvas.getBorderStatus();
 		$scope.turtle_status = myCanvas.getTurtleStatus();
-		initSlider();
+		$('#code-pad').val("");
 		$('#result-pad').empty();
 		interpret_json.delay = 1;
 	};
