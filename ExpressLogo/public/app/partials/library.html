@@ -303,7 +303,7 @@
 			[ <br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;if :A>20 pu <br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;if :A>20 [pu] <br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;make "A :A+1 <br/>
 			]
 		</code></div>
@@ -411,7 +411,7 @@
 			make "A 0 <br/>
 			repeat 36 <br/>
 			[ <br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;if :A==0 [color [255 0 0]] else [color [0 255 255]] <br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;if :A==0 [color [0 255 255]] else [color [255 0 0]] <br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;make "A 1-:A <br/>
@@ -523,6 +523,7 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;if :A==18 [setxy 250 250] <br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;lt 10 <br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;fd 10 <br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;make "A :A+1<br/>
 			] <br/>
 			home
 		</code></div>
