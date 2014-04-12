@@ -61,14 +61,6 @@ ExpressLOGOApp.controller('playViewController', function ($scope, $http, sampleC
 			'turtleStatusCallback': change_turtle_status,
 			'ready': setReady
 		};
-
-		$("footer .navbar").removeClass('navbar-static-bottom');
-		$("footer .navbar").addClass('navbar-fixed-bottom');
-
-		$scope.$on('$destroy', function() {
-			$("footer .navbar").addClass('navbar-static-bottom');
-			$("footer .navbar").removeClass('navbar-fixed-bottom');
-		});
 	};
 
 	$('.tip').click(function () {

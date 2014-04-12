@@ -1,12 +1,24 @@
 body {
 	padding-top: 70px;
 	padding-bottom: 0;
-	margin-bottom: -70px;
 	font-family: "Avenir Next", "Segoe UI", sans-serif !important;
 }
 
+html, body {
+	height: 100%;
+	position: relative;
+}
+
+#wrapper {
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 80px;
+}
+
 footer {
-	margin-top: 50px;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
 	padding-bottom: 0;
 	margin-bottom: 0;
 }
@@ -80,8 +92,7 @@ header .navbar .btn:hover {
 }
 
 #play {
-	margin-top: 20px;
-	padding-bottom: 70px;
+	padding-top: 20px;
 }
 
 #play #canvas-pad {
