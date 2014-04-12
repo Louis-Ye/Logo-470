@@ -65,4 +65,37 @@ ExpressLOGOApp.controller('gallerylistViewController', function ($scope, $http, 
 		window.location.href='#/gallery';
 	}	
 
+	function like(_id)
+	{
+		$scope.test = '/gallery/'+_id + '/like';
+		$http({
+			method: 'POST',
+			url: '/gallery/'+ _id + '/like',
+			data: _id,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		.success(function (data) {
+			//success
+		})
+		.error(function (data) {
+			//failed
+		});
+	}
+
+	$scope.addone = function() {
+		$http({
+			method: 'POST',
+			url: '/gallery/'+ $scope.photo._id + '/like',
+			data: _id,
+			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+		})
+		.success(function (data) {
+			//success
+		})
+		.error(function (data) {
+			//failed
+		});
+		$route.reload();
+	}
+
 });
