@@ -1,8 +1,8 @@
 
 var g_delay;
-var g_isDebugMode;
 var g_hasError;
 var g_noProcessWaitingTimeout;
+var g_programRunning;
 
 var g_tokens;
 
@@ -15,6 +15,8 @@ var g_stack = [];
 var given_penStatusCallback;
 var given_turtleStatusCallback;
 var given_callback;
+var given_ready;
+var given_debugMode;
 const g_callback = function(error, result) {
 	//console.log(result);
 	given_callback(error);
@@ -29,7 +31,8 @@ var g_runProgram = function() {
 	}
 	else {
 		g_noProcessWaitingTimeout = true;
-		g_curExeNode.execute();
+		if (g_programRunning) g_curExeNode.execute();
+		//else console.log(g_curExeNode);
 	}
 }
 
@@ -40,12 +43,14 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 	given_callback = arg.callback;
 	given_penStatusCallback = arg.penStatusCallback;
 	given_turtleStatusCallback = arg.turtleStatusCallback;
+	given_debugMode = arg.debugMode;
+	given_ready = arg.ready;
 
 	g_stack = [];
 	g_hasError = false;
-	g_delay = arg.delay;
-	g_debugMode = arg.debugMode;
+	g_programRunning = true;
 
+	g_delay = arg.delay;
 	if (g_delay < 1) {
 		g_max_command_count = 1.0 / g_delay;
 		if (g_max_command_count > 500) g_max_command_count = 500;
@@ -74,6 +79,7 @@ function interpret(arg) { //userTyping, delay, debugMode, callback
 
 	if (runTree) {
 		g_reseting = false;
+		g_curExeNode = g_programExeNode;
 		g_runProgram();
 	}
 };

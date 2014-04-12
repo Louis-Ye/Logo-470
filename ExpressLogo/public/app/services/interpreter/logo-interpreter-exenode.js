@@ -155,6 +155,11 @@ ExeNode.prototype.execute = function() {
 				setTimeOutAndNextExeNode(this);
 			}
 		}
+		else {
+			console.log("end of program");
+			g_programRunning = false;
+			given_ready();
+		}
 		return;
 	}
 
@@ -217,7 +222,10 @@ ExeNode.prototype.execute = function() {
 			else if (this.parent.nodeType == FUNC_DEF_TYPE) {
 				var symbolTableList = [];
 				while (true) {
-					//console.log(g_stack);
+					if (g_stack.length == 0) {
+						//console.log("!@#!@#");
+						return;
+					}
 					if ( g_stack[ g_stack.length - 1 ].nodeID ) break;
 					symbolTableList.push( g_stack.pop() );
 				}
