@@ -1,14 +1,15 @@
 <div id="gallerylist" class="container">
-	<div class = "row" >
+	<div class="row" >
 		<div class="col-xs-6 col-md-5">
 			<a class="thumbnail"><img ng-src="{{ photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
 		</div>	
+		<div class="col-xs-6 col-md-5">
+			<a class="thumbnail"><textarea id="code" class="form-control" rows="19">{{photo.code}}</textarea></a>
+		</div>
 	</div>	
 	<div class = "order_photo">
 		<label>Author:</label><p>{{photo.author.name}}</p>
 		<label>Create Date:</label><p>{{create_time}}</p>
-		<label>Code:</label>
-		<textarea id="code" class="form-control" rows="3">{{photo.code}}</textarea>
 		<table class="table table-striped">
 			<thead> <tr>
 				<th>Date</th>

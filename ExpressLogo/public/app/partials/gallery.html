@@ -11,7 +11,6 @@
 					</li>
 				</ul>
 		<div class="row">
-
 			 <ui class="photo">
 					<li ng-repeat="photo in items | offset: currentPage*itemsPerPage | limitTo: itemsPerPage" class="col-xs-6 col-md-5">
 						<a ng-href="#/gallerylist/{{photo._id}}" class="thumbnail"><img ng-src="{{ photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
