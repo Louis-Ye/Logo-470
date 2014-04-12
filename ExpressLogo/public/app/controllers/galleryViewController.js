@@ -59,6 +59,10 @@ ExpressLOGOApp.controller('galleryViewController', function ($scope, $http, $fil
 			$scope.currentPage = i;
 		}
 	
+	$scope.checkactive = function(n){
+		if (n === $scope.currentPage) return "active";
+		else return "";
+	}
 
 	function like(_id)
 	{
