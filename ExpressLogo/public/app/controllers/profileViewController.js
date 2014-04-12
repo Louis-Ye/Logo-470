@@ -17,7 +17,6 @@ ExpressLOGOApp.controller('profileViewController', function ($scope, $http, $rou
 	});
 
 	$scope.post_delete = function(postId){
-		console.log(postId);
 		$http({
 			method: 'DELETE',
 			url: '/profile/' + postId
