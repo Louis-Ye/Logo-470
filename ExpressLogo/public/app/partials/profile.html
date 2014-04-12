@@ -26,9 +26,9 @@
       			  <i class="fa fa-heart"></i>&nbsp; {{ post.like }}
       		  </div>
             <div class="col-xs-12 col-md-3">
-              <a class="btn btn-xs" data-toggle="modal" data-target="#del-confirm" data-ng-click="post_delete(post._id)"><i class="fa fa-trash-o fa-lg"></i></a>
+              <a class="btn btn-xs" data-toggle="modal" data-target="#del-confirm-{{post._id}}"><i class="fa fa-trash-o fa-lg"></i></a>
 
-<!--               <div class="modal fade" id="del-confirm">
+         <div class="modal fade" id="del-confirm-{{post._id}}">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -45,7 +45,8 @@
                   </div>
                 </div>
               </div>
- -->
+
+
             </div>
       		</div>
 
