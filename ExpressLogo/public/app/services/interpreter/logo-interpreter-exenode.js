@@ -217,6 +217,7 @@ ExeNode.prototype.execute = function() {
 			else if (this.parent.nodeType == FUNC_DEF_TYPE) {
 				var symbolTableList = [];
 				while (true) {
+					//console.log(g_stack);
 					if ( g_stack[ g_stack.length - 1 ].nodeID ) break;
 					symbolTableList.push( g_stack.pop() );
 				}
@@ -273,18 +274,22 @@ ExeNode.prototype.execute = function() {
 
 	if ( this.nodeType == FORWARD_TYPE ) {
 		var childrenValue = this.children[0].execute();
+		//console.log("fd " + childrenValue);
 		myCanvas.walkForwardLength(childrenValue);
 	}
 	if ( this.nodeType == BACKWARD_TYPE ) {
 		var childrenValue = this.children[0].execute();
+		//console.log("bk " + (-1) * childrenValue);
 		myCanvas.walkForwardLength((-1) * childrenValue);
 	}
 	if ( this.nodeType == LEFT_TYPE ) {
 		var childrenValue = this.children[0].execute();
+		//console.log("lt " + childrenValue);
 		myCanvas.turnLeftDegrees(childrenValue);
 	}
 	if ( this.nodeType == RIGHT_TYPE ) {
 		var childrenValue = this.children[0].execute();
+		//console.log("rt " + childrenValue); 
 		myCanvas.turnRightDegrees(childrenValue);
 	}
 
