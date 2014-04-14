@@ -2,7 +2,7 @@
 var LocalStrategy = require('passport-local').Strategy;
 var validator = require('validator');
 var crypto = require('crypto');
-var md5 = crypto.createHash('md5');
+// var md5 = crypto.createHash('md5');
 
 var User = require('../models/user');
 
@@ -59,7 +59,7 @@ module.exports = function(passport) {
                         newUser.register = 'local';
                         newUser.local.email = email;
                         newUser.local.name = email;
-                        newUser.local.avatar = "http://www.gravatar.com/avatar/" + md5.update(email.toLowerCase()).digest('hex') + "?d=retro&s=58";
+                        newUser.local.avatar = "http://www.gravatar.com/avatar/" +crypto.createHash('md5').update(email.toLowerCase()).digest('hex') + "?d=retro&s=58";
                         newUser.local.password = newUser.generateHash(password);
                         newUser.save(function(err) {
                             if (err)

@@ -9,14 +9,13 @@
 		<img ng-src="{{ user.avatar }}" class="img-thumbnail"/>
 	</fieldset>
 	<h3 class="text-info"> {{user.name}} </h3>
-
 </div>
 <div class="col-sm-9">
 	<h3>Posts</h3>
 	<div class = "row">
-		<div ng-if='message == "success"' ng-repeat="post in posts" class="col-xs-6 col-md-4">
+		<div ng-if='message == "success"' ng-repeat-start="post in posts" class="col-xs-6 col-md-4">
     		<a class="thumbnail" href="#/gallerylist/{{post._id}}">
-        	<img id="profile_pic" ng-src="{{ post.image_url }}" alt="">
+        	{{post._id}}<img id="profile_pic" ng-src="{{ post.image_url }}" alt="" />
       	</a>
       		<div class = "row">
             <div class="col-xs-12 col-md-6">
@@ -40,7 +39,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-danger" data-ng-click="post_delete(post._id)" data-dismiss="modal">Delete</button>
+                      <button type="button" class="btn btn-danger" data-ng-click="post_delete(post._id)" data-dismiss="modal">{{post._id}}Delete</button>
                     </div>
                   </div>
                 </div>
@@ -53,7 +52,7 @@
       		<div class = "row" ng-if="post.title"><p>{{post.title}}</p></div>
       		</br>
     	</div>
-      <div ng-if='message == "null"'>
+      <div ng-if='message == "null"' ng-repeat-end>
         <p>You have not posted anything yet. Go <a href="#/play">Play</a> and Share your codes!</p>
       </div>
 	</div>
