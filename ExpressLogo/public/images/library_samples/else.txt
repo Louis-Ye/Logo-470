@@ -1,0 +1,4 @@
+bk 50
+make "A 1
+if :A>2 [rt 60] else [lt 60]
+fd 50

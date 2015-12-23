@@ -1,0 +1,8 @@
+make "A 0
+repeat 36
+[
+    if :A==18 [setxy 250 250]
+    lt 10
+    fd 10
+]
+home

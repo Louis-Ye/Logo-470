@@ -1,0 +1,45 @@
+<!DOCTYPE HTML5>
+<html>
+<head>
+</head>
+
+<body>
+	<script src="logo-drawer.js" charset="utf-8"></script>
+	<script src="readPicture.js" charset="utf-8"></script>
+
+	<input type="file" id="img-input" onchange="readPicture(event,id);" hidden/>
+	<button id="add-image" type="button" class="btn btn-default" onclick="document.getElementById('img-input').click()">Image</button>
+
+	<canvas id="saving" width="500" height="400" style="position: absolute; z-index: 0">
+		Your browser does not support the canvas element.
+	</canvas>
+	<canvas id="bg" width="500" height="400" style="position: absolute; z-index: 1">
+	</canvas>
+	<canvas id="lines" width="500" height="400" style="position: absolute; z-index: 2">
+	</canvas>
+	<canvas id="turtle" width="500" height="400" style="position: absolute; z-index: 3">
+	</canvas>
+	<script>
+		myCanvas.initCanvas();
+		/*for (I =0; I<30;I++)
+		{
+			myCanvas.turnLeftDegrees(10);
+			myCanvas.walkForwardLength(5);
+			myCanvas.turnRightDegrees(20);
+			myCanvas.walkForwardLength(5);
+		}
+		myCanvas.setBackgroundColor("66ccff");
+		myCanvas.setTurtlePosition(100,100);*/
+		I=0;
+		myCanvas.setBackgroundColor("000000");
+		//myCanvas.noBorder();
+		var timer = setInterval(function () {
+			myCanvas.setPenColor((I%2==0)?"#0000ff":"#ff0000");
+			//myCanvas.setLineWidth((I%2==0)?5:1);
+			myCanvas.turnLeftDegrees(3.6);
+			myCanvas.walkForwardLength(20);
+			I++;
+        }, 10);
+	</script>
+</body>
+</html>

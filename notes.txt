@@ -1,0 +1,31 @@
+Express Logo - probably the best online Logo interpreter website in the world
+
+Working Components:
+
+1. Library(documentation) about Logo programming language.
+2. Tutorial of our website.
+3. Play Page - the Logo interpreter together with a canvas to draw
+	(1) You can share your work on our website so that everyone can see it!
+	(2) There is a bunch of interesting features in this page to discover!
+4. Gallery Page - the page where everyone can see patterns shared by the author.
+5. Commenting system
+	(1) Making comments about all the shared patterns.
+	(2) You can also “like” others’ works.
+6. Sign in and registration system
+	(1) Sign in with Facebook or Twitter account
+	(2) Register by email and password
+7. Account setting - change email, username and password
+8. Notification system - when there is new comments to the patterns you shared, the system will send notification to you.
+
+
+Features may be missed while marking:
+
+1. The diverse functions of the code editor in play page.
+	(1) type ‘[‘
+	(2) type something, and press shift + enter
+	(3) select some lines, and press tab or ‘;’
+	(4) between a '[]' press enter or backspace of delete.
+	(5) press ctrl+z or ctrl+y. (use command under Mac)
+2. Progress bar in Tutorial Page can be clicked.
+
+

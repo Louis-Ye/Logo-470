@@ -1,0 +1,32 @@
+<div id="gallerylist" class="container">
+	<div class="row" >
+		<div class="col-xs-6 col-md-5">
+			<a class="thumbnail"><img ng-src="{{ photo.image_url }}" alt="500x400" style="height: 400px; width: 500px; display: block;"></a>
+		</div>	
+		<div class="col-xs-6 col-md-5">
+			<a class="thumbnail"><textarea id="code" class="form-control" rows="19">{{photo.code}}</textarea></a>
+		</div>
+	</div>	
+	<p><button class="btn btn-primary" ng-click="addone()">Like({{ photo.like }})</button></p>
+	<div class = "order_photo">
+		<label>Author:</label><p>{{photo.author.name}}</p>
+		<label>Create Date:</label><p>{{create_time}}</p>
+		<table class="table table-striped">
+			<thead> <tr>
+				<th>Date</th>
+				<th>ID</th>
+				<th>Description</th> </tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in photo.comment"> <td>{{gettime(item.date)}}</td> <td>{{item.author.name}}</td> <td>{{item.content}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<label>Say something:</label>
+			<textarea id="cm" class="form-control" rows="3"></textarea>
+
+		<p><button class="btn btn-primary" ng-click="submit({{ photo }})">Submit</button>
+		   <button class="btn btn-default" ng-click="back()">Back</button></p>
+
+	</div>
+</div>

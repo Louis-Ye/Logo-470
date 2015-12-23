@@ -1,0 +1,167 @@
+#library
+{
+	height: 100%;
+	/*margin-left:20%;*/
+	/*margin-right:20%;*/
+}
+
+#library h2
+{
+	font-size: 40px;
+	font-weight:bold;
+	text-align:center;
+	background-color: #66CCFF;
+}
+
+#library p
+{
+	background-color: #EEEEFF;
+}
+
+#library .for_export
+{
+	background-color: #EEEECC;
+	font-size: 80%;
+	margin-left:10%;
+	margin-right:10%;
+}
+
+#library h3
+{
+	text-decoration: underline;
+}
+
+#library a:link
+{
+	text-decoration: none;
+	color: blue
+}
+
+#library a:active
+{
+	text-decoration: blink;
+	color: blue
+}
+
+#library a:visited
+{
+	text-decoration: none;
+	color: blue
+}
+
+#library a:hover
+{
+	text-decoration: underline;
+	color: red
+}
+
+#library #library_toc
+{
+	position:fixed;
+	margin-top:5%;
+	width:13em;
+	padding: 0em 1em;
+	border-style: solid;
+	background-color: #EEEEEE
+}
+
+#library .tocheader
+{
+	text-align:center;
+}
+
+#library .library_code
+{
+	margin-left:5%;
+}
+
+
+#library .type_style_number
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.1em;
+	font-weight:bold;
+	font-style: italic;
+	color: #229933;
+}
+
+#library .type_style_condition
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.1em;
+	font-weight:bold;
+	font-style: italic;
+	color: #223399;
+}
+
+#library .type_style_commands
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.1em;
+	font-weight:bold;
+	font-style: italic;
+	color: #993322;
+}
+
+#library .type_style_variable
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.1em;
+	font-weight:bold;
+	font-style: italic;
+	color: #555522;
+}
+
+#library .type_style_expression
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.1em;
+	font-weight:bold;
+	font-style: italic;
+	color: #339999;
+}
+
+#library .type_style_Standard
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.4em 0.02em 0.2em;
+	font-weight:bold;
+	font-style: italic;
+	color: #CC0000;
+}
+
+#library .type_style_Shortcut
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.4em 0.02em 0.2em;
+	font-weight:bold;
+	font-style: italic;
+	color: #00CC00;
+}
+
+#library .type_style_Related
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.4em 0.02em 0.2em;
+	font-weight:bold;
+	font-style: italic;
+	color: #0000CC;
+}
+
+#library .type_style_function
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.4em 0.02em 0.2em;
+	font-weight:bold;
+	font-style: italic;
+	color: #6600CC;
+}
+
+#library .type_style_parameter
+{
+	background-color: #CCCCCC;
+	padding: 0.02em 0.4em 0.02em 0.2em;
+	font-weight:bold;
+	font-style: italic;
+	color: #009999;
+}

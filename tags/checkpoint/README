@@ -1,0 +1,5 @@
+During past few weeks, our team is directly doing works under root directory, so the commit history of our project is on root directoy, which can not be copied here (svn copy does not allow a copy itself to its child) .
+
+You can see the complete commit-log history here on the root:
+https://punch.cs.sfu.ca/svn/CMPT470-1141-g-gem/
+

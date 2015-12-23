@@ -1,0 +1,263 @@
+body {
+	padding-top: 70px;
+	font-family: "Avenir Next", "Segoe UI", sans-serif !important;
+}
+
+html, body {
+	height: 100%;
+	position: relative;
+}
+
+#wrapper {
+	min-height: 100%;
+	position: relative;
+	padding-bottom: 80px;
+}
+
+footer {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+footer .navbar {
+	margin-bottom: 0;
+}
+
+a {
+	color: #df3505;
+}
+
+a:hover {
+	color: #ef5525;
+}
+
+::-moz-selection {
+	background: #f9eb87;
+	text-shadow: none;
+}
+::selection {
+	background: #f9eb87;
+	text-shadow: none;
+}
+
+header .navbar {
+	background-color: #ffe5a5;
+	border-color: #ffb515;
+}
+
+header .navbar .dropdown {
+	cursor: pointer;
+}
+
+header .navbar .open .dropdown-toggle {
+	background-color: #ffe9b5 !important;
+}
+
+header .navbar a {
+	color: #df3505 !important;
+}
+
+header .navbar .navbar-brand {
+	font-weight: bold;
+}
+
+header .navbar .btn {
+	border-color: #ffb515;
+}
+
+header .navbar .btn:hover {
+	background-color: #fffff5;
+}
+
+.view-animate.ng-enter{
+	-webkit-transition: 0.5s linear opacity;
+	-moz-transition: 0.5s linear opacity;
+	-o-transition: 0.5s linear opacity;
+	transition: 0.5s linear opacity;
+}
+
+.view-animate.ng-enter {
+	opacity:0;
+}
+
+.view-animate.ng-enter.ng-enter-active {
+	opacity: 1;
+}
+
+#homepage #hello {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	background-color: rgba(255, 229, 165, 0.15);
+}
+
+#homepage #hello h1 {
+	color: #df3505;
+}
+
+#homepage .caption {
+	text-align: center;
+}
+
+#homepage a:hover {
+	text-decoration: none;
+}
+
+#homepage a:hover h3 {
+	color: #ffb515;
+}
+
+#play {
+	padding-top: 20px;
+}
+
+#play #canvas-pad {
+	border-color: rgb(91, 184, 92);
+}
+
+#play #canvas-pad canvas {
+	width: 500px;
+	height: 400px;
+	position: absolute;
+	border: 4px solid rgb(91, 192, 222);
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+#play #console-pad {
+	padding-left: 50px;
+}
+
+#play #result-pad {
+	width: 100%;
+	height: 204px;
+	border: 4px solid rgb(91, 184, 92);
+	margin-bottom: -4px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	padding: 6px 10px;
+	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
+	overflow: auto;
+}
+
+#play #code-pad {
+	width: 90%;
+	height: 200px;
+	border: 4px solid rgb(91, 184, 92);
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 4px;
+	outline: none;
+	padding: 6px 10px;
+	resize: none;
+	float: left;
+	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
+}
+
+#play #code-pad-wrapper {
+	margin-right: -4px;
+}
+
+#play #submit {
+	width: 10%;
+	height: 200px;
+	float: right;
+	margin-left: -4px;
+	border-bottom-left-radius: 0px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+#play #control-buttons {
+	text-align: center;
+	/*font-family: Menlo, Consolas, "Ubuntu Mono", monospace;*/
+}
+
+#play #slider-line {
+	width: 140px;
+	margin: 5px 15px;
+}
+
+#play #line-tip {
+	width: 50px;
+	border: 1px rgb(53, 126, 189) solid;
+	border-radius: 4px;
+}
+
+#play #slider-delay {
+	width: 190px;
+	margin: 5px 20px;
+}
+
+#play #delay-tip {
+	width: 80px;
+	border: 1px rgb(238, 162, 54) solid;
+	border-radius: 4px;
+}
+
+#play #img-input {
+	display: none;
+}
+
+#play #result-pad {
+	padding: 0;
+}
+
+#play #result-pad .item {
+	padding: 10px;
+}
+
+#play #result-pad .item p,
+#play #result-pad .item pre {
+	margin: 4px 0;
+}
+
+#play #result-pad .item:nth-child(odd) {
+}
+
+#play #result-pad .item:nth-child(odd):hover {
+	background-color: #fcfcfc;
+}
+
+#play #result-pad .item:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+#play #result-pad .item:nth-child(even):hover {
+	background-color: #f4f4f4;
+}
+
+#play #result-pad .error {
+	color: #d9534f;
+	font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+#play #result-pad .error strong {
+	font-family: Menlo, Consolas, "Ubuntu Mono", monospace;
+}
+
+#play #result-pad .error p {
+	color: #428bca;
+}
+
+#gallery li {
+	list-style-type: none;
+	margin-bottom: 20px;
+}
+
+#profile-image {
+	float:left;
+	margin-left: -100px;
+	margin-top: 50px;
+}
+
+#profile-name {
+	margin-top: 50px;
+	display: block;
+}

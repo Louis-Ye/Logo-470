@@ -1,0 +1,103 @@
+<div id="play" class="container">
+	<div class="alert alert-success", data-ng-if="message == 'success'">Successfully shared.</div>
+	<div class="alert alert-warning", data-ng-if="message == 'not logged in'">You need to <a href="#/sign-in" class="alert-link">log in</a> first.</div>
+	<div class="row">
+		<div id="canvas-pad" class="col-sm-12 col-md-6 col-lg-5 col-lg-offset-1">
+			<canvas id="saving" style="z-index: 0">
+			</canvas>
+			<canvas id="bg" style="z-index: 1">
+			Your browser does not support the canvas element.
+			</canvas>
+			<canvas id="lines" style="z-index: 2">
+			</canvas>
+			<canvas id="turtle" style="z-index: 3">
+			</canvas>
+		</div>
+		<div id="console-pad" class="col-sm-12 col-md-6 col-lg-5">
+			<div class="row">
+				<div class="col-sm-6 col-md-12">
+					<p id="result-pad"></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div id="code-pad-wrapper"><textarea id="code-pad" placeholder="Try something here!" autofocus spellcheck="false" onkeypress="return indentCode(id,event);" onkeydown="return ic_keydown(id,event);"></textarea></div>
+					<button id="submit" class="btn btn-success" data-ng-click="on_submit_clicked()"><span class="glyphicon glyphicon-play"></span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="row">
+		<div id="control-buttons" class="col-md-12 col-lg-10 col-lg-offset-1">
+			<div class="btn-group">
+				<div class="btn-group dropup">
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+						Line <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li class="tip">Width 1 - 500: <input id="line-tip" value="1" type="text" /></li>
+						<li>
+							<div id="slider-line"></div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="btn-group dropup">
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+						Color <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><div id="colorpalette-pen"></div></li>
+					</ul>
+				</div>
+
+				<div class="btn-group dropup">
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+						Background <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><div id="colorpalette-background"></div></li>
+					</ul>
+				</div>
+
+				<button id="pen-status" type="button" class="btn btn-info" data-ng-click="toggle_pen()">Pen {{ pen_status ? 'up' : 'down' }}</button>
+
+				<button id="turtle-status" type="button" class="btn btn-info" data-ng-click="toggle_turtle()">{{ turtle_status ? 'Hide': 'Show' }} Turtle</button>
+
+				<button id="clear-canvas" type="button" class="btn btn-info" data-ng-click="clear_canvas()">Clear Screen</button>
+
+				<button id="add-image" type="button" class="btn btn-warning" onclick="document.getElementById('img-input').click()">Image</button>
+
+				<button id="border-status" type="button" class="btn btn-warning" data-ng-click="toggle_border()">{{ border_status ? 'Borderless' : 'Border' }}</button>
+
+				<div class="btn-group dropup">
+					<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+						Delay <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu pull-center">
+						<li class="tip">Interval 2 - 1000000: <input id="delay-tip" value="1000" type="text" /></li>
+						<li>
+							<div id="slider-delay"></div>
+						</li>
+					</ul>
+				</div>
+
+				<button id="reset" type="button" class="btn btn-danger" data-ng-click="reset()">Reset</button>
+
+				<button id="share" type="button" class="btn btn-success" data-ng-click="share()">Share</button>
+
+				<div class="btn-group dropup">
+					<button id="sample-code" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-gift"></span>
+					</button>
+					<ul class="dropdown-menu pull-right">
+						<li data-ng-repeat="sample in sample_codes"><a href="" data-ng-click="show_code(sample)">{{ sample.name }}</a></li>
+					</ul>
+				</div>
+
+			</div>
+			<input type="file" id="img-input" onchange="readPicture(event,id);" hidden/>
+		</div>
+	</div>
+</div>

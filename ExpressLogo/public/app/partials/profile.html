@@ -1,0 +1,62 @@
+<div id="profile" class="container">
+<div ng-if = 'message == "not logged in"'>
+  <div class="alert alert-danger">You need to <a href="#/sign-in">log in</a> first</div>
+</div>
+<div ng-if = 'message !="not logged in"'>
+<div class="col-sm-3 sidebar">
+	<br />
+	<fieldset id="profile-image-controls">
+		<img ng-src="{{ user.avatar }}" class="img-thumbnail"/>
+	</fieldset>
+	<h3 class="text-info"> {{user.name}} </h3>
+
+</div>
+<div class="col-sm-9">
+	<h3>Posts</h3>
+	<div class = "row">
+		<div ng-if='message == "success"' ng-repeat="post in posts" class="col-xs-6 col-md-4">
+    		<a class="thumbnail" href="#/gallerylist/{{post._id}}">
+        	<img id="profile_pic" ng-src="{{ post.image_url }}" alt="">
+      	</a>
+      		<div class = "row">
+            <div class="col-xs-12 col-md-6">
+              <p><small>{{ post.create_time }}</small></p>
+            </div>      		
+            <div class="col-xs-12 col-md-3">
+      			  <i class="fa fa-heart"></i>&nbsp; {{ post.like }}
+      		  </div>
+            <div class="col-xs-12 col-md-3">
+              <a class="btn btn-xs" data-toggle="modal" data-target="#del-confirm-{{post._id}}"><i class="fa fa-trash-o fa-lg"></i></a>
+
+         <div class="modal fade" id="del-confirm-{{post._id}}">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title">Confirm deletion</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-danger" data-ng-click="post_delete(post._id)" data-dismiss="modal">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+      		</div>
+
+      		<div class = "row" ng-if="post.title"><p>{{post.title}}</p></div>
+      		</br>
+    	</div>
+      <div ng-if='message == "null"'>
+        <p>You have not posted anything yet. Go <a href="#/play">Play</a> and Share your codes!</p>
+      </div>
+	</div>
+</div>
+</div>
+</div>

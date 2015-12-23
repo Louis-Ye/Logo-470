@@ -1,0 +1,77 @@
+<div id="account" class="container">
+<div ng-if = 'loginMessage == "not logged in"'>
+  <div class="alert alert-danger">You need to <a href="#/sign-in">log in</a> first</div>
+</div>
+<div ng-if = 'loginMessage != "not logged in"'>
+<div class="col-sm-3 sidebar">
+	<br>
+	<fieldset id="profile-image-controls">
+		<img ng-src="{{ user.avatar }}" class="img-thumbnail"/>
+	</fieldset>
+	<h3 class="text-info"> {{user.name}} </h3>
+
+	<ul class="nav nav-sidebar">
+  		<li><a href="#/profile">Profile</a></li>
+  		<li><a href="#/account#personal">Personal Information</a></li>
+  		<li><a href="#/account#passwd">Change password</a></li>
+	</ul>
+</div>
+
+<div class="col-sm-9 col-sm-offset">
+	<div class="alert alert-warning alert-dismissable" ng-if="pwdMessage != null">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<p>{{pwdMessage}}</p>
+	</div>
+	<h1>Account</h1>
+	<br>
+	<div class="content-inner no-stream-end">
+		<legend class="control-label">Personal Information</legend>
+		<form id="personal" action="/account/update" method="post">
+			<div class="control-group">
+				<label class="control-label" for="user_email">Email</label>
+				<div class="controls">
+					<input id="user_email" maxlength="20" type="text" name="email" value="{{user.email}}" disabled/>
+					<p><small>Email cannot be changed.</small></p>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="user_name">Name</label>
+				<div class="controls">
+					<input id="user_name" maxlength="20" type="text" name="name" value="{{ user.name }}"/>
+					<p><small>Real name is welcomed!</small></p>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-warning btn-sm">Update</button>
+		</form>
+	</div>
+	<br>
+	
+	<div class="content-inner no-stream-end">
+	<legend class="control-label">Change Password</legend>
+		<form id="passwd" action="/account/change-password" method="post">
+			<div class="control-group">
+				<label class="control-label" for="old_password">Old Password</label>
+				<div class="controls">
+					<input id="user_old_password" name="old_password" size="30" type="password"/>
+					<p><small>Input your current password.</small></p>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="new_password">New Password</label>
+				<div class="controls">
+					<input id="user_new_password" name="new_password" size="30" type="password"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="confirm_password">Confirm New Password</label>
+				<div class="controls">
+					<input id="user_confirm_new_password" name="confirm_password" size="30" type="password"/>
+					<p><small>Input your new password again.</small></p>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-warning btn-sm">Change</button>
+		</form>
+	</div>
+</div>
+</div>
+</div>
