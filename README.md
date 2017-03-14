@@ -1,4 +1,6 @@
 Logo-470
 ========
-This is a course project for CMPT 470 of SFU
+* A Logo Programming Language (a kid-friendly programming language) Interpreter and Gallery Website.
+* The interpreter is written in JavaScript and integrated in the frontend page.
+* This is originally a course project for CMPT 470 of SFU.
 
